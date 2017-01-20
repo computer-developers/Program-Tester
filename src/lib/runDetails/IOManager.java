@@ -9,7 +9,11 @@ public class IOManager {
      public static IntIODetail getIODetail(List<String> input,List<String> output){
           return new DummyIODetail();
      }
+     public static IntIODetail getIODetail(List<String> input,List<String> output,long time){
+          return new DummyIODetail();
+     }
      public static IntIODetail getIODetail(Path filepath){
           return new DummyIODetail();
      }
+     
 }
