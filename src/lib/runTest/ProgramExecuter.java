@@ -17,8 +17,8 @@ class ProgramExecuter {
      List<String> output;
      Scanner sc;
      long time=-1;
-     //InputStreamReader in;
-     OutputStreamWriter out;
+     BufferedReader in;
+     PrintWriter out;
      /**
       * create object with list of input string command.
       * the command is not executed until the execute method called on the object.
@@ -28,7 +28,7 @@ class ProgramExecuter {
      ProgramExecuter(List<String> input,String cmd){
           this.input=input;
           pb=new ProcessBuilder(cmd);
-          pb.redirectErrorStream(true);
+          //pb.redirectErrorStream(true);
           output=new ArrayList<>();
      }
      
@@ -49,18 +49,24 @@ class ProgramExecuter {
           output=new ArrayList();
           long st=System.currentTimeMillis();
           boolean b=false;
+          //pb.inheritIO();
+          //pr=Runtime.getRuntime().exec("resources\\pro.exe");
           pr=pb.start();
-          out=new OutputStreamWriter(pr.getOutputStream());
-          sc=new Scanner(pr.getInputStream());
+          System.out.println("ProgramExecuter.execute :- started");
+          in=new BufferedReader(new InputStreamReader(pr.getInputStream()));
+          //in=new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
+          out=new PrintWriter(pr.getOutputStream());
+          //sc=new Scanner(pr.getInputStream());
           tin=new Thread(this::giveIn);
           tout=new Thread(this::getOut);
-          tin.start();
           tout.start();
+          tin.start();
           try{
                b=pr.waitFor(time, TimeUnit.MILLISECONDS);
           }catch(InterruptedException e){return null;}
+          b=true;
+          stop();
           if(!b){
-               stop();
                output.clear();
                return output;
           }
@@ -80,10 +86,12 @@ class ProgramExecuter {
                pr.destroyForcibly();
           }
           if(tin!=null&&tin.isAlive()){
-               tin.destroy();
+               sc.close();
+               //tin.destroy();
           }
           if(tout!=null&&tout.isAlive()){
-               tout.destroy();
+                    //tout.destroy();
+                    out.close();
           }
      }
      /**
@@ -100,20 +108,31 @@ class ProgramExecuter {
       * print strings on standard input stream of subprocess provided in constructor. 
       */
      private void giveIn(){
+          int i=0;
+          System.out.println("ProgramExecuter.getin :- started");
           input.stream().forEach(str -> {
-               try {
-                    out.write(str);
-               } catch(IOException ex) {}});
+               //try {
+                    out.println(str);
+                    System.out.println("ProgramExecuter.getin :- give in "+str);
+               //} catch(IOException ex) {}
+          });
      }
      /**
       * get the output from standard output stream of subprocess & store in list output.
       * method can be called from new thread.
       */
      private void getOut(){
-          try{
-               for(;;)
-               output.add(sc.nextLine());
-          }catch(NoSuchElementException ex){}               
+          System.out.println("ProgramExecuter.getOut :- started");
+          for(;pr.isAlive();){
+               try{
+                    String s=in.readLine();
+                    output.add(s);
+                    System.out.println("ProgramExecuter.getout :- get out "+s);
+               }catch(NoSuchElementException | IOException ex){
+                    System.out.println(ex);
+               }
+          }
+          System.out.println("ProgramExecuter.getOut : - ended");
      }
      
      /**return runtime of subprocess in milli seconds.

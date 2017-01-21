@@ -35,8 +35,7 @@ public class RunTest {
      synchronized public void run(){
           if(t!=null&&t.isAlive())
                return;
-          t=new Thread();
-          long st=System.nanoTime();
+          t=new Thread(this::start);
           t.start();
      }
      
@@ -56,7 +55,10 @@ public class RunTest {
      void start(){
           try{
                out=pb.execute(runTime);
-          }catch(IOException e){}
+          }catch(IOException e){
+               System.out.println("Exception :- RunTest.start()");
+               e.printStackTrace();
+          }
      }
      
      /**
