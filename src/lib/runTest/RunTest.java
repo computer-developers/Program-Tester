@@ -7,11 +7,11 @@ import java.io.*;
  * @author Neel Patel
  */
 public class RunTest {
-     public static final long runTime = 30000;
-     ProgramExecuter pb;
-     Thread t;
-     List<String> out;
-     long time=-1;
+     public static final long runTime = 30000; //default runtime.
+     ProgramExecuter pe; //to execute subprocess.
+     Thread t; //to execute subprocess in parallel
+     List<String> out; //to store output
+     long time=-1; //time taken by suprocess
      
      /**
       * create object with specified input & command
@@ -23,7 +23,7 @@ public class RunTest {
      }
      
      RunTest(List<String> input,String cmd){
-          pb=new ProgramExecuter(input,cmd);
+          pe=new ProgramExecuter(input,cmd);
      }
      
      /**
@@ -35,7 +35,7 @@ public class RunTest {
      synchronized public void run(){
           if(t!=null&&t.isAlive())
                return;
-          t=new Thread(this::start);
+          t=new Thread(this::start); //create thread to execute the subprocess.
           t.start();
      }
      
@@ -54,7 +54,7 @@ public class RunTest {
       */
      void start(){
           try{
-               out=pb.execute(runTime);
+               out=pe.execute(runTime);
           }catch(IOException e){
                System.out.println("Exception :- RunTest.start()");
                e.printStackTrace();
@@ -63,17 +63,20 @@ public class RunTest {
      
      /**
       * return the result of previous execution of subprocess.
-      * if the subprocess is not executed once then execute the subprocess & wait until the process terminate.
+      * if the subprocess is not executed before then execute the subprocess & wait until the process terminate.
       * if the subprocess is executing currently then it will wait to finish it.
+      * note:- if subprocess is already executed ones this method create new subprocess.
       * @return object of IntIODetail of last execution of process.
       */
      synchronized public IntIODetail getIODetail(){
-          if(t==null)
-               run();
-          try{
+          //call methode run to execute the subprocess if subprocess is not executing.
+          if(t==null) 
+               run(); 
+          try{ //wait for subprocess to terminate.
                t.join();
           }catch(InterruptedException e){}
-          return DummyIntIODetail.getIntIODetail(pb.input,out,pb.getRunTime());
+          //create & return object of IntIODetail.
+          return DummyIntIODetail.getIntIODetail(pe.input,out,pe.getRunTime());
      }
      
 }

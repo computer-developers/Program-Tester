@@ -27,7 +27,7 @@ public class TestRunTest {
           System.out.println("input read completed.");
           RunTest rt=new RunTest(DummyIntIODetail.getIntIODetail(input,null, 0),com);
           System.out.println("process start.");
-          rt.run();
+          //rt.run();
           IntIODetail obj=rt.getIODetail();
           System.out.println("process completed. obj :- "+obj.getAllOutput());
           if(arg.length>1)
