@@ -9,7 +9,8 @@ import dk.brics.automaton.State;
 import dk.brics.automaton.Transition;
 
 /**
- * An implementation of {@code Iterator} class that iterate over the list of Strings that matches a given Regex.
+ * An implementation of {@code Iterator} class that iterate over the list of 
+ * Strings that matches a given Regex.
  * 
  * @author neel patel
  *

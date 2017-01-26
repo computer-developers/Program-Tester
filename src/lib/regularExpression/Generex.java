@@ -21,8 +21,10 @@ import dk.brics.automaton.State;
 import dk.brics.automaton.Transition;
 
 /**
- * A Java utility class that help generating string values that match a given regular expression.It generate all values
- * that are matched by the Regex, a random value, or you can generate only a specific string based on it's
+ * A Java utility class that help generating string values that match a given regular
+ * expression.It generate all values
+ * that are matched by the Regex, a random value, or you can 
+ * generate only a specific string based on it's
  * lexicographical order .
  *
  * @author neel patel
@@ -32,7 +34,8 @@ public class Generex implements Iterable {
     /**
      * The predefined character classes supported by {@code Generex}.
      * <p>
-     * An immutable map containing as keys the character classes and values the equivalent regular expression syntax.
+     * An immutable map containing as keys the character classes and values 
+     * the equivalent regular expression syntax.
      *
      * //@see #createRegExp(String)
      */
@@ -77,7 +80,8 @@ public class Generex implements Iterable {
     /**
      * Creates a {@code RegExp} instance from the given regular expression.
      * <p>
-     * Predefined character classes are replaced with equivalent regular expression syntax prior creating the instance.
+     * Predefined character classes are replaced with equivalent regular 
+     * expression syntax prior creating the instance.
      *
      * @param regex the regular expression used to build the {@code RegExp} instance
      * @return a {@code RegExp} instance for the given regular expression
@@ -97,7 +101,8 @@ public class Generex implements Iterable {
 
     /**
      * initialize the random instance used with a seed value  to generate a
-     * pseudo random suite of strings based on the passed seed and matches the used regular expression
+     * pseudo random suite of strings based on the passed seed and matches the 
+     * used regular expression
      * instance
      *
      * @param seed
@@ -270,7 +275,8 @@ public class Generex implements Iterable {
     }
 
     /**
-     * Generate subList with a size of <code>limit</code> of Strings that matches the given Regex. the Strings are
+     * Generate subList with a size of <code>limit</code> of Strings that 
+     * matches the given Regex. the Strings are
      * ordered in lexicographical order.
      *
      * @param limit
@@ -293,7 +299,8 @@ public class Generex implements Iterable {
     }
 
     /**
-     * Generate and return a random String that match the pattern used in this Generex, and the string has a length >=
+     * Generate and return a random String that match the pattern used in 
+     * this Generex, and the string has a length >=
      * <code>minLength</code>
      *
      * @param minLength
@@ -368,7 +375,8 @@ public class Generex implements Iterable {
     }
 
     /**
-     * Tells whether or not the given regular expression is a valid pattern (for {@code Generex}).
+     * Tells whether or not the given regular expression is a valid 
+     * pattern (for {@code Generex}).
      *
      * @param regex the regular expression that will be validated
      * @return {@code true} if the regular expression is valid, {@code false} otherwise
@@ -385,8 +393,10 @@ public class Generex implements Iterable {
     }
 
     /**
-     * Requote a regular expression by escaping some parts of it from generation without need to escape each special
-     * character one by one. <br> this is done by setting the part to be interpreted as normal characters (thus, quote
+     * Requote a regular expression by escaping some parts of 
+     * it from generation without need to escape each special
+     * character one by one. <br> this is done by setting the part to be interpreted 
+     * as normal characters (thus, quote
      * all meta-characters) between \Q and \E , ex : <br> <code> minion_\d{3}\Q@gru.evil\E </code> <br> will be
      * transformed to : <br> <code> minion_\d{3}\@gru\.evil </code>
      *
