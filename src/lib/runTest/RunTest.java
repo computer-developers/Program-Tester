@@ -76,7 +76,7 @@ public class RunTest {
                t.join();
           }catch(InterruptedException e){}
           //create & return object of IntIODetail.
-          return DummyIntIODetail.getIntIODetail(pe.input,out,pe.getRunTime());
+          return IOManager.getIODetail(pe.input,out,pe.getRunTime());
      }
      
 }

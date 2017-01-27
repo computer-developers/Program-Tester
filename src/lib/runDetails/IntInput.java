@@ -2,7 +2,7 @@ package lib.runDetails;
 import java.util.*;
 /**
  * this interface used to get input for specific type of program.
- * @author admin
+ * @author neel patel
  */
 public interface IntInput {
      /**
@@ -12,7 +12,7 @@ public interface IntInput {
      /**
       * @return return unique id for which input is generated, -1 if not specified.
       */
-     default long programId(){
+     default long programID(){
           return -1;
      }
      /**
