@@ -56,7 +56,7 @@ class ProgramExecuter {
           //System.out.println("ProgramExecuter.execute :- started");
           //in=new BufferedReader(new InputStreamReader(pr.getInputStream()));
           //in=new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
-          out=new PrintWriter(pr.getOutputStream());
+          out=new PrintWriter(new BufferedOutputStream(pr.getOutputStream()));
           sc=new Scanner(pr.getInputStream());
           tin=new Thread(this::giveIn); //create thread to give input to subprocess 
           tout=new Thread(this::getOut); //create thread to get output of subprocess

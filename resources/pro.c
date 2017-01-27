@@ -5,7 +5,7 @@ void merge(long *,long);
 void merges(long *,long);
 void main()
 {
-	int i,*s,l;
+	long i,*s,l;
 	scanf("%d",&l);
 	s=(long *)calloc(l,sizeof(long));
 	for(i=0;i<l;i++)

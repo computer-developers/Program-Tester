@@ -13,6 +13,12 @@ public interface IntInput {
       * @return return unique id for which input is generated, -1 if not specified.
       */
      default long programId(){
-          return 10;
+          return -1;
+     }
+     /**
+      * @return return index of input, -1 if not specified.
+      */
+     default long index(){
+          return -1;
      }
 }

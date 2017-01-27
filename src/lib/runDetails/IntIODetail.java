@@ -10,11 +10,13 @@ public interface IntIODetail extends IntInput{
       */
      List<String> getAllOutput();
      /**
-      * @return string
-      */
-     String getName();
-     /**
       * @return execution time in milli seconds taken by program, -1 if not applicable 
       */
      long getTime();
+     /**
+      * @return return index of input & corresponding output, -1 if not specified.
+      */
+     default long index(){
+          return -1;
+     }
 }
