@@ -1,4 +1,4 @@
-package lib.inputGenerator;
+package lib.dataTools.inputGenerator;
 import java.util.*;
 
 /**

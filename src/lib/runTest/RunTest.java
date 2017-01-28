@@ -52,7 +52,7 @@ public class RunTest {
       * start new subprocess.
       * wait until the process is terminated.
       */
-     void start(){
+     private void start(){
           try{
                out=pe.execute(runTime);
           }catch(IOException e){

@@ -1,4 +1,4 @@
-package lib.inputGenerator;
+package lib.dataTools.inputGenerator;
 import lib.regularExpression.*;
 import java.util.*;
 import java.lang.IllegalArgumentException;

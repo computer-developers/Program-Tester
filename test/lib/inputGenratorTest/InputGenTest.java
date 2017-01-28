@@ -1,6 +1,6 @@
 package lib.inputGenratorTest;
+import lib.dataTools.inputGenerator.InputGen;
 import java.io.IOException;
-import lib.inputGenerator.*;
 import java.nio.file.*;
 import java.util.*;
 

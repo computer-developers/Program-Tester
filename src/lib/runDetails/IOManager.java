@@ -1,7 +1,10 @@
 package lib.runDetails;
 import java.util.*;
+import java.util.stream.*;
 import java.nio.file.*;
 import java.io.*;
+import java.util.function.*;
+
 /**
  * this is factory class provide various method to create object of IntIODetail.
  * this class provide facility to create object of IntIODetail.
@@ -9,6 +12,8 @@ import java.io.*;
  * @author neel patel
  */
 public class IOManager {
+     private IOManager(){}
+               
      /**
       * this method return immutable object of {@code IntIODetail}
         using specified parameters.
@@ -108,5 +113,23 @@ public class IOManager {
           } catch(IOException ex) {
                return false;
           }
+     }
+     
+     /**
+      * this method compare the IntInput Objects.
+      * if {@code programID} & {@code index} is available than this method compare
+        those values & return false if anyone value for both objects are not same.
+      * if {@code programID} & {@code index} are available but same then this
+        method compare the list of sting return by {@code getAllInput} method & 
+        return true if both are same, otherwise returns false.
+      * @param a object going to be compare with another one.
+      * @param b object going to be compare with another one.
+      * @return result of comparison performed on certain parameters.
+      */
+     public static boolean isEqual(IntInput a,IntInput b){
+          if(a.programID()>0 && b.programID()>0 && a.programID()!=b.programID())
+               if(a.index()>0 && b.index()>0 && a.index()!=b.index())
+                    return false;
+          return a.getAllInput().equals(b.getAllInput());
      }
 }

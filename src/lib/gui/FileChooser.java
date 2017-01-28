@@ -1,4 +1,4 @@
-package lib;
+package lib.gui;
 /**
  *This is a basic GUI page for selecting the saved .class file or .exe
  *file of the user program
