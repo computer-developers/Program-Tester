@@ -8,6 +8,8 @@ package lib.gui;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 public class FileChooser extends JFrame {
@@ -21,31 +23,29 @@ public class FileChooser extends JFrame {
     c.setLayout(new FlowLayout());
     
     JButton openButton = new JButton("Open");
-    final JLabel statusbar = new JLabel("Output of your selection will go here");
+    //final JLabel statusbar = new JLabel("Output of your selection will go here");
 
     // Create a file chooser that opens up as an Open dialog
     openButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
         JFileChooser chooser = new JFileChooser();
-        //chooser.setMultiSelectionEnabled(true);
+        chooser.setDialogTitle("choosertitle");
+        String fullPath = null, cmd;
         int option = chooser.showOpenDialog(FileChooser.this);
         if (option == JFileChooser.APPROVE_OPTION) {
-          File[] sf = chooser.getSelectedFiles();
-          String filelist = "nothing";
-          if (sf.length > 0) filelist = sf[0].getName();
-          for (int i = 1; i < sf.length; i++) {
-            filelist += ", " + sf[i].getName();
-          }
-          statusbar.setText("You chose " + filelist);
-        }
-        else {
-          statusbar.setText("You canceled.");
+            String sf = chooser.getSelectedFile().getName();
+            File file = chooser.getCurrentDirectory();
+            fullPath = file.getPath();
+            System.out.println("The selected file's path is " + fullPath);
+            System.out.println("The selected file is " + sf);
+            cmd="java " + fullPath + "\\" + sf;
+            System.out.println("The final command is "+cmd);
         }
       }
     });
 
     c.add(openButton);
-    c.add(statusbar);
+    //c.add(statusbar);
   }
 
   public static void main(String args[]) {
