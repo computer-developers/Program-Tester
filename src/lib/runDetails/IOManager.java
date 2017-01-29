@@ -6,7 +6,8 @@ import java.io.*;
 import java.util.function.*;
 
 /**
- * this is factory class provide various method to create object of IntIODetail.
+ * this is factory class provide various method to create object of 
+   IntIODetail.
  * this class provide facility to create object of IntIODetail.
  * it also provide facility of writing & reading IntIODetail objects to & from file.
  * @author neel patel
@@ -21,10 +22,22 @@ public class IOManager {
         method always return -1
       * @param input list of string which can be used as input of other program
       * @param output list of string which is output of any program
-      * @return 
+      * @return object of IntIODetail.
       */
      public static IntIODetail getIODetail(List<String> input,List<String> output){
           return new IODetail(input,output);
+     }
+     
+     /**
+      * this method return immutable object of {@code IntIODetail}
+        using specified parameters.
+      * @param input object of IntInput.
+      * @param output list of string which is output of any program.
+      * @param time time taken for generate output for {@param input}.
+      * @return object of IntIODetail.
+      */
+     public static IntIODetail getIODetail(IntInput input, List<String> output, long time){
+          return getIODetail(input.getAllInput(),output,time,input.programID(),input.index());
      }
      
      /**
@@ -34,10 +47,25 @@ public class IOManager {
       * @param input list of string which can be used as input of other program
       * @param output list of string which is output of any program
       * @param time execution time in milliseconds.
-      * @return 
+      * @return object of IntIODetail.
       */
      public static IntIODetail getIODetail(List<String> input,List<String> output,long time){
           return new IODetail(input,output,time);
+     }
+     
+     /**
+      * this method return immutable object of {@code IntIODetail}
+        using specified parameters.
+      * @param input list of string which can be used as input of other program.
+      * @param output list of string which is output of any program.
+      * @param time execution time in milliseconds.
+      * @param programID long programID.
+      * @param index long index value.
+      * @return Object of IntIODetail.
+      */
+     public static IntIODetail getIODetail(List<String> input,List<String> output
+               ,long time,long programID,long index){
+          return new IODetail(input,output,time,programID,index);
      }
      
      /**
