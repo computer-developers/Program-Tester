@@ -1,7 +1,4 @@
 package lib.inputGenratorTest;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import lib.dataTools.inputGenerator.InputGen;
 import java.io.IOException;
 import java.nio.file.*;
@@ -30,10 +27,6 @@ public class InputGenTest {
           System.out.println("counts :- ");
           int c=sc.nextInt();
           List<String> lines= InputGen.getInput(c,s);
-         /* FileWriter fw = new FileWriter(p.toString());
-          BufferedWriter bw = new BufferedWriter(fw);
-          for(String l:lines)
-            bw.write(l);
-          fw.close();*/
+          Files.write(p, lines,StandardOpenOption.CREATE);
      }
 }
