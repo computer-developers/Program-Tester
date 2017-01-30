@@ -8,8 +8,7 @@ package lib.gui;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.*;
 import javax.swing.*;
 
 public class FileChooser extends JFrame {
@@ -38,7 +37,9 @@ public class FileChooser extends JFrame {
             fullPath = file.getPath();
             System.out.println("The selected file's path is " + fullPath);
             System.out.println("The selected file is " + sf);
-            cmd="java " + fullPath + "\\" + sf;
+            String dcmd = "java " + fullPath + "\\" + sf;
+            StringTokenizer st = new StringTokenizer(dcmd,".");
+            cmd = st.nextToken();
             System.out.println("The final command is "+cmd);
         }
       }
