@@ -1,9 +1,12 @@
 package lib.dataTools.problemAdder;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+
 /**
- *
- * @author admin
+ * this class contain method to generate unique programId.
+ * this is strongly recommended to use the programId provided the method of this
+   class only. 
+ * @author Neel Patel
  */
 public final class ProgramIDGenerator{
      private ProgramIDGenerator(){}
@@ -12,9 +15,11 @@ public final class ProgramIDGenerator{
      /**
       * generate unique programID.
       * it use current system date & time to generate programID.
+      * make sure that your system date is correct.
+      * wrong system date can lead to generation of duplicate programID.
       * @return long programID.
       */
-     public static long newProgramID(){
+     public static synchronized long newProgramID(){
           LocalDateTime dt=LocalDateTime.now();
           long pid=Long.parseLong(dt.format(DateTimeFormatter.ofPattern("yyMMddhhmmss")));
           if(pid!=last){
