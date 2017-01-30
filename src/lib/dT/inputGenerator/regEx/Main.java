@@ -1,11 +1,11 @@
-package lib.regularExpression;
+package lib.dt.inputGenerator.regEx;
 
 //import java.util.List;
 
-import lib.regularExpression.util.Iterator;
+import lib.dt.inputGenerator.regEx.util.Iterator;
 
 /**
- * @author neel patel
+ * @author Neel Patel
  *
  */
 public class Main {

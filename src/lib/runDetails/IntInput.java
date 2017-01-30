@@ -2,7 +2,7 @@ package lib.runDetails;
 import java.util.*;
 /**
  * this interface used to get input for specific type of program.
- * @author neel patel
+ * @author Neel Patel
  */
 public interface IntInput {
      /**

@@ -1,10 +1,10 @@
-package lib.dataTools.inputGenerator;
+package lib.dt.inputGenerator;
 import java.util.*;
 
 /**
  * this class provide advanced functionality to generate the random string using
    using nesting of regular expressions.
- * @author admin
+ * @author Neel Patel
  */
 public class InputGenExt {
      int count;

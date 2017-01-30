@@ -8,7 +8,7 @@ import java.nio.file.StandardOpenOption;
 import java.nio.file.*;
 /**
  *
- * @author admin
+ * @author NEel Patel
  */
 public class TestRunTest {
      static Scanner sc=new Scanner(System.in);

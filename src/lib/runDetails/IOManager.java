@@ -10,7 +10,7 @@ import java.util.function.*;
    IntIODetail.
  * this class provide facility to create object of IntIODetail.
  * it also provide facility of writing & reading IntIODetail objects to & from file.
- * @author neel patel
+ * @author Neel Patel
  */
 public class IOManager {
      private IOManager(){}

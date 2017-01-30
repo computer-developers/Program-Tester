@@ -1,9 +1,9 @@
-package lib.dataTools.inputGenerator;
+package lib.dt.inputGenerator;
 import java.util.*;
 
 /**
  *
- * @author admin
+ * @author Neel Patel
  */
 public class InputGen {
      private InputGen(){}

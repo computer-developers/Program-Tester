@@ -1,12 +1,11 @@
-package lib.dataTools.inputGenerator;
-import lib.regularExpression.*;
+package lib.dt.inputGenerator;
+import lib.dt.inputGenerator.regEx.Generex;
 import java.util.*;
-import java.lang.IllegalArgumentException;
 import java.util.stream.Collectors;
 
 /**
  *
- * @author admin
+ * @author Neel Patel
  */
 public class StringGen {
      Generex[] ar;

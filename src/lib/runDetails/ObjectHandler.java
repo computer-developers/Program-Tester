@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 /**
  * this is factory class which provide methods to read or write {@code IntIODetail}
    object to the specified streams.
- * @author neel patel
+ * @author Neel Patel
  */
 class ObjectHandler {
      private ObjectHandler(){}

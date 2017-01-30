@@ -1,12 +1,12 @@
 package lib.inputGenratorTest;
-import lib.dataTools.inputGenerator.InputGen;
+import lib.dt.inputGenerator.InputGen;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.*;
 
 /**
  *
- * @author admin
+ * @author Neel Patel
  */
 public class InputGenTest {
      static Scanner sc=new Scanner(System.in);

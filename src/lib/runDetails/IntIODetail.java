@@ -2,8 +2,8 @@ package lib.runDetails;
 import java.util.*;
 
 /**
- *
- * @author neel patel
+ * this interface can be used to store the information about single run.
+ * @author Neel Patel
  */
 public interface IntIODetail extends IntInput{
      /**

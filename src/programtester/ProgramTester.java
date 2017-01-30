@@ -2,7 +2,7 @@ package programtester;
 
 /**
  *
- * @author admin
+ * @author Neel Patel
  */
 public class ProgramTester {
 

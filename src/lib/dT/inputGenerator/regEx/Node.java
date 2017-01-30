@@ -1,4 +1,4 @@
-package lib.regularExpression;
+package lib.dt.inputGenerator.regEx;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
  * be used to go to the next possible position, and a list of Node that present
  * the next positions.
  * 
- * @author neel patel
+ * @author Neel Patel
  *
  */
 public class Node {

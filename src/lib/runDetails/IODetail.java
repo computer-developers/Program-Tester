@@ -10,7 +10,7 @@ import java.io.*;
  * if the serialVersionUID differs at ObjectInputStram from ObjectOutputStream 
    then the Object can not be read by ObjectInputStream.
  * @version 1
- * @author neel patel
+ * @author Neel Patel
  */
 class IODetail implements IntIODetail, Serializable{
      private static final long serialVersionUID = 1L;

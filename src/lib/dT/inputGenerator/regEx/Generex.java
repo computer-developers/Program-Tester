@@ -1,4 +1,4 @@
-package lib.regularExpression;
+package lib.dt.inputGenerator.regEx;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,8 +12,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import lib.regularExpression.util.Iterable;
-import lib.regularExpression.util.Iterator;
+import lib.dt.inputGenerator.regEx.util.Iterable;
+import lib.dt.inputGenerator.regEx.util.Iterator;
 
 import dk.brics.automaton.Automaton;
 import dk.brics.automaton.RegExp;
@@ -27,7 +27,7 @@ import dk.brics.automaton.Transition;
  * generate only a specific string based on it's
  * lexicographical order .
  *
- * @author neel patel
+ * @author Neel Patel
  */
 public class Generex implements Iterable {
 

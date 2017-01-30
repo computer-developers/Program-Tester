@@ -1,7 +1,7 @@
-package lib.regularExpression.util;
+package lib.dt.inputGenerator.regEx.util;
 
 /**
- * @author neel patel
+ * @author Neel Patel
  *
  */
 public interface Iterable {

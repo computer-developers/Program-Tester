@@ -1,9 +1,9 @@
-package lib.regularExpression;
+package lib.dt.inputGenerator.regEx;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-import lib.regularExpression.util.Iterator;
+import lib.dt.inputGenerator.regEx.util.Iterator;
 
 import dk.brics.automaton.State;
 import dk.brics.automaton.Transition;
@@ -12,7 +12,7 @@ import dk.brics.automaton.Transition;
  * An implementation of {@code Iterator} class that iterate over the list of 
  * Strings that matches a given Regex.
  * 
- * @author neel patel
+ * @author Neel Patel
  *
  */
 public class GenerexIterator implements Iterator {
