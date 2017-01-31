@@ -10,6 +10,9 @@ import java.util.function.*;
 public class StringComparators {
      private StringComparators(){}
      
+     /**
+      * @author Neel Patel
+      */
      public static class ExactMatch implements BiPredicate<String,String>{
           public boolean test(String o1, String o2) {
                return o1.equals(o2);
@@ -17,12 +20,18 @@ public class StringComparators {
           
      }
      
+     /**
+      * @author Neel Patel
+      */
      public static class IgnoreCase implements BiPredicate<String,String>{
           public boolean test(String o1, String o2) {
                return o1.equalsIgnoreCase(o2);
           }
      }
      
+     /**
+      * @author Neel Patel
+      */
      public static class IgnoreWhiteSpace
                implements BiPredicate<String,String>{
           public boolean test(String o1, String o2) {
@@ -32,6 +41,9 @@ public class StringComparators {
           }
      }
      
+     /**
+      * @author Neel Patel
+      */
      public static class IgnoreWhiteSpaceAndCase
                implements BiPredicate<String,String>{
           public boolean test(String o1, String o2) {

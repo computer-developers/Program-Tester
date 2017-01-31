@@ -494,6 +494,7 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * Returns the number of states in this automaton.
+      * @return 
 	 */
 	public int getNumberOfStates() {
 		if (isSingleton())
@@ -504,6 +505,7 @@ public class Automaton implements Serializable, Cloneable {
 	/**
 	 * Returns the number of transitions in this automaton. This number is counted
 	 * as the total number of edges, where one edge may be a character interval.
+      * @return 
 	 */
 	public int getNumberOfTransitions() {
 		if (isSingleton())
@@ -584,6 +586,7 @@ public class Automaton implements Serializable, Cloneable {
 	/**
 	 * Returns <a href="http://www.research.att.com/sw/tools/graphviz/" target="_top">Graphviz Dot</a> 
 	 * representation of this automaton.
+      * @return 
 	 */
 	public String toDot() {
 		StringBuilder b = new StringBuilder("digraph Automaton {\n");
@@ -630,6 +633,7 @@ public class Automaton implements Serializable, Cloneable {
 
 	/**
 	 * Returns a clone of this automaton.
+      * @return 
 	 */
 	@Override
 	public Automaton clone() {
@@ -668,6 +672,7 @@ public class Automaton implements Serializable, Cloneable {
 	/** 
 	 * Retrieves a serialized <code>Automaton</code> located by a URL.
 	 * @param url URL of serialized automaton
+      * @return 
 	 * @exception IOException if input/output related exception occurs
 	 * @exception OptionalDataException if the data is not a serialized object
 	 * @exception InvalidClassException if the class serial number does not match
@@ -682,6 +687,7 @@ public class Automaton implements Serializable, Cloneable {
 	/**
 	 * Retrieves a serialized <code>Automaton</code> from a stream.
 	 * @param stream input stream with serialized automaton
+      * @return 
 	 * @exception IOException if input/output related exception occurs
 	 * @exception OptionalDataException if the data is not a serialized object
 	 * @exception InvalidClassException if the class serial number does not match
@@ -707,6 +713,7 @@ public class Automaton implements Serializable, Cloneable {
 
 	/** 
 	 * See {@link BasicAutomata#makeEmpty()}.
+      * @return 
 	 */
 	public static Automaton makeEmpty()	{
 		return BasicAutomata.makeEmpty();
@@ -714,6 +721,7 @@ public class Automaton implements Serializable, Cloneable {
 
 	/** 
 	 * See {@link BasicAutomata#makeEmptyString()}.
+      * @return 
 	 */
 	public static Automaton makeEmptyString() {
 		return BasicAutomata.makeEmptyString();
@@ -721,6 +729,7 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/** 
 	 * See {@link BasicAutomata#makeAnyString()}.
+      * @return 
 	 */
 	public static Automaton makeAnyString()	{
 		return BasicAutomata.makeAnyString();
@@ -728,6 +737,7 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/** 
 	 * See {@link BasicAutomata#makeAnyChar()}.
+      * @return 
 	 */
 	public static Automaton makeAnyChar() {
 		return BasicAutomata.makeAnyChar();
@@ -735,6 +745,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/** 
 	 * See {@link BasicAutomata#makeChar(char)}.
+      * @param c
+      * @return 
 	 */
 	public static Automaton makeChar(char c) {
 		return BasicAutomata.makeChar(c);
@@ -742,6 +754,9 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/** 
 	 * See {@link BasicAutomata#makeCharRange(char, char)}.
+      * @param min
+      * @param max
+      * @return 
 	 */
 	public static Automaton makeCharRange(char min, char max) {
 		return BasicAutomata.makeCharRange(min, max);
@@ -749,6 +764,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/** 
 	 * See {@link BasicAutomata#makeCharSet(String)}.
+      * @param set
+      * @return 
 	 */
 	public static Automaton makeCharSet(String set) {
 		return BasicAutomata.makeCharSet(set);
@@ -756,6 +773,10 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/** 
 	 * See {@link BasicAutomata#makeInterval(int, int, int)}.
+      * @param min
+      * @param max
+      * @param digits
+      * @return 
 	 */
 	public static Automaton makeInterval(int min, int max, int digits) throws IllegalArgumentException {
 		return BasicAutomata.makeInterval(min, max, digits);
@@ -763,6 +784,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/** 
 	 * See {@link BasicAutomata#makeString(String)}.
+      * @param s
+      * @return 
 	 */
 	public static Automaton makeString(String s) {
 		return BasicAutomata.makeString(s);
@@ -770,6 +793,8 @@ public class Automaton implements Serializable, Cloneable {
 	
     /** 
      * See {@link BasicAutomata#makeStringUnion(CharSequence...)}.
+      * @param strings
+      * @return 
      */
     public static Automaton makeStringUnion(CharSequence... strings) {
         return BasicAutomata.makeStringUnion(strings);
@@ -777,6 +802,8 @@ public class Automaton implements Serializable, Cloneable {
 
 	/**
 	 * See {@link BasicAutomata#makeMaxInteger(String)}.
+      * @param n
+      * @return 
 	 */
 	public static Automaton makeMaxInteger(String n) {
 		return BasicAutomata.makeMaxInteger(n);
@@ -784,6 +811,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link BasicAutomata#makeMinInteger(String)}.
+      * @param n
+      * @return 
 	 */
 	public static Automaton makeMinInteger(String n) {
 		return BasicAutomata.makeMinInteger(n);
@@ -791,6 +820,8 @@ public class Automaton implements Serializable, Cloneable {
 
 	/**
 	 * See {@link BasicAutomata#makeTotalDigits(int)}.
+      * @param i
+      * @return 
 	 */
 	public static Automaton makeTotalDigits(int i) {
 		return BasicAutomata.makeTotalDigits(i);
@@ -798,6 +829,8 @@ public class Automaton implements Serializable, Cloneable {
 
 	/**
 	 * See {@link BasicAutomata#makeFractionDigits(int)}.
+      * @param i
+      * @return 
 	 */
 	public static Automaton makeFractionDigits(int i) {
 		return BasicAutomata.makeFractionDigits(i);
@@ -805,6 +838,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link BasicAutomata#makeIntegerValue(String)}.
+      * @param value
+      * @return 
 	 */
 	public static Automaton makeIntegerValue(String value) {
 		return BasicAutomata.makeIntegerValue(value);
@@ -812,6 +847,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link BasicAutomata#makeDecimalValue(String)}.
+      * @param value
+      * @return 
 	 */
 	public static Automaton makeDecimalValue(String value) {
 		return BasicAutomata.makeDecimalValue(value);
@@ -819,6 +856,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link BasicAutomata#makeStringMatcher(String)}.
+      * @param s
+      * @return 
 	 */
 	public static Automaton makeStringMatcher(String s) {
 		return BasicAutomata.makeStringMatcher(s);
@@ -826,6 +865,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/** 
 	 * See {@link BasicOperations#concatenate(Automaton, Automaton)}.
+      * @param a
+      * @return 
 	 */
 	public Automaton concatenate(Automaton a) {
 		return BasicOperations.concatenate(this, a);
@@ -833,6 +874,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link BasicOperations#concatenate(List)}.
+      * @param l
+      * @return 
 	 */
 	static public Automaton concatenate(List<Automaton> l) {
 		return BasicOperations.concatenate(l);
@@ -840,6 +883,7 @@ public class Automaton implements Serializable, Cloneable {
 
 	/**
 	 * See {@link BasicOperations#optional(Automaton)}.
+      * @return 
 	 */
 	public Automaton optional() {
 		return BasicOperations.optional(this);
@@ -847,6 +891,7 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link BasicOperations#repeat(Automaton)}.
+      * @return 
 	 */
 	public Automaton repeat() {
 		return BasicOperations.repeat(this);
@@ -854,6 +899,8 @@ public class Automaton implements Serializable, Cloneable {
 
 	/**
 	 * See {@link BasicOperations#repeat(Automaton, int)}.
+      * @param min
+      * @return 
 	 */
 	public Automaton repeat(int min) {
 		return BasicOperations.repeat(this, min);
@@ -861,6 +908,9 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link BasicOperations#repeat(Automaton, int, int)}.
+      * @param min
+      * @param max
+      * @return 
 	 */
 	public Automaton repeat(int min, int max) {
 		return BasicOperations.repeat(this, min, max);
@@ -868,6 +918,7 @@ public class Automaton implements Serializable, Cloneable {
 
 	/**
 	 * See {@link BasicOperations#complement(Automaton)}.
+      * @return 
 	 */
 	public Automaton complement() {
 		return BasicOperations.complement(this);
@@ -875,6 +926,8 @@ public class Automaton implements Serializable, Cloneable {
 
 	/**
 	 * See {@link BasicOperations#minus(Automaton, Automaton)}.
+      * @param a
+      * @return 
 	 */
 	public Automaton minus(Automaton a) {
 		return BasicOperations.minus(this, a);
@@ -882,6 +935,8 @@ public class Automaton implements Serializable, Cloneable {
 
 	/**
 	 * See {@link BasicOperations#intersection(Automaton, Automaton)}.
+      * @param a
+      * @return 
 	 */
 	public Automaton intersection(Automaton a) {
 		return BasicOperations.intersection(this, a);
@@ -889,6 +944,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link BasicOperations#subsetOf(Automaton, Automaton)}.
+      * @param a
+      * @return 
 	 */
 	public boolean subsetOf(Automaton a) {
 		return BasicOperations.subsetOf(this, a);
@@ -896,6 +953,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link BasicOperations#union(Automaton, Automaton)}.
+      * @param a
+      * @return 
 	 */
 	public Automaton union(Automaton a) {
 		return BasicOperations.union(this, a);
@@ -903,6 +962,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link BasicOperations#union(Collection)}.
+      * @param l
+      * @return 
 	 */
 	static public Automaton union(Collection<Automaton> l) {
 		return BasicOperations.union(l);
@@ -917,6 +978,7 @@ public class Automaton implements Serializable, Cloneable {
 
 	/** 
 	 * See {@link BasicOperations#addEpsilons(Automaton, Collection)}.
+      * @param pairs
 	 */
 	public void addEpsilons(Collection<StatePair> pairs) {
 		BasicOperations.addEpsilons(this, pairs);
@@ -924,6 +986,7 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link BasicOperations#isEmptyString(Automaton)}.
+      * @return 
 	 */
 	public boolean isEmptyString() {
 		return BasicOperations.isEmptyString(this);
@@ -931,6 +994,7 @@ public class Automaton implements Serializable, Cloneable {
 
 	/**
 	 * See {@link BasicOperations#isEmpty(Automaton)}.
+      * @return 
 	 */
 	public boolean isEmpty() {
 		return BasicOperations.isEmpty(this);
@@ -938,6 +1002,7 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link BasicOperations#isTotal(Automaton)}.
+      * @return 
 	 */
 	public boolean isTotal() {
 		return BasicOperations.isTotal(this);
@@ -945,6 +1010,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link BasicOperations#getShortestExample(Automaton, boolean)}.
+      * @param accepted
+      * @return 
 	 */
 	public String getShortestExample(boolean accepted) {
 		return BasicOperations.getShortestExample(this, accepted);
@@ -952,6 +1019,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link BasicOperations#run(Automaton, String)}.
+      * @param s
+      * @return 
 	 */
 	public boolean run(String s) {
 		return BasicOperations.run(this, s);
@@ -967,6 +1036,8 @@ public class Automaton implements Serializable, Cloneable {
 	/**
 	 * See {@link MinimizationOperations#minimize(Automaton)}.
 	 * Returns the automaton being given as argument.
+      * @param a
+      * @return 
 	 */
 	public static Automaton minimize(Automaton a) {
 		a.minimize();
@@ -975,6 +1046,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link SpecialOperations#overlap(Automaton, Automaton)}.
+      * @param a
+      * @return 
 	 */
 	public Automaton overlap(Automaton a) {
 		return SpecialOperations.overlap(this, a);
@@ -982,6 +1055,7 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/** 
 	 * See {@link SpecialOperations#singleChars(Automaton)}.
+      * @return 
 	 */
 	public Automaton singleChars() {
 		return SpecialOperations.singleChars(this);
@@ -989,6 +1063,9 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link SpecialOperations#trim(Automaton, String, char)}.
+      * @param set
+      * @param c
+      * @return 
 	 */
 	public Automaton trim(String set, char c) {
 		return SpecialOperations.trim(this, set, c);
@@ -996,6 +1073,9 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link SpecialOperations#compress(Automaton, String, char)}.
+      * @param set
+      * @param c
+      * @return 
 	 */
 	public Automaton compress(String set, char c) {
 		return SpecialOperations.compress(this, set, c);
@@ -1003,6 +1083,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link SpecialOperations#subst(Automaton, Map)}.
+      * @param map
+      * @return 
 	 */
 	public Automaton subst(Map<Character,Set<Character>> map) {
 		return SpecialOperations.subst(this, map);
@@ -1010,6 +1092,9 @@ public class Automaton implements Serializable, Cloneable {
 
 	/**
 	 * See {@link SpecialOperations#subst(Automaton, char, String)}.
+      * @param c
+      * @param s
+      * @return 
 	 */
 	public Automaton subst(char c, String s) {
 		return SpecialOperations.subst(this, c, s);
@@ -1017,6 +1102,9 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link SpecialOperations#homomorph(Automaton, char[], char[])}.
+      * @param source
+      * @param dest
+      * @return 
 	 */
 	public Automaton homomorph(char[] source, char[] dest) {
 		return SpecialOperations.homomorph(this, source, dest);
@@ -1024,6 +1112,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link SpecialOperations#projectChars(Automaton, Set)}.
+      * @param chars
+      * @return 
 	 */
 	public Automaton projectChars(Set<Character> chars) {
 		return SpecialOperations.projectChars(this, chars);
@@ -1031,6 +1121,7 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link SpecialOperations#isFinite(Automaton)}.
+      * @return 
 	 */
 	public boolean isFinite() {
 		return SpecialOperations.isFinite(this);
@@ -1038,6 +1129,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link SpecialOperations#getStrings(Automaton, int)}.
+      * @param length
+      * @return 
 	 */
 	public Set<String> getStrings(int length) {
 		return SpecialOperations.getStrings(this, length);
@@ -1045,6 +1138,7 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link SpecialOperations#getFiniteStrings(Automaton)}.
+      * @return 
 	 */
 	public Set<String> getFiniteStrings() {
 		return SpecialOperations.getFiniteStrings(this);
@@ -1052,6 +1146,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link SpecialOperations#getFiniteStrings(Automaton, int)}.
+      * @param limit
+      * @return 
 	 */
 	public Set<String> getFiniteStrings(int limit) {
 		return SpecialOperations.getFiniteStrings(this, limit);
@@ -1059,6 +1155,7 @@ public class Automaton implements Serializable, Cloneable {
 
 	/**
 	 * See {@link SpecialOperations#getCommonPrefix(Automaton)}.
+      * @return 
 	 */
 	public String getCommonPrefix() {
 		return SpecialOperations.getCommonPrefix(this);
@@ -1073,6 +1170,8 @@ public class Automaton implements Serializable, Cloneable {
 
 	/**
 	 * See {@link SpecialOperations#hexCases(Automaton)}.
+      * @param a
+      * @return 
 	 */
 	public static Automaton hexCases(Automaton a) {
 		return SpecialOperations.hexCases(a);
@@ -1080,6 +1179,8 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link SpecialOperations#replaceWhitespace(Automaton)}.
+      * @param a
+      * @return 
 	 */
 	public static Automaton replaceWhitespace(Automaton a) {
 		return SpecialOperations.replaceWhitespace(a);
@@ -1087,6 +1188,11 @@ public class Automaton implements Serializable, Cloneable {
 	
 	/**
 	 * See {@link ShuffleOperations#shuffleSubsetOf(Collection, Automaton, Character, Character)}.
+      * @param ca
+      * @param a
+      * @param suspend_shuffle
+      * @param resume_shuffle
+      * @return 
 	 */ 
 	public static String shuffleSubsetOf(Collection<Automaton> ca, Automaton a, Character suspend_shuffle, Character resume_shuffle) {
 		return ShuffleOperations.shuffleSubsetOf(ca, a, suspend_shuffle, resume_shuffle);
@@ -1094,6 +1200,8 @@ public class Automaton implements Serializable, Cloneable {
 
 	/** 
 	 * See {@link ShuffleOperations#shuffle(Automaton, Automaton)}.
+      * @param a
+      * @return 
 	 */
 	public Automaton shuffle(Automaton a) {
 		return ShuffleOperations.shuffle(this, a);

@@ -21,7 +21,11 @@ public class GenerexIterator implements Iterator {
 	private final StringBuilder stringBuilder;
 	private boolean found;
 
-	public GenerexIterator(State initialState) {
+     /**
+      *
+      * @param initialState
+      */
+     public GenerexIterator(State initialState) {
 		steps = new ArrayDeque<Step>();
 		int initialCapacity;
 		if (initialState.isAccept() && initialState.getTransitions().isEmpty()) {
@@ -34,7 +38,11 @@ public class GenerexIterator implements Iterator {
 		stringBuilder = new StringBuilder(initialCapacity);
 	}
 
-	public boolean hasNext() {
+     /**
+      *
+      * @return
+      */
+     public boolean hasNext() {
 		if (found) {
 			return true;
 		}
@@ -54,7 +62,11 @@ public class GenerexIterator implements Iterator {
 		}
 	}
 
-	public String next() {
+     /**
+      *
+      * @return
+      */
+     public String next() {
 		if (!found) {
 			nextImpl();
 		}

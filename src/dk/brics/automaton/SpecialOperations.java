@@ -46,6 +46,8 @@ final public class SpecialOperations {
 	/**
 	 * Reverses the language of the given (non-singleton) automaton while returning
 	 * the set of new initial states.
+      * @param a
+      * @return 
 	 */
 	public static Set<State> reverse(Automaton a) {
 		// reverse all edges
@@ -74,6 +76,9 @@ final public class SpecialOperations {
 	 * Returns an automaton that accepts the overlap of strings that in more than one way can be split into
 	 * a left part being accepted by <code>a1</code> and a right part being accepted by
 	 * <code>a2</code>.
+      * @param a1
+      * @param a2
+      * @return 
 	 */
 	public static Automaton overlap(Automaton a1, Automaton a2) {
 		Automaton b1 = a1.cloneExpanded();
@@ -100,6 +105,8 @@ final public class SpecialOperations {
 	 * Returns an automaton that accepts the single chars that occur 
 	 * in strings that are accepted by the given automaton. 
 	 * Never modifies the input automaton.
+      * @param a
+      * @return 
 	 */
 	public static Automaton singleChars(Automaton a) {
 		Automaton b = new Automaton();
@@ -126,8 +133,10 @@ final public class SpecialOperations {
 	 * more <code>set</code> characters are allowed in the new automaton. 2)
 	 * The automaton is prefixed and postfixed with any number of
 	 * <code>set</code> characters.
+      * @param a
 	 * @param set set of characters to be trimmed
 	 * @param c canonical trim character (assumed to be in <code>set</code>)
+      * @return 
 	 */
 	public static Automaton trim(Automaton a, String set, char c) {
 		a = a.cloneExpandedIfRequired();
@@ -168,8 +177,10 @@ final public class SpecialOperations {
 	 * automaton. Whenever a <code>c</code> character is allowed in the
 	 * original automaton, one or more <code>set</code> characters are allowed
 	 * in the new automaton.
+      * @param a
 	 * @param set set of characters to be compressed
 	 * @param c canonical compress character (assumed to be in <code>set</code>)
+      * @return 
 	 */
 	public static Automaton compress(Automaton a, String set, char c) {
 		a = a.cloneExpandedIfRequired();
@@ -196,8 +207,10 @@ final public class SpecialOperations {
 	 * Each transition labeled <code>c</code> is changed to a set of
 	 * transitions, one for each character in <code>map(c)</code>. If
 	 * <code>map(c)</code> is null, then the transition is unchanged.
+      * @param a
 	 * @param map map from characters to sets of characters (where characters 
 	 *            are <code>Character</code> objects)
+      * @return 
 	 */
 	public static Automaton subst(Automaton a, Map<Character, Set<Character>> map) {
 		if (map.isEmpty())
@@ -273,6 +286,7 @@ final public class SpecialOperations {
 	
 	/**
 	 * Returns an automaton where all transitions of the given char are replaced by a string.
+      * @param a
 	 * @param c char
 	 * @param s string
 	 * @return new automaton
@@ -325,6 +339,10 @@ final public class SpecialOperations {
 	 * points of char intervals, and the corresponding entries in
 	 * <code>dest</code> define the starting points of corresponding new
 	 * intervals.
+      * @param a
+      * @param source
+      * @param dest
+      * @return 
 	 */
 	public static Automaton homomorph(Automaton a, char[] source, char[] dest) {
 		a = a.cloneExpandedIfRequired();
@@ -361,6 +379,9 @@ final public class SpecialOperations {
 	 * u0000-uDFFF and uF900-uFFFF (i.e., the non-private code points). It is
 	 * assumed that all other characters from <code>chars</code> are in the
 	 * interval uE000-uF8FF.
+      * @param a
+      * @param chars
+      * @return 
 	 */
 	public static Automaton projectChars(Automaton a, Set<Character> chars) {
 		Character[] c = chars.toArray(new Character[chars.size()]);
@@ -425,6 +446,8 @@ final public class SpecialOperations {
 	
 	/**
 	 * Returns true if the language of this automaton is finite.
+      * @param a
+      * @return 
 	 */
 	public static boolean isFinite(Automaton a) {
 		if (a.isSingleton())
@@ -448,6 +471,9 @@ final public class SpecialOperations {
 	
 	/**
 	 * Returns the set of accepted strings of the given length.
+      * @param a
+      * @param length
+      * @return 
 	 */
 	public static Set<String> getStrings(Automaton a, int length) {
 		HashSet<String> strings = new HashSet<String>();
@@ -474,6 +500,8 @@ final public class SpecialOperations {
 	/**
 	 * Returns the set of accepted strings, assuming this automaton has a finite
 	 * language. If the language is not finite, null is returned.
+      * @param a
+      * @return 
 	 */
 	public static Set<String> getFiniteStrings(Automaton a) {
 		HashSet<String> strings = new HashSet<String>();
@@ -489,6 +517,9 @@ final public class SpecialOperations {
 	 * strings are accepted. If more than <code>limit</code> strings are
 	 * accepted, null is returned. If <code>limit</code>&lt;0, then this
 	 * methods works like {@link #getFiniteStrings(Automaton)}.
+      * @param a
+      * @param limit
+      * @return 
 	 */
 	public static Set<String> getFiniteStrings(Automaton a, int limit) {
 		HashSet<String> strings = new HashSet<String>();
@@ -530,6 +561,7 @@ final public class SpecialOperations {
 	/**
 	 * Returns the longest string that is a prefix of all accepted strings and
 	 * visits each state at most once.
+      * @param a
 	 * @return common prefix
 	 */
 	public static String getCommonPrefix(Automaton a) {
@@ -556,6 +588,7 @@ final public class SpecialOperations {
 	
 	/**
 	 * Prefix closes the given automaton.
+      * @param a
 	 */
 	public static void prefixClose(Automaton a) {
 		for (State s : a.getStates())

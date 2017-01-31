@@ -43,6 +43,7 @@ final public class MinimizationOperations {
 
 	/**
 	 * Minimizes (and determinizes if not already deterministic) the given automaton.
+      * @param a
 	 * @see Automaton#setMinimization(int)
 	 */
 	public static void minimize(Automaton a) {
@@ -140,7 +141,8 @@ final public class MinimizationOperations {
 	}
 	
 	/** 
-	 * Minimizes the given automaton using Huffman's algorithm. 
+	 * Minimizes the given automaton using Huffman's algorithm.
+      * @param a
 	 */
 	public static void minimizeHuffman(Automaton a) {
 		a.determinize();
@@ -206,7 +208,8 @@ final public class MinimizationOperations {
 	}
 	
 	/** 
-	 * Minimizes the given automaton using Brzozowski's algorithm. 
+	 * Minimizes the given automaton using Brzozowski's algorithm.
+      * @param a
 	 */
 	public static void minimizeBrzozowski(Automaton a) {
 		if (a.isSingleton())
@@ -216,7 +219,8 @@ final public class MinimizationOperations {
 	}
 	
 	/** 
-	 * Minimizes the given automaton using Hopcroft's algorithm. 
+	 * Minimizes the given automaton using Hopcroft's algorithm.
+      * @param a
 	 */
 	public static void minimizeHopcroft(Automaton a) {
 		a.determinize();

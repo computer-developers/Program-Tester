@@ -57,22 +57,40 @@ public class Generex implements Iterable {
         PREDEFINED_CHARACTER_CLASSES = Collections.unmodifiableMap(characterClasses);
     }
 
-    public Generex(String regex) {
+     /**
+      *
+      * @param regex
+      */
+     public Generex(String regex) {
         this(regex, new Random());
     }
 
-    public Generex(Automaton automaton) {
+     /**
+      *
+      * @param automaton
+      */
+     public Generex(Automaton automaton) {
         this(automaton, new Random());
     }
 
-    public Generex(String regex, Random random) {
+     /**
+      *
+      * @param regex
+      * @param random
+      */
+     public Generex(String regex, Random random) {
         regex = requote(regex);
         regExp = createRegExp(regex);
         automaton = regExp.toAutomaton();
         this.random = random;
     }
 
-    public Generex(Automaton automaton, Random random) {
+     /**
+      *
+      * @param automaton
+      * @param random
+      */
+     public Generex(Automaton automaton, Random random) {
         this.automaton = automaton;
         this.random = random;
     }
@@ -370,7 +388,11 @@ public class Generex implements Iterable {
         return transitions.size() == 0;
     }
 
-    public Iterator iterator() {
+     /**
+      *
+      * @return
+      */
+     public Iterator iterator() {
         return new GenerexIterator(automaton.getInitialState());
     }
 

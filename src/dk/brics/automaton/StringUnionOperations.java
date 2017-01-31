@@ -243,6 +243,7 @@ final public class StringUnionOperations {
 	 * Add another character sequence to this automaton. The sequence must be
 	 * lexicographically larger or equal compared to any previous sequences
 	 * added to this automaton (the input must be sorted).
+      * @param current
 	 */
 	public void add(CharSequence current) {
 		assert register != null : "Automaton already built.";
@@ -306,6 +307,8 @@ final public class StringUnionOperations {
 
 	/**
 	 * Build a minimal, deterministic automaton from a sorted list of strings.
+      * @param input
+      * @return 
 	 */
 	public static dk.brics.automaton.State build(CharSequence[] input) {
 		final StringUnionOperations builder = new StringUnionOperations(); 

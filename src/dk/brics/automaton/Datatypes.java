@@ -233,6 +233,7 @@ final public class Datatypes {
 	 * Invoke during compilation to pre-build automata.
 	 * Automata are stored in the directory specified by the system property <tt>dk.brics.automaton.datatypes</tt>.
 	 * (Default: <tt>build</tt>, relative to the current working directory.)
+      * @param args
 	 */
 	public static void main(String[] args) {
 		long t = System.currentTimeMillis();
@@ -258,7 +259,7 @@ final public class Datatypes {
 	 * <tr><td><tt>Char</tt></td><td><a target="_top" href="http://www.w3.org/TR/REC-xml/#NT-Char">Char</a> from XML 1.0</td></tr>
 	 * <tr><td><tt>NameChar</tt></td><td><a target="_top" href="http://www.w3.org/TR/REC-xml/#NT-NameChar">NameChar</a> from XML 1.0</td></tr>
 	 * <tr><td><tt>URI</tt></td><td><a target="_top" href="http://rfc.net/rfc2396.html#sA%2e">URI</a> from RFC2396 with
-	 * amendments from <a target="_top" href="http://www.faqs.org/rfcs/rfc2373.html">RFC2373</td></tr>
+	 * amendments from <a target="_top" href="http://www.faqs.org/rfcs/rfc2373.html">RFC2373</a></td></tr>
 	 * <tr><td><tt>anyname</tt></td><td>optional URI enclosed by brackets, followed by NCName</td></tr>
 	 * <tr><td><tt>noap</tt></td><td>strings not containing '@' and '%'</td></tr>
 	 * <tr><td><tt>whitespace</tt></td><td>optional <a target="_top" href="http://www.w3.org/TR/REC-xml/#NT-S">S</a> from XML 1.0</td></tr>
@@ -431,6 +432,8 @@ final public class Datatypes {
 	
 	/**
 	 * Checks whether the given string is the name of a Unicode block (see {@link #get(String)}).
+      * @param name
+      * @return 
 	 */
 	public static boolean isUnicodeBlockName(String name) {
 		return unicodeblock_names.contains(name);
@@ -438,6 +441,8 @@ final public class Datatypes {
 	
 	/**
 	 * Checks whether the given string is the name of a Unicode category (see {@link #get(String)}).
+      * @param name
+      * @return 
 	 */
 	public static boolean isUnicodeCategoryName(String name) {
 		return unicodecategory_names.contains(name);
@@ -445,6 +450,8 @@ final public class Datatypes {
 	
 	/**
 	 * Checks whether the given string is the name of an XML / XML Schema automaton (see {@link #get(String)}).
+      * @param name
+      * @return 
 	 */
 	public static boolean isXMLName(String name) {
 		return xml_names.contains(name);

@@ -44,6 +44,7 @@ final public class BasicAutomata {
 
 	/** 
 	 * Returns a new (deterministic) automaton with the empty language. 
+      * @return 
 	 */
 	public static Automaton makeEmpty() {
 		Automaton a = new Automaton();
@@ -55,6 +56,7 @@ final public class BasicAutomata {
 	
 	/** 
 	 * Returns a new (deterministic) automaton that accepts only the empty string. 
+      * @return 
 	 */
 	public static Automaton makeEmptyString() {
 		Automaton a = new Automaton();
@@ -65,6 +67,7 @@ final public class BasicAutomata {
 	
 	/** 
 	 * Returns a new (deterministic) automaton that accepts all strings. 
+      * @return 
 	 */
 	public static Automaton makeAnyString()	{
 		Automaton a = new Automaton();
@@ -78,6 +81,7 @@ final public class BasicAutomata {
 	
 	/** 
 	 * Returns a new (deterministic) automaton that accepts any single character. 
+      * @return 
 	 */
 	public static Automaton makeAnyChar() {
 		return makeCharRange(Character.MIN_VALUE, Character.MAX_VALUE);
@@ -85,6 +89,8 @@ final public class BasicAutomata {
 	
 	/** 
 	 * Returns a new (deterministic) automaton that accepts a single character of the given value. 
+      * @param c
+      * @return 
 	 */
 	public static Automaton makeChar(char c) {
 		Automaton a = new Automaton();
@@ -96,6 +102,9 @@ final public class BasicAutomata {
 	/** 
 	 * Returns a new (deterministic) automaton that accepts a single char 
 	 * whose value is in the given interval (including both end points). 
+      * @param min
+      * @param max
+      * @return 
 	 */
 	public static Automaton makeCharRange(char min, char max) {
 		if (min == max)
@@ -113,6 +122,8 @@ final public class BasicAutomata {
 	
 	/** 
 	 * Returns a new (deterministic) automaton that accepts a single character in the given set. 
+      * @param set
+      * @return 
 	 */
 	public static Automaton makeCharSet(String set) {
 		if (set.length() == 1)
@@ -212,6 +223,7 @@ final public class BasicAutomata {
 	 * @param digits if >0, use fixed number of digits (strings must be prefixed 
 	 *               by 0's to obtain the right length) -
 	 *               otherwise, the number of digits is not fixed
+      * @return 
 	 * @exception IllegalArgumentException if min>max or if numbers in the interval cannot be expressed
 	 *                                     with the given fixed number of digits
 	 */
@@ -254,6 +266,8 @@ final public class BasicAutomata {
 	
 	/** 
 	 * Returns a new (deterministic) automaton that accepts the single given string.
+      * @param s
+      * @return 
 	 */
 	public static Automaton makeString(String s) {
 		Automaton a = new Automaton();
@@ -266,6 +280,8 @@ final public class BasicAutomata {
      * Returns a new (deterministic and minimal) automaton that accepts the union of the
      * given set of strings. The input character sequences are internally sorted in-place,
      * so the input array is modified. 
+      * @param strings
+      * @return 
      * @see StringUnionOperations
      */
     public static Automaton makeStringUnion(CharSequence... strings) {
@@ -284,6 +300,7 @@ final public class BasicAutomata {
 	 * Constructs automaton that accept strings representing nonnegative integers
 	 * that are not larger than the given value.
 	 * @param n string representation of maximum value
+      * @return 
 	 */
 	public static Automaton makeMaxInteger(String n) {
 		int i = 0;
@@ -314,6 +331,7 @@ final public class BasicAutomata {
 	 * Constructs automaton that accept strings representing nonnegative integers
 	 * that are not less that the given value.
 	 * @param n string representation of minimum value
+      * @return 
 	 */
 	public static Automaton makeMinInteger(String n) {
 		int i = 0;
@@ -343,6 +361,7 @@ final public class BasicAutomata {
 	 * that can be written with at most the given number of digits.
 	 * Surrounding whitespace is permitted.
 	 * @param i max number of necessary digits
+      * @return 
 	 */
 	public static Automaton makeTotalDigits(int i) {
 		return Automaton.minimize((new RegExp("[ \t\n\r]*[-+]?0*([0-9]{0," + i + "}|((([0-9]\\.*){0," + i + "})&@\\.@)0*)[ \t\n\r]*")).toAutomaton());
@@ -353,6 +372,7 @@ final public class BasicAutomata {
 	 * that can be written with at most the given number of digits in the fraction part.
 	 * Surrounding whitespace is permitted.
 	 * @param i max number of necessary fraction digits
+      * @return 
 	 */
 	public static Automaton makeFractionDigits(int i) {
 		return Automaton.minimize((new RegExp("[ \t\n\r]*[-+]?[0-9]+(\\.[0-9]{0," + i + "}0*)?[ \t\n\r]*")).toAutomaton());
@@ -362,6 +382,7 @@ final public class BasicAutomata {
 	 * Constructs automaton that accept strings representing the given integer.
 	 * Surrounding whitespace is permitted.
 	 * @param value string representation of integer
+      * @return 
 	 */
 	public static Automaton makeIntegerValue(String value) {
 		boolean minus = false;
@@ -391,6 +412,7 @@ final public class BasicAutomata {
 	 * Constructs automaton that accept strings representing the given decimal number.
 	 * Surrounding whitespace is permitted.
 	 * @param value string representation of decimal number
+      * @return 
 	 */
 	public static Automaton makeDecimalValue(String value) {
 		boolean minus = false;
@@ -437,6 +459,8 @@ final public class BasicAutomata {
 	
 	/**
 	 * Constructs deterministic automaton that matches strings that contain the given substring.
+      * @param s
+      * @return 
 	 */
 	public static Automaton makeStringMatcher(String s) {
 		Automaton a = new Automaton();

@@ -222,6 +222,7 @@ public class RegExp {
 	/** 
 	 * Constructs new <code>Automaton</code> from this <code>RegExp</code>. 
 	 * Same as <code>toAutomaton(null)</code> (empty automaton map).
+      * @return 
 	 */
 	public Automaton toAutomaton() {
 		return toAutomatonAllowMutate(null, null, true);
@@ -230,6 +231,8 @@ public class RegExp {
 	/** 
 	 * Constructs new <code>Automaton</code> from this <code>RegExp</code>. 
 	 * Same as <code>toAutomaton(null,minimize)</code> (empty automaton map).
+      * @param minimize
+      * @return 
 	 */
 	public Automaton toAutomaton(boolean minimize) {
 		return toAutomatonAllowMutate(null, null, minimize);
@@ -240,6 +243,7 @@ public class RegExp {
 	 * The constructed automaton is minimal and deterministic and has no 
 	 * transitions to dead states. 
 	 * @param automaton_provider provider of automata for named identifiers
+      * @return 
 	 * @exception IllegalArgumentException if this regular expression uses
 	 *   a named identifier that is not available from the automaton provider
 	 */
@@ -252,6 +256,7 @@ public class RegExp {
 	 * The constructed automaton has no transitions to dead states. 
 	 * @param automaton_provider provider of automata for named identifiers
 	 * @param minimize if set, the automaton is minimized and determinized
+      * @return 
 	 * @exception IllegalArgumentException if this regular expression uses
 	 *   a named identifier that is not available from the automaton provider
 	 */
@@ -265,6 +270,7 @@ public class RegExp {
 	 * transitions to dead states. 
 	 * @param automata a map from automaton identifiers to automata 
 	 *   (of type <code>Automaton</code>).
+      * @return 
 	 * @exception IllegalArgumentException if this regular expression uses
 	 *   a named identifier that does not occur in the automaton map
 	 */
@@ -278,6 +284,7 @@ public class RegExp {
 	 * @param automata a map from automaton identifiers to automata 
 	 *   (of type <code>Automaton</code>).
 	 * @param minimize if set, the automaton is minimized and determinized
+      * @return 
 	 * @exception IllegalArgumentException if this regular expression uses
 	 *   a named identifier that does not occur in the automaton map
 	 */
@@ -406,6 +413,7 @@ public class RegExp {
 
 	/** 
 	 * Constructs string from parsed regular expression. 
+      * @return 
 	 */
 	@Override
 	public String toString() {
@@ -497,6 +505,7 @@ public class RegExp {
 
 	/** 
 	 * Returns set of automaton identifiers that occur in this regular expression. 
+      * @return 
 	 */
 	public Set<String> getIdentifiers() {
 		HashSet<String> set = new HashSet<String>();

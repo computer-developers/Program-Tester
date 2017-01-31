@@ -7,6 +7,10 @@ import java.io.*;
  * @author Neel Patel
  */
 public class RunTest {
+
+     /**
+      *
+      */
      public static final long runTime = 30000; //default runtime.
      ProgramExecuter pe; //to execute subprocess.
      Thread t; //to execute subprocess in parallel

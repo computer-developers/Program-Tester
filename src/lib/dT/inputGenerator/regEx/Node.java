@@ -39,43 +39,83 @@ public class Node {
 		isNbrMatchedStringUpdated = true;
 	}
 
-	public List<Node> getNextNodes() {
+     /**
+      *
+      * @return
+      */
+     public List<Node> getNextNodes() {
 		return nextNodes;
 	}
 
-	public void setNextNodes(List<Node> nextNodes) {
+     /**
+      *
+      * @param nextNodes
+      */
+     public void setNextNodes(List<Node> nextNodes) {
 		this.nextNodes = nextNodes;
 	}
 
-	public int getNbrChar() {
+     /**
+      *
+      * @return
+      */
+     public int getNbrChar() {
 		return nbrChar;
 	}
 
-	public void setNbrChar(int nbrChar) {
+     /**
+      *
+      * @param nbrChar
+      */
+     public void setNbrChar(int nbrChar) {
 		this.nbrChar = nbrChar;
 	}
 
-	public long getNbrMatchedString() {
+     /**
+      *
+      * @return
+      */
+     public long getNbrMatchedString() {
 		return nbrMatchedString;
 	}
 
-	public void setNbrMatchedString(long nbrMatchedString) {
+     /**
+      *
+      * @param nbrMatchedString
+      */
+     public void setNbrMatchedString(long nbrMatchedString) {
 		this.nbrMatchedString = nbrMatchedString;
 	}
 
-	public char getMaxChar() {
+     /**
+      *
+      * @return
+      */
+     public char getMaxChar() {
 		return maxChar;
 	}
 
-	public void setMaxChar(char maxChar) {
+     /**
+      *
+      * @param maxChar
+      */
+     public void setMaxChar(char maxChar) {
 		this.maxChar = maxChar;
 	}
 
-	public char getMinChar() {
+     /**
+      *
+      * @return
+      */
+     public char getMinChar() {
 		return minChar;
 	}
 
-	public void setMinChar(char minChar) {
+     /**
+      *
+      * @param minChar
+      */
+     public void setMinChar(char minChar) {
 		this.minChar = minChar;
 	}
 

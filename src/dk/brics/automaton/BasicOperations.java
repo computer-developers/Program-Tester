@@ -51,6 +51,9 @@ final public class BasicOperations {
 	 * the given automata. 
 	 * <p>
 	 * Complexity: linear in number of states. 
+      * @param a1
+      * @param a2
+      * @return 
 	 */
 	static public Automaton concatenate(Automaton a1, Automaton a2) {
 		if (a1.isSingleton() && a2.isSingleton())
@@ -80,6 +83,8 @@ final public class BasicOperations {
 	 * the given automata.
 	 * <p>
 	 * Complexity: linear in total number of states.
+      * @param l
+      * @return 
 	 */
 	static public Automaton concatenate(List<Automaton> l) {
 		if (l.isEmpty())
@@ -142,6 +147,8 @@ final public class BasicOperations {
 	 * language of the given automaton.
 	 * <p>
 	 * Complexity: linear in number of states.
+      * @param a
+      * @return 
 	 */
 	static public Automaton optional(Automaton a) {
 		a = a.cloneExpandedIfRequired();
@@ -161,6 +168,8 @@ final public class BasicOperations {
 	 * Never modifies the input automaton language.
 	 * <p>
 	 * Complexity: linear in number of states.
+      * @param a
+      * @return 
 	 */
 	static public Automaton repeat(Automaton a) {
 		a = a.cloneExpanded();
@@ -181,6 +190,9 @@ final public class BasicOperations {
 	 * concatenated repetitions of the language of the given automaton.
 	 * <p>
 	 * Complexity: linear in number of states and in <code>min</code>.
+      * @param a
+      * @param min
+      * @return 
 	 */
 	static public Automaton repeat(Automaton a, int min) {
 		if (min == 0)
@@ -199,6 +211,10 @@ final public class BasicOperations {
 	 * <p>
 	 * Complexity: linear in number of states and in <code>min</code> and
 	 * <code>max</code>.
+      * @param a
+      * @param min
+      * @param max
+      * @return 
 	 */
 	static public Automaton repeat(Automaton a, int min, int max) {
 		if (min > max)
@@ -238,6 +254,8 @@ final public class BasicOperations {
 	 * language of the given automaton.
 	 * <p>
 	 * Complexity: linear in number of states (if already deterministic).
+      * @param a
+      * @return 
 	 */
 	static public Automaton complement(Automaton a) {
 		a = a.cloneExpandedIfRequired();
@@ -256,6 +274,9 @@ final public class BasicOperations {
 	 * already deterministic.
 	 * <p>
 	 * Complexity: quadratic in number of states (if already deterministic).
+      * @param a1
+      * @param a2
+      * @return 
 	 */
 	static public Automaton minus(Automaton a1, Automaton a2) {
 		if (a1.isEmpty() || a1 == a2)
@@ -277,6 +298,9 @@ final public class BasicOperations {
 	 * Never modifies the input automata languages.
 	 * <p>
 	 * Complexity: quadratic in number of states.
+      * @param a1
+      * @param a2
+      * @return 
 	 */
 	static public Automaton intersection(Automaton a1, Automaton a2) {
 		if (a1.isSingleton()) {
@@ -338,6 +362,9 @@ final public class BasicOperations {
 	 * deterministic.
 	 * <p>
 	 * Complexity: quadratic in number of states.
+      * @param a1
+      * @param a2
+      * @return 
 	 */
 	public static boolean subsetOf(Automaton a1, Automaton a2) {
 		if (a1 == a2)
@@ -391,6 +418,9 @@ final public class BasicOperations {
 	 * Returns an automaton that accepts the union of the languages of the given automata.
 	 * <p>
 	 * Complexity: linear in number of states.
+      * @param a1
+      * @param a2
+      * @return 
 	 */
 	public static Automaton union(Automaton a1, Automaton a2) {
 		if ((a1.isSingleton() && a2.isSingleton() && a1.singleton.equals(a2.singleton)) || a1 == a2)
@@ -416,6 +446,8 @@ final public class BasicOperations {
 	 * Returns an automaton that accepts the union of the languages of the given automata.
 	 * <p>
 	 * Complexity: linear in number of states.
+      * @param l
+      * @return 
 	 */
 	public static Automaton union(Collection<Automaton> l) {
 		Set<Integer> ids = new HashSet<Integer>();
@@ -445,6 +477,7 @@ final public class BasicOperations {
 	 * Determinizes the given automaton.
 	 * <p>
 	 * Complexity: exponential in number of states.
+      * @param a
 	 */
 	public static void determinize(Automaton a) {
 		if (a.deterministic || a.isSingleton())
@@ -504,6 +537,7 @@ final public class BasicOperations {
 	 * Adds epsilon transitions to the given automaton.
 	 * This method adds extra character interval transitions that are equivalent to the given
 	 * set of epsilon transitions. 
+      * @param a
 	 * @param pairs collection of {@link StatePair} objects representing pairs of source/destination states 
 	 *        where epsilon transitions should be added
 	 */
@@ -565,6 +599,8 @@ final public class BasicOperations {
 	
 	/**
 	 * Returns true if the given automaton accepts the empty string and nothing else.
+      * @param a
+      * @return 
 	 */
 	public static boolean isEmptyString(Automaton a) {
 		if (a.isSingleton())
@@ -575,6 +611,8 @@ final public class BasicOperations {
 
 	/**
 	 * Returns true if the given automaton accepts no strings.
+      * @param a
+      * @return 
 	 */
 	public static boolean isEmpty(Automaton a) {
 		if (a.isSingleton())
@@ -584,6 +622,8 @@ final public class BasicOperations {
 	
 	/**
 	 * Returns true if the given automaton accepts all strings.
+      * @param a
+      * @return 
 	 */
 	public static boolean isTotal(Automaton a) {
 		if (a.isSingleton())
@@ -598,6 +638,7 @@ final public class BasicOperations {
 	/**
 	 * Returns a shortest accepted/rejected string. 
 	 * If more than one shortest string is found, the lexicographically first of the shortest strings is returned.
+      * @param a
 	 * @param accepted if true, look for accepted strings; otherwise, look for rejected strings
 	 * @return the string, null if none found
 	 */
@@ -646,6 +687,9 @@ final public class BasicOperations {
 	 * Complexity: linear in the length of the string.
 	 * <p>
 	 * <b>Note:</b> for full performance, use the {@link RunAutomaton} class.
+      * @param a
+      * @param s
+      * @return 
 	 */
 	public static boolean run(Automaton a, String s) {
 		if (a.isSingleton())

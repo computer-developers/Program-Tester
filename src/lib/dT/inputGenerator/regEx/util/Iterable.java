@@ -5,5 +5,10 @@ package lib.dt.inputGenerator.regEx.util;
  *
  */
 public interface Iterable {
-	Iterator iterator();
+
+     /**
+      *
+      * @return
+      */
+     Iterator iterator();
 }

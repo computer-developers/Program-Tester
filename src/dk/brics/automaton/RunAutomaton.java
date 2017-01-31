@@ -105,6 +105,7 @@ public class RunAutomaton implements Serializable {
 
 	/** 
 	 * Returns number of states in automaton. 
+      * @return 
 	 */
 	public int getSize() {
 		return size;
@@ -112,6 +113,8 @@ public class RunAutomaton implements Serializable {
 
 	/** 
 	 * Returns acceptance status for given state. 
+      * @param state
+      * @return 
 	 */
 	public boolean isAccept(int state) {
 		return accept[state];
@@ -119,6 +122,7 @@ public class RunAutomaton implements Serializable {
 
 	/** 
 	 * Returns initial state. 
+      * @return 
 	 */
 	public int getInitialState() {
 		return initial;
@@ -127,6 +131,7 @@ public class RunAutomaton implements Serializable {
 	/**
 	 * Returns array of character class interval start points. The array should
 	 * not be modified by the caller.
+      * @return 
 	 */
 	public char[] getCharIntervals() {
 		return points.clone();
@@ -154,6 +159,7 @@ public class RunAutomaton implements Serializable {
 	/**
 	 * Retrieves a serialized <code>RunAutomaton</code> located by a URL.
 	 * @param url URL of serialized automaton
+      * @return 
 	 * @exception IOException if input/output related exception occurs
 	 * @exception OptionalDataException if the data is not a serialized object
 	 * @exception InvalidClassException if the class serial number does not match
@@ -168,6 +174,7 @@ public class RunAutomaton implements Serializable {
 	/**
 	 * Retrieves a serialized <code>RunAutomaton</code> from a stream.
 	 * @param stream input stream with serialized automaton
+      * @return 
 	 * @exception IOException if input/output related exception occurs
 	 * @exception OptionalDataException if the data is not a serialized object
 	 * @exception InvalidClassException if the class serial number does not match
@@ -229,6 +236,9 @@ public class RunAutomaton implements Serializable {
 	 * <code>Automaton</code> had no dead states, -1 is returned here if and
 	 * only if a dead state is entered in an equivalent automaton with a total
 	 * transition function.)
+      * @param state
+      * @param c
+      * @return 
 	 */
 	public int step(int state, char c) {
 		if (classmap == null)
@@ -239,6 +249,8 @@ public class RunAutomaton implements Serializable {
 
 	/** 
 	 * Returns true if the given string is accepted by this automaton. 
+      * @param s
+      * @return 
 	 */
 	public boolean run(String s) {
 		int p = initial;

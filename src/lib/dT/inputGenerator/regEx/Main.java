@@ -9,7 +9,12 @@ import lib.dt.inputGenerator.regEx.util.Iterator;
  *
  */
 public class Main {
-	public static void main(String[] args) {
+
+     /**
+      *
+      * @param args
+      */
+     public static void main(String[] args) {
 		Generex generex = new Generex("[0-3]([a-c]|[e-g]{1,2})");
 
 		// generate the second String in lexicographical order that match the

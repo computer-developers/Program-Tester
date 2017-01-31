@@ -79,17 +79,20 @@ public class Transition implements Serializable, Cloneable {
 		this.to = to;
 	}
 	
-	/** Returns minimum of this transition interval. */
+	/** Returns minimum of this transition interval.
+      * @return  */
 	public char getMin() {
 		return min;
 	}
 	
-	/** Returns maximum of this transition interval. */
+	/** Returns maximum of this transition interval.
+      * @return  */
 	public char getMax() {
 		return max;
 	}
 	
-	/** Returns destination of this transition. */
+	/** Returns destination of this transition.
+      * @return  */
 	public State getDest() {
 		return to;
 	}

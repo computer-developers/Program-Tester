@@ -5,6 +5,16 @@ package lib.dt.inputGenerator.regEx.util;
  *
  */
 public interface Iterator {
-	boolean hasNext();
-	String next();
+
+     /**
+      *
+      * @return
+      */
+     boolean hasNext();
+
+     /**
+      *
+      * @return
+      */
+     String next();
 }

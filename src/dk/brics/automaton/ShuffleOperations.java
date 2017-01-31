@@ -55,6 +55,9 @@ final public class ShuffleOperations {
 	 * <p>
 	 * <dl><dt><b>Author:</b></dt><dd>Torben Ruby 
 	 * &lt;<a href="mailto:ruby@daimi.au.dk">ruby@daimi.au.dk</a>&gt;</dd></dl>
+      * @param a1
+      * @param a2
+      * @return 
 	 */
 	public static Automaton shuffle(Automaton a1, Automaton a2) {
 		a1.determinize();
@@ -113,6 +116,11 @@ final public class ShuffleOperations {
 	 * <p>
 	 * Complexity: proportional to the product of the numbers of states (if <code>a</code>
 	 * is already deterministic).
+      * @param ca
+      * @param a
+      * @param resume_shuffle
+      * @param suspend_shuffle
+      * @return 
 	 */ 
 	public static String shuffleSubsetOf(Collection<Automaton> ca, Automaton a, Character suspend_shuffle, Character resume_shuffle) {
 		if (ca.size() == 0)

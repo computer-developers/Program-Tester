@@ -8,6 +8,12 @@ import java.util.*;
 public class InputGen {
      private InputGen(){}
      
+     /**
+      *
+      * @param count
+      * @param reg
+      * @return
+      */
      public static List<String> getInput(int count,String... reg){
           List<String> li=new ArrayList();
           StringGen sg=new StringGen(reg);
