@@ -13,7 +13,8 @@ public class StringComparators {
      /**
       * @author Neel Patel
       */
-     public static class ExactMatch implements BiPredicate<String,String>{
+     private static class ExactMatch implements BiPredicate<String,String>{
+          private static BiPredicate<String,String> obj;
           public boolean test(String o1, String o2) {
                return o1.equals(o2);
           }
@@ -23,7 +24,8 @@ public class StringComparators {
      /**
       * @author Neel Patel
       */
-     public static class IgnoreCase implements BiPredicate<String,String>{
+     private static class IgnoreCase implements BiPredicate<String,String>{
+          private static BiPredicate<String,String> obj;
           public boolean test(String o1, String o2) {
                return o1.equalsIgnoreCase(o2);
           }
@@ -32,8 +34,9 @@ public class StringComparators {
      /**
       * @author Neel Patel
       */
-     public static class IgnoreWhiteSpace
+     private static class IgnoreWhiteSpace
                implements BiPredicate<String,String>{
+          private static BiPredicate<String,String> obj;
           public boolean test(String o1, String o2) {
                List<String> l1=Arrays.asList(o1.split("\\s"));
                List<String> l2=Arrays.asList(o2.split("\\s"));
@@ -44,8 +47,9 @@ public class StringComparators {
      /**
       * @author Neel Patel
       */
-     public static class IgnoreWhiteSpaceAndCase
+     private static class IgnoreWhiteSpaceAndCase
                implements BiPredicate<String,String>{
+          private static BiPredicate<String,String> obj;
           public boolean test(String o1, String o2) {
                List<String> l1=Arrays.asList(o1.split("\\s"))
                          .parallelStream().map(s->s.toLowerCase())
@@ -55,6 +59,93 @@ public class StringComparators {
                          .collect(Collectors.toList());
                return l1.equals(l2);
           }
+     }
+     
+     /**
+      * return instance of BiPredicate to compare String.
+      * BiPredicate instance returned by this method can be used as argument
+        of different methods to compare string.
+      * test method of the BiPredicate will return true if both the Strings are 
+        equal, return false otherwise.
+      * @return BiPredicate object
+      */
+     public static BiPredicate<String,String> getExactmatch(){
+          if(ExactMatch.obj==null){
+               synchronized(ExactMatch.class){
+                    if(ExactMatch.obj==null)
+                         ExactMatch.obj=new ExactMatch();
+               }
+          }
+          return ExactMatch.obj;
+     }
+     
+     /**
+      * return instance of BiPredicate to compare String ignoring case.
+      * BiPredicate instance returned by this method can be used as argument
+        of different methods to compare string.
+      * test method of the BiPredicate will return true if both the Strings are 
+        equal ignoring case, returns false otherwise.
+      * @return BiPredicate object
+      */
+     public static BiPredicate<String,String> getIgnoreCase(){
+          if(IgnoreCase.obj==null){
+               synchronized(IgnoreCase.class){
+                    if(IgnoreCase.obj==null)
+                         IgnoreCase.obj=new IgnoreCase();
+               }
+          }
+          return IgnoreCase.obj;
+     }
+     
+     /**
+      * return instance of BiPredicate to compare String ignoring whitespace.
+      * BiPredicate instance returned by this method can be used as argument
+        of different methods to compare string.
+      * test method of the BiPredicate will return true if both the Strings are 
+        equal ignoring multiple whitespace, returns false otherwise.
+        if there is multiple whitespace in between string then this method 
+        encounter only one whitespace & compare those strings.<br>
+      * {@code let consider string s1 & s2..
+        s1="abc   d\ne\tf" &
+        s2="abc e f".
+        test method of the object return by this method encounters s1 & s2 is equal
+        & return true.}<br>
+      * @return BiPredicate object
+      */
+     public static BiPredicate<String,String> getIgnoreWhiteSpace(){
+          if(IgnoreWhiteSpace.obj==null){
+               synchronized(IgnoreWhiteSpace.class){
+                    if(IgnoreWhiteSpace.obj==null)
+                         IgnoreWhiteSpace.obj=new IgnoreWhiteSpace();
+               }
+          }
+          return IgnoreWhiteSpace.obj;
+     }
+     
+     /**
+      * return instance of BiPredicate to compare String ignoring whitespace
+        & case.
+      * BiPredicate instance returned by this method can be used as argument
+        of different methods to compare string.
+      * test method of the BiPredicate will return true if both the Strings are 
+        equal ignoring multiple whitespace & case, returns false otherwise.
+        if there is multiple whitespace in between string then this method 
+        encounter only one whitespace & compare those strings.<br>
+      * {@code let consider string s1 & s2..
+        s1="abc   d\ne\tf" &
+        s2="aBc e f".
+        test method of the object return by this method encounters s1 & s2 is equal
+        & return true.}<br>
+      * @return BiPredicate object
+      */
+     public static BiPredicate<String,String> IgnoreWhiteSpaceAndCase(){
+          if(IgnoreWhiteSpaceAndCase.obj==null){
+               synchronized(IgnoreWhiteSpaceAndCase.class){
+                    if(IgnoreWhiteSpaceAndCase.obj==null)
+                         IgnoreWhiteSpaceAndCase.obj=new IgnoreWhiteSpaceAndCase();
+               }
+          }
+          return IgnoreWhiteSpaceAndCase.obj;
      }
      
 }
