@@ -14,6 +14,10 @@ import java.util.function.*;
  */
 public class IOManager {
      private IOManager(){}
+     
+     public static IntInput getInput(List<String> input){
+          return new IODetail(input);
+     }
                
      /**
       * this method return immutable object of {@code IntIODetail}

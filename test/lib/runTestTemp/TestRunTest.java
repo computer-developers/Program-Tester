@@ -1,5 +1,4 @@
 package lib.runTestTemp;
-import lib.runTest.DummyIntIODetail;
 import java.io.IOException;
 import lib.runDetails.*;
 import lib.runTest.*;
@@ -25,11 +24,11 @@ public class TestRunTest {
           System.out.println("pi :- "+pi);
           List<String> input=Files.readAllLines(pi);
           System.out.println("input read completed.");
-          RunTest rt=new RunTest(DummyIntIODetail.getIntIODetail(input,null, 0),com);
+          RunTest rt=new RunTest(IOManager.getIODetail(input,null, 0),com);
           System.out.println("process start.");
           //rt.run();
           IntIODetail obj=rt.getIODetail();
-          System.out.println("process completed. obj :- "+obj.getAllOutput());
+          System.out.println("process completed. obj :- ");
           if(arg.length>1)
                pi=Paths.get(arg[1]);
           else

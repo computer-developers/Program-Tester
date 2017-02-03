@@ -22,9 +22,16 @@ class IODetail implements IntIODetail, Serializable{
      long index=-1;
      List<String> input=new ArrayList<>(),output=new ArrayList<>();
      
-     IODetail(List<String> input,List<String> output){
+     IODetail(List<String> input){
           this.input.addAll(input);
-          this.output.addAll(output);
+     }
+     
+     IODetail(List<String> input,List<String> output){
+          this(input);
+          if(output!=null)
+               this.output.addAll(output);
+          else
+               this.output=null;
      }
      
      IODetail(List<String> input,List<String> output, long time){
@@ -73,6 +80,8 @@ class IODetail implements IntIODetail, Serializable{
       */
      @Override
      synchronized public List<String> getAllOutput() {
+          if(output==null)
+               return null;
           List<String> l=new ArrayList<String>();
           l.addAll(output);
           return l;
@@ -94,7 +103,7 @@ class IODetail implements IntIODetail, Serializable{
      /**
       * it returns time taken by the process to generate {@code output} from
         {@code input}.
-      * @return long time
+      * @return positive long time, negative value if not applicable.
       */
      @Override
      public long getTime() {
