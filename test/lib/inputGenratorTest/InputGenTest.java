@@ -1,5 +1,5 @@
 package lib.inputGenratorTest;
-import lib.dt.inputGenerator.InputGen;
+import lib.dT.inputGenerator.*;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.*;

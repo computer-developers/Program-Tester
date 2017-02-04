@@ -11,6 +11,7 @@ import java.util.logging.Logger;
  */
 class ProgramExecuter {
      boolean executed=false;
+     String cmd;
      ProcessBuilder pb; //used to create subprocess
      Process pr; //refer to the subprocess
      Thread tin,tout; //refer to the thread which give input & output
@@ -28,6 +29,7 @@ class ProgramExecuter {
       */
      ProgramExecuter(List<String> input,String cmd){
           this.input=input;
+          this.cmd=cmd;
           pb=new ProcessBuilder(cmd);
           pb.redirectErrorStream(true); //error stream bind with the output steam of subprocess
           output=new ArrayList<>();
@@ -51,8 +53,8 @@ class ProgramExecuter {
           long st=System.currentTimeMillis();
           boolean b=false;
           //pb.inheritIO();
-          //pr=Runtime.getRuntime().exec("resources\\pro.exe");
-          pr=pb.start(); //start new subprocess.
+          pr=Runtime.getRuntime().exec(cmd);
+          //pr=pb.start(); //start new subprocess.
           //System.out.println("ProgramExecuter.execute :- started");
           //in=new BufferedReader(new InputStreamReader(pr.getInputStream()));
           //in=new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
