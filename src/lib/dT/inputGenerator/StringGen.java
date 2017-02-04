@@ -1,4 +1,4 @@
-package lib.dt.inputGenerator;
+package lib.dT.inputGenerator;
 import lib.dt.inputGenerator.regEx.Generex;
 import java.util.*;
 import java.util.stream.Collectors;

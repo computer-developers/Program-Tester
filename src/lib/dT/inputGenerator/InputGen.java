@@ -1,4 +1,4 @@
-package lib.dt.inputGenerator;
+package lib.dT.inputGenerator;
 import java.util.*;
 
 /**
