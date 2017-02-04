@@ -26,7 +26,7 @@ public class InputGenTest {
           }
           System.out.println("counts :- ");
           int c=sc.nextInt();
-          List<String> lines= InputGen.getInput(c,s);
+          List<String> lines= InputGen.getInput(c,ar);
           Files.write(p, lines,StandardOpenOption.CREATE);
      }
 }
