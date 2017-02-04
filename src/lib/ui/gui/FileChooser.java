@@ -1,4 +1,4 @@
-package lib.gui;
+package lib.ui.gui;
 /**
  *This is a basic GUI page for selecting the saved .class file or .exe
  *file of the user program
@@ -21,9 +21,9 @@ public class FileChooser extends JFrame {
     Container c = getContentPane();
     c.setLayout(new FlowLayout());
     
-    JButton openButton = new JButton("Open");
-    //final JLabel statusbar = new JLabel("Output of your selection will go here");
-
+    JButton openButton = new JButton("Select your file from here");
+    JButton result=new JButton("Submit your file");
+    result.setActionCommand("Open");
     // Create a file chooser that opens up as an Open dialog
     openButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
@@ -44,9 +44,19 @@ public class FileChooser extends JFrame {
         }
       }
     });
+    result.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            String cmd = e.getActionCommand();
+
+        if(cmd.equals("Open"))
+        {
+            new resultPage();
+        }
+        }
+    });
 
     c.add(openButton);
-    //c.add(statusbar);
+    c.add(result);
   }
 
   public static void main(String args[]) {

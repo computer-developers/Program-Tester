@@ -1,4 +1,4 @@
-package lib.gui;
+package lib.ui.gui;
 
 /**
  *
