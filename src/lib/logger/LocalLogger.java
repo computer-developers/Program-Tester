@@ -2,7 +2,7 @@ package lib.logger;
 
 /**
  *
- * @author admin
+ * @author Neel Patel
  */
 public class LocalLogger {
      
