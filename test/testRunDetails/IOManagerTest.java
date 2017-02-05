@@ -31,7 +31,7 @@ public class IOManagerTest {
           System.out.println("pi :- "+pi);
           List<String> output=Files.readAllLines(pi);
         io=IOManager.getIODetail(input, output);
-        pi=Paths.get("Data").toAbsolutePath();
-        System.out.println(IOManager.writeIntIODetail(io, pi));
+        pi=Paths.get("temp").toAbsolutePath();
+        System.out.println(IOManager.writeIntIODetail(io, pi,true));
     }
 }

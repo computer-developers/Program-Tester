@@ -23,8 +23,8 @@ public class IOManagerTest2 {
           for(s=sc.nextLine();s=="";s=sc.nextLine());
         IntIODetail io;
         Path pi;
-        pi=Paths.get("Data",s).toAbsolutePath();
-        io=IOManager.getIODetail(pi);
+        pi=Paths.get("temp",s).toAbsolutePath();
+        io=IOManager.getIODetail(pi,true);
         pi=Paths.get("input2.txt");
         Files.write(pi,io.getAllInput(),StandardOpenOption.CREATE);
         pi=Paths.get("output2.txt");

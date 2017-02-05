@@ -19,3 +19,4 @@ extra/
 dist/
 resources/input*
 resources/output*
+resources/temp/

@@ -99,6 +99,39 @@ public class IOManager {
      }
      
      /**
+      * this method return object of {@code IntIODetail} from the file 
+        specified by path.
+      * {@param iscomp} is false then the this method works same as 
+        {@code boolean getIODetail(Path filepath)}.
+      * this method read the object of type {@code IntIODetail} 
+        form file specified by {@param filepath}.
+      * the path specified by {@param filepath} must be absolute.
+      * this method throw {@code IOException} if path is invalid or file not 
+        found or invalid format or object can not be {@code deserialize} because
+        of version difference of corresponding class.
+      * @param filepath path object specifying the valid path of the file which 
+        contain object.
+      * @param isComp is boolean, if it is true then the object will be uncompressed
+        before read, otherwise the {@code getIODetail} is called with
+        {@param filepath}.
+      * @return object of type {@code IntIODetail} read from specified {@param filepath}.
+      * @throws IOException if the error occur while reading object from file.
+      */
+     public static IntIODetail getIODetail(Path filepath,boolean isComp)throws IOException{
+          if(!isComp)
+               return getIODetail(filepath);
+          if(!filepath.isAbsolute())
+               return null;
+          if((!Files.exists(filepath))||Files.isDirectory(filepath))
+               return null;
+          FileInputStream f=new FileInputStream(filepath.toFile());
+          IntIODetail obj=ObjectHandler.readCompObj(f);
+          if(obj!=null)
+               return obj;
+          throw new IOException();
+     }
+     
+     /**
       * write the object in separate file in the directory specified by
         the path object {@param dir}.
       * return {@code true} if the object is written successfully otherwise 
@@ -120,6 +153,62 @@ public class IOManager {
           if(!Files.isDirectory(dir))
                return false;
           String name="";
+          {//generate the formated file name. 
+               name+="v";
+               if(obj instanceof IODetail)
+                    name+=IODetail.getVersion();
+               else
+                    name+="NA";
+               name=name+"p";
+               if(obj.programID()>=0)
+                    name+=obj.programID();
+               else
+                    name+="NA";
+               name+="i";
+               if(obj.index()>=0)
+                    name+=obj.index();
+               else
+                    name+="NA";
+               name+=".data";
+          }
+          Path f=dir.resolve(name);
+          try {
+               FileOutputStream fout=new FileOutputStream(f.toFile());
+               return ObjectHandler.writeObj(fout, obj);
+          } catch(IOException ex) {
+               return false;
+          }
+     }
+     
+     /**
+      * write the object in separate file in the directory specified by
+        the path object {@param dir} after compressing.
+      * {@param comp} is false then the this method works same as 
+        {@code boolean writeIntIODetail(IntIODetail obj,Path dir)}.
+      * return {@code true} if the object is written successfully otherwise 
+        return {@code false}.
+      * the path specified by {@param dir} must be absolute.
+      * the new file is created in the directory specified by {@param dir} with
+        the formated name as follows..<br>
+      * {@code cvVpPiI.data} where {@code 'V'} specify the {@code version} of the
+        class if available, otherwise {@code 'NA'}, {@code 'P'} specify the 
+        {@code programID} if available, otherwise {@code 'NA'},
+        {@code 'I'} specify the index if available, otherwise {@code 'NA'}.<br>
+      * @param obj object to be written in file.
+      * @param dir directory in which the object is to be written.
+      * @param comp is boolean, if it is true then the object will be compressed
+        before written, otherwise the {@code writeIntIODetail} is called with
+        {@param obj} & {@code dir}.
+      * @return true if the object written in file successfully, false otherwise. 
+      */
+     public static boolean writeIntIODetail(IntIODetail obj,Path dir,boolean comp){
+          if(!comp)
+               return writeIntIODetail(obj,dir);
+          if(!dir.isAbsolute())
+               return false;
+          if(!Files.isDirectory(dir))
+               return false;
+          String name="c";
           {//generate the formated file name. 
                name+="v";
                if(obj instanceof IODetail)
