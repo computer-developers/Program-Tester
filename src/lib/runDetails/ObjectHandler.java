@@ -1,5 +1,8 @@
 package lib.runDetails;
 import java.io.*;
+import java.nio.*;
+import java.util.*;
+import java.util.stream.Stream;
 import java.util.zip.*;
 
 /**
@@ -8,6 +11,51 @@ import java.util.zip.*;
  * @author Neel Patel
  */
 class ObjectHandler {
+     static class EncryptOutputStream extends OutputStream{
+          private int key=25;
+          private OutputStream op;
+          EncryptOutputStream(OutputStream op){
+               this.op=op;
+          }
+          
+          @Override
+          public synchronized void write(int b) throws IOException {
+               op.write((b+key)%256);
+          }
+          @Override
+          public synchronized void write(byte b[],int s,int e) throws IOException {
+               byte l[]=new byte[e-s];
+               op.write(l);
+               int[] l2=new int[l.length];
+               for(int i=0;i<l.length;i++)
+                    l2[i]=(l[i]+key)%256;
+               for(int i=0;i<l.length;i++)
+                    b[s+i]=(byte)l2[i];
+          }
+     }
+     
+     static class DecryptInputStream extends InputStream{
+          private int key=25;
+          private InputStream ip;
+          DecryptInputStream(InputStream ip){
+               this.ip=ip;
+          }
+          
+          @Override
+          public synchronized int read() throws IOException {
+               int d=read();
+               if(d<0)
+                    return d;
+               return (256+(d-key))%256;
+          }
+          
+          @Override
+          public synchronized int read(byte b[],int s,int e)throws IOException{
+               int l=0;
+               return l;
+          }
+     }
+     
      private ObjectHandler(){}
      
      /**
@@ -76,7 +124,7 @@ class ObjectHandler {
       */
      public static boolean writeCompObj(OutputStream out,IntIODetail o)
                throws IOException{
-          return writeObj(new ZipOutputStream(out),o);
+          return writeObj(new EncryptOutputStream(out),o);
      }
      
      /**
@@ -94,7 +142,7 @@ class ObjectHandler {
       */
      public static IntIODetail readCompObj(InputStream in)
                throws IOException{
-          return readObj(new ZipInputStream(in));
+          return readObj(new DecryptInputStream(in));
      }
-      
+     
 }

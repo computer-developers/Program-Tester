@@ -34,7 +34,7 @@ public class TestRunTest {
           else
                pi=Paths.get("output.txt");
           System.out.println("pi :- "+pi);
-          Files.write(pi,obj.getAllOutput(),StandardOpenOption.CREATE);
+          Files.write(pi,obj.getAllOutput(),StandardOpenOption.CREATE_NEW);
           System.out.println("Time :- "+obj.getTime());
      }
 }
