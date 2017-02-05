@@ -230,7 +230,7 @@ public class IOManager {
           Path f=dir.resolve(name);
           try {
                FileOutputStream fout=new FileOutputStream(f.toFile());
-               return ObjectHandler.writeObj(fout, obj);
+               return ObjectHandler.writeCompObj(fout, obj);
           } catch(IOException ex) {
                return false;
           }

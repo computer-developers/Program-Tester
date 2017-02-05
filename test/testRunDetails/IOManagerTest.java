@@ -33,5 +33,6 @@ public class IOManagerTest {
         io=IOManager.getIODetail(input, output);
         pi=Paths.get("temp").toAbsolutePath();
         System.out.println(IOManager.writeIntIODetail(io, pi,true));
+        System.out.println(IOManager.writeIntIODetail(io, pi));
     }
 }

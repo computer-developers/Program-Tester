@@ -1,9 +1,17 @@
 package lib.runDetails;
 import java.io.*;
 import java.nio.*;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 import java.util.zip.*;
+import javax.crypto.*;
+import javax.crypto.CipherInputStream;
+import javax.crypto.spec.*;
 
 /**
  * this is factory class which provide methods to read or write {@code IntIODetail}
@@ -20,17 +28,21 @@ class ObjectHandler {
           
           @Override
           public synchronized void write(int b) throws IOException {
-               op.write((b+key)%256);
+                    op.write((b+key)%256);
           }
+          
           @Override
-          public synchronized void write(byte b[],int s,int e) throws IOException {
-               byte l[]=new byte[e-s];
-               op.write(l);
-               int[] l2=new int[l.length];
-               for(int i=0;i<l.length;i++)
-                    l2[i]=(l[i]+key)%256;
-               for(int i=0;i<l.length;i++)
-                    b[s+i]=(byte)l2[i];
+          public synchronized void write(byte b[]) throws IOException {
+                    this.write(b,0,b.length);
+          }
+          
+          @Override
+          public synchronized void write(byte b[],int off,int len) throws IOException {
+               synchronized(b){
+                    op.write(b,off,len);
+                    for(int i=0;i<len;i++)
+                         b[off+i]=(byte)((b[off+i]+key)%256);
+               }
           }
      }
      
@@ -48,12 +60,14 @@ class ObjectHandler {
                     return d;
                return (256+(d-key))%256;
           }
-          
           @Override
-          public synchronized int read(byte b[],int s,int e)throws IOException{
-               int l=0;
+          public synchronized int read(byte b[],int off,int len) throws IOException {
+               int l=ip.read(b, off, len);
+               for(int i=0;i<l;i++)
+                    b[off+i]=(byte)((256+(b[off+i]-key))%256);
                return l;
           }
+          
      }
      
      private ObjectHandler(){}
@@ -124,7 +138,22 @@ class ObjectHandler {
       */
      public static boolean writeCompObj(OutputStream out,IntIODetail o)
                throws IOException{
-          return writeObj(new EncryptOutputStream(out),o);
+          CipherOutputStream cstream = null;
+          try {        
+               byte[] keyBytes = "1234123412341234".getBytes();  //example
+               final byte[] ivBytes = new byte[] { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 
+                    0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f }; //example
+
+               final SecretKey key = new SecretKeySpec(keyBytes, "AES");
+               final IvParameterSpec IV = new IvParameterSpec(ivBytes);
+               final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding (128)");
+               cipher.init(Cipher.ENCRYPT_MODE, key, IV);
+               cstream = new CipherOutputStream(out, cipher);
+
+          } catch(Exception ex) {
+               ex.printStackTrace();
+          }
+          return writeObj(cstream,o);
      }
      
      /**
@@ -142,7 +171,21 @@ class ObjectHandler {
       */
      public static IntIODetail readCompObj(InputStream in)
                throws IOException{
-          return readObj(new DecryptInputStream(in));
+          CipherInputStream cin=null;
+          byte[] keyBytes = "1234123412341234".getBytes();
+          try {
+          final byte[] ivBytes = new byte[] { 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
+                      0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f };
+
+          final SecretKey secretkey = new SecretKeySpec(keyBytes, "AES");
+          final IvParameterSpec IV = new IvParameterSpec(ivBytes);
+          final Cipher decipher = Cipher.getInstance("AES/CBC/PKCS5Padding (128)");
+               decipher.init(Cipher.DECRYPT_MODE, secretkey, IV);
+               cin=new CipherInputStream(in,decipher);
+          } catch(InvalidKeyException | InvalidAlgorithmParameterException
+                    | NoSuchPaddingException |NoSuchAlgorithmException ex) {
+          }
+          return readObj(cin);
      }
      
 }

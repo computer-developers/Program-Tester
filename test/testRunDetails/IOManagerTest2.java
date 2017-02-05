@@ -25,6 +25,7 @@ public class IOManagerTest2 {
         Path pi;
         pi=Paths.get("temp",s).toAbsolutePath();
         io=IOManager.getIODetail(pi,true);
+        //io=IOManager.getIODetail(pi);
         pi=Paths.get("input2.txt");
         Files.write(pi,io.getAllInput(),StandardOpenOption.CREATE_NEW);
         pi=Paths.get("output2.txt");
