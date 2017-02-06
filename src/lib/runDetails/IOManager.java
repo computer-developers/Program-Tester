@@ -4,6 +4,8 @@ import java.util.stream.*;
 import java.nio.file.*;
 import java.io.*;
 import java.util.function.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * this is factory class provide various method to create object of 
@@ -91,11 +93,13 @@ public class IOManager {
                return null;
           if((!Files.exists(filepath))||Files.isDirectory(filepath))
                return null;
-          FileInputStream f=new FileInputStream(filepath.toFile());
-          IntIODetail obj=ObjectHandler.readObj(f);
-          if(obj!=null)
-               return obj;
-          throw new IOException();
+          try(FileInputStream f=new FileInputStream(filepath.toFile());
+                    BufferedInputStream bin=new BufferedInputStream(f)){    
+               IntIODetail obj=ObjectHandler.readObj(f);
+               if(obj!=null)
+                    return obj;
+               throw new IOException();
+          }
      }
      
      /**
@@ -124,11 +128,13 @@ public class IOManager {
                return null;
           if((!Files.exists(filepath))||Files.isDirectory(filepath))
                return null;
-          FileInputStream f=new FileInputStream(filepath.toFile());
-          IntIODetail obj=ObjectHandler.readCompObj(f);
-          if(obj!=null)
-               return obj;
-          throw new IOException();
+          try(FileInputStream f=new FileInputStream(filepath.toFile());
+                    BufferedInputStream bin=new BufferedInputStream(f)){
+               IntIODetail obj=ObjectHandler.readCompObj(f);
+               if(obj!=null)
+                    return obj;
+               throw new IOException();
+          }
      }
      
      /**
@@ -172,12 +178,12 @@ public class IOManager {
                name+=".data";
           }
           Path f=dir.resolve(name);
-          try {
-               FileOutputStream fout=new FileOutputStream(f.toFile());
+          try(FileOutputStream fout=new FileOutputStream(f.toFile());
+                    BufferedOutputStream bout=new BufferedOutputStream(fout)){
                return ObjectHandler.writeObj(fout, obj);
           } catch(IOException ex) {
                return false;
-          }
+          }     
      }
      
      /**
@@ -228,8 +234,8 @@ public class IOManager {
                name+=".data";
           }
           Path f=dir.resolve(name);
-          try {
-               FileOutputStream fout=new FileOutputStream(f.toFile());
+          try(FileOutputStream fout=new FileOutputStream(f.toFile());
+                    BufferedOutputStream bout =new BufferedOutputStream(fout)){
                return ObjectHandler.writeCompObj(fout, obj);
           } catch(IOException ex) {
                return false;
