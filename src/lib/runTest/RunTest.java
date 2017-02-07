@@ -11,7 +11,7 @@ public class RunTest {
      /**
       *
       */
-     public static final long runTime = 30000; //default runtime.
+     public static final long runTime = 5000; //default runtime.
      ProgramExecuter pe; //to execute subprocess.
      Thread t; //to execute subprocess in parallel
      List<String> out; //to store output
