@@ -146,7 +146,7 @@ class ObjectHandler {
 
                final SecretKey key = new SecretKeySpec(keyBytes, "AES");
                final IvParameterSpec IV = new IvParameterSpec(ivBytes);
-               final Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
+               final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
                cipher.init(Cipher.ENCRYPT_MODE, key, IV);
                try(CipherOutputStream cstream = new CipherOutputStream(out, cipher)){
                     return writeObj(cstream,o);
@@ -178,7 +178,7 @@ class ObjectHandler {
 
                final SecretKey secretkey = new SecretKeySpec(keyBytes, "AES");
                final IvParameterSpec IV = new IvParameterSpec(ivBytes);
-               final Cipher decipher = Cipher.getInstance("AES/CBC/NoPadding");
+               final Cipher decipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
                     decipher.init(Cipher.DECRYPT_MODE, secretkey, IV);
                try(CipherInputStream cin=new CipherInputStream(in,decipher)){
                     return readObj(cin);

@@ -95,7 +95,7 @@ public class IOManager {
                return null;
           try(FileInputStream f=new FileInputStream(filepath.toFile());
                     BufferedInputStream bin=new BufferedInputStream(f)){    
-               IntIODetail obj=ObjectHandler.readObj(f);
+               IntIODetail obj=ObjectHandler.readObj(bin);
                if(obj!=null)
                     return obj;
                throw new IOException();
@@ -130,7 +130,7 @@ public class IOManager {
                return null;
           try(FileInputStream f=new FileInputStream(filepath.toFile());
                     BufferedInputStream bin=new BufferedInputStream(f)){
-               IntIODetail obj=ObjectHandler.readCompObj(f);
+               IntIODetail obj=ObjectHandler.readCompObj(bin);
                if(obj!=null)
                     return obj;
                throw new IOException();
@@ -180,7 +180,7 @@ public class IOManager {
           Path f=dir.resolve(name);
           try(FileOutputStream fout=new FileOutputStream(f.toFile());
                     BufferedOutputStream bout=new BufferedOutputStream(fout)){
-               return ObjectHandler.writeObj(fout, obj);
+               return ObjectHandler.writeObj(bout, obj);
           } catch(IOException ex) {
                return false;
           }     
@@ -236,7 +236,7 @@ public class IOManager {
           Path f=dir.resolve(name);
           try(FileOutputStream fout=new FileOutputStream(f.toFile());
                     BufferedOutputStream bout =new BufferedOutputStream(fout)){
-               return ObjectHandler.writeCompObj(fout, obj);
+               return ObjectHandler.writeCompObj(bout, obj);
           } catch(IOException ex) {
                return false;
           }
