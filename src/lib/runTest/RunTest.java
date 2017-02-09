@@ -16,6 +16,7 @@ public class RunTest {
      Thread t; //to execute subprocess in parallel
      List<String> out; //to store output
      long time=-1; //time taken by suprocess
+     IntInput in;
      
      /**
       * create object with specified input & command
@@ -24,10 +25,12 @@ public class RunTest {
       */
      public RunTest(IntInput input,String cmd){
           this(input.getAllInput(),cmd);
+          in=input;
      }
      
      RunTest(List<String> input,String cmd){
           pe=new ProgramExecuter(input,cmd);
+          in=IOManager.getInput(input);
      }
      
      /**
@@ -80,7 +83,7 @@ public class RunTest {
                t.join();
           }catch(InterruptedException e){}
           //create & return object of IntIODetail.
-          return IOManager.getIODetail(pe.input,out,pe.getRunTime());
+          return IOManager.getIODetail(in,out,pe.getRunTime());
      }
      
 }

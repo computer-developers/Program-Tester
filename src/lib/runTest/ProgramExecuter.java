@@ -147,4 +147,9 @@ class ProgramExecuter {
      synchronized long getRunTime(){
           return time;
      }
+     
+     @Override
+     public void finalize(){
+          stop();
+     }
 }

@@ -4,14 +4,11 @@
  * and open the template in the editor.
  */
 package lib.userModule;
-import java.util.*;
 
 /**
  *
- * @author Parth Doshi
+ * @author Neel Patel
  */
-public interface IntResultSet {
-    int getCount();
-    List<IntResult> getAllResult();
-    IntResult getResult(int index);
+public class TimelimitExceededException extends Exception{
+     
 }

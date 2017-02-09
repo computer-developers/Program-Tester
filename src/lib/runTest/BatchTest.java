@@ -15,6 +15,7 @@ import java.util.stream.*;
  */
 public class BatchTest {
      private RunTest rt[];
+     private IntInput[] ar;
      private List<IntIODetail> io;
      private Stream<IntIODetail> st;
      //private boolean f=false;
@@ -29,7 +30,8 @@ public class BatchTest {
       * @param ar Object of type IntInput to give inputs to the processes.
       */
      public BatchTest(String cmd,IntInput... ar){
-          rt=Arrays.stream(ar).map(s->new RunTest(s,cmd)).toArray(RunTest[]::new);
+          this.ar=ar.clone();
+          rt=Arrays.stream(this.ar).map(s->new RunTest(s,cmd)).toArray(RunTest[]::new);
      }
      
      /**
@@ -121,5 +123,14 @@ public class BatchTest {
           List<IntIODetail> lio=new ArrayList<>();
           lio.addAll(io);
           return lio;
+     }
+     
+     public IntInput[] getInputs(){
+          return this.ar.clone();
+     }
+     
+     @Override
+     public void finalize() throws Throwable{
+          stop();
      }
 }

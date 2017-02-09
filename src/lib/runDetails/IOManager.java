@@ -259,4 +259,8 @@ public class IOManager {
                     return false;
           return a.getAllInput().equals(b.getAllInput());
      }
+     
+     public static long getVersion(){
+          return IODetail.getVersion();
+     }
 }

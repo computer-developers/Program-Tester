@@ -1,4 +1,3 @@
-
 package lib.userModule;
 
 import lib.ui.*;
@@ -10,5 +9,4 @@ import lib.ui.*;
 public interface IntUserFlow {
     void register(IntUI ui);
     IntResultSet execute(String cmd, int pid);
-    
 }
