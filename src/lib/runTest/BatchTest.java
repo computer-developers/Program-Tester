@@ -131,6 +131,10 @@ public class BatchTest {
      
      @Override
      public void finalize() throws Throwable{
-          stop();
+          try {
+               stop();
+          } finally {
+               super.finalize();
+          }
      }
 }

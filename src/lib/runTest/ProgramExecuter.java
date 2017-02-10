@@ -149,7 +149,11 @@ class ProgramExecuter {
      }
      
      @Override
-     public void finalize(){
-          stop();
+     public void finalize()throws Throwable{
+          try {
+               stop();
+          } finally {
+               super.finalize();
+          }
      }
 }

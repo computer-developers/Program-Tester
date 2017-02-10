@@ -10,5 +10,5 @@ package lib.ui;
  * @author Parth Doshi
  */
 public interface IntUI {
-    
+    public void showMessage(String message);
 }

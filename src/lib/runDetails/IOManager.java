@@ -54,6 +54,8 @@ public class IOManager {
       * @param output list of string which is output of any program
       * @param time execution time in milliseconds.
       * @return object of IntIODetail.
+      * @deprecated use {@code getIODetail(IntInput input,List<String> output,long time)}
+        instead. 
       */
      public static IntIODetail getIODetail(List<String> input,List<String> output,long time){
           return new IODetail(input,output,time);
