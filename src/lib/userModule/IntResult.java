@@ -12,4 +12,5 @@ package lib.userModule;
 public interface IntResult {
      long getRunTime()throws TimelimitExceededException;
      String getMessage();
+     int getMessageCode();
 }
