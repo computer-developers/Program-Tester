@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/ui/cli/CliUser.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/runTest/BatchTest.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/runDetails/IODetail.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/userModule/SingleUserFlow.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/userModule/IntUserFlow.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/userModule/TimelimitExceededException.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/runDetails/IntIODetail.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/userModule/Execute.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/ui/IntUI.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

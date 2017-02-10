@@ -15,9 +15,9 @@ import java.util.stream.*;
  */
 public class BatchTest {
      private RunTest rt[];
-     private IntInput[] ar;
+     private IntInput[] ar; 
      private List<IntIODetail> io;
-     private Stream<IntIODetail> st;
+     //private Stream<IntIODetail> st;
      //private boolean f=false;
      private int index=-1; // indicate last returned result
      private Thread t; // the executer thread 
@@ -41,6 +41,8 @@ public class BatchTest {
       * it returns immediately, without waiting for tasks to done.
       * if the executer thread is already initiated it return with null immediately.
       * it returns stream of IntIODetail which gives Input & corresponding output.
+      * the stream returned by this method is infinite stream, it will encounter null
+        when there is no elements exist to process.
       * @return stream of IntIODetail, each element contain result of execution.
       */
      public synchronized Stream<IntIODetail> execute(){
@@ -66,7 +68,7 @@ public class BatchTest {
                     if(!flag)
                          return null;
                     try {
-                         io.wait();
+                         io.wait(1000);
                     } catch(InterruptedException ex) {}
                }
                index++;
@@ -125,6 +127,12 @@ public class BatchTest {
           return lio;
      }
      
+     /**
+      * this method return array of IntInput.
+      * changes made in the array returned by this method will not reflected.
+        i.e. this object will not affected. 
+      * @return returns the array of the IntInput
+      */
      public IntInput[] getInputs(){
           return this.ar.clone();
      }

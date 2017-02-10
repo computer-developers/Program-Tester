@@ -2,6 +2,7 @@ package lib.userModule;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.List;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.stream.Stream;
 import lib.runDetails.IOManager;
@@ -10,7 +11,8 @@ import lib.runDetails.IntInput;
 import lib.runTest.BatchTest;
 
 /**
- *
+ * this class provide facility to run the program for corresponding
+   inputs.
  * @author Neel Patel
  */
 public class Execute {
@@ -99,6 +101,10 @@ public class Execute {
      
      public IntInput[] getInputs(){
           return bt.getInputs();
+     }
+     
+     public synchronized List<IntIODetail> getOutputs(){
+          return bt.getOutputs();
      }
      
      @Override
