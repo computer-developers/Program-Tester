@@ -48,7 +48,7 @@ public class BatchTest {
      public synchronized Stream<IntIODetail> execute(){
           if(t!=null)
                return null;
-          t=new Thread(this::run);
+          t=new Thread(this::run,"Executer Thread");
           t.start();
           return Stream.generate(this::supp);
      }
@@ -56,7 +56,7 @@ public class BatchTest {
      /**
       * this method can be used as supplier by giving reference.
       * this method gives the next result of execution of given command.
-      * this method will wait if next result is available at the moment.
+      * this method will wait if next result is not available at the moment.
       * method will return null if there is no further results available.
       * @return next Object of IntIODetail, null if no further objects available.
       */
@@ -79,8 +79,10 @@ public class BatchTest {
      /**
       * this method can be used to create new thread which will execute
         the commands for multiple times in sequence.
+      * this method call {@code getIODetail} method on all the elements of list 
+        {@link rt}.
       * this method with puts current thread in waiting until the all executions
-        completed or terminated by stop method.
+        completed or process of execution terminated by stop method.
       */
      private void run(){
           flag=true;
