@@ -21,6 +21,7 @@ class ProgramExecuter {
      long time=-1; //time taken by subprocess in milli secounds.
      //BufferedReader in;
      PrintWriter out; //bind to standard input stream of subprocess.
+     
      /**
       * create object with list of input string command.
       * the command is not executed until the execute method called on the object.
@@ -80,7 +81,8 @@ class ProgramExecuter {
                tin.join();
           } catch(InterruptedException ex) {return null;}
           return output;
-     }     
+     }
+     
      /**
       * this method stop the execution of subprocess forcefully if process is alive.
       */
@@ -97,6 +99,7 @@ class ProgramExecuter {
                out.close();
           }
      }
+     
      /**
       * @return true if subprocess is alive, false otherwise
       */
@@ -105,6 +108,7 @@ class ProgramExecuter {
                return pr.isAlive();
           return false;
      }
+     
      /**
       * give the input to the subprocess created by execute method.
       * this method can be invoke from new thread.
@@ -121,6 +125,7 @@ class ProgramExecuter {
           });
           out.close();
      }
+     
      /**
       * get the output from standard output stream of subprocess & store in list output.
       * method can be called from new thread.

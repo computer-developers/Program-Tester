@@ -19,56 +19,6 @@ import javax.crypto.spec.*;
  * @author Neel Patel
  */
 class ObjectHandler {
-     static class EncryptOutputStream extends OutputStream{
-          private int key=25;
-          private OutputStream op;
-          EncryptOutputStream(OutputStream op){
-               this.op=op;
-          }
-          
-          @Override
-          public synchronized void write(int b) throws IOException {
-                    op.write((b+key)%256);
-          }
-          
-          @Override
-          public synchronized void write(byte b[]) throws IOException {
-                    this.write(b,0,b.length);
-          }
-          
-          @Override
-          public synchronized void write(byte b[],int off,int len) throws IOException {
-               synchronized(b){
-                    op.write(b,off,len);
-                    for(int i=0;i<len;i++)
-                         b[off+i]=(byte)((b[off+i]+key)%256);
-               }
-          }
-     }
-     
-     static class DecryptInputStream extends InputStream{
-          private int key=25;
-          private InputStream ip;
-          DecryptInputStream(InputStream ip){
-               this.ip=ip;
-          }
-          
-          @Override
-          public synchronized int read() throws IOException {
-               int d=read();
-               if(d<0)
-                    return d;
-               return (256+(d-key))%256;
-          }
-          @Override
-          public synchronized int read(byte b[],int off,int len) throws IOException {
-               int l=ip.read(b, off, len);
-               for(int i=0;i<l;i++)
-                    b[off+i]=(byte)((256+(b[off+i]-key))%256);
-               return l;
-          }
-          
-     }
      
      private ObjectHandler(){}
      
@@ -190,3 +140,56 @@ class ObjectHandler {
      }
      
 }
+/*
+     static class EncryptOutputStream extends OutputStream{
+          private int key=25;
+          private OutputStream op;
+          EncryptOutputStream(OutputStream op){
+               this.op=op;
+          }
+          
+          @Override
+          public synchronized void write(int b) throws IOException {
+                    op.write((b+key)%256);
+          }
+          
+          @Override
+          public synchronized void write(byte b[]) throws IOException {
+                    this.write(b,0,b.length);
+          }
+          
+          @Override
+          public synchronized void write(byte b[],int off,int len) throws IOException {
+               synchronized(b){
+                    op.write(b,off,len);
+                    for(int i=0;i<len;i++)
+                         b[off+i]=(byte)((b[off+i]+key)%256);
+               }
+          }
+     }
+     
+     static class DecryptInputStream extends InputStream{
+          private int key=25;
+          private InputStream ip;
+          DecryptInputStream(InputStream ip){
+               this.ip=ip;
+          }
+          
+          @Override
+          public synchronized int read() throws IOException {
+               int d=read();
+               if(d<0)
+                    return d;
+               return (256+(d-key))%256;
+          }
+          @Override
+          public synchronized int read(byte b[],int off,int len) throws IOException {
+               int l=ip.read(b, off, len);
+               for(int i=0;i<l;i++)
+                    b[off+i]=(byte)((256+(b[off+i]-key))%256);
+               return l;
+          }
+          
+     }
+
+*/

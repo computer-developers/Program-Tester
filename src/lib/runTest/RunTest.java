@@ -9,7 +9,10 @@ import java.io.*;
 public class RunTest {
 
      /**
-      *
+      * default runTime.
+      * every process must completed before the runTime.
+      * if the process is not terminated in less then runTime then it will
+        forcefully terminated.
       */
      public static final long runTime = 5000; //default runtime.
      ProgramExecuter pe; //to execute subprocess.

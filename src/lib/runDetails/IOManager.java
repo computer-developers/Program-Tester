@@ -17,8 +17,32 @@ import java.util.logging.Logger;
 public class IOManager {
      private IOManager(){}
      
+     /**
+      * returns object of IntInput.
+      * {@code getAllInput} method of the object returned by this process always
+        return the list of string referenced by {@param input}.
+      * {@param input} should not be change by other thread during method call.
+      * @param input list of String.
+      * @return Object of IntInput.
+      */
      public static IntInput getInput(List<String> input){
           return new IODetail(input);
+     }
+               
+     /**
+      * returns object of IntInput.
+      * {@code getAllInput} method of the object returned by this process always
+        return the list of string referenced by {@param input}.
+      * same as {@code index} & {@code programID} returns {@param index & 
+        {@param programID respectively.
+      * {@param input} should not be change by other thread during method call.
+      * @param input list of String.
+      * @param programID unique programID.
+      * @param index index of the input.
+      * @return Object of IntInput.
+      */
+     public static IntInput getInput(List<String> input,long programID,long index){
+          return getIODetail(input,null,-1,programID,index);
      }
                
      /**

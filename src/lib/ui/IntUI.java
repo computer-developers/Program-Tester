@@ -10,5 +10,10 @@ package lib.ui;
  * @author Parth Doshi
  */
 public interface IntUI {
-    public void showMessage(String message);
+     /**
+      * implementation of this method should show the {@code String}
+        {@param message} to the user.
+      * @param message 
+      */
+     public void showMessage(String message);
 }
