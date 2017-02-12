@@ -20,10 +20,10 @@ public class QuestionPage extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500,500);
         pid=new JLabel(""+det.getProgramID());    //Converted to String from Long
-        title=new JLabel(""+det.getTitle());
+        title=new JLabel(det.getTitle());
         description=new JLabel(""+det.getDescription());
-        input=new JLabel(""+det.getInput());
-        output=new JLabel(""+det.getOutput());
+        input=new JLabel(det.getInput());
+        output=new JLabel(det.getOutput());
         saminput=new JPanel();
         samoutput=new JPanel();
         setVisible(true);
@@ -37,6 +37,6 @@ public class QuestionPage extends JFrame{
      
      
      public static void main(String[] args){
-        ResultPage rp=new ResultPage();
+        QuestionPage qp=new QuestionPage();
     }
 }
