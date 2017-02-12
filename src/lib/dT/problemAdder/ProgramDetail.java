@@ -2,6 +2,7 @@ package lib.dT.problemAdder;
 
 import java.io.Serializable;
 import java.util.*;
+import static lib.dT.problemAdder.ProgramIDGenerator.newProgramID;
 
 /**
  *
@@ -19,6 +20,7 @@ public class ProgramDetail implements IntProgramDetail, Serializable {
      
      ProgramDetail(String title,List<String> description, String input, 
                     String output,List<String> sampleInput, List<String> sampleOutput){
+          this.programId=newProgramID();
           this.title=title;
           this.description.addAll(description);
           this.input=input;

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.*;
 import java.util.List;
+import java.util.Scanner;
 import lib.runDetails.*;
 
 /**
@@ -18,6 +19,9 @@ public class IOManagerTest {
     public static void main(String... args) throws IOException{
         IntIODetail io;
         Path pi;
+        Scanner sc=new Scanner(System.in);
+        long programID=sc.nextLong();
+        int index=sc.nextInt();
         if(args.length>0)
                pi=Paths.get(args[0]);
           else
@@ -30,7 +34,7 @@ public class IOManagerTest {
                pi=Paths.get("output.txt");
           System.out.println("pi :- "+pi);
           List<String> output=Files.readAllLines(pi);
-        io=IOManager.getIODetail(input, output);
+        io=IOManager.getIODetail(input, output,-1,programID,index);
         pi=Paths.get("temp").toAbsolutePath();
         System.out.println(IOManager.writeIntIODetail(io, pi,true));
         System.out.println(IOManager.writeIntIODetail(io, pi));
