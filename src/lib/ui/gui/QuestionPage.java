@@ -19,11 +19,11 @@ public class QuestionPage extends JFrame{
         super("Question Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500,500);
-        pid=new JLabel(""+det.getProgramID());    //Converted to String from Long
-        title=new JLabel(det.getTitle());
-        description=new JLabel(""+det.getDescription());
-        input=new JLabel(det.getInput());
-        output=new JLabel(det.getOutput());
+        pid=new JLabel("Program ID : "+det.getProgramID());    //Converted to String from Long
+        title=new JLabel("Program Title : "+det.getTitle());
+        description=new JLabel("Description : "+det.getDescription());
+        input=new JLabel("Input : "+det.getInput());
+        output=new JLabel("Output : "+det.getOutput());
         saminput=new JPanel();
         samoutput=new JPanel();
         setVisible(true);
