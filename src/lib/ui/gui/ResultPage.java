@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package lib.ui.gui;
 import java.awt.*;
 import java.awt.event.*;
@@ -14,10 +9,10 @@ import javax.swing.*;
  *
  * @author Parth Doshi
  */
-public class resultPage extends JFrame{
+public class ResultPage extends JFrame{
     JLabel tcno;
     JTextField ans;
-    public resultPage() {    
+    public ResultPage() {    
         
     super("Result Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,6 +25,6 @@ public class resultPage extends JFrame{
         this.add(ans);
     }
     public static void main(String[] args){
-        resultPage rp=new resultPage();
+        ResultPage rp=new ResultPage();
     }
 }

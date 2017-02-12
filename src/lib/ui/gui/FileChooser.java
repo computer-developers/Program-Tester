@@ -50,7 +50,7 @@ public class FileChooser extends JFrame {
 
         if(cmd.equals("Open"))
         {
-            new resultPage();
+            new ResultPage();
         }
         }
     });
