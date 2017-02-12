@@ -5,6 +5,7 @@
  */
 package lib.userModule;
 
+import lib.logger.MyLogger;
 import lib.ui.IntUI;
 
 /**
@@ -13,7 +14,12 @@ import lib.ui.IntUI;
  */
 public class SingleUserFlow implements IntUserFlow{
      private IntUI ui;
+     private MyLogger logger;
 
+     SingleUserFlow(){
+          
+     }
+     
      @Override
      public synchronized void  register(IntUI ui) {
           this.ui=ui;
@@ -21,8 +27,10 @@ public class SingleUserFlow implements IntUserFlow{
 
      @Override
      public IntResultSet execute(String cmd, int pid) {
-          
           return null;
      }
      
+     public synchronized void setLogger(MyLogger logger){
+          this.logger=logger;
+     }
 }

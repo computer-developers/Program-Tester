@@ -19,14 +19,14 @@ public class Execute {
 //static Part
      
      /* 
-     * defdir is default path veriable which is used by construtor if no path
+     * defDir is default path veriable which is used by construtor if no path
        provided explicitly.
      * it should only accessed by getter & setter methods only.
      */
-     static private Path defdir=Paths.get(".").toAbsolutePath();
+     static private Path defDir=Paths.get(".").toAbsolutePath();
      
-     //lock on defdir
-     static final private ReentrantReadWriteLock ldefdir=new ReentrantReadWriteLock();
+     //lock on defDir
+     static final private ReentrantReadWriteLock ldefDir=new ReentrantReadWriteLock();
      
      /**
       * getter method of default path.
@@ -36,11 +36,11 @@ public class Execute {
       */
      static public Path getDefaultDir(){
           try{
-               ldefdir.readLock().lock();
-               return defdir;
+               ldefDir.readLock().lock();
+               return defDir;
           }
           finally{
-               ldefdir.readLock().unlock();     
+               ldefDir.readLock().unlock();     
           }
      }
      
@@ -58,19 +58,19 @@ public class Execute {
           if(!p.isAbsolute()||!Files.isDirectory(p))
                return false;
           try{
-               ldefdir.readLock().lock();
+               ldefDir.readLock().lock();
                try {
-                    if(defdir.equals(p))
+                    if(defDir.equals(p))
                          return true;
                } finally {
-                    ldefdir.readLock().unlock();
+                    ldefDir.readLock().unlock();
                }
-               ldefdir.writeLock().lock();
-               defdir=p;
+               ldefDir.writeLock().lock();
+               defDir=p;
                return true;
           }finally{
-               ldefdir.readLock().unlock();
-               ldefdir.writeLock().unlock();
+               ldefDir.readLock().unlock();
+               ldefDir.writeLock().unlock();
           }
      }
 
