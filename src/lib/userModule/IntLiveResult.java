@@ -9,11 +9,6 @@ package lib.userModule;
  *
  * @author Neel Patel
  */
-public interface IntResult {
-     long getRunTime()throws TimeNotAvailableException;
-     default long index(){
-          return -1;
-     }
-     String getMessage();
-     int getMessageCode();
+public interface IntLiveResult extends IntResult{
+     void addRunnable(Runnable r);
 }

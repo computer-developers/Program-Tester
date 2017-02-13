@@ -16,4 +16,6 @@ public interface IntUI {
       * @param message 
       */
      public void showMessage(String message);
+     
+     public void start();
 }

@@ -12,7 +12,6 @@ import lib.dT.problemAdder.ProgramDetails;
 public class testProgramDetails {
      public static void main(String args[]) throws IOException{
           IntProgramDetail x=ProgramDetails.parseProgramDetail(Paths.get("temp","Sorting.txt").toAbsolutePath());
-          System.out.println("ProgramID:"+x.getProgramID());
           System.out.println("Title:"+x.getTitle());
           System.out.println("Description:"+x.getDescription());
           System.out.println("Input:"+x.getInput());

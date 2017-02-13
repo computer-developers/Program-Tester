@@ -7,9 +7,9 @@ package lib.userModule;
 
 /**
  *
- * @author Neel PAtel
+ * @author Neel Patel
  */
-class ResultAdapter implements IntResult{
+public class ResultAdapter implements IntResult{
      final long runTime;
      final int code;
      final String message;
@@ -19,7 +19,7 @@ class ResultAdapter implements IntResult{
           this.code=code;
      }
      @Override
-     public long getRunTime() throws TimelimitExceededException {
+     public long getRunTime() throws TimeNotAvailableException {
           return runTime;
      }
 

@@ -16,12 +16,13 @@ import lib.runDetails.*;
  * @author Rushabh Modi
  */
 public class IOManagerTest {
+     static Scanner sc=new Scanner(System.in);
+    
     public static void main(String... args) throws IOException{
         IntIODetail io;
         Path pi;
-        Scanner sc=new Scanner(System.in);
-        long programID=sc.nextLong();
-        int index=sc.nextInt();
+        System.out.println("encript ? :-");
+          boolean b=sc.nextBoolean();
         if(args.length>0)
                pi=Paths.get(args[0]);
           else
@@ -34,9 +35,8 @@ public class IOManagerTest {
                pi=Paths.get("output.txt");
           System.out.println("pi :- "+pi);
           List<String> output=Files.readAllLines(pi);
-        io=IOManager.getIODetail(input, output,-1,programID,index);
+        io=IOManager.getIODetail(input, output);
         pi=Paths.get("temp").toAbsolutePath();
-        System.out.println(IOManager.writeIntIODetail(io, pi,true));
-        System.out.println(IOManager.writeIntIODetail(io, pi));
+        System.out.println(IOManager.writeIntIODetail(io, pi,b));
     }
 }

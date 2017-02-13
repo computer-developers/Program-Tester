@@ -20,6 +20,7 @@ public class CliUser implements IntUI{
           System.out.println("message :- "+message);
      }
      
+     @Override
      public synchronized void start(){
           Scanner sc=new Scanner(System.in);
           while(true){
@@ -32,7 +33,7 @@ public class CliUser implements IntUI{
                               long p=sc.nextLong();
                               System.out.println("Enter command");
                               String s;
-                              for(s=sc.nextLine();s!="";s=sc.nextLine());
+                              for(s=sc.nextLine();s.isEmpty();s=sc.nextLine());
                               test(p,s);
                               break;
                     case 2:break;
@@ -43,6 +44,12 @@ public class CliUser implements IntUI{
      }
      
      public void test(long pid,String cmd){
-          
+          //System.out.println("test start...");
+          uf.execute(pid,cmd).getAllLiveResult()
+                  .forEach(i->i.addRunnable(()->
+                          System.out.println("test "
+                                  +i.index()+" :- "
+                                  +i.getMessageCode()+","+i.getMessage())));
+          //System.out.println("test end..");
      }
 }

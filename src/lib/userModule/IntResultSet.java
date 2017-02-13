@@ -12,6 +12,6 @@ import java.util.*;
  */
 public interface IntResultSet {
     int getCount();
-    List<IntResult> getAllResult();
+    List<? extends IntResult> getAllResult();
     IntResult getResult(int index);
 }

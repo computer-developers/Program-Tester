@@ -164,6 +164,45 @@ public class IOManager {
      }
      
      /**
+      * this method return object of {@code IntIODetail} from the
+        directory specified by path.
+      * this method resolve the file path using specified parameters using
+        standard naming convention.
+      * after the resolving the file path it call the method {@code IntIODetail
+        getIODetail(Path filepath,boolean isComp)} with proper parameters.
+      * this method read the object of type {@code IntIODetail}.
+        form file specified by {@param dir}.
+      * the path specified by {@param dir} must be absolute.
+      * this method throw {@code IOException} if path is invalid or file not 
+        found or invalid format or object can not be {@code deserialize} because
+        of version difference of corresponding class.
+      * @param dir path object specifying the valid path of the directory in which 
+        file exist with proper naming convention which contain object.
+      * @param isComp is boolean, if it is true then the object will be decrypted
+        before read, otherwise the object will be read from file as it.
+      * @return object of type {@code IntIODetail} read from specified {@param dir}.
+      * @throws IOException if the error occur while reading object from file.
+      */
+     public static IntIODetail getIODetail(Path dir, long pid, long index
+               ,boolean isComp)throws IOException{
+          String name;
+          {//generate the formated file name. 
+               if(isComp)
+                    name="c";
+               else
+                    name="";
+               name+="v";
+               name+=IODetail.getVersion();
+               name+="p";
+               name+=pid;
+               name+="i";
+               name+=index;
+               name+=".data";
+          }
+          return getIODetail(dir.resolve(name),isComp);
+     }
+     
+     /**
       * write the object in separate file in the directory specified by
         the path object {@param dir}.
       * return {@code true} if the object is written successfully otherwise 

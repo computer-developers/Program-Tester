@@ -5,8 +5,12 @@
  */
 package lib.userModule;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lib.logger.MyLogger;
 import lib.ui.IntUI;
+import lib.userModule.test.Test;
 
 /**
  *
@@ -16,7 +20,7 @@ public class SingleUserFlow implements IntUserFlow{
      private IntUI ui;
      private MyLogger logger;
 
-     SingleUserFlow(){
+     public SingleUserFlow(){
           
      }
      
@@ -26,7 +30,12 @@ public class SingleUserFlow implements IntUserFlow{
      }
 
      @Override
-     public IntResultSet execute(String cmd, int pid) {
+     public IntLiveResultSet execute(long pid,String cmd) {
+          try {
+               return new Test(pid,cmd).start();
+          } catch (IOException ex) {
+               System.out.println("Error");
+          }
           return null;
      }
      

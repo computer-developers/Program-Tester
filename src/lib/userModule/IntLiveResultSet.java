@@ -5,15 +5,13 @@
  */
 package lib.userModule;
 
+import java.util.List;
+
 /**
  *
- * @author Neel Patel
+ * @author admin
  */
-public interface IntResult {
-     long getRunTime()throws TimeNotAvailableException;
-     default long index(){
-          return -1;
-     }
-     String getMessage();
-     int getMessageCode();
+public interface IntLiveResultSet extends IntResultSet{
+     IntLiveResult getLiveResult(int index);
+     List<IntLiveResult> getAllLiveResult();
 }

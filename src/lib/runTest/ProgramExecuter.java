@@ -19,7 +19,7 @@ class ProgramExecuter {
      List<String> output; //output of subprocess
      Scanner sc; //Scanner bind to standard outputStream & error stream
      long time=-1; //time taken by subprocess in milli secounds.
-     //BufferedReader in;
+     BufferedReader in;
      PrintWriter out; //bind to standard input stream of subprocess.
      
      /**
@@ -133,6 +133,7 @@ class ProgramExecuter {
      private void getOut(){
           //System.out.println("ProgramExecuter.getOut :- started");
           //for(;pr.isAlive();){
+          //in.lines().forEach(s->output.add(s));
           sc.forEachRemaining(s->{
                try{
                     //String s=in.readLine();

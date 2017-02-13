@@ -15,19 +15,19 @@ import lib.runDetails.*;
  *
  * @author Rushabh Modi
  */
-public class IOManagerTest2 {
+public class IOManagerTest3 {
     static Scanner sc=new Scanner(System.in);
     public static void main(String... args) throws IOException{
-          System.out.println("enter file name:-");
-          String s;
-          for(s=sc.nextLine();s=="";s=sc.nextLine());
-          System.out.println("encript ? :-");
+          System.out.println("enter pid :- ");
+          long pid=sc.nextLong();
+          System.out.println("enter index :- ");
+          long index=sc.nextLong();
+          System.out.println("encrypt ? :- ");
           boolean b=sc.nextBoolean();
         IntIODetail io;
         Path pi;
-        pi=Paths.get(s).toAbsolutePath();
-        io=IOManager.getIODetail(pi,b);
-        //io=IOManager.getIODetail(pi);
+        pi=Paths.get("temp").toAbsolutePath();
+        io=IOManager.getIODetail(pi,pid,index,b);
         pi=Paths.get("input2.txt");
         Files.write(pi,io.getAllInput(),StandardOpenOption.CREATE_NEW);
         pi=Paths.get("output2.txt");

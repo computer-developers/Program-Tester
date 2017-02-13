@@ -8,5 +8,5 @@ import lib.ui.*;
  */
 public interface IntUserFlow {
     void register(IntUI ui);
-    IntResultSet execute(String cmd, int pid);
+    IntLiveResultSet execute(long pid,String cmd);
 }
