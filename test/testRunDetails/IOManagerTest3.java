@@ -10,6 +10,7 @@ import java.nio.file.*;
 import java.util.List;
 import java.util.Scanner;
 import lib.runDetails.*;
+import programtester.config.Configurator;
 
 /**
  *
@@ -18,6 +19,7 @@ import lib.runDetails.*;
 public class IOManagerTest3 {
     static Scanner sc=new Scanner(System.in);
     public static void main(String... args) throws IOException{
+          Configurator.init();
           System.out.println("enter pid :- ");
           long pid=sc.nextLong();
           System.out.println("enter index :- ");

@@ -11,6 +11,7 @@ import lib.ui.cli.CliUser;
 import lib.userModule.IntUserFlow;
 import lib.userModule.SingleUserFlow;
 import lib.userModule.test.Test;
+import programtester.config.Configurator;
 
 /**
  *
@@ -18,6 +19,8 @@ import lib.userModule.test.Test;
  */
 public class UserModuleTest {
      public static void main(String... arg){
+          //Configurator.init();
+          
           Test.setDefaultDir(Paths.get("Data").toAbsolutePath());
           System.out.println("Working Directory = " +System.getProperty("user.dir"));
           System.out.println("Data Directory = " +Test.getDefaultDir());

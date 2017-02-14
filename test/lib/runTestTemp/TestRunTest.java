@@ -5,6 +5,7 @@ import lib.runTest.*;
 import java.util.*;
 import java.nio.file.StandardOpenOption;
 import java.nio.file.*;
+import programtester.config.Configurator;
 /**
  *
  * @author Neel Patel
@@ -12,6 +13,7 @@ import java.nio.file.*;
 public class TestRunTest {
      static Scanner sc=new Scanner(System.in);
      public static void main(String... arg) throws IOException{
+          Configurator.init();
           System.out.println("Working Directory = " +System.getProperty("user.dir"));
           String com=sc.nextLine();
           //Path c=Paths.get(com).toAbsolutePath();

@@ -3,6 +3,7 @@ import lib.dT.inputGenerator.*;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.*;
+import programtester.config.Configurator;
 
 /**
  *
@@ -11,6 +12,7 @@ import java.util.*;
 public class InputGenTest {
      static Scanner sc=new Scanner(System.in);
      public static void main(String... arg) throws IOException{
+          Configurator.init();
           System.out.println("enter file name:-");
           String s;
           for(s=sc.nextLine();s=="";s=sc.nextLine());

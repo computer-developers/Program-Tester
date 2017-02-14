@@ -10,6 +10,7 @@ import java.nio.file.*;
 import java.util.List;
 import java.util.Scanner;
 import lib.runDetails.*;
+import programtester.config.Configurator;
 
 /**
  *
@@ -19,6 +20,7 @@ public class IOManagerTest {
      static Scanner sc=new Scanner(System.in);
     
     public static void main(String... args) throws IOException{
+        Configurator.init();
         IntIODetail io;
         Path pi;
         System.out.println("encript ? :-");
