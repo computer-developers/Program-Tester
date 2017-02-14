@@ -1,8 +1,8 @@
-package lib.dT.problemAdder;
+package lib.dT.problemManipulate;
 
 import java.io.Serializable;
 import java.util.*;
-import static lib.dT.problemAdder.ProgramIDGenerator.newProgramID;
+import static lib.dT.problemManipulate.ProgramIDGenerator.newProgramID;
 
 /**
  *

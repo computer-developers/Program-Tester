@@ -1,4 +1,4 @@
-package lib.dT.problemAdder;
+package lib.dT.problemManipulate;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,7 +12,8 @@ import java.util.List;
  */
 public class ProgramDetails {
      
-     public static IntProgramDetail parseProgramDetail(Path filepath)throws IOException{
+     public static IntProgramDetail parseProgramDetail(Path filepath)
+             throws IOException{
           if(!filepath.isAbsolute())
                return null;
           if((!Files.exists(filepath))||Files.isDirectory(filepath))
