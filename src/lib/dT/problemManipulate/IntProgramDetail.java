@@ -1,4 +1,4 @@
-package lib.dT.problemAdder;
+package lib.dT.problemManipulate;
 import java.util.*;
 
 /**
@@ -13,4 +13,5 @@ public interface IntProgramDetail {
      List<String> getSampleInput();
      List<String> getSampleOutput();
      long getProgramID();
+     int getCredit();
 }

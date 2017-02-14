@@ -1,4 +1,4 @@
-package lib.dT.problemAdder;
+package lib.dT.problemManipulate;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,13 +12,15 @@ import java.util.List;
  */
 public class ProgramDetails {
      
-     public static IntProgramDetail parseProgramDetail(Path filepath)throws IOException{
+     public static IntProgramDetail parseProgramDetail(Path filepath)
+             throws IOException{
           if(!filepath.isAbsolute())
                return null;
           if((!Files.exists(filepath))||Files.isDirectory(filepath))
                return null;
           List<String> temp=Files.readAllLines(filepath);
           int i=0;
+          int credit=-1;
           String title="",input="",output="";
           List<String> description=new ArrayList<>(), sampleInput=new ArrayList<>(),
                        sampleOutput=new ArrayList<>();
@@ -58,13 +60,27 @@ public class ProgramDetails {
                                    i++;
                               }
                               break;
+                         case "@credit":
+                              i++;
+                              credit=Integer.parseInt(temp.get(i).split(" ")[0]);
+                              break;
                          default:
                               i++;
                     }
                }
           }
           catch(IndexOutOfBoundsException e){}
-          return new ProgramDetail(title,description,input,output,sampleInput,sampleOutput);
+          return new ProgramDetail(title,description,input,output,sampleInput
+                              ,sampleOutput,credit);
+     }
+     
+     /**
+      *
+      * @param filepath
+      * @return
+      */
+     public static IntProgramDetail readProgramDetail(Path filepath){
+          return null;
      }
      
 }

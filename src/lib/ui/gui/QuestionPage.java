@@ -1,6 +1,6 @@
 package lib.ui.gui;
 import javax.swing.*;
-import lib.dT.problemAdder.IntProgramDetail;
+import lib.dT.problemManipulate.IntProgramDetail;
 
 /**
  *

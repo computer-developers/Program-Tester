@@ -1,8 +1,8 @@
-package lib.dT.problemAdder;
+package lib.dT.problemManipulate;
 
 import java.io.Serializable;
 import java.util.*;
-import static lib.dT.problemAdder.ProgramIDGenerator.newProgramID;
+import static lib.dT.problemManipulate.ProgramIDGenerator.newProgramID;
 
 /**
  *
@@ -13,13 +13,14 @@ public class ProgramDetail implements IntProgramDetail, Serializable {
      static long getVersion(){
           return serialVersionUID;
      }
+     int credit;
      long programId=-1;
      String title,input,output;
      List<String> description=new ArrayList<>(), sampleInput=new ArrayList<>(),
                   sampleOutput=new ArrayList<>();
      
-     ProgramDetail(String title,List<String> description, String input, 
-                    String output,List<String> sampleInput, List<String> sampleOutput){
+     ProgramDetail(String title,List<String> description, String input,String output
+             ,List<String> sampleInput, List<String> sampleOutput,int credit){
           this.programId=newProgramID();
           this.title=title;
           this.description.addAll(description);
@@ -27,6 +28,7 @@ public class ProgramDetail implements IntProgramDetail, Serializable {
           this.output=output;
           this.sampleInput.addAll(sampleInput);
           this.sampleOutput.addAll(sampleOutput);
+          this.credit=credit;
      }
      
      @Override
@@ -90,5 +92,10 @@ public class ProgramDetail implements IntProgramDetail, Serializable {
           List<String> l=new ArrayList<String>();
           l.addAll(sampleOutput);
           return l;
+     }
+
+     @Override
+     public int getCredit() {
+          return credit;
      }
 }

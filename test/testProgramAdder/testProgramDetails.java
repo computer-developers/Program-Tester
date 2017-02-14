@@ -2,8 +2,8 @@ package testProgramAdder;
 
 import java.io.IOException;
 import java.nio.file.Paths;
-import lib.dT.problemAdder.IntProgramDetail;
-import lib.dT.problemAdder.ProgramDetails;
+import lib.dT.problemManipulate.IntProgramDetail;
+import lib.dT.problemManipulate.ProgramDetails;
 
 /**
  *
