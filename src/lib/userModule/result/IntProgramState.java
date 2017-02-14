@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lib.userModule;
+package lib.userModule.result;
+
+import lib.dT.problemManipulate.IntProgramDetail;
 
 /**
  *
  * @author Neel Patel
  */
-public interface IntResult {
-     long getRunTime()throws TimeNotAvailableException;
-     default long index(){
-          return -1;
-     }
-     String getMessage();
-     int getMessageCode();
+public interface IntProgramState extends IntProgramDetail{
+     void setRunnable(Runnable r);
+     int getState();
 }

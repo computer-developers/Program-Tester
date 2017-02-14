@@ -7,10 +7,11 @@ package lib.userModule.test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import lib.runDetails.IntIODetail;
 import lib.runDetails.IntInput;
-import lib.userModule.IntLiveResult;
-import lib.userModule.IntResult;
+import lib.userModule.result.IntLiveResult;
+import lib.userModule.result.IntResult;
 import lib.userModule.TimeNotAvailableException;
 
 /**
@@ -24,6 +25,7 @@ final class TestState implements IntIODetail, IntLiveResult{
      private String message="";
      private int code=0;
      private boolean isExecuted;
+     private final AtomicBoolean isFinal=new AtomicBoolean(false);
      private List<Runnable> func=new ArrayList<>();
      
      private void run(){
@@ -47,6 +49,8 @@ final class TestState implements IntIODetail, IntLiveResult{
      }
      
      synchronized void update(IntIODetail io){
+          if(isFinal())
+               return;
           this.input.clear();
           this.input.addAll(io.getAllInput());
           this.output.clear();
@@ -58,6 +62,8 @@ final class TestState implements IntIODetail, IntLiveResult{
      }
      
      synchronized void setState(String message,int code){
+          if(isFinal())
+               return;
           this.message=message;
           this.code=code;
           run();
@@ -66,6 +72,7 @@ final class TestState implements IntIODetail, IntLiveResult{
      synchronized boolean isExecuted(){
           return isExecuted;
      }
+     
      @Override
      public synchronized List<String> getAllOutput() {
           if(!isExecuted)
@@ -119,4 +126,29 @@ final class TestState implements IntIODetail, IntLiveResult{
           func.add(r);
      }
      
+     @Override
+     public IntResult toIntResult(){
+          synchronized(isFinal){
+               for(;!isFinal();){    
+                    try {
+                         isFinal.wait();
+                    } catch (InterruptedException ex){}
+               }
+               return this;
+          }
+     } 
+
+     @Override
+     public void makeFinal() {
+          synchronized(isFinal){
+               isFinal.set(true);
+               isFinal.notify();
+          }
+     }
+     
+     public boolean isFinal(){
+          synchronized(isFinal){
+               return isFinal.get();
+          }
+     }
 }

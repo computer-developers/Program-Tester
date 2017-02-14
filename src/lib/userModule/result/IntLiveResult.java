@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lib.userModule;
+package lib.userModule.result;
 
 /**
  *
@@ -11,4 +11,6 @@ package lib.userModule;
  */
 public interface IntLiveResult extends IntResult{
      void addRunnable(Runnable r);
+     IntResult toIntResult();
+     void makeFinal();
 }

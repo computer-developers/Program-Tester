@@ -11,6 +11,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lib.dT.manipulate.comparators.ListManipulator;
@@ -18,8 +20,8 @@ import lib.dT.manipulate.comparators.StringComparators;
 import lib.runDetails.IOManager;
 import lib.runDetails.IntIODetail;
 import lib.runTest.RunTest;
-import lib.userModule.IntLiveResultSet;
-import lib.userModule.LiveResultSetAdapter;
+import lib.userModule.result.IntLiveResultSet;
+import lib.userModule.result.LiveResultSetAdapter;
 
 /**
  *
@@ -152,12 +154,13 @@ public class Test {
      private void run(){
           flag=true;
           for(TestState i:ts){
-               if(!flag) //check if the thread should to be terminated.
+               if(!flag) //check if the thread should be terminated.
                     break;
                RunTest rt=new RunTest(i,cmd);
                i.setState("Executing", 0);
                i.update(rt.getIODetail());
                comp(i);
+               i.makeFinal();
           }
      }
      
@@ -189,6 +192,13 @@ public class Test {
           t=new Thread(this::run,"Tester Thread");
           t.start();
           return new LiveResultSetAdapter(ts);
+     }
+     
+     public void join(){
+          for(;t!=null&&t.isAlive();)
+          try {
+               t.join();
+          } catch (InterruptedException ex) {}
      }
      
      /**

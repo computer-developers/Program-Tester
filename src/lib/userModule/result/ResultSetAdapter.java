@@ -1,4 +1,4 @@
-package lib.userModule;
+package lib.userModule.result;
 
 import java.util.ArrayList;
 import java.util.Arrays;

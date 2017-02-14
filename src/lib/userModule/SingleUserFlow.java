@@ -5,6 +5,7 @@
  */
 package lib.userModule;
 
+import lib.userModule.result.IntLiveResultSet;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

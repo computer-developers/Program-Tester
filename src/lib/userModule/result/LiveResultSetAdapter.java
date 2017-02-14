@@ -1,9 +1,9 @@
-package lib.userModule;
+package lib.userModule.result;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -27,12 +27,14 @@ public class LiveResultSetAdapter implements IntLiveResultSet{
 
      @Override
      public List<? extends IntResult> getAllResult() {
-          return li;
+          List<IntResult> nl = li.stream().map(i->i.toIntResult())
+                  .collect(Collectors.toList());
+          return nl;
      }
 
      @Override
      public IntResult getResult(int index) {
-          return li.get(index);
+          return li.get(index).toIntResult();
      }
 
      @Override
@@ -44,5 +46,6 @@ public class LiveResultSetAdapter implements IntLiveResultSet{
      public List<IntLiveResult> getAllLiveResult() {
           return li;
      }
+     
      
 }

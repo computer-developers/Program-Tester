@@ -2,6 +2,7 @@ package lib.ui.cli;
 
 import java.util.Scanner;
 import lib.ui.IntUI;
+import lib.userModule.result.IntLiveResultSet;
 import lib.userModule.IntUserFlow;
 import lib.userModule.TimeNotAvailableException;
 
@@ -46,7 +47,8 @@ public class CliUser implements IntUI{
      
      public void test(long pid,String cmd){
           //System.out.println("test start...");
-          uf.execute(pid,cmd).getAllLiveResult()
+          IntLiveResultSet lrs=uf.execute(pid,cmd);
+          lrs.getAllLiveResult()
                     .forEach(i->i.addRunnable(()->{
                          String s="test "
                                  +i.index()+" :- "
@@ -58,7 +60,7 @@ public class CliUser implements IntUI{
                          System.out.println(s);
                     }
                   ));
-                  
+          lrs.getAllResult();
           //System.out.println("test end..");
      }
 }

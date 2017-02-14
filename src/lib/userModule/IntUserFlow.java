@@ -1,5 +1,6 @@
 package lib.userModule;
 
+import lib.userModule.result.IntLiveResultSet;
 import lib.ui.*;
 
 /**
