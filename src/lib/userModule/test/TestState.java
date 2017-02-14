@@ -28,7 +28,7 @@ final class TestState implements IntIODetail, IntLiveResult{
      private final AtomicBoolean isFinal=new AtomicBoolean(false);
      private List<Runnable> func=new ArrayList<>();
      
-     private void run(){
+     private synchronized void run(){
           func.parallelStream().forEach(r->r.run());
      }
      

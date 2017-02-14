@@ -7,10 +7,15 @@ package lib.userModule;
 
 import lib.userModule.result.IntLiveResultSet;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import lib.dT.problemManipulate.IntProgramDetail;
+import lib.dT.problemManipulate.ProgramDetails;
 import lib.logger.MyLogger;
 import lib.ui.IntUI;
+import lib.userModule.result.IntProgramState;
+import lib.userModule.result.ProgramStateAdapter;
 import lib.userModule.test.Test;
 
 /**
@@ -20,9 +25,26 @@ import lib.userModule.test.Test;
 public class SingleUserFlow implements IntUserFlow{
      private IntUI ui;
      private MyLogger logger;
-
-     public SingleUserFlow(){
+     private List<IntProgramState> ps;
+     private class ProblemState extends ProgramStateAdapter{
+          ProblemState(IntProgramDetail pd){
+               super(pd);
+          }
           
+          @Override
+          protected synchronized void setState(int s){
+               super.setState(s);
+          }
+     }
+     
+     private List<IntProgramState> getPrograms(){
+          List<IntProgramState> ps=ProgramDetails.readProgramDetail().stream()
+                  .map(i->new ProblemState(i)).collect(Collectors.toList());
+          return Collections.unmodifiableList(ps);
+     }
+     
+     public SingleUserFlow(){
+          ps=getPrograms();
      }
      
      @Override
@@ -42,5 +64,10 @@ public class SingleUserFlow implements IntUserFlow{
      
      public synchronized void setLogger(MyLogger logger){
           this.logger=logger;
+     }
+
+     @Override
+     public synchronized List<IntProgramState> getAllProgramDetail() {
+          return ps;
      }
 }

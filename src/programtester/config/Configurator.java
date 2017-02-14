@@ -25,7 +25,7 @@ public class Configurator {
           try {
                Files.lines(p).map(i->i.trim())
                        .filter(i->!i.startsWith("#"))
-                       .peek(i->System.out.println("peek :- "+i))
+                       //.peek(i->System.out.println("peek :- "+i))
                        .forEach(i->proc(i));
           } catch (IOException ex) {
                ex.printStackTrace();
@@ -37,15 +37,19 @@ public class Configurator {
           String ar[]=Arrays.stream(s.split(":-",2)).map(i->i.trim())
                   .toArray(String[]::new);
           switch(ar[0]){
-               case "working_dir":
+               /*case "working_dir":
                     Path p=Paths.get(ar[1]).toAbsolutePath();
                     System.out.println("wd :- "+p);
-                    if(Files.exists(p)&&Files.isDirectory(p))
+                    if(Files.exists(p)&&Files.isDirectory(p)){
+                         System.out.println("test");
                          System.setProperty("user.dir",p.toString());
+                    }
                     break;
+               */
+               
                case "source_data_dir":
                     Path p2=Paths.get(ar[1]).toAbsolutePath();
-                    System.out.println("sdd :- "+p2);
+                    //System.out.println("sdd :- "+p2);
                     if(Files.exists(p2)&&Files.isDirectory(p2))
                          Test.setDefaultDir(p2);
                     break;

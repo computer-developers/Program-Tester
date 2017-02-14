@@ -125,7 +125,7 @@ public class Test {
      }
      
      private synchronized void reader()throws IOException{
-          List<TestState> ts=IntStream.rangeClosed(1,10)
+          List<TestState> ts=IntStream.rangeClosed(1,20)
                               .mapToObj(i->read(i))
                               .filter(i->i!=null)
                               //.peek(i->System.out.println("index :- "+i.index()))

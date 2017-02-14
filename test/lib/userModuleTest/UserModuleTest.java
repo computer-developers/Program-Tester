@@ -19,9 +19,9 @@ import programtester.config.Configurator;
  */
 public class UserModuleTest {
      public static void main(String... arg){
-          //Configurator.init();
+          Configurator.init();
           
-          Test.setDefaultDir(Paths.get("Data").toAbsolutePath());
+          //Test.setDefaultDir(Paths.get("Data").toAbsolutePath());
           System.out.println("Working Directory = " +System.getProperty("user.dir"));
           System.out.println("Data Directory = " +Test.getDefaultDir());
           IntUserFlow uf=new SingleUserFlow();

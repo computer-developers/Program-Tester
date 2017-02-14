@@ -12,6 +12,6 @@ import lib.dT.problemManipulate.IntProgramDetail;
  * @author Neel Patel
  */
 public interface IntProgramState extends IntProgramDetail{
-     void setRunnable(Runnable r);
+     void addRunnable(Runnable r);
      int getState();
 }

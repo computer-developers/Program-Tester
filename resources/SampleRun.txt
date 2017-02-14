@@ -1,18 +1,25 @@
 run:
-Working Directory = C:\My folder\Fun\Data\Program Tester\resources\temp
+Working Directory = C:\My folder\Fun\Data\Program Tester
+Data Directory = C:\My folder\Fun\Data\Program Tester\resources\Data
 Menu..
-1.Test2.Display0.Exit
+1.Test
+2.Display
+0.Exit
+
 1
 Enter Program ID..
 170212032726
 Enter command
-pro.exe
+resources\pro.exe
+test case	code	message		time
+test 1 :-	0,	Executing
+test 1 :-	1,	Perfact,	38
+test 2 :-	0,	Executing
+test 2 :-	1,	Perfact,	85
+test 3 :-	0,	Executing
+test 3 :-	1,	Perfact,	143
 Menu..
-1.Test2.Display0.Exit
-test 1 :- 0,Executing
-test 1 :- 1,Perfact
-test 2 :- 0,Executing
-test 2 :- 1,Perfact
-test 3 :- 0,Executing
-test 3 :- 1,Perfact
-BUILD STOPPED (total time: 21 seconds)
+1.Test
+2.Display
+0.Exit
+
