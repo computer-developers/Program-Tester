@@ -14,7 +14,7 @@ import lib.userModule.test.Test;
 
 /**
  *
- * @author admin
+ * @author Neel Patel
  */
 public class UserModuleTest {
      public static void main(String... arg){

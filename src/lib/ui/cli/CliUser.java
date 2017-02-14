@@ -3,6 +3,7 @@ package lib.ui.cli;
 import java.util.Scanner;
 import lib.ui.IntUI;
 import lib.userModule.IntUserFlow;
+import lib.userModule.TimeNotAvailableException;
 
 /**
  *
@@ -46,10 +47,18 @@ public class CliUser implements IntUI{
      public void test(long pid,String cmd){
           //System.out.println("test start...");
           uf.execute(pid,cmd).getAllLiveResult()
-                  .forEach(i->i.addRunnable(()->
-                          System.out.println("test "
-                                  +i.index()+" :- "
-                                  +i.getMessageCode()+","+i.getMessage())));
+                    .forEach(i->i.addRunnable(()->{
+                         String s="test "
+                                 +i.index()+" :- "
+                                 +i.getMessageCode()+","+i.getMessage();
+                         try{
+                              long t=i.getRunTime();
+                              s+=","+t;
+                         }catch(TimeNotAvailableException e){}
+                         System.out.println(s);
+                    }
+                  ));
+                  
           //System.out.println("test end..");
      }
 }
