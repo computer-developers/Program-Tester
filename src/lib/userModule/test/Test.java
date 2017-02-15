@@ -11,8 +11,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import lib.dT.manipulate.comparators.ListManipulator;
@@ -21,7 +19,9 @@ import lib.runDetails.IOManager;
 import lib.runDetails.IntIODetail;
 import lib.runTest.RunTest;
 import lib.userModule.result.IntLiveResultSet;
+import lib.userModule.result.IntResultSet;
 import lib.userModule.result.LiveResultSetAdapter;
+import lib.userModule.result.ResultSetAdapter;
 
 /**
  *
@@ -86,6 +86,7 @@ public class Test {
      private final String cmd;
      private Thread t;
      private List<TestState> ts;
+     private IntLiveResultSet lrs;
      private boolean flag=false;
      
      /**
@@ -112,7 +113,7 @@ public class Test {
                if(ListManipulator.compare(us.getAllOutput(),ori.getAllOutput(),
                               StringComparators.getExactmatch())){
                     //System.out.println("perfect check");
-                    us.setState("Perfact",1);
+                    us.setState("Perfect",1);
                }
                else if(ListManipulator.compare(us.getAllOutput(),ori.getAllOutput(),
                               StringComparators.getIgnoreWhiteSpace())){
@@ -191,7 +192,8 @@ public class Test {
           reader();
           t=new Thread(this::run,"Tester Thread");
           t.start();
-          return new LiveResultSetAdapter(ts);
+          lrs=new LiveResultSetAdapter(ts);
+          return lrs;
      }
      
      public void join(){
@@ -199,6 +201,10 @@ public class Test {
           try {
                t.join();
           } catch (InterruptedException ex) {}
+     }
+     
+     public IntResultSet getIntResultSet(){
+          return new ResultSetAdapter(lrs.getAllResult());
      }
      
      /**

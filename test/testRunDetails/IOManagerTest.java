@@ -10,6 +10,7 @@ import java.nio.file.*;
 import java.util.List;
 import java.util.Scanner;
 import lib.runDetails.*;
+import lib.userModule.test.Test;
 import programtester.config.Configurator;
 
 /**
@@ -22,23 +23,24 @@ public class IOManagerTest {
     public static void main(String... args) throws IOException{
         Configurator.init();
         IntIODetail io;
+        Path dir=Test.getDefaultDir();
         Path pi;
         System.out.println("encript ? :-");
           boolean b=sc.nextBoolean();
         if(args.length>0)
-               pi=Paths.get(args[0]);
+               pi=dir.resolve(args[0]);
           else
-               pi=Paths.get("input.txt");
+               pi=dir.resolve("input.txt");
           System.out.println("pi :- "+pi);
           List<String> input=Files.readAllLines(pi);
         if(args.length>1)
-               pi=Paths.get(args[1]);
+               pi=dir.resolve(args[1]);
           else
-               pi=Paths.get("output.txt");
+               pi=dir.resolve("output.txt");
           System.out.println("pi :- "+pi);
           List<String> output=Files.readAllLines(pi);
         io=IOManager.getIODetail(input, output);
-        pi=Paths.get("temp").toAbsolutePath();
+        pi=Paths.get("resources\\temp").toAbsolutePath();
         System.out.println(IOManager.writeIntIODetail(io, pi,b));
     }
 }

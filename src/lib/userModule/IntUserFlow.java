@@ -12,5 +12,5 @@ import lib.userModule.result.IntProgramState;
 public interface IntUserFlow {
     void register(IntUI ui);
     IntLiveResultSet execute(long pid,String cmd);
-    List<IntProgramState> getAllProgramDetail();
+    List<? extends IntProgramState> getAllProgramDetail();
 }

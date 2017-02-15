@@ -14,7 +14,7 @@ import lib.userModule.result.IntProgramState;
  */
 public class CliUser implements IntUI{
      private IntUserFlow uf;
-     private List<IntProgramState> ps;
+     private List<?extends IntProgramState> ps;
      public CliUser(IntUserFlow uf){
           this.uf=uf;
           this.uf.register(this);
