@@ -10,8 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import lib.dT.problemManipulate.ProgramDetails;
 import lib.userModule.test.Test;
 
 /**
@@ -54,9 +53,9 @@ public class Configurator {
                          Test.setDefaultDir(p2);
                     break;
                case "problem_dir":
-                    //Path p3=Paths.get(ar[1]).toAbsolutePath();
-                    //if(Files.exists(p3)&&Files.isDirectory(p3))
-                    //     Test.setDefaultDir(p3);
+                    Path p3=Paths.get(ar[1]).toAbsolutePath();
+                    if(Files.exists(p3)&&Files.isDirectory(p3))
+                         ProgramDetails.setDefaultDir(p3);
                     break;
                case "local_logger_dir":
                     //Path p4=Paths.get(ar[1]).toAbsolutePath();
