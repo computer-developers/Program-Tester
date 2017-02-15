@@ -1,6 +1,35 @@
 run:
 Working Directory = C:\My folder\Fun\Data\Program Tester
 Data Directory = C:\My folder\Fun\Data\Program Tester\resources\Data
+Program Directory = C:\My folder\Fun\Data\Program Tester\resources\ProbDef
+Menu..
+1.Test
+2.Display
+0.Exit
+
+2
+index	ProblemId	State	Title
+
+0	170215054539	0	Write a program to add the entered numbers but repeated numbers should be ignored.
+1	170215054616	0	Write a program to sort the entered numbers in proper order.
+2	170215054628	0	Write a program to check whether the entered strings are palindrome or not.
+3	170215054640	0	Write a program to check whether the entered numbers are palindrome or not.
+4	170215054654	0	Write a program to check whether the entered e-mail addresses are valid or not.
+5	170215054711	0	Write a program to check whether the entered numbers are armstrong or not.
+
+enter index :- 
+2
+Program Id :	170215054628
+Title :		Write a program to check whether the entered strings are palindrome or not.
+Description :	[Palindrome strings are the ones that are read same if reversed (By example, rar is rar if reversed)., make a program to determine that the string is palindrome or not.]
+Input :		First line showing the number of inputs as N. Following N lines containing test strings.length of each test string is ranging from 1 to 60.
+Output :	for every test string print 'true' if it is palindrome or 'false' if is not palindrome.
+Sample Input :	[5, werew, rush, lol, pqksl, q]
+Sample Output :	[true, false, true, false, true]
+Credit :	5
+
+enter index :- 
+-1
 Menu..
 1.Test
 2.Display
@@ -8,18 +37,33 @@ Menu..
 
 1
 Enter Program ID..
-170212032726
+170215054616
 Enter command
-resources\pro.exe
+resources\prop.exe
 test case	code	message		time
-test 1 :-	0,	Executing
-test 1 :-	1,	Perfact,	38
+test 1 :-	1,	Perfect,	39
 test 2 :-	0,	Executing
-test 2 :-	1,	Perfact,	85
+test 2 :-	1,	Perfect,	59
 test 3 :-	0,	Executing
-test 3 :-	1,	Perfact,	143
+test 3 :-	1,	Perfect,	151
+test 4 :-	0,	Executing
+test 4 :-	1,	Perfect,	176
+test 5 :-	0,	Executing
+test 5 :-	1,	Perfect,	232
+test 6 :-	0,	Executing
+test 6 :-	1,	Perfect,	316
+test 7 :-	0,	Executing
+test 7 :-	1,	Perfect,	329
+test 8 :-	0,	Executing
+test 8 :-	1,	Perfect,	320
 Menu..
 1.Test
 2.Display
 0.Exit
 
+#PID :- 170215054616
+#Title :- Write a program to sort the entered numbers in proper order.
+#State :- 1
+
+0
+BUILD SUCCESSFUL (total time: 33 seconds)

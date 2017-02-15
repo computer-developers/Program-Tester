@@ -1,0 +1,26 @@
+@programID
+170215054711
+@title
+Write a program to check whether the entered numbers are armstrong or not.
+Armstrong numbers are the ones in which addition of cubes of every digit in that number gives the original number (By example, 153:1^3+5^3+3^3=153).
+make a program to determine the number is armstrong or not.
+Write a program to check whether the entered numbers are armstrong or not.
+@input
+First line showing the number of test cases as N. Following N lines containing test integers in between -999999999 to 999999999.
+@output
+for every test integers print true if is armstrong. print false otherwise.
+@sample input
+5
+153
+56
+9842289
+371
+1
+@sample output
+true
+false
+false
+true
+true
+@credit
+5

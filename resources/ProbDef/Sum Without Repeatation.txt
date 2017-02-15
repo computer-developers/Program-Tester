@@ -1,0 +1,20 @@
+@title
+Write a program to add the entered numbers but repeated numbers should be ignored.
+@description
+Add all the numbers but if a specific number is repeated one or more times it should only be added once.
+Check for input of N numbers.
+@input
+First line contain integer N, where 0<N<=100000. Following N lines containing integers T, where -9999<T<9999.
+@output
+Sum of those N numbers without repeating.
+@sample_input
+5
+600
+20
+600
+40
+6
+@sample_output
+666
+@credit
+7

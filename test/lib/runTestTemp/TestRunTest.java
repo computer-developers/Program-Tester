@@ -5,6 +5,7 @@ import lib.runTest.*;
 import java.util.*;
 import java.nio.file.StandardOpenOption;
 import java.nio.file.*;
+import lib.userModule.test.Test;
 import programtester.config.Configurator;
 /**
  *
@@ -15,14 +16,22 @@ public class TestRunTest {
      public static void main(String... arg) throws IOException{
           Configurator.init();
           System.out.println("Working Directory = " +System.getProperty("user.dir"));
-          String com=sc.nextLine();
-          //Path c=Paths.get(com).toAbsolutePath();
-          System.out.println("com :- "+com);
+          Path dir=Test.getDefaultDir();
+          System.out.println("Data Directory = " + dir);
+          String com;
+          System.out.println("command :- ");
+          for(com=sc.nextLine();com=="";com=sc.nextLine());
+          String in;
+          System.out.println("input file :- ");
+          for(in=sc.nextLine();in=="";in=sc.nextLine());
+          String out;
+          System.out.println("output file :- ");
+          for(out=sc.nextLine();out=="";out=sc.nextLine());
+          System.out.println("cmd :- "+com);
+          System.out.println("input :- "+in);
+          System.out.println("out :- "+out);
           Path pi;
-          if(arg.length>0)
-               pi=Paths.get(arg[0]);
-          else
-               pi=Paths.get("input.txt");
+          pi=dir.resolve(in);
           System.out.println("pi :- "+pi);
           List<String> input=Files.readAllLines(pi);
           System.out.println("input read completed.");
@@ -30,11 +39,11 @@ public class TestRunTest {
           System.out.println("process start.");
           //rt.run();
           IntIODetail obj=rt.getIODetail();
-          System.out.println("process completed. obj :- ");
+          System.out.println("process completed.");
           if(arg.length>1)
-               pi=Paths.get(arg[1]);
+               pi=dir.resolve(arg[1]);
           else
-               pi=Paths.get("output.txt");
+               pi=dir.resolve(out);
           System.out.println("pi :- "+pi);
           Files.write(pi,obj.getAllOutput(),StandardOpenOption.CREATE_NEW);
           System.out.println("Time :- "+obj.getTime());

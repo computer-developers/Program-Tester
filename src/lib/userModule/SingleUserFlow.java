@@ -9,6 +9,7 @@ import lib.userModule.result.IntLiveResultSet;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 import lib.dT.problemManipulate.IntProgramDetail;
 import lib.dT.problemManipulate.ProgramDetails;
@@ -28,6 +29,7 @@ public class SingleUserFlow implements IntUserFlow{
      private MyLogger logger;
      private List<ProblemState> ps;
      private Thread t;
+     private ExecutorService es=Executors.newCachedThreadPool();
      private class ProblemState extends ProgramStateAdapter{
           ProblemState(IntProgramDetail pd){
                super(pd);
@@ -44,11 +46,15 @@ public class SingleUserFlow implements IntUserFlow{
           IntResultSet rs=t.getIntResultSet();
           if(rs.getAllResult().stream()
                     .allMatch(i->i.getMessageCode()>0))
-               ps.stream().findAny().get().setState(1);
+               ps.stream().filter(i->i.getProgramID()==t.getProgramID())
+                       .findAny()
+                       .get().setState(1);
      }
      
      private List<? extends IntProgramState> getPrograms(){
+          //System.out.println("suf getPro...");
           List<ProblemState> psl=ProgramDetails.readProgramDetail().stream()
+                  //.peek(i->System.out.println("Pid :- "+i.getProgramID()))
                   .map(i->new ProblemState(i)).collect(Collectors.toList());
           psl=Collections.unmodifiableList(psl);
           return psl;
@@ -66,7 +72,10 @@ public class SingleUserFlow implements IntUserFlow{
      @Override
      public IntLiveResultSet execute(long pid,String cmd) {
           try {
-               return new Test(pid,cmd).start();
+               Test t=new Test(pid,cmd);
+               IntLiveResultSet rt=t.start();
+               es.submit(()->update(t));
+               return rt;
           } catch (IOException ex) {
                System.out.println("Error");
           }

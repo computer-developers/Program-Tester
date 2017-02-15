@@ -217,6 +217,10 @@ public class Test {
           flag=false;
      }
      
+     public long getProgramID(){
+          return pid;
+     }
+     
      @Override
      public void finalize() throws Throwable{
           try {

@@ -24,8 +24,8 @@ public class ProgramStateAdapter implements IntProgramState{
      }
      
      protected synchronized void setState(int s){
-          run();
           state=s;
+          run();
      }
      
      public ProgramStateAdapter(IntProgramDetail pd){

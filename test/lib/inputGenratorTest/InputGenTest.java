@@ -3,6 +3,7 @@ import lib.dT.inputGenerator.*;
 import java.io.IOException;
 import java.nio.file.*;
 import java.util.*;
+import lib.userModule.test.Test;
 import programtester.config.Configurator;
 
 /**
@@ -13,10 +14,12 @@ public class InputGenTest {
      static Scanner sc=new Scanner(System.in);
      public static void main(String... arg) throws IOException{
           Configurator.init();
+          Path dir=Test.getDefaultDir();
+          System.out.println("Data Directory = " + dir);
           System.out.println("enter file name:-");
           String s;
           for(s=sc.nextLine();s=="";s=sc.nextLine());
-          Path p=Paths.get(s).toAbsolutePath();
+          Path p=dir.resolve(s);
           System.out.println("number of regx...");
           int n=sc.nextInt();
           String ar[]=new String[n];

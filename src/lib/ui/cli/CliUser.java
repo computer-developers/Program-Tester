@@ -15,14 +15,15 @@ import lib.userModule.result.IntProgramState;
 public class CliUser implements IntUI{
      private IntUserFlow uf;
      private List<?extends IntProgramState> ps;
+     private Scanner sc=new Scanner(System.in);
      public CliUser(IntUserFlow uf){
           this.uf=uf;
           this.uf.register(this);
           ps=uf.getAllProgramDetail();
           ps.forEach(i->i.addRunnable(
-                         ()->System.out.println("PID :- "
-                         +i.getProgramID()+ "\nTitle :- "+i.getTitle()
-                         +"\nState :- "+i.getState()+"\n")
+                         ()->System.out.println("#PID :- "
+                         +i.getProgramID()+ "\n#Title :- "+i.getTitle()
+                         +"\n#State :- "+i.getState()+"\n")
                          )
                     );
      }
@@ -34,7 +35,6 @@ public class CliUser implements IntUI{
      
      @Override
      public synchronized void start(){
-          Scanner sc=new Scanner(System.in);
           while(true){
                System.out.println("Menu..\n"
                          + "1.Test\n"
@@ -76,14 +76,30 @@ public class CliUser implements IntUI{
      }
      
      public void dispDetail(){
-          System.out.println("ProblemId\tState\tTitle\n");
+          System.out.println("index\tProblemId\tState\tTitle\n");
           ps.stream().forEach(i->{
                          String s=""
+                                 +ps.indexOf(i)+"\t"
                                  +i.getProgramID()+"\t"
                                  +i.getState()+"\t"+i.getTitle();
                          System.out.println(s);
                     }
                );
+          try{
+               for(;;){
+                    System.out.println("\nenter index :- ");
+                    int i=sc.nextInt();
+                    IntProgramState x=ps.get(i);
+                    System.out.println("Program Id :\t"+x.getProgramID());
+                    System.out.println("Title :\t\t"+x.getTitle());
+                    System.out.println("Description :\t"+x.getDescription());
+                    System.out.println("Input :\t\t"+x.getInput());
+                    System.out.println("Output :\t"+x.getOutput());
+                    System.out.println("Sample Input :\t"+x.getSampleInput());
+                    System.out.println("Sample Output :\t"+x.getSampleOutput());
+                    System.out.println("Credit :\t"+x.getCredit());
+               }
+          }catch(IndexOutOfBoundsException e){}
      }
      
 }

@@ -17,30 +17,31 @@ import programtester.config.Configurator;
  *
  * @author Rushabh Modi
  */
-public class IOManagerTest {
+public class IOManagerWriteTest {
      static Scanner sc=new Scanner(System.in);
     
     public static void main(String... args) throws IOException{
         Configurator.init();
         IntIODetail io;
         Path dir=Test.getDefaultDir();
+        System.out.println("Data Directory = " + dir);
         Path pi;
         System.out.println("encript ? :-");
           boolean b=sc.nextBoolean();
-        if(args.length>0)
-               pi=dir.resolve(args[0]);
-          else
-               pi=dir.resolve("input.txt");
-          System.out.println("pi :- "+pi);
+          String in;
+          System.out.println("input file :- ");
+          for(in=sc.nextLine();in=="";in=sc.nextLine());
+          String out;
+          System.out.println("output file :- ");
+          for(out=sc.nextLine();out=="";out=sc.nextLine());
+          System.out.println("input :- "+in);
+          System.out.println("out :- "+out);
+          pi=dir.resolve(in);
           List<String> input=Files.readAllLines(pi);
-        if(args.length>1)
-               pi=dir.resolve(args[1]);
-          else
-               pi=dir.resolve("output.txt");
-          System.out.println("pi :- "+pi);
+          pi=dir.resolve(out);
           List<String> output=Files.readAllLines(pi);
         io=IOManager.getIODetail(input, output);
-        pi=Paths.get("resources\\temp").toAbsolutePath();
+        pi=dir;
         System.out.println(IOManager.writeIntIODetail(io, pi,b));
     }
 }

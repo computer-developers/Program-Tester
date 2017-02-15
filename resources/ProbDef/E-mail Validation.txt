@@ -1,0 +1,28 @@
+@title
+Write a program to check whether the entered e-mail addresses are valid or not.
+@description
+Valid e-mail addresses contain parameters like,	-One and only one '@' symbol should be present.
+-Atleast one '.' should be present after but not immediately after '@' (domain part).
+-Any part can't be null.
+-Certain special characters(like space) are not allowed.
+-etc.
+Check for input of N numbers.
+@input
+First line showing the no. of inputs as N. Following N lines containing those random e-mail addresses ranging from length of 0 to 60.
+@output
+Return for every addresses from those N e-mail addresses as whether it is valid or not in separate lines as boolean true or false.
+@sample_input
+5
+m.r@gmail.com
+kasl aks@ma
+alsl@smka.sa.sa
+asadaea.as
+a@
+@sample_output
+true
+false
+true
+false
+false
+@credit
+10

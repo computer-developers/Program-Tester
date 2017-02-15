@@ -5,7 +5,7 @@
  */
 package lib.userModuleTest;
 
-import java.nio.file.Paths;
+import lib.dT.problemManipulate.ProgramDetails;
 import lib.ui.IntUI;
 import lib.ui.cli.CliUser;
 import lib.userModule.IntUserFlow;
@@ -23,8 +23,10 @@ public class UserModuleTest {
           //Test.setDefaultDir(Paths.get("Data").toAbsolutePath());
           System.out.println("Working Directory = " +System.getProperty("user.dir"));
           System.out.println("Data Directory = " +Test.getDefaultDir());
+          System.out.println("Program Directory = " +ProgramDetails.getDefaultDir());
           IntUserFlow uf=new SingleUserFlow();
           IntUI cli=new CliUser(uf);
           cli.start();
+          System.exit(0);
      }
 }

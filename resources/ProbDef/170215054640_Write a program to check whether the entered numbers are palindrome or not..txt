@@ -1,0 +1,26 @@
+@programID
+170215054640
+@title
+Write a program to check whether the entered numbers are palindrome or not.
+Palindrome numbers are the ones that are read same if reversed (By example, 121 is 121 if reversed).
+make a program to determine the number is palindrome or not.
+Write a program to check whether the entered numbers are palindrome or not.
+@input
+First line contain integer N, where 0<N<100000. Following N lines containing Strings T, where length T is between 1 to 9.
+@output
+for every test input print 'true' if it is palindrome number or 'false' if is not palindrome number. if the test case is not number then print 'invalid'.
+@sample input
+5
+1234
+56765
+98289
+1a4a2
+0
+@sample output
+false
+true
+true
+invalid
+true
+@credit
+7
