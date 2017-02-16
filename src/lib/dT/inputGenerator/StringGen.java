@@ -20,11 +20,11 @@ public class StringGen {
           ar=getGenerex(regx);
      }
      
-     /**return array of {@code Generex} related to string array {@param reg}.
-      * this method remove duplicates from the array {@param reg}.
-      * {@param reg} remain unchanged.
+     /**return array of {@code Generex} related to string array {@code reg}.
+      * this method remove duplicates from the array {@code reg}.
+      * {@code reg} remain unchanged.
       * @param reg array of {@code String} representing valid regular expression.
-      * @return Array of {@code Generex} related to {@param reg}.
+      * @return Array of {@code Generex} related to {@code reg}.
       * @throws IllegalArgumentException if an error occurred while parsing the given regular expression
       * @throws StackOverflowError if the regular expression has to many transitions
       */
@@ -45,11 +45,11 @@ public class StringGen {
      }
      
      /**
-      * return a random String of length between {@param minlen} & {@param maxlen}.
+      * return a random String of length between {@code minlen} & {@code maxlen}.
       * it generate the string using any one of the regular expression passed in constructor.
-      * if {@param maxlen} is negative or zero then it return any string having length greater than {@param minlen}
-      * the {@code IllegalArgumentException} is thrown if {@param minlen}
-       is greater than {@param maxlen} or {@param minlen} is less than {code zero}.
+      * if {@code maxlen} is negative or zero then it return any string having length greater than {@code minlen}
+      * the {@code IllegalArgumentException} is thrown if {@code minlen}
+       is greater than {@code maxlen} or {@code minlen} is less than {code zero}.
       * @param minlen minimum length of regular expression
       * @param maxlen maximum length of regular expression
       * @return valid string generated using one of the regular expressions.

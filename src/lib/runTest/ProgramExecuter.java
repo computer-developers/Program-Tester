@@ -6,7 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
  *this is class is used to execute the program once with given in input.
- * standard output & error streams are bind together by default.
+ * standard output and error streams are bind together by default.
  * @author Neel Patel
  */
 class ProgramExecuter {
@@ -127,7 +127,7 @@ class ProgramExecuter {
      }
      
      /**
-      * get the output from standard output stream of subprocess & store in list output.
+      * get the output from standard output stream of subprocess and store in list output.
       * method can be called from new thread.
       */
      private void getOut(){

@@ -5,7 +5,7 @@ import java.io.*;
 /**
  * this class is used to store the data of single run of any program.
  * object of this class can easily be written to the file or passed in stream using
-   {@code ObjectOutputStream} & read using {@code ObjectInputStream}.
+   {@code ObjectOutputStream} and read using {@code ObjectInputStream}.
  * version of class refers the serialVersionUID.
  * if the serialVersionUID differs at ObjectInputStram from ObjectOutputStream 
    then the Object can not be read by ObjectInputStream.
@@ -46,11 +46,11 @@ class IODetail implements IntIODetail, Serializable{
      }
      
      /**
-      * returns the programId, for which the {@code input} & {@code output} related.
+      * returns the programId, for which the {@code input} and {@code output} related.
       * the programId is a unique identification of program type for which the 
         the list of string return by the method {@link getAllInput} can be used 
         as input.
-      * the programId refers to the problem definition related to the input & 
+      * the programId refers to the problem definition related to the input and 
         corresponding output.
       * @return positive long programId, negative value if not applicable
       */
@@ -60,10 +60,10 @@ class IODetail implements IntIODetail, Serializable{
      }
      
      /**
-      * return index of the {@code input} & corresponding {@code output}
+      * return index of the {@code input} and corresponding {@code output}
         if applicable.
       * index is unique serial number to identify the test {@code input}
-        & {@code output} for the program corresponding to the {@code programId}
+        and {@code output} for the program corresponding to the {@code programId}
       * @return positive long index, negative value if not applicable
       */
      @Override

@@ -25,22 +25,51 @@ import lib.userModule.test.Test;
  * @author Neel Patel
  */
 public class SingleUserFlow implements IntUserFlow{
-     private IntUI ui;
-     private MyLogger logger;
-     private List<ProblemState> ps;
-     private Thread t;
+     private IntUI ui; //Refrence to the UI
+     private MyLogger logger; //Refrence to the Logger
+     private List<ProblemState> ps; //Reference to the live Problem definations.
+     //private Thread t;
+     //this is executer service used to execute the parallel task.
      private ExecutorService es=Executors.newCachedThreadPool();
+     
+     /**
+      * this is simple extension of class {@code ProgramStateAdapter},
+        which implements the {@code IntProblemState}.
+      * this class Override the default implementation of {@code setState}
+        method.
+      */
      private class ProblemState extends ProgramStateAdapter{
+          /**
+           * constructor
+           * @param pd object of type {@code IntProgramDetail} which will be
+             used to initialize this object.
+           */
           ProblemState(IntProgramDetail pd){
                super(pd);
           }
           
+          /**
+           * this is synchronized implementation of setState method.
+           * this method will simple call the implementation of super class.
+           * @param s 
+           */
           @Override
           public synchronized void setState(int s){
                super.setState(s);
           }
      }
      
+     /**
+      * this method is used to update the {@code ProblemState}.
+      * this method get the final results from {@code t} and determine if
+        the state of the corresponding problem should be updated or not.
+      * if the state of the corresponding problem is 1, then it remain as it is.
+      * if the state of the corresponding problem is 0 & all the test cases passed
+        by the program corresponding to the {@code t} then the state of the
+        problem will be updated with 1.
+      * this method can be executed in parallel to support live platforms.
+      * @param t object of Test for with update operation perform.
+      */
      private void update(Test t){
           t.join();
           IntResultSet rs=t.getIntResultSet();
@@ -51,6 +80,14 @@ public class SingleUserFlow implements IntUserFlow{
                        .get().setState(1);
      }
      
+     /**
+      * this method read & return all the program from default program directory.
+      * this method internally call {@code ProgramDetails.readProgramDetail()}
+        to get problem definition.
+      * this process create the new objects of type ProblemState using the
+        objects of type {@code IntProgramState}.
+      * @return unmodifiable list of IntProgramStates.
+      */
      private List<? extends IntProgramState> getPrograms(){
           //System.out.println("suf getPro...");
           List<ProblemState> psl=ProgramDetails.readProgramDetail().stream()
@@ -60,15 +97,38 @@ public class SingleUserFlow implements IntUserFlow{
           return psl;
      }
      
+     /**
+      * constructor.
+      * initialize the object with all problem definition read from the default
+        program directory.
+      */
      public SingleUserFlow(){
           ps=(List<ProblemState>)getPrograms();
      }
      
+     /**
+      * this method register the user interface.
+      * calling this method will replace the previous registered user interface
+        with {@code ui}.
+      * @param ui object of IntUI.
+      */
      @Override
-     public synchronized void  register(IntUI ui) {
+     public synchronized void register(IntUI ui) {
           this.ui=ui;
      }
 
+     /**
+      * this method executes the command {@code cmd} with proper inputs
+        corresponding to the Program ID specified by {@code pid}.
+      * this method internally execute the command with all available inputs
+        corresponds to the Program Id available in the default source directory.
+      * this method returns live result set immediately & start the processing
+        in parallel.
+      * this will method update the resultSet in parallel, after returning.
+      * @param pid program ID corresponds to the executable command
+      * @param cmd executable command
+      * @return object of type IntLiveResultSet.
+      */
      @Override
      public IntLiveResultSet execute(long pid,String cmd) {
           try {
@@ -82,12 +142,39 @@ public class SingleUserFlow implements IntUserFlow{
           return null;
      }
      
+     /**
+      * set logger.
+      * @param logger object of logger. 
+      */
      public synchronized void setLogger(MyLogger logger){
           this.logger=logger;
      }
 
+     /**
+      * this method return list of {@code IntProgramState} corresponds to the
+        all Program Details.
+      * the list return by this method is unmodifiable list.
+      * @return unmodifiable list of Program states
+      */
      @Override
      public synchronized List<? extends IntProgramState> getAllProgramDetail() {
           return ps;
+     }
+     
+     /**
+      * {@inheritDoc }
+      */
+     @Override
+     public void finalize(){
+          es.shutdownNow();
+     }
+     
+     /**
+      * {@inheritDoc }
+      */
+     @Override
+     public void close(){
+          es.shutdownNow();
+          ui.close();
      }
 }

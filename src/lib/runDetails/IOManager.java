@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * this is factory class provide various method to create object of 
    IntIODetail.
  * this class provide facility to create object of IntIODetail.
- * it also provide facility of writing & reading IntIODetail objects to & from file.
+ * it also provide facility of writing and reading IntIODetail objects to and from file.
  * @author Neel Patel
  */
 public class IOManager {
@@ -20,8 +20,8 @@ public class IOManager {
      /**
       * returns object of IntInput.
       * {@code getAllInput} method of the object returned by this process always
-        return the list of string referenced by {@param input}.
-      * {@param input} should not be change by other thread during method call.
+        return the list of string referenced by {@code input}.
+      * {@code input} should not be change by other thread during method call.
       * @param input list of String.
       * @return Object of IntInput.
       */
@@ -32,10 +32,10 @@ public class IOManager {
      /**
       * returns object of IntInput.
       * {@code getAllInput} method of the object returned by this process always
-        return the list of string referenced by {@param input}.
-      * same as {@code index} & {@code programID} returns {@param index & 
-        {@param programID respectively.
-      * {@param input} should not be change by other thread during method call.
+        return the list of string referenced by {@code input}.
+      * same as {@code index} and {@code programID} returns {@code index} and 
+        {@code programID} respectively.
+      * {@code input} should not be change by other thread during method call.
       * @param input list of String.
       * @param programID unique programID.
       * @param index index of the input.
@@ -48,7 +48,7 @@ public class IOManager {
      /**
       * this method return immutable object of {@code IntIODetail}
         using specified parameters.
-      * {@code getTime} & {@code programId} method of the object return by this 
+      * {@code getTime} and {@code programId} method of the object return by this 
         method always return -1
       * @param input list of string which can be used as input of other program
       * @param output list of string which is output of any program
@@ -63,7 +63,7 @@ public class IOManager {
         using specified parameters.
       * @param input object of IntInput.
       * @param output list of string which is output of any program.
-      * @param time time taken for generate output for {@param input}.
+      * @param time time taken for generate output for {@code input}.
       * @return object of IntIODetail.
       */
      public static IntIODetail getIODetail(IntInput input, List<String> output, long time){
@@ -104,14 +104,14 @@ public class IOManager {
       * this method return object of {@code IntIODetail} from the file 
         specified by path.
       * this method read the object of type {@code IntIODetail} 
-        form file specified by {@param filepath}.
-      * the path specified by {@param filepath} must be absolute.
+        form file specified by {@code filepath}.
+      * the path specified by {@code filepath} must be absolute.
       * this method throw {@code IOException} if path is invalid or file not 
         found or invalid format or object can not be {@code deserialize} because
         of version difference of corresponding class.
       * @param filepath path object specifying the valid path of the file which 
         contain object.
-      * @return object of type {@code IntIODetail} read from specified {@param filepath}.
+      * @return object of type {@code IntIODetail} read from specified {@code filepath}.
       * @throws IOException if the error occur while reading object from file.
       */
      public static IntIODetail getIODetail(Path filepath)throws IOException{
@@ -131,11 +131,11 @@ public class IOManager {
      /**
       * this method return object of {@code IntIODetail} from the file 
         specified by path.
-      * {@param iscomp} is false then the this method works same as 
+      * {@code iscomp} is false then the this method works same as 
         {@code boolean getIODetail(Path filepath)}.
       * this method read the object of type {@code IntIODetail} 
-        form file specified by {@param filepath}.
-      * the path specified by {@param filepath} must be absolute.
+        form file specified by {@code filepath}.
+      * the path specified by {@code filepath} must be absolute.
       * this method throw {@code IOException} if path is invalid or file not 
         found or invalid format or object can not be {@code deserialize} because
         of version difference of corresponding class.
@@ -143,8 +143,8 @@ public class IOManager {
         contain object.
       * @param isComp is boolean, if it is true then the object will be uncompressed
         before read, otherwise the {@code getIODetail} is called with
-        {@param filepath}.
-      * @return object of type {@code IntIODetail} read from specified {@param filepath}.
+        {@code filepath}.
+      * @return object of type {@code IntIODetail} read from specified {@code filepath}.
       * @throws IOException if the error occur while reading object from file.
       */
      public static IntIODetail getIODetail(Path filepath,boolean isComp)throws IOException{
@@ -171,8 +171,8 @@ public class IOManager {
       * after the resolving the file path it call the method {@code IntIODetail
         getIODetail(Path filepath,boolean isComp)} with proper parameters.
       * this method read the object of type {@code IntIODetail}.
-        form file specified by {@param dir}.
-      * the path specified by {@param dir} must be absolute.
+        form file specified by {@code dir}.
+      * the path specified by {@code dir} must be absolute.
       * this method throw {@code IOException} if path is invalid or file not 
         found or invalid format or object can not be {@code deserialize} because
         of version difference of corresponding class.
@@ -180,7 +180,7 @@ public class IOManager {
         file exist with proper naming convention which contain object.
       * @param isComp is boolean, if it is true then the object will be decrypted
         before read, otherwise the object will be read from file as it.
-      * @return object of type {@code IntIODetail} read from specified {@param dir}.
+      * @return object of type {@code IntIODetail} read from specified {@code dir}.
       * @throws IOException if the error occur while reading object from file.
       */
      public static IntIODetail getIODetail(Path dir, long pid, long index
@@ -204,11 +204,11 @@ public class IOManager {
      
      /**
       * write the object in separate file in the directory specified by
-        the path object {@param dir}.
+        the path object {@code dir}.
       * return {@code true} if the object is written successfully otherwise 
         return {@code false}.
-      * the path specified by {@param dir} must be absolute.
-      * the new file is created in the directory specified by {@param dir} with
+      * the path specified by {@code dir} must be absolute.
+      * the new file is created in the directory specified by {@code dir} with
         the formated name as follows..<br>
       * {@code vVpPiI.data} where {@code 'V'} specify the {@code version} of the
         class if available, otherwise {@code 'NA'}, {@code 'P'} specify the 
@@ -253,13 +253,13 @@ public class IOManager {
      
      /**
       * write the object in separate file in the directory specified by
-        the path object {@param dir} after compressing.
-      * {@param comp} is false then the this method works same as 
+        the path object {@code dir} after compressing.
+      * {@code comp} is false then the this method works same as 
         {@code boolean writeIntIODetail(IntIODetail obj,Path dir)}.
       * return {@code true} if the object is written successfully otherwise 
         return {@code false}.
-      * the path specified by {@param dir} must be absolute.
-      * the new file is created in the directory specified by {@param dir} with
+      * the path specified by {@code dir} must be absolute.
+      * the new file is created in the directory specified by {@code dir} with
         the formated name as follows..<br>
       * {@code cvVpPiI.data} where {@code 'V'} specify the {@code version} of the
         class if available, otherwise {@code 'NA'}, {@code 'P'} specify the 
@@ -269,7 +269,7 @@ public class IOManager {
       * @param dir directory in which the object is to be written.
       * @param comp is boolean, if it is true then the object will be compressed
         before written, otherwise the {@code writeIntIODetail} is called with
-        {@param obj} & {@code dir}.
+        {@code obj} and {@code dir}.
       * @return true if the object written in file successfully, false otherwise. 
       */
      public static boolean writeIntIODetail(IntIODetail obj,Path dir,boolean comp){
@@ -309,10 +309,10 @@ public class IOManager {
      
      /**
       * this method compare the IntInput Objects.
-      * if {@code programID} & {@code index} is available than this method compare
-        those values & return false if anyone value for both objects are not same.
-      * if {@code programID} & {@code index} are available but same then this
-        method compare the list of sting return by {@code getAllInput} method & 
+      * if {@code programID} and {@code index} is available than this method compare
+        those values and return false if anyone value for both objects are not same.
+      * if {@code programID} and {@code index} are available but same then this
+        method compare the list of sting return by {@code getAllInput} method and 
         return true if both are same, otherwise returns false.
       * @param a object going to be compare with another one.
       * @param b object going to be compare with another one.

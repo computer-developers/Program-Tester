@@ -27,6 +27,6 @@ public class UserModuleTest {
           IntUserFlow uf=new SingleUserFlow();
           IntUI cli=new CliUser(uf);
           cli.start();
-          System.exit(0);
+          //System.exit(0);
      }
 }

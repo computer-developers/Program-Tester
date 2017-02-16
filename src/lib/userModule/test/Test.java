@@ -63,7 +63,7 @@ public class Test {
         of the class as they use their local variable to store path variable
         to locate the data files.
       * @param p new default path.
-      * @return true if the default path is updated with {@param p}, false if p
+      * @return true if the default path is updated with {@code p}, false if p
         is not absolute or not a directory.
       */
      static public boolean setDefaultDir(Path p){
@@ -90,14 +90,13 @@ public class Test {
      private boolean flag=false;
      
      /**
-      * this method compare the output of {@param us} with
+      * this method compare the output of {@code us} with
         corresponding output in list {@code orig}.
       * this method finds the equivalent original output from list {@code orig}
-        & compare it's output to the output of {@param us}.
-      * @param us object of IntIODetail, output of which is going to be compared.
-      * @return object of IntResult containing the result of the comparison.
+        & compare it's output to the output of {@code us}.
+      * @param us object of TestState, output of which is going to be compared.
       * @throws IllegalArgumentException if no equivalent object exist in list
-        {@code orig} or {@param us} contain invalid information like negative
+        {@code orig} or {@code us} contain invalid information like negative
         {@code programID} or {@code index} etc..
       */
      private void comp(TestState us){
@@ -166,7 +165,7 @@ public class Test {
      }
      
      /**
-      * creates the object using {@param pid}, {@param cmd} & default path. 
+      * creates the object using {@code pid}, {@code cmd} & default path. 
       * @param pid programID.
       * @param cmd Executable command.
       */
@@ -175,7 +174,7 @@ public class Test {
      }
      
      /**
-      * creates the object using {@param pid}, {@param dir} & {@param cmd}. 
+      * creates the object using {@code pid}, {@code dir} & {@code cmd}. 
       * @param pid programID.
       * @param dir path of directory.
       * @param cmd Executable command.

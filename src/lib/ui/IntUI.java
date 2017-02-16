@@ -5,17 +5,27 @@
  */
 package lib.ui;
 
+import java.io.Closeable;
+
 /**
  *
  * @author Parth Doshi
  */
-public interface IntUI {
+public interface IntUI extends Closeable{
      /**
       * implementation of this method should show the {@code String}
-        {@param message} to the user.
+        {@code message} to the user.
       * @param message 
       */
      public void showMessage(String message);
      
+     /**
+      * implementation of this method should initiate the process of execution.
+      */
      public void start();
+     
+     /**
+      * {@inheritDoc }
+      */
+     public void close();
 }

@@ -22,7 +22,7 @@ public class RunTest {
      IntInput in;
      
      /**
-      * create object with specified input & command
+      * create object with specified input and command
       * @param input used to create IntIODetail object by executing command.
       * @param cmd command to create subprocess.
       */
@@ -73,7 +73,7 @@ public class RunTest {
      
      /**
       * return the result of previous execution of subprocess.
-      * if the subprocess is not executed before then execute the subprocess & wait until the process terminate.
+      * if the subprocess is not executed before then execute the subprocess and wait until the process terminate.
       * if the subprocess is executing currently then it will wait to finish it.
       * note:- if subprocess is already executed ones this method create new subprocess.
       * @return object of IntIODetail of last execution of process.

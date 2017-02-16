@@ -47,7 +47,7 @@ public class LocalLogger extends MyLogger{
         of the class as they use their local variable to store path variable
         to locate the logger file.
       * @param p new default path.
-      * @return true if the default path is updated with {@param p}, false if p
+      * @return true if the default path is updated with {@code p}, false if p
         is not absolute or not a directory.
       */
      static public boolean setDefaultLogDir(Path p){

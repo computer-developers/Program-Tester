@@ -1,5 +1,6 @@
 package lib.ui.cli;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 import lib.ui.IntUI;
@@ -16,6 +17,7 @@ public class CliUser implements IntUI{
      private IntUserFlow uf;
      private List<?extends IntProgramState> ps;
      private Scanner sc=new Scanner(System.in);
+     private boolean isAlive=true;
      public CliUser(IntUserFlow uf){
           this.uf=uf;
           this.uf.register(this);
@@ -35,7 +37,7 @@ public class CliUser implements IntUI{
      
      @Override
      public synchronized void start(){
-          while(true){
+          while(isAlive){
                System.out.println("Menu..\n"
                          + "1.Test\n"
                          + "2.Display\n"
@@ -50,7 +52,8 @@ public class CliUser implements IntUI{
                               break;
                     case 2:dispDetail();
                               break;
-                    case 0:return;
+                    case 0:uf.close();
+                         return;
                     default: System.out.println("Invalid input");
                }
           }
@@ -100,6 +103,11 @@ public class CliUser implements IntUI{
                     System.out.println("Credit :\t"+x.getCredit());
                }
           }catch(IndexOutOfBoundsException e){}
+     }
+
+     @Override
+     public void close() {
+          isAlive=false;
      }
      
 }

@@ -24,12 +24,12 @@ class ObjectHandler {
      
      /**
       * this method writes object to the output stream.
-      * this method writes the object {@param o} to the output stream {@param out}.
+      * this method writes the object {@code o} to the output stream {@code out}.
       * it close the output stream after writing done.
       * it return true if the object written to the stream successfully, return
         false otherwise.
       * it throws IOException if the underlying stream throws.
-      * @param out Output stream on which object {@param o} will be written.
+      * @param out Output stream on which object {@code o} will be written.
       * @param o object of type {@code IntIODetail} which will be written on the
         stream.
       * @return true if object written successfully, false otherwise
@@ -49,7 +49,7 @@ class ObjectHandler {
      
      /**
       * this method reads object to the input stream.
-      * this method reads the object from input stream {@param in}.
+      * this method reads the object from input stream {@code in}.
       * it close the input stream after reading done.
       * it return object if the object read from the stream successfully, return
         null otherwise.
@@ -73,14 +73,14 @@ class ObjectHandler {
      
      /**
       * this method writes compressed object to the output stream.
-      * this method writes the object {@param o} to the output stream {@param out}.
-      * this method first mask the {@param out} with {@link ZipOutputStream}
+      * this method writes the object {@code o} to the output stream {@code out}.
+      * this method first mask the {@code out} with {@link ZipOutputStream}
         then call {@link writeObj} method.
       * it close the output stream after writing done.
       * it return true if the object written to the stream successfully, return
         false otherwise.
       * it throws IOException if the underlying stream throws.
-      * @param out Output stream on which object {@param o} will be written.
+      * @param out Output stream on which object {@code o} will be written.
       * @param o object of type {@code IntIODetail} which will be written on the
         stream.
       * @return true if object written successfully, false otherwise
@@ -108,8 +108,8 @@ class ObjectHandler {
      
      /**
       * this method reads Compressed object to the input stream.
-      * this method reads the object from input stream {@param in}.
-      * this method mask {@param in} with {@link ZipInputStream} then
+      * this method reads the object from input stream {@code in}.
+      * this method mask {@code in} with {@link ZipInputStream} then
         call the method {@link readObj}.
       * it close the input stream after reading done.
       * it return object if the object read from the stream successfully, return

@@ -252,7 +252,7 @@ final public class Datatypes {
  	 * (Typically, the pre-built automata are stored in the same jar as this class.)
  	 * <p>
 	 * The following automata are available:
-	 * <table border=1>
+	 * {@code <table border=1>
 	 * <tr><th>Name</th><th>Description</th></tr>
 	 * <tr><td><tt>NCName</tt></td><td><a target="_top" href="http://www.w3.org/TR/REC-xml-names/#NT-NCName">NCName</a> from XML Namespaces 1.0</td></tr>
 	 * <tr><td><tt>QName</tt></td><td><a target="_top" href="http://www.w3.org/TR/REC-xml-names/#NT-QName">QName</a> from XML Namespaces 1.0</td></tr>
@@ -416,7 +416,7 @@ final public class Datatypes {
 	 * <tr><td><tt>Co</tt></td><td><a target="_top" href="http://www.unicode.org/Public/3.1-Update/UnicodeData-3.1.0.txt">Co</a> category from Unicode 3.1</td></tr>
 	 * <tr><td><tt>Cn</tt></td><td><a target="_top" href="http://www.unicode.org/Public/3.1-Update/UnicodeData-3.1.0.txt">Cn</a> category from Unicode 3.1</td></tr>
 	 * <tr><td><tt>C</tt></td><td><a target="_top" href="http://www.unicode.org/Public/3.1-Update/UnicodeData-3.1.0.txt">C</a> category from Unicode 3.1</td></tr>
-	 * </table>
+	 * </table>}
 	 * <p>Loaded automata are cached in memory.
 	 * @param name name of automaton
 	 * @return automaton

@@ -318,8 +318,8 @@ public class Generex implements Iterable {
 
     /**
      * Generate and return a random String that match the pattern used in 
-     * this Generex, and the string has a length >=
-     * <code>minLength</code>
+     * this Generex, and the string has a length 
+     * <code>>=minLength</code>
      *
      * @param minLength
      * @return
@@ -329,8 +329,8 @@ public class Generex implements Iterable {
     }
 
     /**
-     * Generate and return a random String that match the pattern used in this Generex, and the string has a length >=
-     * <code>minLength</code> and <= <code>maxLength</code>
+     * Generate and return a random String that match the pattern used in this Generex, and the string has a length 
+     * <code>>=minLength</code> and  {@literal  <= maxLength}
      *
      * @param minLength
      * @param maxLength
