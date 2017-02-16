@@ -1,6 +1,6 @@
 working_dir :- resources\
 problem_dir :- resources\ProbDef\
 source_data_dir :- resources\Data\
-local_logger_dir :- resources\log\
+local_logger_dir :- resources\temp\log\
 network_logger_ip :- 127.0.0.1
 network_logger_port :- 8686
