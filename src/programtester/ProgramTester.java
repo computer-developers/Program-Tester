@@ -1,11 +1,14 @@
 package programtester;
 
-import lib.dT.problemManipulate.ProgramDetails;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import lib.logger.LocalLogger;
+import lib.logger.MyLogger;
 import lib.ui.IntUI;
 import lib.ui.cli.CliUser;
 import lib.userModule.IntUserFlow;
 import lib.userModule.SingleUserFlow;
-import lib.userModule.test.Test;
 import programtester.config.Configurator;
 
 /**
@@ -29,6 +32,13 @@ public class ProgramTester {
           //System.out.println("Program Directory = " +ProgramDetails.getDefaultDir());
           IntUserFlow uf=new SingleUserFlow();
           IntUI cli=new CliUser(uf);
+          try {
+               MyLogger l=new LocalLogger("log.txt");
+               l.setSep(",");
+               uf.setLogger(l);
+          } catch (FileNotFoundException ex) {
+               System.out.println("error in log file.");
+          }
           cli.start();
           //System.exit(0);
      }

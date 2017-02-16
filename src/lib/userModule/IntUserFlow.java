@@ -2,6 +2,7 @@ package lib.userModule;
 
 import java.io.Closeable;
 import java.util.List;
+import lib.logger.MyLogger;
 import lib.userModule.result.IntLiveResultSet;
 import lib.ui.*;
 import lib.userModule.result.IntProgramState;
@@ -18,6 +19,13 @@ public interface IntUserFlow extends Closeable{
       * @param ui 
       */
      void register(IntUI ui);
+     
+     /**
+      * implementation of this method should register the User Interface.
+      * recorded user interface should be used to interact with user.
+      * @param ui 
+      */
+     void setLogger(MyLogger logger);
      
      /**
       * implementation of this method should execute the command

@@ -54,40 +54,47 @@ public class LocalLogger extends MyLogger{
           if(!p.isAbsolute()||!Files.isDirectory(p))
                return false;
           try{
-               ldefLogDir.readLock().lock();
-               try {
-                    if(defLogDir.equals(p))
-                         return true;
-               } finally {
-                    ldefLogDir.readLock().unlock();
-               }
+               if(getDefaultLogDir().equals(p))
+                    return true;
                ldefLogDir.writeLock().lock();
                defLogDir=p;
                return true;
           }finally{
-               ldefLogDir.readLock().unlock();
                ldefLogDir.writeLock().unlock();
           }
      }
      
 //local part
-     private String sep="";
-     public LocalLogger() throws FileNotFoundException{
-          this(getDefaultLogDir());
+     
+          
+     public LocalLogger(String name) throws FileNotFoundException{
+          this(getDefaultLogDir().resolve(name));
      }
      
      public LocalLogger(Path filePath) throws FileNotFoundException{
-          super(new FileOutputStream(filePath.toFile()));
+          super(new FileOutputStream(filePath.toFile(),true));
      }
      
-     public synchronized void setSep(String sep){
-          this.sep=sep;
-     }
      
-     public synchronized void log(String... ar){
-          String l=Arrays.stream(ar)
-                  .reduce("",(s1,s2)->s1+sep+s2);
-          super.log(l);
-     }
      
 }
+     /*
+     String formate="%l";
+     private Runnable[] r;
+     public synchronized void setFormater(String f,Runnable... r){
+          this.r=r.clone();
+          this.formate=f;
+     }
+     private String formator(String... lr){
+          String sb=formate;
+          String[] ar=sb.split("%l");
+          for(int i=0;i<ar.length-1;i++)
+               ar[i]=ar[i]+lr[i];
+          Arrays.spliterator(lr,ar.length-1,lr.length)
+                  .forEachRemaining(j->ar[ar.length-2]+=sep+j);
+          String front=Arrays.stream(ar).reduce("",(x,y)->x+y);
+          
+          return sb;
+     }
+
+     */

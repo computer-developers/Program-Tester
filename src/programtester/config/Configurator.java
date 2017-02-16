@@ -10,7 +10,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import lib.dT.problemManipulate.ProgramDetails;
+import lib.logger.LocalLogger;
 import lib.userModule.test.Test;
 
 /**
@@ -58,9 +61,12 @@ public class Configurator {
                          ProgramDetails.setDefaultDir(p3);
                     break;
                case "local_logger_dir":
-                    //Path p4=Paths.get(ar[1]).toAbsolutePath();
-                    //if(Files.exists(p4)&&Files.isDirectory(p4))
-                    //     Test.setDefaultDir(p4);
+                    Path p4=Paths.get(ar[1]).toAbsolutePath();
+                    try {
+                         Files.createDirectories(p4);
+                    } catch (IOException ex) {}
+                    if(Files.exists(p4)&&Files.isDirectory(p4))
+                         LocalLogger.setDefaultLogDir(p4);
                     break;
                case "network_logger_ip":
                     break;

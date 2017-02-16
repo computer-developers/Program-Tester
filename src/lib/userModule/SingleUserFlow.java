@@ -7,6 +7,7 @@ package lib.userModule;
 
 import lib.userModule.result.IntLiveResultSet;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.*;
@@ -31,7 +32,7 @@ public class SingleUserFlow implements IntUserFlow{
      //private Thread t;
      //this is executer service used to execute the parallel task.
      private ExecutorService es=Executors.newCachedThreadPool();
-     
+
      /**
       * this is simple extension of class {@code ProgramStateAdapter},
         which implements the {@code IntProblemState}.
@@ -73,11 +74,15 @@ public class SingleUserFlow implements IntUserFlow{
      private void update(Test t){
           t.join();
           IntResultSet rs=t.getIntResultSet();
-          if(rs.getAllResult().stream()
-                    .allMatch(i->i.getMessageCode()>0))
-               ps.stream().filter(i->i.getProgramID()==t.getProgramID())
-                       .findAny()
-                       .get().setState(1);
+          ProblemState x=ps.stream().filter(i->i.getProgramID()==t.getProgramID())
+                  .findAny().get();
+          if(rs.getAllResult().stream().allMatch(i->i.getMessageCode()>0)){
+               x.setState(1);
+          }
+          if(logger!=null)
+               logger.log("DateTime = "+LocalDateTime.now()
+               ,"PID = "+x.getProgramID()
+               ,"State = "+x.getState());
      }
      
      /**
@@ -146,6 +151,7 @@ public class SingleUserFlow implements IntUserFlow{
       * set logger.
       * @param logger object of logger. 
       */
+     @Override
      public synchronized void setLogger(MyLogger logger){
           this.logger=logger;
      }
@@ -175,6 +181,7 @@ public class SingleUserFlow implements IntUserFlow{
      @Override
      public void close(){
           es.shutdownNow();
+          logger.close();
           ui.close();
      }
 }

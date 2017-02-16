@@ -3,22 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/nbproject/build-impl.xml</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/runDetails/IOManager.java</file>
             <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/ui/cli/CliUser.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/test/lib/runTestTemp/TestRunTest.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/programtester/ProgramTester.java</file>
             <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/userModule/SingleUserFlow.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/runDetails/IODetail.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/runDetails/IntIODetail.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/dk/brics/automaton/RegExp.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/dk/brics/automaton/Datatypes.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/test/lib/userModuleTest/UserModuleTest.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/dT/inputGenerator/regEx/Generex.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/runTest/RunTest.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/test/lib/inputGenratorTest/InputGenTest.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/dk/brics/automaton/BasicAutomata.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/userModule/IntUserFlow.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/runTest/ProgramExecuter.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/logger/MyLogger.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/programtester/config/Configurator.java</file>
         </group>
     </open-files>
 </project-private>
