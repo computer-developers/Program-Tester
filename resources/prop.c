@@ -12,7 +12,7 @@ void main()
 		scanf("%d",&s[i]);
 	merge(&s[0],l);
 	for(i=0;i<l;i++)
-		printf("%d  \n\n",s[i]);
+		printf("%d45\n\n",s[i]);
 }
 void merge(long *a,long i)
 {

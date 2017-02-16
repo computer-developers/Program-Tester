@@ -38,7 +38,7 @@ public class CliUser implements IntUI{
      @Override
      public synchronized void start(){
           while(isAlive){
-               System.out.println("Menu..\n"
+               System.out.println("\nMenu..\n"
                          + "1.Test\n"
                          + "2.Display\n"
                          + "0.Exit\n");
@@ -60,7 +60,7 @@ public class CliUser implements IntUI{
      }
      
      public void test(long pid,String cmd){
-          System.out.println("test case\tcode\tmessage\t\ttime");
+          System.out.println("test case\tcode\tmessage\ttime");
           IntLiveResultSet lrs=uf.execute(pid,cmd);
           lrs.getAllLiveResult()
                     .forEach(i->i.addRunnable(()->{
@@ -93,14 +93,17 @@ public class CliUser implements IntUI{
                     System.out.println("\nenter index :- ");
                     int i=sc.nextInt();
                     IntProgramState x=ps.get(i);
-                    System.out.println("Program Id :\t"+x.getProgramID());
-                    System.out.println("Title :\t\t"+x.getTitle());
-                    System.out.println("Description :\t"+x.getDescription());
-                    System.out.println("Input :\t\t"+x.getInput());
-                    System.out.println("Output :\t"+x.getOutput());
-                    System.out.println("Sample Input :\t"+x.getSampleInput());
-                    System.out.println("Sample Output :\t"+x.getSampleOutput());
-                    System.out.println("Credit :\t"+x.getCredit());
+                    System.out.println("\nProgram Id :\t"+x.getProgramID());
+                    System.out.println("\nTitle :\t\t"+x.getTitle());
+                    System.out.println("\nDescription :-");
+                    x.getDescription().forEach(j->System.out.println(j));
+                    System.out.println("\nInput :\t\t"+x.getInput());
+                    System.out.println("\nOutput :\t"+x.getOutput());
+                    System.out.println("\nSample Input :-");
+                    x.getSampleInput().forEach(j->System.out.println(j));
+                    System.out.println("\nSample Output :-");
+                    x.getSampleOutput().forEach(j->System.out.println(j));
+                    System.out.println("\nCredit :\t"+x.getCredit());
                }
           }catch(IndexOutOfBoundsException e){}
      }

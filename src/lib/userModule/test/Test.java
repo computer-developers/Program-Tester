@@ -104,7 +104,7 @@ public class Test {
                if(!us.isExecuted())
                     return;
                if(us.getTime()<0){
-                    us.setState("Time Limit Exceeded", 0);
+                    us.setState("Time Limit Exceeded", -2);
                     return;
                }
                IntIODetail ori=read(us.index());
@@ -112,12 +112,15 @@ public class Test {
                if(ListManipulator.compare(us.getAllOutput(),ori.getAllOutput(),
                               StringComparators.getExactmatch())){
                     //System.out.println("perfect check");
-                    us.setState("Perfect",1);
+                    us.setState("Pass",1);
                }
                else if(ListManipulator.compare(us.getAllOutput(),ori.getAllOutput(),
                               StringComparators.getIgnoreWhiteSpace())){
                     //System.out.println("persentation check");
                     us.setState("Presentation Error",2);
+               }
+               else {
+                    us.setState("Fail", -1);
                }
           }catch(NullPointerException ex){
                throw new IllegalArgumentException();
