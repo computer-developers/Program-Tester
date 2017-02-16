@@ -104,12 +104,12 @@ public class StringComparators {
       * test method of the BiPredicate will return true if both the Strings are 
         equal ignoring multiple whitespace, returns false otherwise.
         if there is multiple whitespace in between string then this method 
-        encounter only one whitespace & compare those strings.<br>
-      * {@code let consider string s1 & s2..
+        encounter only one whitespace and compare those strings.<br>
+      * {@code let consider string s1 and s2..
         s1="abc   d\ne\tf" &
         s2="abc e f".
-        test method of the object return by this method encounters s1 & s2 is equal
-        & return true.}<br>
+        test method of the object return by this method encounters s1 and s2 is equal
+        and return true.}<br>
       * @return BiPredicate object
       */
      public static BiPredicate<String,String> getIgnoreWhiteSpace(){
@@ -124,18 +124,18 @@ public class StringComparators {
      
      /**
       * return instance of BiPredicate to compare String ignoring whitespace
-        & case.
+        and case.
       * BiPredicate instance returned by this method can be used as argument
         of different methods to compare string.
       * test method of the BiPredicate will return true if both the Strings are 
-        equal ignoring multiple whitespace & case, returns false otherwise.
+        equal ignoring multiple whitespace and case, returns false otherwise.
         if there is multiple whitespace in between string then this method 
-        encounter only one whitespace & compare those strings.<br>
-      * {@code let consider string s1 & s2..
+        encounter only one whitespace and compare those strings.<br>
+      * {@code let consider string s1 and s2..
         s1="abc   d\ne\tf" &
         s2="aBc e f".
-        test method of the object return by this method encounters s1 & s2 is equal
-        & return true.}<br>
+        test method of the object return by this method encounters s1 and s2 is equal
+        and return true.}<br>
       * @return BiPredicate object
       */
      public static BiPredicate<String,String> IgnoreWhiteSpaceAndCase(){

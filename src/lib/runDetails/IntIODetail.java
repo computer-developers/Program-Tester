@@ -18,7 +18,7 @@ public interface IntIODetail extends IntInput{
      long getTime();
      
      /**
-      * @return index of input & corresponding output, -1 if not specified.
+      * @return index of input and corresponding output, -1 if not specified.
       */
      default long index(){
           return -1;

@@ -25,7 +25,7 @@ public class BatchTest {
                            //manualy
      
      /**
-      * creates object with executable command & multiple inputs.
+      * creates object with executable command and multiple inputs.
       * @param cmd command to be executed.
       * @param ar Object of type IntInput to give inputs to the processes.
       */
@@ -40,7 +40,7 @@ public class BatchTest {
         execute the command for different inputs one by one.
       * it returns immediately, without waiting for tasks to done.
       * if the executer thread is already initiated it return with null immediately.
-      * it returns stream of IntIODetail which gives Input & corresponding output.
+      * it returns stream of IntIODetail which gives Input and corresponding output.
       * the stream returned by this method is infinite stream, it will encounter null
         when there is no elements exist to process.
       * @return stream of IntIODetail, each element contain result of execution.

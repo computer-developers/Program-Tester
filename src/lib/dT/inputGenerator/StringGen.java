@@ -45,7 +45,7 @@ public class StringGen {
      }
      
      /**
-      * return a random String of length between {@code minlen} & {@code maxlen}.
+      * return a random String of length between {@code minlen} and {@code maxlen}.
       * it generate the string using any one of the regular expression passed in constructor.
       * if {@code maxlen} is negative or zero then it return any string having length greater than {@code minlen}
       * the {@code IllegalArgumentException} is thrown if {@code minlen}

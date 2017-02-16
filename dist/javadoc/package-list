@@ -1,0 +1,17 @@
+dk.brics.automaton
+lib.dT.inputGenerator
+lib.dT.manipulate.comparators
+lib.dT.problemManipulate
+lib.dt.inputGenerator.regEx
+lib.dt.inputGenerator.regEx.util
+lib.logger
+lib.runDetails
+lib.runTest
+lib.ui
+lib.ui.cli
+lib.ui.gui
+lib.userModule
+lib.userModule.result
+lib.userModule.test
+programtester
+programtester.config

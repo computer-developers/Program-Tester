@@ -64,7 +64,7 @@ public class SingleUserFlow implements IntUserFlow{
       * this method get the final results from {@code t} and determine if
         the state of the corresponding problem should be updated or not.
       * if the state of the corresponding problem is 1, then it remain as it is.
-      * if the state of the corresponding problem is 0 & all the test cases passed
+      * if the state of the corresponding problem is 0 and all the test cases passed
         by the program corresponding to the {@code t} then the state of the
         problem will be updated with 1.
       * this method can be executed in parallel to support live platforms.
@@ -81,7 +81,7 @@ public class SingleUserFlow implements IntUserFlow{
      }
      
      /**
-      * this method read & return all the program from default program directory.
+      * this method read and return all the program from default program directory.
       * this method internally call {@code ProgramDetails.readProgramDetail()}
         to get problem definition.
       * this process create the new objects of type ProblemState using the
@@ -122,7 +122,7 @@ public class SingleUserFlow implements IntUserFlow{
         corresponding to the Program ID specified by {@code pid}.
       * this method internally execute the command with all available inputs
         corresponds to the Program Id available in the default source directory.
-      * this method returns live result set immediately & start the processing
+      * this method returns live result set immediately and start the processing
         in parallel.
       * this will method update the resultSet in parallel, after returning.
       * @param pid program ID corresponds to the executable command

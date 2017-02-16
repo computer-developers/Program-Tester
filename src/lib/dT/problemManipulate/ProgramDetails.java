@@ -23,7 +23,7 @@ public class ProgramDetails {
      /* 
      * defProDir is default path veriable which is used by methods if no path
        provided explicitly.
-     * it should only accessed by getter & setter methods only.
+     * it should only accessed by getter and setter methods only.
      */
      static private Path defProDir=Paths.get(".").toAbsolutePath();
      

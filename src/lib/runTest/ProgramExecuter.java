@@ -14,10 +14,10 @@ class ProgramExecuter {
      String cmd;
      ProcessBuilder pb; //used to create subprocess
      Process pr; //refer to the subprocess
-     Thread tin,tout; //refer to the thread which give input & output
+     Thread tin,tout; //refer to the thread which give input and output
      List<String> input; //input of subprocess
      List<String> output; //output of subprocess
-     Scanner sc; //Scanner bind to standard outputStream & error stream
+     Scanner sc; //Scanner bind to standard outputStream and error stream
      long time=-1; //time taken by subprocess in milli secounds.
      BufferedReader in;
      PrintWriter out; //bind to standard input stream of subprocess.
@@ -76,7 +76,7 @@ class ProgramExecuter {
                return output;
           }
           this.time=System.currentTimeMillis()-st; //calculate the ruuning time of subprocess
-          try { //join the input & output Threads.
+          try { //join the input and output Threads.
                tout.join();
                tin.join();
           } catch(InterruptedException ex) {return null;}

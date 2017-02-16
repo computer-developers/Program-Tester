@@ -85,7 +85,7 @@ public class RunTest {
           try{ //wait for subprocess to terminate.
                t.join();
           }catch(InterruptedException e){}
-          //create & return object of IntIODetail.
+          //create and return object of IntIODetail.
           return IOManager.getIODetail(in,out,pe.getRunTime());
      }
      

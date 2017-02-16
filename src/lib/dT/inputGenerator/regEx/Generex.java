@@ -130,10 +130,10 @@ public class Generex implements Iterable {
     }
 
     /**
-     * @param indexOrder ( 1<= indexOrder <=n)
+     * @param indexOrder {@literal ( 1<= indexOrder <=n)}
      * @return The matched string by the given pattern in the given it's order in the sorted list of matched String.<br>
      * <code>indexOrder</code> between 1 and <code>n</code> where <code>n</code> is the number of matched String.<br> If
-     * indexOrder >= n , return an empty string. if there is an infinite number of String that matches the given Regex,
+     * indexOrder {@literal >= n} , return an empty string. if there is an infinite number of String that matches the given Regex,
      * the method throws {@code StackOverflowError}
      */
     public String getMatchedString(int indexOrder) {
@@ -319,7 +319,7 @@ public class Generex implements Iterable {
     /**
      * Generate and return a random String that match the pattern used in 
      * this Generex, and the string has a length 
-     * <code>>=minLength</code>
+     * <code>{@literal >=minLength}</code>
      *
      * @param minLength
      * @return
@@ -330,7 +330,7 @@ public class Generex implements Iterable {
 
     /**
      * Generate and return a random String that match the pattern used in this Generex, and the string has a length 
-     * <code>>=minLength</code> and  {@literal  <= maxLength}
+     * <code>{@literal >=minLength}</code> and  {@literal  <= maxLength}
      *
      * @param minLength
      * @param maxLength

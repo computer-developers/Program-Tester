@@ -14,7 +14,7 @@ public final class ProgramIDGenerator{
      
      /**
       * generate unique programID.
-      * it use current system date & time to generate programID.
+      * it use current system date and time to generate programID.
       * make sure that your system date is correct.
       * wrong system date can lead to generation of duplicate programID.
       * @return long programID.

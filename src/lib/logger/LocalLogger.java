@@ -17,7 +17,7 @@ public class LocalLogger extends MyLogger{
      /* 
      * defLogDir is default path veriable which is used by construtor if no path
        provided explicitly.
-     * it should only accessed by getter & setter methods only.
+     * it should only accessed by getter and setter methods only.
      */
      static private Path defLogDir=Paths.get(".").toAbsolutePath();
      

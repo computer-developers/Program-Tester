@@ -16,7 +16,6 @@ hs_err_pid*
 !*IODetail.class
 build/
 extra/
-dist/
 resources/input*
 resources/output*
 resources/temp/

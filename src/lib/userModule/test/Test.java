@@ -33,7 +33,7 @@ public class Test {
      /* 
      * defDir is default path veriable which is used by construtor if no path
        provided explicitly.
-     * it should only accessed by getter & setter methods only.
+     * it should only accessed by getter and setter methods only.
      */
      static private Path defDir=Paths.get(".").toAbsolutePath();
      
@@ -93,7 +93,7 @@ public class Test {
       * this method compare the output of {@code us} with
         corresponding output in list {@code orig}.
       * this method finds the equivalent original output from list {@code orig}
-        & compare it's output to the output of {@code us}.
+        and compare it's output to the output of {@code us}.
       * @param us object of TestState, output of which is going to be compared.
       * @throws IllegalArgumentException if no equivalent object exist in list
         {@code orig} or {@code us} contain invalid information like negative
@@ -165,7 +165,7 @@ public class Test {
      }
      
      /**
-      * creates the object using {@code pid}, {@code cmd} & default path. 
+      * creates the object using {@code pid}, {@code cmd} and default path. 
       * @param pid programID.
       * @param cmd Executable command.
       */
@@ -174,7 +174,7 @@ public class Test {
      }
      
      /**
-      * creates the object using {@code pid}, {@code dir} & {@code cmd}. 
+      * creates the object using {@code pid}, {@code dir} and {@code cmd}. 
       * @param pid programID.
       * @param dir path of directory.
       * @param cmd Executable command.
