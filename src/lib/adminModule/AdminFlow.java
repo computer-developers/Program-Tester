@@ -20,9 +20,9 @@ public class AdminFlow {
                switch(sc.nextInt()){
                     case 1:disPath();
                               break;
-                    case 2:AdminDataManipulator.start();
+                    case 2:AdminProgramManipulator.start();
                               break;
-                    case 3:AdminProgramManipulator.start();
+                    case 3:AdminDataManipulator.start();
                               break;
                     case 0:return;
                     default: System.out.println("Invalid input");

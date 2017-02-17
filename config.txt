@@ -1,6 +1,6 @@
 working_dir :- resources\
-problem_dir :- \\192.168.0.150\\ubuntu neel\tester\resources\ProbDef\
-source_data_dir :- \\192.168.0.150\\ubuntu neel\tester\resources\Data\
-local_logger_dir :- \\192.168.0.150\\ubuntu neel\tester\resources\temp\log\
+problem_dir :- resources\ProbDef\
+source_data_dir :- resources\Data\
+local_logger_dir :- resources\temp\log\
 network_logger_ip :- 127.0.0.1
 network_logger_port :- 8686

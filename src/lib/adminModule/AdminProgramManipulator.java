@@ -27,13 +27,12 @@ public class AdminProgramManipulator {
                          + "3.show default Path\n"
                          + "0.exit from Program Defination manipulation\n");
                switch(sc.nextInt()){
-                    case 1:System.out.println("Enter Program ID..");
-                              long p=sc.nextLong();
-                              System.out.println("Enter command");
-                              String s;
-                              for(s=sc.nextLine();s.isEmpty();s=sc.nextLine());
+                    case 1:addProgramDefination();
                               break;
-                    case 2:   break;
+                    case 2:showProgramDetail();
+                              break;
+                    case 3:showDefaultPath();
+                              break;
                     case 0:return;
                     default: System.out.println("Invalid input");
                }
@@ -60,9 +59,9 @@ public class AdminProgramManipulator {
                System.out.println("\nCredit : "+x.getCredit());
                System.out.println("Do you want to save ?\n1.Yes\n0.No");
                int i;
-               for(i=sc.nextInt();i>=0&&i<=1;i=sc.nextInt())
+               for(i=sc.nextInt();i<0||i>1;i=sc.nextInt())
                     System.out.println("invalid!!");
-               if(sc.nextInt()==1)
+               if(i==1)
                     ProgramDetails.writeIntProgramDetail(x);
           } catch (IOException ex) {
                System.out.println("Error :- "+ex.getMessage());
@@ -90,9 +89,9 @@ public class AdminProgramManipulator {
                System.out.println("\nCredit : "+x.getCredit());
                System.out.println("Do you want to save ?\n1.Yes\n0.No");
                int i;
-               for(i=sc.nextInt();i>=0&&i<=1;i=sc.nextInt())
+               for(i=sc.nextInt();i<0||i>1;i=sc.nextInt())
                     System.out.println("invalid!!");
-               if(sc.nextInt()==1)
+               if(i==1)
                     System.out.println(ProgramDetails.writeToTxt(x));
           } catch (IOException ex) {
                System.out.println("Error :- "+ex.getMessage());
@@ -100,6 +99,6 @@ public class AdminProgramManipulator {
      }
      
      public static void showDefaultPath(){
-          
+          System.out.println("Program Directory = " +ProgramDetails.getDefaultDir());
      }
 }
