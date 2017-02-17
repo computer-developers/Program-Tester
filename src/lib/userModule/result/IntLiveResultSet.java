@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author admin
+ * @author Neel Patel
  */
 public interface IntLiveResultSet extends IntResultSet{
      IntLiveResult getLiveResult(int index);

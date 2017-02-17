@@ -1,8 +1,7 @@
 package programtester;
 
 import java.io.FileNotFoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import lib.adminModule.AdminFlow;
 import lib.logger.LocalLogger;
 import lib.logger.MyLogger;
 import lib.ui.IntUI;
@@ -21,10 +20,11 @@ public class ProgramTester {
       * @param args the command line arguments
       */
      public static void main(String[] args) {
-          mainCli();
+          //mainUserCli();
+          mainAdminCli();
      }
      
-     public static void mainCli(String... ar){
+     public static void mainUserCli(){
           Configurator.init();
           //Test.setDefaultDir(Paths.get("Data").toAbsolutePath());
           //System.out.println("Working Directory = " +System.getProperty("user.dir"));
@@ -41,5 +41,10 @@ public class ProgramTester {
           }
           cli.start();
           //System.exit(0);
+     }
+     
+     public static void mainAdminCli(){
+          Configurator.init();
+          new AdminFlow().start();
      }
 }

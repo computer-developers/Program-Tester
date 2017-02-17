@@ -243,6 +243,11 @@ public class IOManager {
                name+=".data";
           }
           Path f=dir.resolve(name);
+          try {
+               Files.deleteIfExists(f);
+          } catch (IOException ex) {
+               return false;
+          }
           try(FileOutputStream fout=new FileOutputStream(f.toFile());
                     BufferedOutputStream bout=new BufferedOutputStream(fout)){
                return ObjectHandler.writeObj(bout, obj);
@@ -299,6 +304,11 @@ public class IOManager {
                name+=".data";
           }
           Path f=dir.resolve(name);
+          try {
+               Files.deleteIfExists(f);
+          } catch (IOException ex) {
+               return false;
+          }
           try(FileOutputStream fout=new FileOutputStream(f.toFile());
                     BufferedOutputStream bout =new BufferedOutputStream(fout)){
                return ObjectHandler.writeCompObj(bout, obj);
