@@ -2,6 +2,7 @@
 170215054654
 @title
 Write a program to check whether the entered e-mail addresses are valid or not.
+@description
 Valid e-mail addresses contain parameters like,	-One and only one '@' symbol should be present.
 -Atleast one '.' should be present after but not immediately after '@' (domain part).
 -Any part can't be null.

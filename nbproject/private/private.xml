@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/ui/cli/CliUser.java</file>
             <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/programtester/ProgramTester.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/adminModule/AdminProgramManipulator.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/userModule/IntUserFlow.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/ui/IntUI.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/userModule/result/IntProgramState.java</file>
         </group>
     </open-files>
 </project-private>
