@@ -14,7 +14,7 @@ import lib.userModule.result.IntProgramState;
  * @author Neel Patel
  */
 public class CliUser implements IntUI{
-     private IntUserFlow uf;
+     private final IntUserFlow uf;
      private List<?extends IntProgramState> ps;
      private Scanner sc=new Scanner(System.in);
      private boolean isAlive=true;

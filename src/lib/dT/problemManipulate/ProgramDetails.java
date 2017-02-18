@@ -246,6 +246,7 @@ public class ProgramDetails {
                p.println(obj.getProgramID());
                p.println("@title");
                p.println(obj.getTitle());
+               p.println("@description");
                obj.getDescription().forEach(p::println);
                p.println(obj.getTitle());
                p.println("@input");
