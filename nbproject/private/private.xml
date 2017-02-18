@@ -5,9 +5,11 @@
         <group>
             <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/ui/cli/CliUser.java</file>
             <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/programtester/ProgramTester.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/userModule/IntUserFlow.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/ui/IntUI.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/userModule/result/IntProgramState.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/runTest/RunTest.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/userModule/SingleUserFlow.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/programtester/config/Configurator.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/userModule/test/Test.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/dT/manipulate/comparators/StringComparators.java</file>
         </group>
     </open-files>
 </project-private>

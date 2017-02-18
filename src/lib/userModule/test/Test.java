@@ -29,7 +29,9 @@ import lib.userModule.result.ResultSetAdapter;
  */
 public class Test {
 //static Part
-     
+     public static final int TEST_PASS=2,TEST_PRESENT_ERROR=1,TEST_FAIL=-2,
+             TEST_TIME_ERROR=-1,TEST_FILE_ERROR=-3;
+     public static long minMem=20000000;
      /* 
      * defDir is default path veriable which is used by construtor if no path
        provided explicitly.
@@ -39,6 +41,16 @@ public class Test {
      
      //lock on defDir
      static final private ReentrantReadWriteLock ldefDir=new ReentrantReadWriteLock();
+     
+     /* 
+     * defDir is default path veriable which is used by construtor if no path
+       provided explicitly.
+     * it should only accessed by getter and setter methods only.
+     */
+     static private boolean isParallel=true;
+     
+     //lock on defDir
+     static final private ReentrantReadWriteLock lIsParallel=new ReentrantReadWriteLock();
      
      /**
       * getter method of default path.
@@ -79,6 +91,40 @@ public class Test {
                ldefDir.writeLock().unlock();
           }
      }
+     
+     
+     /**
+      * getter method of default execution method.
+      * it is used by default.
+      * this method is thread safe.
+      * @return default execution method.
+      */
+     static public boolean getIsParallel(){
+          try{
+               lIsParallel.readLock().lock();
+               return isParallel;
+          }
+          finally{
+               lIsParallel.readLock().unlock();     
+          }
+     }
+     
+     /**
+      * setter method of default execution method.
+      * this method is thread safe.<br>
+      * @param isParallel if the execution method is parallel or not.
+      */
+     static public void setIsParallel(boolean isParallel){
+          try{
+               if(getIsParallel()==isParallel)
+                    return;
+               lIsParallel.writeLock().lock();
+               Test.isParallel=isParallel;
+               return;
+          }finally{
+               lIsParallel.writeLock().unlock();
+          }
+     }
 
 //local Part     
      private final Path dir;
@@ -104,23 +150,27 @@ public class Test {
                if(!us.isExecuted())
                     return;
                if(us.getTime()<0){
-                    us.setState("Time Limit Exceeded", -2);
+                    us.setState("Time Limit Exceeded",TEST_TIME_ERROR);
                     return;
                }
                IntIODetail ori=read(us.index());
+               if(ori==null)
+                    us.setState("File Not Found !!", TEST_FILE_ERROR);
                //System.out.println("enter check");
                if(ListManipulator.compare(us.getAllOutput(),ori.getAllOutput(),
                               StringComparators.getExactmatch())){
                     //System.out.println("perfect check");
-                    us.setState("Pass",1);
+                    us.setState("Pass",TEST_PASS);
                }
-               else if(ListManipulator.compare(us.getAllOutput(),ori.getAllOutput(),
+               else if(ListManipulator.compare(
+                       ListManipulator.removeNull(us.getAllOutput()),
+                       ListManipulator.removeNull(ori.getAllOutput()),
                               StringComparators.getIgnoreWhiteSpace())){
                     //System.out.println("persentation check");
-                    us.setState("Presentation Error",2);
+                    us.setState("Presentation Error",TEST_PRESENT_ERROR);
                }
                else {
-                    us.setState("Fail", -1);
+                    us.setState("Fail",TEST_FAIL);
                }
           }catch(NullPointerException ex){
                throw new IllegalArgumentException();
@@ -128,7 +178,7 @@ public class Test {
      }
      
      private synchronized void reader()throws IOException{
-          List<TestState> ts=IntStream.rangeClosed(1,20)
+          List<TestState> ts=IntStream.rangeClosed(1,30)
                               .mapToObj(i->read(i))
                               .filter(i->i!=null)
                               //.peek(i->System.out.println("index :- "+i.index()))
@@ -159,12 +209,46 @@ public class Test {
           for(TestState i:ts){
                if(!flag) //check if the thread should be terminated.
                     break;
+               for(;Runtime.getRuntime().freeMemory()<minMem&&
+                       minMem*2<Runtime.getRuntime().maxMemory();){
+                    try{
+                         System.gc();
+                         Thread.sleep(1000);
+                    }catch(InterruptedException e){}
+               }
                RunTest rt=new RunTest(i,cmd);
                i.setState("Executing", 0);
                i.update(rt.getIODetail());
                comp(i);
                i.makeFinal();
           }
+          //System.gc();
+     }
+     
+     private void run(boolean isParallel){
+          if(!isParallel){
+               run();
+               return;
+          }
+          flag=true;
+          ts.parallelStream().peek(i->{
+               if(!flag) //check if the thread should be terminated.
+                    return;
+               for(;Runtime.getRuntime().freeMemory()<minMem&&
+                       minMem*2<Runtime.getRuntime().maxMemory();){
+                    //System.out.println("jbahbajadk");
+                    try{
+                         System.gc();
+                         Thread.sleep(1000);
+                    }catch(InterruptedException e){}
+               }
+               RunTest rt=new RunTest(i,cmd);
+               i.setState("Executing", 0);
+               i.update(rt.getIODetail());
+               comp(i);
+               i.makeFinal();
+               System.gc();
+          }).count();
      }
      
      /**
@@ -192,7 +276,7 @@ public class Test {
           if(t!=null)
                return null;
           reader();
-          t=new Thread(this::run,"Tester Thread");
+          t=new Thread(()->run(getIsParallel()),"Tester Thread");
           t.start();
           lrs=new LiveResultSetAdapter(ts);
           return lrs;

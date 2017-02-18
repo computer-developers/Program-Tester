@@ -20,12 +20,13 @@ public class ProgramTester {
       * @param args the command line arguments
       */
      public static void main(String[] args) {
-          //mainUserCli();
-          mainAdminCli();
+          mainUserCli();
+          //mainAdminCli();
      }
      
      public static void mainUserCli(){
           Configurator.init();
+          
           //Test.setDefaultDir(Paths.get("Data").toAbsolutePath());
           //System.out.println("Working Directory = " +System.getProperty("user.dir"));
           //System.out.println("Data Directory = " +Test.getDefaultDir());

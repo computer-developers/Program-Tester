@@ -37,8 +37,10 @@ public final class ListManipulator {
                }
           }catch(NoSuchElementException e){
                return false;
+          }finally{
+               System.gc();
           }
-          return false; 
+          return false;
      }
      
      /**
@@ -55,7 +57,7 @@ public final class ListManipulator {
         from {@code li}.
       */
      public static List<String> removeNull(List<String> li){
-          return li.stream().filter(s->s!=null&&s!="")
+          return li.stream().filter(s->!s.trim().isEmpty())
                     .collect(Collectors.toList());
      }
      

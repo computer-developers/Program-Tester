@@ -4,3 +4,5 @@ source_data_dir :- resources\Data\
 local_logger_dir :- resources\temp\log\
 network_logger_ip :- 127.0.0.1
 network_logger_port :- 8686
+#parallel_execution :- false
+parallel_thread :- 2

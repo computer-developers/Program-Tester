@@ -2,6 +2,7 @@
 170215054628
 @title
 Write a program to check whether the entered strings are palindrome or not.
+@description
 Palindrome strings are the ones that are read same if reversed (By example, rar is rar if reversed).
 make a program to determine that the string is palindrome or not.
 Write a program to check whether the entered strings are palindrome or not.

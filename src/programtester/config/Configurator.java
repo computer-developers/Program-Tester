@@ -10,8 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import lib.dT.problemManipulate.ProgramDetails;
 import lib.logger.LocalLogger;
 import lib.userModule.test.Test;
@@ -69,6 +67,18 @@ public class Configurator {
                          LocalLogger.setDefaultLogDir(p4);
                     break;
                case "network_logger_ip":
+                    break;
+               case "parallel_execution":
+                    boolean b=Boolean.parseBoolean(ar[1]);
+                    Test.setIsParallel(b);
+                    break;
+               case "parallel_thread":
+                    try{
+                         int i=Integer.parseInt(ar[1]);
+                         System.setProperty("java.util.concurrent.ForkJoinPool"
+                                 + ".common.parallelism",""+i);
+                         
+                    }catch(NumberFormatException e){}
                     break;
                case "network_logger_port":
                     break;

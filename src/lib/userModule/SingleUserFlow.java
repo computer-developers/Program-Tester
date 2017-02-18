@@ -76,13 +76,16 @@ public class SingleUserFlow implements IntUserFlow{
           IntResultSet rs=t.getIntResultSet();
           ProblemState x=ps.stream().filter(i->i.getProgramID()==t.getProgramID())
                   .findAny().get();
-          if(rs.getAllResult().stream().allMatch(i->i.getMessageCode()>0)){
-               x.setState(1);
+          int code=rs.getAllResult().stream().mapToInt(r->r.getMessageCode())
+                  .min().orElse(0);
+          if(code>x.getState()){
+               x.setState(code);
           }
           if(logger!=null)
                logger.log("DateTime = "+LocalDateTime.now()
                ,"PID = "+x.getProgramID()
                ,"State = "+x.getState());
+          System.gc();
      }
      
      /**
@@ -142,7 +145,7 @@ public class SingleUserFlow implements IntUserFlow{
                es.submit(()->update(t));
                return rt;
           } catch (IOException ex) {
-               System.out.println("Error");
+               ui.showMessage("file not found !!!");
           }
           return null;
      }

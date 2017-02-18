@@ -12,12 +12,12 @@ import java.util.logging.Logger;
 class ProgramExecuter {
      boolean executed=false;
      String cmd;
-     ProcessBuilder pb; //used to create subprocess
+     //ProcessBuilder pb; //used to create subprocess
      Process pr; //refer to the subprocess
      Thread tin,tout; //refer to the thread which give input and output
      List<String> input; //input of subprocess
      List<String> output; //output of subprocess
-     Scanner sc; //Scanner bind to standard outputStream and error stream
+     //Scanner sc; //Scanner bind to standard outputStream and error stream
      long time=-1; //time taken by subprocess in milli secounds.
      BufferedReader in;
      PrintWriter out; //bind to standard input stream of subprocess.
@@ -31,8 +31,8 @@ class ProgramExecuter {
      ProgramExecuter(List<String> input,String cmd){
           this.input=input;
           this.cmd=cmd;
-          pb=new ProcessBuilder(cmd);
-          pb.redirectErrorStream(true); //error stream bind with the output steam of subprocess
+          //pb=new ProcessBuilder(cmd);
+          //pb.redirectErrorStream(true); //error stream bind with the output steam of subprocess
           output=new ArrayList<>();
      }
      
@@ -57,10 +57,10 @@ class ProgramExecuter {
           pr=Runtime.getRuntime().exec(cmd);
           //pr=pb.start(); //start new subprocess.
           //System.out.println("ProgramExecuter.execute :- started");
-          //in=new BufferedReader(new InputStreamReader(pr.getInputStream()));
+          in=new BufferedReader(new InputStreamReader(pr.getInputStream()));
           //in=new BufferedReader(new InputStreamReader(new FileInputStream("input.txt")));
           out=new PrintWriter(new BufferedOutputStream(pr.getOutputStream()));
-          sc=new Scanner(pr.getInputStream());
+          //sc=new Scanner(pr.getInputStream());
           tin=new Thread(this::giveIn); //create thread to give input to subprocess 
           tout=new Thread(this::getOut); //create thread to get output of subprocess
           tout.start();
@@ -91,8 +91,12 @@ class ProgramExecuter {
                pr.destroyForcibly();
           }
           if(tin!=null&&tin.isAlive()){
-               sc.close();
-               //tin.destroy();
+               try {
+                    //sc.close();
+                    in.close();
+                    //tin.destroy();
+               } catch (IOException ex) {
+               }
           }
           if(tout!=null&&tout.isAlive()){
                //tout.destroy();
@@ -133,8 +137,8 @@ class ProgramExecuter {
      private void getOut(){
           //System.out.println("ProgramExecuter.getOut :- started");
           //for(;pr.isAlive();){
-          //in.lines().forEach(s->output.add(s));
-          sc.forEachRemaining(s->{
+          in.lines().limit(200000).forEach(s->output.add(s));
+          /*sc.forEachRemaining(s->{
                try{
                     //String s=in.readLine();
                     output.add(s);
@@ -142,8 +146,9 @@ class ProgramExecuter {
                }catch(NoSuchElementException ex){
                     //System.out.println(ex);
                }
-          });
+          });*/
           //System.out.println("ProgramExecuter.getOut : - ended");
+          //System.gc();
      }
      
      /**return runtime of subprocess in milli seconds.
