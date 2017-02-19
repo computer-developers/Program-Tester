@@ -31,7 +31,7 @@ public class Test {
 //static Part
      public static final int TEST_PASS=2,TEST_PRESENT_ERROR=1,TEST_FAIL=-2,
              TEST_TIME_ERROR=-1,TEST_FILE_ERROR=-3;
-     public static long minMem=20000000;
+     public static long minMem=1000000;
      /* 
      * defDir is default path veriable which is used by construtor if no path
        provided explicitly.
