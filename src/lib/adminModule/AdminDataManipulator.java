@@ -18,6 +18,7 @@ import lib.runDetails.IOManager;
 import lib.runDetails.IntIODetail;
 import lib.runTest.RunTest;
 import lib.userModule.test.Test;
+import programtester.config.Configuration;
 
 /**
  *
@@ -53,7 +54,7 @@ public class AdminDataManipulator {
      public static void createTestCase(){
           try {
                IntIODetail io;
-               Path dir=Test.getDefaultDir();
+               Path dir=Configuration.getDefaultDir();
                Path pi;
                System.out.println("Program id :-");
                long programID=sc.nextLong();
@@ -82,7 +83,7 @@ public class AdminDataManipulator {
      
      public static void decryptTestCase(){
           try{
-               Path dir=Test.getDefaultDir();
+               Path dir=Configuration.getDefaultDir();
                System.out.println("enter file name:-");
                String s;
                for(s=sc.nextLine();s.trim().isEmpty();s=sc.nextLine());
@@ -113,7 +114,7 @@ public class AdminDataManipulator {
      
      public static void modifyTestCase(){
           try {
-               Path dir=Test.getDefaultDir();
+               Path dir=Configuration.getDefaultDir();
                System.out.println("enter file name:-");
                String s;
                for(s=sc.nextLine();s.trim().isEmpty();s=sc.nextLine());
@@ -140,7 +141,7 @@ public class AdminDataManipulator {
      
      public static void generateInput(){
           try {
-               Path dir=Test.getDefaultDir();
+               Path dir=Configuration.getDefaultDir();
                System.out.println("enter file name:-");
                String s;
                for(s=sc.nextLine();s=="";s=sc.nextLine());
@@ -165,7 +166,7 @@ public class AdminDataManipulator {
      
      public static void generateOutput(){
           try {
-               Path dir=Test.getDefaultDir();
+               Path dir=Configuration.getDefaultDir();
                String com;
                System.out.println("command :- ");
                for(com=sc.nextLine();com=="";com=sc.nextLine());
@@ -195,7 +196,7 @@ public class AdminDataManipulator {
      public static void compareOutputs(){
           try {
                Path pi;
-               Path dir=Test.getDefaultDir();
+               Path dir=Configuration.getDefaultDir();
                String out1;
                System.out.println("output 1 file :- ");
                for(out1=sc.nextLine();out1=="";out1=sc.nextLine());
@@ -223,6 +224,6 @@ public class AdminDataManipulator {
      }
      
      public static void defaultPath(){
-          System.out.println("Source data Directory :- "+Test.getDefaultDir());
+          System.out.println("Source data Directory :- "+Configuration.getDefaultDir());
      }
 }

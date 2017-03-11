@@ -10,7 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.*;
 import java.util.Scanner;
 import lib.runDetails.*;
-import lib.userModule.test.Test;
+import programtester.config.Configuration;
 import programtester.config.Configurator;
 
 /**
@@ -21,7 +21,7 @@ public class IOManagerGetPidTest {
     static Scanner sc=new Scanner(System.in);
     public static void main(String... args) throws IOException{
           Configurator.init();
-          Path dir=Test.getDefaultDir();
+          Path dir=Configuration.getDefaultDir();
           System.out.println("Data Directory = " + dir);
           System.out.println("enter pid :- ");
           long pid=sc.nextLong();
@@ -31,7 +31,7 @@ public class IOManagerGetPidTest {
           boolean b=sc.nextBoolean();
         IntIODetail io;
         Path pi;
-        pi=Test.getDefaultDir().toAbsolutePath();
+        pi=Configuration.getDefaultDir().toAbsolutePath();
         io=IOManager.getIODetail(pi,pid,index,b);
         pi=dir.resolve("input2.txt");
         Files.write(pi,io.getAllInput(),StandardOpenOption.CREATE_NEW);

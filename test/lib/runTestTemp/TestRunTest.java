@@ -5,7 +5,7 @@ import lib.runTest.*;
 import java.util.*;
 import java.nio.file.StandardOpenOption;
 import java.nio.file.*;
-import lib.userModule.test.Test;
+import programtester.config.Configuration;
 import programtester.config.Configurator;
 /**
  *
@@ -16,7 +16,7 @@ public class TestRunTest {
      public static void main(String... arg) throws IOException{
           Configurator.init();
           System.out.println("Working Directory = " +System.getProperty("user.dir"));
-          Path dir=Test.getDefaultDir();
+          Path dir=Configuration.getDefaultDir();
           System.out.println("Data Directory = " + dir);
           String com;
           System.out.println("command :- ");

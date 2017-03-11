@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Scanner;
 import lib.runDetails.*;
 import lib.userModule.test.Test;
+import programtester.config.Configuration;
 import programtester.config.Configurator;
 
 /**
@@ -23,7 +24,7 @@ public class IOManagerWriteTest {
     public static void main(String... args) throws IOException{
         Configurator.init();
         IntIODetail io;
-        Path dir=Test.getDefaultDir();
+        Path dir=Configuration.getDefaultDir();
         System.out.println("Data Directory = " + dir);
         Path pi;
         System.out.println("encript ? :-");

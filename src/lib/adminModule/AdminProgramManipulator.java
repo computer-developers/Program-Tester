@@ -8,10 +8,9 @@ package lib.adminModule;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import lib.dT.problemManipulate.IntProgramDetail;
 import lib.dT.problemManipulate.ProgramDetails;
+import static programtester.config.Configuration.getDefaultProDir;
 
 /**
  *
@@ -41,7 +40,7 @@ public class AdminProgramManipulator {
      
      public static void addProgramDefination(){
           try {
-               Path dir=ProgramDetails.getDefaultDir();
+               Path dir=getDefaultProDir();
                System.out.println("enter file name = ");
                String s;
                for(s=sc.nextLine();s.trim().isEmpty();s=sc.nextLine());
@@ -70,7 +69,7 @@ public class AdminProgramManipulator {
      
      public static void showProgramDetail(){
           try {
-               Path dir=ProgramDetails.getDefaultDir();
+               Path dir=getDefaultProDir();
                System.out.println("Program Directory = " + dir);
                System.out.println("enter file name = ");
                String s="";
@@ -99,6 +98,6 @@ public class AdminProgramManipulator {
      }
      
      public static void showDefaultPath(){
-          System.out.println("Program Directory = " +ProgramDetails.getDefaultDir());
+          System.out.println("Program Directory = " +getDefaultProDir());
      }
 }

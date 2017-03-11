@@ -51,12 +51,12 @@ public class Configurator {
                     Path p2=Paths.get(ar[1]).toAbsolutePath();
                     //System.out.println("sdd :- "+p2);
                     if(Files.exists(p2)&&Files.isDirectory(p2))
-                         Test.setDefaultDir(p2);
+                         Configuration.setDefaultDir(p2);
                     break;
                case "problem_dir":
                     Path p3=Paths.get(ar[1]).toAbsolutePath();
                     if(Files.exists(p3)&&Files.isDirectory(p3))
-                         ProgramDetails.setDefaultDir(p3);
+                         Configuration.setDefaultProDir(p3);
                     break;
                case "local_logger_dir":
                     Path p4=Paths.get(ar[1]).toAbsolutePath();
@@ -64,13 +64,13 @@ public class Configurator {
                          Files.createDirectories(p4);
                     } catch (IOException ex) {}
                     if(Files.exists(p4)&&Files.isDirectory(p4))
-                         LocalLogger.setDefaultLogDir(p4);
+                         Configuration.setDefaultLogDir(p4);
                     break;
                case "network_logger_ip":
                     break;
                case "parallel_execution":
                     boolean b=Boolean.parseBoolean(ar[1]);
-                    Test.setIsParallel(b);
+                    Configuration.setIsParallel(b);
                     break;
                case "parallel_thread":
                     try{
