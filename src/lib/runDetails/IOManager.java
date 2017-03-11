@@ -178,9 +178,12 @@ public class IOManager {
         of version difference of corresponding class.
       * @param dir path object specifying the valid path of the directory in which 
         file exist with proper naming convention which contain object.
+      * @param pid programID
+      * @param index index of test-case
       * @param isComp is boolean, if it is true then the object will be decrypted
         before read, otherwise the object will be read from file as it.
       * @return object of type {@code IntIODetail} read from specified {@code dir}.
+        null if any invalid parameters or data found.
       * @throws IOException if the error occur while reading object from file.
       */
      public static IntIODetail getIODetail(Path dir, long pid, long index
@@ -199,7 +202,10 @@ public class IOManager {
                name+=index;
                name+=".data";
           }
-          return getIODetail(dir.resolve(name),isComp);
+          IntIODetail i=getIODetail(dir.resolve(name),isComp);
+          if(i!=null&&i.programID()==pid&&i.index()==index)
+               return i;
+          return null;
      }
      
      /**
@@ -335,6 +341,9 @@ public class IOManager {
           return a.getAllInput().equals(b.getAllInput());
      }
      
+     /**
+      * @return version of implementation of {@code IntIODetail}
+      */
      public static long getVersion(){
           return IODetail.getVersion();
      }

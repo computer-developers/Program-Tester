@@ -127,13 +127,13 @@ public class Test {
      }
 
 //local Part     
-     private final Path dir;
-     private final long pid;
-     private final String cmd;
-     private Thread t;
-     private List<TestState> ts;
-     private IntLiveResultSet lrs;
-     private boolean flag=false;
+     private final Path dir;  //directory of test-cases
+     private final long pid;  //programId
+     private final String cmd;  //executable command
+     private Thread t;  //Tester thread
+     private List<TestState> ts;  //contain test-case results details
+     private IntLiveResultSet lrs;  //refer to the object return by execute method
+     private boolean flag=false;  //shows the state of thread t
      
      /**
       * this method compare the output of {@code us} with
@@ -141,9 +141,8 @@ public class Test {
       * this method finds the equivalent original output from list {@code orig}
         and compare it's output to the output of {@code us}.
       * @param us object of TestState, output of which is going to be compared.
-      * @throws IllegalArgumentException if no equivalent object exist in list
-        {@code orig} or {@code us} contain invalid information like negative
-        {@code programID} or {@code index} etc..
+      * @throws IllegalArgumentException if {@code us} contain invalid
+        information like negative {@code programID} or {@code index} etc..
       */
      private void comp(TestState us){
           try{
@@ -177,10 +176,20 @@ public class Test {
           }
      }
      
+     /**
+      * read the test-cases from {@code dir}.
+      * this method make a new list of test-cases found & make the reference
+        {@code ts} to refer the list.
+      * if the number of test-cases found is less then count then the IOException
+        will be thrown.
+      * @throws IOException if occurred while reading object or no object found 
+      */
      private synchronized void reader()throws IOException{
           List<TestState> ts=IntStream.rangeClosed(1,30)
                               .mapToObj(i->read(i))
                               .filter(i->i!=null)
+                              .filter(i->i.programID()==pid)
+                              .distinct()
                               //.peek(i->System.out.println("index :- "+i.index()))
                               .map(i->new TestState(i))
                               .collect(Collectors.toList());
@@ -189,6 +198,35 @@ public class Test {
           this.ts=ts;
      }
      
+     /**
+      * read the test-cases from {@code dir}.
+      * this method make a new list of test-cases found & make the reference
+        {@code ts} to refer the list.
+      * if the number of test-cases found is less then count then the IOException
+        will be thrown.
+      * @param count number of test-cases.
+      * @throws IOException if occurred while reading object or number of
+        objects found is less then {@code count}  
+      */
+     private synchronized void reader(int count)throws IOException{
+          List<TestState> ts=IntStream.rangeClosed(1,30)
+                              .mapToObj(i->read(i))
+                              .filter(i->i!=null)
+                              .filter(i->i.programID()==pid)
+                              .distinct()
+                              //.peek(i->System.out.println("index :- "+i.index()))
+                              .map(i->new TestState(i))
+                              .collect(Collectors.toList());
+          if(ts.size()<count)
+               throw new IOException();
+          this.ts=ts;
+     }
+     
+     /**
+      * 
+      * @param index index of test-case
+      * @return Object of IntIODetail, null if not found
+      */
      private IntIODetail read(long index){
           //System.out.println("read .... start");
           IntIODetail d;
@@ -204,6 +242,13 @@ public class Test {
           return null;
      }
      
+     /**
+      * iterate over the list {@code ts} & execute & compare the test-cases.
+      * this method execute the test-case & then compare it in sequence.
+      * this method update boolean {@code flag} with true then continue.
+      * if any instance the {@code flag} is false then this method terminate the
+        the execution of test-cases & return. 
+      */
      private void run(){
           flag=true;
           for(TestState i:ts){
@@ -225,6 +270,18 @@ public class Test {
           //System.gc();
      }
      
+     /**
+      * iterate over the list {@code ts} & execute & compare the test-cases.
+      * if the parameter {@code isParrallel} is {@code false} then this method
+        works same as method {@code void run()}.
+      * if the parameter {@code isParrallel} is {@code true} then this method
+        execute the test-case & then compare it in parallel using concurrent
+        framework.
+      * this method update boolean {@code flag} with true then continue.
+      * if any instance the {@code flag} is false then this method terminate the
+        the execution of test-cases & return. 
+      * @param isParallel boolean variable, refers to a concurrency of execution.
+      */
      private void run(boolean isParallel){
           if(!isParallel){
                run();
@@ -272,9 +329,19 @@ public class Test {
           this.cmd=cmd;
      }
 
+     /**
+      * start the execution in parallel & return object of
+        {@code IntLiveResultSet}.
+      * this method creates new thread {@code Tester Thread} if not created.
+      * Tester Thread process the test-cases in parallel.
+      * if the Tester Thread is already created, this method returns the 
+        previous object of {@code IntLiveResultSet}.
+      * @return object of {@code IntLiveResultSet}.
+      * @throws IOException 
+      */
      public synchronized IntLiveResultSet start() throws IOException{
           if(t!=null)
-               return null;
+               return lrs;
           reader();
           t=new Thread(()->run(getIsParallel()),"Tester Thread");
           t.start();
@@ -282,6 +349,9 @@ public class Test {
           return lrs;
      }
      
+     /**
+      * this method wait for {@code Tester Thread} to terminate.
+      */
      public void join(){
           for(;t!=null&&t.isAlive();)
           try {
@@ -289,7 +359,15 @@ public class Test {
           } catch (InterruptedException ex) {}
      }
      
+     /**
+      * this method return object of IntResultSet.
+      * this method will wait until the result is ready.
+      * @return object of IntResultSet, null if execution process not initialized
+        properly.
+      */
      public IntResultSet getIntResultSet(){
+          if(lrs==null)
+               return null;
           return new ResultSetAdapter(lrs.getAllResult());
      }
      
@@ -303,6 +381,9 @@ public class Test {
           flag=false;
      }
      
+     /**
+      * @return programID
+      */
      public long getProgramID(){
           return pid;
      }

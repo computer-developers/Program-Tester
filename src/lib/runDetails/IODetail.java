@@ -109,4 +109,21 @@ class IODetail implements IntIODetail, Serializable{
      public long getTime() {
           return time;
      }
+     
+     @Override
+     public boolean equals(Object o){
+          if(!(o instanceof IODetail))
+               return false;
+          IODetail i=(IODetail)o;
+          if(this.programID()!=i.programID())
+               return false;
+          if(this.index()!=i.index())
+               return false;
+          return true;
+     }
+     
+     @Override
+     public int hashCode(){
+          return (int)this.programId;
+     }
 }

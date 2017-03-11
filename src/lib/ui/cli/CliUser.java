@@ -62,6 +62,8 @@ public class CliUser implements IntUI{
      public void test(long pid,String cmd){
           System.out.println("test case\tcode\tmessage\ttime");
           IntLiveResultSet lrs=uf.execute(pid,cmd);
+          if(lrs==null)
+               return;
           lrs.getAllLiveResult()
                     .forEach(i->i.addRunnable(()->{
                          String s="test "

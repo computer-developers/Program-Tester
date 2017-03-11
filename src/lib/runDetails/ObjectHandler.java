@@ -133,10 +133,14 @@ class ObjectHandler {
                try(CipherInputStream cin=new CipherInputStream(in,decipher)){
                     return readObj(cin);
                }
-          } catch(InvalidKeyException | InvalidAlgorithmParameterException
+          /*} catch(InvalidKeyException | InvalidAlgorithmParameterException
                     | NoSuchPaddingException |NoSuchAlgorithmException ex) {
                return null;
+          }*/
+          }catch(Exception e){
+               return null;
           }
+          
      }
      
 }
