@@ -3,19 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.mainSer;
+package net.logSer;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Map;
 
 /**
  *
  * @author Neel Patel
  */
-public class MainSer extends UnicastRemoteObject implements IntMainSer{
-
-     public MainSer()throws RemoteException{}
+public class RemoteLog extends UnicastRemoteObject implements IntRemoteLog{
+     public RemoteLog()throws RemoteException{}
      
      @Override
      public boolean aya() throws RemoteException {
@@ -23,22 +21,17 @@ public class MainSer extends UnicastRemoteObject implements IntMainSer{
      }
 
      @Override
-     public String getDataSer() throws RemoteException {
-          return SerDetails.getDataSer();
+     public boolean log(String s) throws RemoteException {
+          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
      }
 
      @Override
-     public String getLogSer() throws RemoteException {
-          return SerDetails.getLogSer();
+     public boolean setBackupLogger(IntRemoteLog bl) throws RemoteException {
+          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
      }
 
      @Override
-     public boolean registerDataSer(String url) throws RemoteException {
-          return SerDetails.registerDataSer(url);
-     }
-
-     @Override
-     public Map<Long, Integer> getStatus(String user, String passwd) {
+     public String toUrl() throws RemoteException {
           throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
      }
      

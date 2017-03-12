@@ -16,5 +16,5 @@ public interface IntRemoteLog extends Remote{
      boolean aya()throws RemoteException;
      boolean log(String s)throws RemoteException;
      boolean setBackupLogger(IntRemoteLog bl)throws RemoteException;
-     String toUrl()throws Exception;
+     String toUrl()throws RemoteException;
 }
