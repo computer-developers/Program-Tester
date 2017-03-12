@@ -14,4 +14,5 @@ import java.rmi.RemoteException;
  */
 public interface IntDataSer extends Remote{
      boolean aya()throws RemoteException;
+     String toUrl()throws RemoteException;
 }

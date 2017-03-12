@@ -6,32 +6,35 @@
 package net.mainSer;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Map;
 
 /**
  *
  * @author Neel Patel
  */
-public class MainSer implements IntMainSer{
+public class MainSer extends UnicastRemoteObject implements IntMainSer{
 
+     MainSer()throws RemoteException{}
+     
      @Override
      public boolean aya() throws RemoteException {
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          return true;
      }
 
      @Override
      public String getDataSer() throws RemoteException {
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          return SerDetails.getDataSer();
      }
 
      @Override
      public String getLogSer() throws RemoteException {
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          return SerDetails.getLogSer();
      }
 
      @Override
      public boolean registerDataSer(String url) throws RemoteException {
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          return SerDetails.registerDataSer(url);
      }
 
      @Override
