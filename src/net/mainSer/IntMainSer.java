@@ -7,7 +7,7 @@ package net.mainSer;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.Map;
+import net.mainSer.userStatus.IntUserStatus;
 
 /**
  *
@@ -18,5 +18,5 @@ public interface IntMainSer extends Remote{
      String getDataSer()throws RemoteException;
      String getLogSer()throws RemoteException;
      boolean registerDataSer(String url)throws RemoteException;
-     Map<Long,Integer> getStatus(String user,String passwd)throws RemoteException;
+     IntUserStatus getStatus(String user,String passwd)throws RemoteException;
 }

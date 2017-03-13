@@ -5,6 +5,7 @@
  */
 package net.mainSer;
 
+import net.mainSer.userStatus.IntUserStatus;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Map;
@@ -38,7 +39,7 @@ public class MainSer extends UnicastRemoteObject implements IntMainSer{
      }
 
      @Override
-     public Map<Long, Integer> getStatus(String user, String passwd) {
+     public IntUserStatus getStatus(String user, String passwd) {
           throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
      }
      
