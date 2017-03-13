@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class MainSer extends UnicastRemoteObject implements IntMainSer{
 
-     public MainSer()throws RemoteException{}
+     MainSer()throws RemoteException{}
      
      @Override
      public boolean aya() throws RemoteException {

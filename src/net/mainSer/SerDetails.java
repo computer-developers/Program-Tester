@@ -99,4 +99,20 @@ public class SerDetails {
                return false;
           }
      }
+     
+     public synchronized static boolean registerMainDataSer(String url){
+          try {
+               IntDataSer ds=(IntDataSer)Naming.lookup(url);
+               if(ds.aya()){
+                    mainDataSer=ds;
+                    return true;
+               }else{
+                    assert true:"remote Log Server say 'not alive'";
+                    return false;
+               }
+          } catch (Exception ex) {
+               return false;
+          }
+     }
+     
 }

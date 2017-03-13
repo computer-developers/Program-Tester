@@ -17,14 +17,22 @@ import static programtester.config.Configuration.getDefaultLogDir;
  */
 public class LogHandler {
      private LogHandler(){}
-     static PrintStream ps;
+     private static PrintStream ps;
      private static final String dtf="yyMMddhhmmss";
-     private static boolean flag=true;
+     private static boolean flag=false;
      private static Thread t;
-     private static final int timeInter=10000;
+     private static final int timeInter=600000;
      
      public static synchronized boolean log(String log){
-          return false;
+          try{
+               if(ps==null)
+                    return false;
+               ps.println(log);
+               ps.flush();
+               return true;
+          }catch(Exception ex){
+               return false;
+          }
      }
      
      public static synchronized void makeFile() throws FileNotFoundException{
@@ -34,10 +42,14 @@ public class LogHandler {
           ps=new PrintStream(out);
      }
      
-     static{
+     public static void start(){
+          flag=true;
+          if(t!=null)
+               return;
           t=new Thread(LogHandler::run,"Logger Thread");
           t.start();
      }
+     
      public static void run(){
           for(;flag;){
                try {
@@ -46,8 +58,17 @@ public class LogHandler {
                     p.flush();
                     p.close();
                     sleep(timeInter);
-               } catch (InterruptedException | FileNotFoundException ex) {
+               } catch (Exception ex) {
                }
           }
+     }
+     
+     public static void stop(){
+          if(t==null)
+               return;
+          flag=false;
+          ps.close();
+          ps=null;
+          t=null;
      }
 }

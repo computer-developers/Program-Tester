@@ -13,7 +13,16 @@ import java.rmi.server.UnicastRemoteObject;
  * @author Neel Patel
  */
 public class RemoteLog extends UnicastRemoteObject implements IntRemoteLog{
-     public RemoteLog()throws RemoteException{}
+     private String url="";
+     
+     public RemoteLog()throws RemoteException{
+          LogHandler.start();
+     }
+     
+     public boolean setUrl(String u){
+          url=u;
+          return true;
+     }
      
      @Override
      public boolean aya() throws RemoteException {
@@ -22,7 +31,7 @@ public class RemoteLog extends UnicastRemoteObject implements IntRemoteLog{
 
      @Override
      public boolean log(String s) throws RemoteException {
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          return LogHandler.log(s);
      }
 
      @Override
@@ -32,7 +41,7 @@ public class RemoteLog extends UnicastRemoteObject implements IntRemoteLog{
 
      @Override
      public String toUrl() throws RemoteException {
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          return url;
      }
      
 }
