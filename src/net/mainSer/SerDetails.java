@@ -26,6 +26,10 @@ public class SerDetails {
      private static IntDataSer mainDataSer;
      private final static Map<IntDataSer,Long> dataSer=new ConcurrentHashMap<>();
      
+     /**
+      * 
+      * @return 
+      */
      public static String getDataSer(){
           for(;!(dataSer.isEmpty()&&mainDataSer==null);){
                String s=findDataSer();
@@ -35,6 +39,10 @@ public class SerDetails {
           return null;
      }
      
+     /**
+      * 
+      * @return 
+      */
      private synchronized static String findDataSer(){
           IntDataSer d=dataSer.keySet().parallelStream()
                               .reduce((x,y)->{
@@ -56,6 +64,10 @@ public class SerDetails {
           }
      }
      
+     /**
+      * 
+      * @return 
+      */
      public static synchronized String getLogSer(){
           try {
                if(log.aya())
@@ -69,6 +81,11 @@ public class SerDetails {
           }
      }
      
+     /**
+      * 
+      * @param url
+      * @return 
+      */
      public static boolean setLogSer(String url){
           try {
                IntRemoteLog ls=(IntRemoteLog)Naming.lookup(url);
@@ -85,6 +102,11 @@ public class SerDetails {
           } 
      }
      
+     /**
+      * 
+      * @param url
+      * @return 
+      */
      public static boolean registerDataSer(String url){
           try {
                IntDataSer ds=(IntDataSer)Naming.lookup(url);
@@ -100,6 +122,15 @@ public class SerDetails {
           }
      }
      
+     /**
+      * register the main server.
+      * this method first get a reference of remote object using String 
+        {@code url} then it calls {@code aya} method.
+      * if the the object reference is successfully obtain then it will update
+        {@code mainDataSer}.
+      * @param url
+      * @return 
+      */
      public synchronized static boolean registerMainDataSer(String url){
           try {
                IntDataSer ds=(IntDataSer)Naming.lookup(url);

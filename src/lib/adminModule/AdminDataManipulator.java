@@ -144,7 +144,7 @@ public class AdminDataManipulator {
                Path dir=Configuration.getDefaultDir();
                System.out.println("enter file name:-");
                String s;
-               for(s=sc.nextLine();s=="";s=sc.nextLine());
+               for(s=sc.nextLine();s.trim().isEmpty();s=sc.nextLine());
                Path p=dir.resolve(s);
                System.out.println("number of regx...");
                int n=sc.nextInt();
@@ -167,15 +167,15 @@ public class AdminDataManipulator {
      public static void generateOutput(){
           try {
                Path dir=Configuration.getDefaultDir();
-               String com;
+               String com="";
                System.out.println("command :- ");
-               for(com=sc.nextLine();com=="";com=sc.nextLine());
+               for(com=sc.nextLine();com.trim().isEmpty();com=sc.nextLine());
                String in;
                System.out.println("input file :- ");
-               for(in=sc.nextLine();in=="";in=sc.nextLine());
+               for(in=sc.nextLine();in.trim().isEmpty();in=sc.nextLine());
                String out;
                System.out.println("output file :- ");
-               for(out=sc.nextLine();out=="";out=sc.nextLine());
+               for(out=sc.nextLine();out.trim().isEmpty();out=sc.nextLine());
                Path pi;
                pi=dir.resolve(in);
                List<String> input=Files.readAllLines(pi);

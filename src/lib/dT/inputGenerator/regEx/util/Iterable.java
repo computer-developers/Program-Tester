@@ -8,7 +8,7 @@ public interface Iterable {
 
      /**
       *
-      * @return
+      * @return Iterator object
       */
      Iterator iterator();
 }

@@ -16,14 +16,14 @@ public interface IntUserFlow extends Closeable{
      /**
       * implementation of this method should register the User Interface.
       * recorded user interface should be used to interact with user.
-      * @param ui 
+      * @param ui object of User Interface. 
       */
      void register(IntUI ui);
      
      /**
       * implementation of this method should register the User Interface.
       * recorded user interface should be used to interact with user.
-      * @param ui 
+      * @param logger Object of MyLogger
       */
      void setLogger(MyLogger logger);
      

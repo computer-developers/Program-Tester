@@ -22,6 +22,16 @@ import static programtester.config.Configuration.getDefaultProDir;
  */
 public class DataSerHandler {
      private DataSerHandler(){}
+     
+     /**
+      * this method return object of type IntDataSer.
+      * this method create the object using {@code Default Problem Directory}
+        and {@code Default Data Directory} to create the object.
+      * this method read all the files from the specified directory to create
+        the object.
+      * this method return null if any exception occur while creating a object.
+      * @return object if created successfully, null otherwise.
+      */
      public static IntDataSer makeObject(){
           try {
                Path td=getDefaultDir();
@@ -37,6 +47,11 @@ public class DataSerHandler {
           }
      }
      
+     /**
+      * @param dir path of the directory
+      * @return return map object of all the files in the directory at level 0,
+        null otherwise.
+      */
      private static Map<String,byte[]> getAllFiles(Path dir){
           try {
                if(!Files.isDirectory(dir))

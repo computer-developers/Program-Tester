@@ -15,10 +15,44 @@ import java.util.Map;
  * @author Neel Patel
  */
 public interface IntDataSer extends Remote{
+     /**
+      * are you alive.
+      * @return this method should always return true;
+      * @throws RemoteException if occur in RMI framework.
+      */
      boolean aya()throws RemoteException;
+     
+     /**
+      * 
+      * @return URI of the object to access remotely, null otherwise.
+      * @throws RemoteException if occur in RMI framework.
+      */
      String toUrl()throws RemoteException;
+     
+     /**
+      * this method should return all the problem files as map
+        object of which maps the name of the file to byte array of file data.
+      * @return map object containing data of Problems.
+      */
      Map<String,byte[]> getAllProblems();
+     
+     /**
+      * this method should return all the Test files as map object of which
+        maps the name of the file to byte array of file data.
+      * @return map object containing data of Test files.
+      */
      Map<String,byte[]> getAllTestCases();
+     
+     /**
+      * when this method called remotely, this object should be
+        transfer from the server to client through the network.
+      * @return this object.
+      */
      IntDataSer getObject();
+     
+     /**
+      * should return creation time of the object
+      * @return object of LocalDateTime
+      */
      LocalDateTime getTime();
 }

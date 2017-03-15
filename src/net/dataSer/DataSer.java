@@ -27,36 +27,59 @@ public class DataSer extends UnicastRemoteObject implements IntDataSer{
           this.dt=LocalDateTime.now();
      }
      
+     /**
+      * set the URI of the object which will return by toUrl method.
+      * @param u URI String
+      * @return true if the URI updated successfully.
+      */
      public boolean setUrl(String u){
           url=u;
           return true;
      }
      
+     /**
+      * {@inheritDoc} 
+      */
      @Override
      public boolean aya() throws RemoteException {
           return true;
      }
 
+     /**
+      * {@inheritDoc} 
+      */
      @Override
      public String toUrl() throws RemoteException {
           return url;
      }
 
+     /**
+      * {@inheritDoc} 
+      */
      @Override
      public Map<String, byte[]> getAllProblems() {
           return problems;
      }
 
+     /**
+      * {@inheritDoc} 
+      */
      @Override
      public Map<String, byte[]> getAllTestCases() {
           return testCases;
      }
 
+     /**
+      * {@inheritDoc} 
+      */
      @Override
      public IntDataSer getObject() {
           return this;
      }
 
+     /**
+      * {@inheritDoc} 
+      */
      @Override
      public LocalDateTime getTime() {
           return dt;

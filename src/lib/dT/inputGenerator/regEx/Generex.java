@@ -59,7 +59,7 @@ public class Generex implements Iterable {
 
      /**
       *
-      * @param regex
+      * @param regex regular expression.
       */
      public Generex(String regex) {
         this(regex, new Random());
@@ -67,7 +67,7 @@ public class Generex implements Iterable {
 
      /**
       *
-      * @param automaton
+      * @param automaton automation object
       */
      public Generex(Automaton automaton) {
         this(automaton, new Random());
@@ -87,8 +87,8 @@ public class Generex implements Iterable {
 
      /**
       *
-      * @param automaton
-      * @param random
+      * @param automaton automation object
+      * @param random random object
       */
      public Generex(Automaton automaton, Random random) {
         this.automaton = automaton;
@@ -123,7 +123,7 @@ public class Generex implements Iterable {
      * used regular expression
      * instance
      *
-     * @param seed
+     * @param seed long variable
      */
     public void setSeed(long seed) {
         random = new Random(seed);
@@ -283,7 +283,7 @@ public class Generex implements Iterable {
     /**
      * Generate all Strings that matches the given Regex.
      *
-     * @return
+     * @return list of string
      */
     public List<String> getAllMatchedStrings() {
         matchedStrings = new ArrayList<String>();
@@ -297,8 +297,8 @@ public class Generex implements Iterable {
      * matches the given Regex. the Strings are
      * ordered in lexicographical order.
      *
-     * @param limit
-     * @return
+     * @param limit integer limit
+     * @return list of string
      */
     public List<String> getMatchedStrings(int limit) {
         matchedStrings = new ArrayList<String>();
@@ -310,7 +310,7 @@ public class Generex implements Iterable {
     /**
      * Generate and return a random String that match the pattern used in this Generex.
      *
-     * @return
+     * @return String
      */
     public String random() {
         return prepareRandom("", automaton.getInitialState(), 1, Integer.MAX_VALUE);
@@ -321,8 +321,8 @@ public class Generex implements Iterable {
      * this Generex, and the string has a length 
      * <code>{@literal >=minLength}</code>
      *
-     * @param minLength
-     * @return
+     * @param minLength minimum length
+     * @return string
      */
     public String random(int minLength) {
         return prepareRandom("", automaton.getInitialState(), minLength, Integer.MAX_VALUE);
@@ -332,9 +332,9 @@ public class Generex implements Iterable {
      * Generate and return a random String that match the pattern used in this Generex, and the string has a length 
      * <code>{@literal >=minLength}</code> and  {@literal  <= maxLength}
      *
-     * @param minLength
-     * @param maxLength
-     * @return
+     * @param minLength min length
+     * @param maxLength max length
+     * @return return string
      */
     public String random(int minLength, int maxLength) {
         return prepareRandom("", automaton.getInitialState(), minLength, maxLength);
@@ -390,7 +390,7 @@ public class Generex implements Iterable {
 
      /**
       *
-      * @return
+      * @return Iterator.
       */
      public Iterator iterator() {
         return new GenerexIterator(automaton.getInitialState());

@@ -239,7 +239,7 @@ public class Test {
      }
 
      /**
-      * start the execution in parallel & return object of
+      * start the execution in parallel and return object of
         {@code IntLiveResultSet}.
       * this method creates new thread {@code Tester Thread} if not created.
       * Tester Thread process the test-cases in parallel.

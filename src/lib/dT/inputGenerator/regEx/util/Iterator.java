@@ -8,13 +8,13 @@ public interface Iterator {
 
      /**
       *
-      * @return
+      * @return true if it has a elements.
       */
      boolean hasNext();
 
      /**
       *
-      * @return
+      * @return return next elements.
       */
      String next();
 }

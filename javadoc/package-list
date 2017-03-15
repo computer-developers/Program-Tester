@@ -1,4 +1,5 @@
 dk.brics.automaton
+lib.adminModule
 lib.dT.inputGenerator
 lib.dT.manipulate.comparators
 lib.dT.problemManipulate
@@ -13,5 +14,10 @@ lib.ui.gui
 lib.userModule
 lib.userModule.result
 lib.userModule.test
+net
+net.dataSer
+net.logSer
+net.mainSer
+net.mainSer.userStatus
 programtester
 programtester.config
