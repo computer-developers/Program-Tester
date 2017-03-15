@@ -1,6 +1,6 @@
 package lib.ui.gui;
 import javax.swing.*;
-import lib.dT.problemManipulate.IntProgramDetail;
+import lib.userModule.result.IntProgramState;
 
 /**
  *
@@ -14,7 +14,7 @@ public class QuestionPage extends JFrame{
      JLabel output;
      JPanel saminput;
      JPanel samoutput;
-     IntProgramDetail det;
+     IntProgramState det;
      public QuestionPage() {    
         super("Question Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

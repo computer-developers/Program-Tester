@@ -10,7 +10,7 @@ import java.util.Collections;
  *
  * @author Neel Patel
  */
-public class UserStatus implements IntUserStatus, Serializable{
+public class UserStatus implements IntUserStatus{
      private final Map<Long,Integer> ps;
      private int credit;
      private final String uName,passwd;

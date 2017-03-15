@@ -1,12 +1,13 @@
 package net.mainSer.userStatus;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
  * this Interface is used to remotely transfer data from main server.
  * @author Neel Patel
  */
-public interface IntUserStatus {
+public interface IntUserStatus extends Serializable{
      
      /**
       * @return Map object which map ProgramID to the Credit earned by user.
