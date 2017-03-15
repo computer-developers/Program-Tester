@@ -28,7 +28,7 @@ public class SerDetails {
      
      /**
       * 
-      * @return 
+      * @return return the data Server, null if no data server connected.
       */
      public static String getDataSer(){
           for(;!(dataSer.isEmpty()&&mainDataSer==null);){
@@ -40,8 +40,15 @@ public class SerDetails {
      }
      
      /**
-      * 
-      * @return 
+      * this method return URI of data server.
+      * return the String of URI of data server from list {@code dataSer},
+        which have minimum timestamp.
+      * this method also update the timestamp of the server.
+      * if the selected remote server is not reachable then the URI will
+        be removed and returns null
+      * if there is no server in the list {@code dataSer} then the
+        {@code main data server} will be selected.
+      * @return data server, null if exception occur.
       */
      private synchronized static String findDataSer(){
           IntDataSer d=dataSer.keySet().parallelStream()
@@ -65,8 +72,9 @@ public class SerDetails {
      }
      
      /**
-      * 
-      * @return 
+      * return log server.
+      * @return URI of log server, null if log sever is not reachable
+        exception occur
       */
      public static synchronized String getLogSer(){
           try {
@@ -82,9 +90,18 @@ public class SerDetails {
      }
      
      /**
-      * 
-      * @param url
-      * @return 
+      * register the log data server.
+      * this method first get a reference of remote object using String 
+        {@code url} then it calls {@code aya} method.
+      * if the the object reference is successfully obtain then it will update
+        {@code log} and return true.
+      * if any exception occur while the getting reference of remote object
+        then this method returns false without updating reference.<br>
+      * Note :- if the new remote server is added then the old one is
+        removed if any.(reference of log server is maintained internally)
+      * @param url URI of remote data Server.
+      * @return true if successfully updated, false if not updated due to some
+        reason.
       */
      public static boolean setLogSer(String url){
           try {
@@ -103,9 +120,18 @@ public class SerDetails {
      }
      
      /**
-      * 
-      * @param url
-      * @return 
+      * register the data server.
+      * this method first get a reference of remote object using String 
+        {@code url} then it calls {@code aya} method.
+      * if the the object reference is successfully obtain then it will add 
+        in the {@code dataSer} and return true.
+      * if any exception occur while the getting reference of remote object
+        then this method returns false without updating reference.<br>
+      * Note :- if the new remote server is added then the old one is not
+        removed if any.(list of data server is maintained internally)
+      * @param url URI of remote data Server.
+      * @return true if successfully added, false if not added due to some
+        reason.
       */
      public static boolean registerDataSer(String url){
           try {
@@ -123,13 +149,18 @@ public class SerDetails {
      }
      
      /**
-      * register the main server.
+      * register the main data server.
       * this method first get a reference of remote object using String 
         {@code url} then it calls {@code aya} method.
       * if the the object reference is successfully obtain then it will update
-        {@code mainDataSer}.
-      * @param url
-      * @return 
+        {@code mainDataSer} and return true.
+      * if any exception occur while the getting reference of remote object
+        then this method returns false without updating reference.<br>
+      * Note :- if the new remote server is added then the old one is
+        removed if any.(reference of main data server is maintained internally)
+      * @param url URI of remote data Server.
+      * @return true if successfully updated, false if not updated due to some
+        reason.
       */
      public synchronized static boolean registerMainDataSer(String url){
           try {

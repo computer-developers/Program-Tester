@@ -22,7 +22,7 @@ public class UserStatus implements IntUserStatus, Serializable{
      }
 
      /**
-      * @return immutable map containing all mapping of ProgramId to credits.
+      * {@inheritDoc}
       */
      @Override
      public synchronized Map<Long, Integer> getAllProStatus() {
@@ -30,7 +30,7 @@ public class UserStatus implements IntUserStatus, Serializable{
      }
 
      /**
-      * @return user's current credit.
+      * {@inheritDoc}
       */
      @Override
      public synchronized int getUserCredit() {
@@ -38,7 +38,7 @@ public class UserStatus implements IntUserStatus, Serializable{
      }
      
      /**
-      * @return UserName
+      * {@inheritDoc}
       */
      @Override
      public String getUName() {
@@ -46,7 +46,7 @@ public class UserStatus implements IntUserStatus, Serializable{
      }
 
      /**
-      * @return password
+      * {@inheritDoc}
       */
      @Override
      public String getPasswd() {
