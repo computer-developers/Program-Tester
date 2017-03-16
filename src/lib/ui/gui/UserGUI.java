@@ -8,7 +8,7 @@ import static programtester.config.Configuration.TEST_PASS;
 
 /**
  *
- * @author Neel Patel
+ * @author Parth Doshi
  */
 public class UserGUI implements IntUI{
 
