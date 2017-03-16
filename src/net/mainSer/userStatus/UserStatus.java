@@ -76,7 +76,7 @@ public class UserStatus implements IntUserStatus{
      }
      
      /**
-      * add programIds with the initial credit  0.
+      * add programIds with the initial credit 0.
       * this method will not perform any change if the program id already exist.
       * this method will add all the programIds which is not already in system
         with credit 0

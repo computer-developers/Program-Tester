@@ -5,12 +5,20 @@
  */
 package net.mainSer.userStatus;
 
-import java.util.Arrays;
+import java.rmi.Naming;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 import lib.logger.LogTools;
+import net.UrlTools;
+import net.logSer.IntLogProc;
+import net.logSer.IntRemoteLog;
+import static programtester.config.Configuration.getDefaultRMIPort;
 
 /**
  *
@@ -18,8 +26,27 @@ import lib.logger.LogTools;
  */
 public class UserFactory {
      private UserFactory(){}
+     private static AtomicBoolean bl=new AtomicBoolean(false);
+     private static List<String> log=Collections.synchronizedList(new ArrayList<>());
      private static final Map<Long,Integer> problems=new HashMap<>();
      private static final Set<UserStatus> user=new HashSet<UserStatus>();
+
+     /**
+      * this method initialize the user status logger.
+      * @param lp URI of remote object of IntLogProc.
+      * @return URI of user status logger, null otherwise.
+      */
+     public static String init(String lp){
+          try {
+               IntRemoteLog ir=new UserStatusLog();
+               int port=getDefaultRMIPort();
+               String uri=UrlTools.registerObj(ir, port,"userState");
+               new Thread(()->proBack(lp)).start();
+               return uri;
+          } catch (Exception ex) {
+               return null;
+          }
+     }
      
      /**
       * add new user if already not exist system.
@@ -79,6 +106,24 @@ public class UserFactory {
      }
      
      /**
+      * this method return object of {@code IntUserStatus}.
+      * this method return return object of {@code IntUserStatus} from the
+        system containing same username.
+      * this method returns {@code null} if such a object is not exist in the
+        system.
+      * @param uName username
+      * @return object of {@code IntUserStatus} if exist, null otherwise.
+      */
+     public static synchronized IntUserStatus getUser(String uName){
+          UserStatus u=user.parallelStream()
+                         .filter(i->i.getUName().equals(uName))
+                         .findAny().orElse(null);
+          if(u==null)
+               return null;
+          return u;
+     }
+     
+     /**
       * this method process the log and update UserStatus related to log.
       * this method return true if log is successfully processed.
       * if the log is not processed properly by any reason (i.e malformed log),
@@ -86,7 +131,7 @@ public class UserFactory {
       * @param log String of log
       * @return true if processed successfully, false otherwise.
       */
-     public static boolean processLog(String log){
+     public synchronized static boolean processLog(String log){
           try{
                String uName=LogTools.getLogProperty(log, "username");
                String passwd=LogTools.getLogProperty(log, "password");
@@ -105,9 +150,34 @@ public class UserFactory {
       * @param pid programId.
       * @return credit of the program.
       */
-     public static int getCredit(long pid){
+     public static synchronized int getCredit(long pid){
           if(problems.containsKey(pid))
                return problems.get(pid);
           return -1;
      }
+     
+     public static synchronized boolean logHandle(String s){
+          if(bl.get())
+               log.add(s);
+          else
+               processLog(s);
+          return true;
+     }
+     
+     public static void proBack(String uri){
+          try {
+               bl.set(true);
+               IntLogProc lp=(IntLogProc)Naming.lookup(uri);
+               List<String> l=lp.getLogs(null,null);
+               l.stream().forEach(i->processLog(i));
+               synchronized(UserFactory.class){
+                    log.stream().forEach(i->processLog(i));
+                    bl.set(false);
+               }
+          } catch (Exception ex) {
+               bl.set(false);
+               return;
+          }
+     }
+
 }

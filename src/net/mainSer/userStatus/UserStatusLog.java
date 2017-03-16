@@ -30,7 +30,7 @@ public class UserStatusLog extends UnicastRemoteObject implements IntRemoteLog{
 
      @Override
      public boolean log(String s) throws RemoteException {
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          return UserFactory.logHandle(s);
      }
 
      @Override

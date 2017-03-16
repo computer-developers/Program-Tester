@@ -1,4 +1,9 @@
-package net.flow.mainSerFlows;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package net.flow.clientFlow;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -10,21 +15,24 @@ import net.logSer.IntRemoteLog;
 import net.mainSer.MainSer;
 import net.mainSer.SerDetails;
 import net.mainSer.userStatus.UserFactory;
-import static programtester.config.Configuration.*;
+import static programtester.config.Configuration.getDefaultMainDataSer;
+import static programtester.config.Configuration.getDefaultMainLogSer;
+import static programtester.config.Configuration.getDefaultMainSer;
+import static programtester.config.Configuration.getDefaultRMIPort;
 
 /**
  *
  * @author Neel Patel
  */
-public class MainSerFlow {
+public class ClientFlow {
      private Thread t=null;
      private Scanner sc=new Scanner(System.in);
      private boolean flag=false;
-     private String mainSer,mainDataSer,mainLogSer;
+     private String mainSer,mainDataSer,mainLogSer,dataSer;
      private MainSer remoteObj;
      private Registry r;
      private int port;
-     public MainSerFlow(){}
+     public ClientFlow(){}
      
      private void run(){
           if(!init())
@@ -41,9 +49,6 @@ public class MainSerFlow {
      }
      private boolean init(){
           this.mainSer=getDefaultMainSer();
-          this.mainDataSer=getDefaultMainDataSer();
-          this.mainLogSer=getDefaultMainLogSer();
-          this.port=getDefaultRMIPort();
           try{
                r=LocateRegistry.createRegistry(port);
           }catch(Exception ex){

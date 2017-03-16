@@ -2,13 +2,19 @@ package net.logSer;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
 import static java.lang.Thread.sleep;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static programtester.config.Configuration.getDefaultLogDir;
 
 /**
@@ -129,6 +135,23 @@ public class LogHandler {
                }
           } catch (Exception ex) {
                return false;
+          }
+     }
+     
+     public static List<String> getLogs(){
+          try {
+               Path dir=getDefaultLogDir();
+               List<String> li=new ArrayList();
+               Files.list(dir).filter(i->!Files.isDirectory(i))
+                       .forEach(p->{
+                            try {
+                                 li.addAll(Files.readAllLines(p));
+                            } catch (Exception ex) {
+                            }
+                       });
+               return li;
+          } catch (Exception ex) {
+               return null;
           }
      }
 }

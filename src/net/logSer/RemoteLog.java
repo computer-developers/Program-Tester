@@ -7,12 +7,15 @@ package net.logSer;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  *
  * @author Neel Patel
  */
-public class RemoteLog extends UnicastRemoteObject implements IntRemoteLog{
+public class RemoteLog extends UnicastRemoteObject implements IntRemoteLog,
+        IntLogProc{
      private String url="";
      
      public RemoteLog()throws RemoteException{
@@ -60,6 +63,11 @@ public class RemoteLog extends UnicastRemoteObject implements IntRemoteLog{
      @Override
      public String toUrl() throws RemoteException {
           return url;
+     }
+
+     @Override
+     public List<String> getLogs(LocalDateTime start, LocalDateTime end) {
+          return LogHandler.getLogs();
      }
      
 }

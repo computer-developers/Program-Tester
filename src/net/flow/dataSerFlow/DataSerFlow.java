@@ -5,17 +5,24 @@
  */
 package net.flow.dataSerFlow;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.UrlTools;
 import net.dataSer.DataSer;
 import net.dataSer.IntDataSer;
 import net.mainSer.IntMainSer;
 import static programtester.config.Configuration.getDefaultDataSer;
+import static programtester.config.Configuration.getDefaultDir;
 import static programtester.config.Configuration.getDefaultMainSer;
+import static programtester.config.Configuration.getDefaultProDir;
 import static programtester.config.Configuration.getDefaultRMIPort;
 
 /**
@@ -31,6 +38,37 @@ public class DataSerFlow {
      private IntMainSer mainObj;
      private Registry r;
      private int port;
+     
+     public static boolean writeData(IntDataSer ds){
+          try {
+               Path pd=getDefaultProDir();
+               Path td=getDefaultDir();
+               ds.getAllProblems().forEach((n,d)->{
+                    Path p=pd.resolve(n);
+                    try {
+                         Files.write(p, d);
+                    } catch (Exception ex) {
+                    }
+               });
+               if(ds.getAllProblems().size()!=Files.list(pd)
+                       .filter(i->!Files.isDirectory(i)).count())
+                    return false;
+               ds.getAllTestCases().forEach((n,d)->{
+                    Path p=td.resolve(n);
+                    try {
+                         Files.write(p, d);
+                    } catch (Exception ex) {
+                    }
+               });
+               if(ds.getAllTestCases().size()!=Files.list(pd)
+                       .filter(i->!Files.isDirectory(i)).count())
+                    return false;
+               return true;
+          } catch (Exception ex) {
+               return false;
+          }
+     }
+     
      public DataSerFlow(String url){
           mainSer=url;
      }
@@ -43,12 +81,13 @@ public class DataSerFlow {
           if(!init())
                return;
           flag=true;
-          System.out.println("enter 0 to exit");
           for(;flag;){
                try{
-                    if(sc.nextInt()==0)
-                    break;
+                    if(!mainObj.aya())
+                         break;
+                    Thread.sleep(10000);
                }catch(Exception ex){ 
+                    break;
                }
           }
      }
@@ -58,11 +97,15 @@ public class DataSerFlow {
                mainObj=(IntMainSer)Naming.lookup(mainSer);
                dataSer=mainObj.getDataSer();
                dataObj=(IntDataSer)Naming.lookup(dataSer);
+               dataObj=dataObj.getObject();
           } catch (Exception ex) {
                System.err.println("Remote Object access error");
                return false;
           }
-          //code to write data on local.
+          if(!writeData(dataObj)){
+               System.err.println("error in getting data");
+               return false;
+          }
           this.dataSer=getDefaultDataSer();
           this.port=getDefaultRMIPort();
           try{
@@ -73,11 +116,19 @@ public class DataSerFlow {
           try{
                if(!UrlTools.registerObj(dataObj,dataSer))
                     throw new RemoteException();
+               ((DataSer)dataObj).setUrl(dataSer);
           }catch(Exception ex){
                System.out.println("Object Binding fail");
                return false;
           }
-          return true;
+          try {
+               if(mainObj.registerDataSer(dataSer))
+                    return true;
+          } catch (Exception ex) {
+               System.out.println("Object registration fail");
+               return false;
+          }
+          return false;
      }
      
      public void start(){
