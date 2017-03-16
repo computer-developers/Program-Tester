@@ -20,7 +20,14 @@ public class UserGUI implements IntUI{
           this.uf.register(this);
           ps=uf.getAllProgramDetail();
           
-     }
+    QuestionPage qqp=new QuestionPage();
+    FileChooser ffc=new FileChooser();
+    ResultPage rrp=new ResultPage();
+    int ppid=qqp.start();
+    String ccmd=ffc.start();
+    uf.execute(ppid,ccmd);
+    
+    }
      
      @Override
      public void showMessage(String message) {

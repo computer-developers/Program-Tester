@@ -47,6 +47,7 @@ public class FileChooser extends JFrame {
     result.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             String cmd = e.getActionCommand();
+            
 
         if(cmd.equals("Open"))
         {

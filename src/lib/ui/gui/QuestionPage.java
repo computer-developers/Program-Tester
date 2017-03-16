@@ -15,8 +15,9 @@ public class QuestionPage extends JFrame{
      JPanel saminput;
      JPanel samoutput;
      IntProgramState det;
-     public QuestionPage() {    
+     public QuestionPage(IntProgramState dett) {
         super("Question Page");
+        this.det=dett;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500,500);
         pid=new JLabel("Program ID : "+det.getProgramID());    //Converted to String from Long
