@@ -73,7 +73,7 @@ public class LogHandler {
       */
      public static void start(){
           flag=true;
-          if(t!=null)
+          if(t!=null && t.isAlive())
                return;
           t=new Thread(LogHandler::run,"Logger Thread");
           t.start();

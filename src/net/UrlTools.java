@@ -68,4 +68,35 @@ public class UrlTools {
                return null;
           }
      }
+     
+     /**
+      * this method {@code rebind} the object.
+      * this method bind the Remote object on specified port with specified name
+        on local server.
+      * this method will return URI to access the object remotely.
+      * this method will return null if the exception occur while binding.<br>
+      * Note:- make sure that the RMI registry is already created on specified
+        port before method call, otherwise this method returns null without
+        binding.
+      * @param obj object to be binded
+      * @param uri {@code uri} on which object going to be bind.
+      * @return URI of the object if successfully binded, null otherwise.
+      */
+     public static boolean registerObj(Remote obj,String uri){
+          try {
+               new Thread(()->{
+                    try {
+                         //System.out.println("bind");
+                         Naming.rebind(uri, obj);
+                    } catch (Exception ex) {
+                         //System.out.println("bind exception");
+                    }
+               }).start();
+               //System.out.println("bind suc :- "+obj);
+               return true;
+          } catch (Exception ex) {
+               //System.out.println("reg exception");
+               return false;
+          }
+     }
 }

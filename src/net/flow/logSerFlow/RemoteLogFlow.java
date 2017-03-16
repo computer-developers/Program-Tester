@@ -1,27 +1,36 @@
-package net.flow.mainSerFlows;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package net.flow.logSerFlow;
 
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Scanner;
 import net.UrlTools;
+import net.logSer.RemoteLog;
 import net.mainSer.MainSer;
 import net.mainSer.SerDetails;
-import static programtester.config.Configuration.*;
+import static programtester.config.Configuration.getDefaultMainDataSer;
+import static programtester.config.Configuration.getDefaultMainLogSer;
+import static programtester.config.Configuration.getDefaultMainSer;
+import static programtester.config.Configuration.getDefaultRMIPort;
 
 /**
  *
  * @author Neel Patel
  */
-public class MainSerFlow {
+public class RemoteLogFlow {
      private Thread t=null;
      private Scanner sc=new Scanner(System.in);
      private boolean flag=false;
-     private String mainSer,mainDataSer,mainLogSer;
-     private MainSer remoteObj;
+     private String logSer;
+     private RemoteLog remoteObj;
      private Registry r;
      private int port;
-     public MainSerFlow(){}
+     public RemoteLogFlow(){}
      
      private void run(){
           if(!init())
@@ -36,29 +45,28 @@ public class MainSerFlow {
                }
           }
      }
+     
      private boolean init(){
-          this.mainSer=getDefaultMainSer();
-          this.mainDataSer=getDefaultMainDataSer();
-          this.mainLogSer=getDefaultMainLogSer();
+          this.logSer=getDefaultMainLogSer();
           this.port=getDefaultRMIPort();
-          try{
-               r=LocateRegistry.createRegistry(port);
-          }catch(Exception ex){
-               System.err.println("Registry fail");
-          }
           try {
-               remoteObj=new MainSer();
-               if(SerDetails.registerMainDataSer(mainDataSer))
-                    throw new RemoteException();
-               if(SerDetails.setLogSer(mainLogSer))
-                    throw new RemoteException();
-               //code for register User State as a backup logger.
+               remoteObj=new RemoteLog();
+               System.out.println("Enter Backup Logger..");
+               String s;
+               for(s=sc.nextLine();s.trim().isEmpty();s=sc.nextLine());
+               if(remoteObj.setBackupLogger(s))
+                    System.err.println("Backup Logger Registration fail");
           } catch (Exception ex) {
                System.err.println("Object creation error");
                return false;
           }
           try{
-               if(!UrlTools.registerObj(remoteObj,mainSer))
+               r=LocateRegistry.createRegistry(port);
+          }catch(Exception ex){
+               System.err.println("Registry fail");
+          }
+          try{
+               if(!UrlTools.registerObj(remoteObj,logSer))
                     throw new RemoteException();
           }catch(Exception ex){
                System.out.println("Object Binding fail");

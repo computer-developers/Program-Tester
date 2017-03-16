@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class MainSer extends UnicastRemoteObject implements IntMainSer{
 
-     MainSer()throws RemoteException{}
+     public MainSer()throws RemoteException{}
      
      /**
       * {@inheritDoc} 

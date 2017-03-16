@@ -1,27 +1,43 @@
-package net.flow.mainSerFlows;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package net.flow.dataSerFlow;
 
+import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Scanner;
 import net.UrlTools;
-import net.mainSer.MainSer;
-import net.mainSer.SerDetails;
-import static programtester.config.Configuration.*;
+import net.dataSer.DataSer;
+import net.dataSer.IntDataSer;
+import net.mainSer.IntMainSer;
+import static programtester.config.Configuration.getDefaultDataSer;
+import static programtester.config.Configuration.getDefaultMainSer;
+import static programtester.config.Configuration.getDefaultRMIPort;
 
 /**
  *
  * @author Neel Patel
  */
-public class MainSerFlow {
+public class DataSerFlow {
      private Thread t=null;
      private Scanner sc=new Scanner(System.in);
      private boolean flag=false;
-     private String mainSer,mainDataSer,mainLogSer;
-     private MainSer remoteObj;
+     private String mainSer,dataSer;
+     private IntDataSer dataObj;
+     private IntMainSer mainObj;
      private Registry r;
      private int port;
-     public MainSerFlow(){}
+     public DataSerFlow(String url){
+          mainSer=url;
+     }
+     
+     public DataSerFlow(){
+          mainSer=getDefaultMainSer();
+     }
      
      private void run(){
           if(!init())
@@ -36,29 +52,26 @@ public class MainSerFlow {
                }
           }
      }
+     
      private boolean init(){
-          this.mainSer=getDefaultMainSer();
-          this.mainDataSer=getDefaultMainDataSer();
-          this.mainLogSer=getDefaultMainLogSer();
+          try {
+               mainObj=(IntMainSer)Naming.lookup(mainSer);
+               dataSer=mainObj.getDataSer();
+               dataObj=(IntDataSer)Naming.lookup(dataSer);
+          } catch (Exception ex) {
+               System.err.println("Remote Object access error");
+               return false;
+          }
+          //code to write data on local.
+          this.dataSer=getDefaultDataSer();
           this.port=getDefaultRMIPort();
           try{
                r=LocateRegistry.createRegistry(port);
           }catch(Exception ex){
                System.err.println("Registry fail");
           }
-          try {
-               remoteObj=new MainSer();
-               if(SerDetails.registerMainDataSer(mainDataSer))
-                    throw new RemoteException();
-               if(SerDetails.setLogSer(mainLogSer))
-                    throw new RemoteException();
-               //code for register User State as a backup logger.
-          } catch (Exception ex) {
-               System.err.println("Object creation error");
-               return false;
-          }
           try{
-               if(!UrlTools.registerObj(remoteObj,mainSer))
+               if(!UrlTools.registerObj(dataObj,dataSer))
                     throw new RemoteException();
           }catch(Exception ex){
                System.out.println("Object Binding fail");
