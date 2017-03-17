@@ -5,13 +5,15 @@
  */
 package net.flow.clientFlow;
 
+import java.util.function.Consumer;
+
 /**
  *
  * @author Neel Patel
  */
 public interface IntNetClient {
-     boolean regErrRunner(Runnable r);
-     boolean regMessageRunner(Runnable r);
+     boolean regErrRunner(Consumer<String> r);
+     boolean regMessageRunner(Consumer<String> r);
      boolean init(String uName,String passwd);
      boolean log(String s);
      int credit(long pid);

@@ -69,8 +69,8 @@ public class DataSerFlow {
           }
      }
      
-     public DataSerFlow(String url){
-          mainSer=url;
+     public DataSerFlow(String mainUrl){
+          mainSer=mainUrl;
      }
      
      public DataSerFlow(){

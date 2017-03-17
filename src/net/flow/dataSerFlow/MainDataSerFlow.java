@@ -74,6 +74,12 @@ public class MainDataSerFlow {
           t.start();
      }
      
+     public void join(){
+          try{
+               t.join();
+          }catch(Exception ex){
+          }
+     }
      public void stop(){
           flag=false;
      }

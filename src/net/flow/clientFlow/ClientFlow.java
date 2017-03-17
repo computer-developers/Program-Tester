@@ -7,18 +7,15 @@ package net.flow.clientFlow;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Scanner;
+import java.util.function.Consumer;
 import net.UrlTools;
+import net.flow.dataSerFlow.DataSerFlow;
 import net.logSer.IntRemoteLog;
-import net.mainSer.MainSer;
-import net.mainSer.SerDetails;
-import net.mainSer.userStatus.UserFactory;
-import static programtester.config.Configuration.getDefaultMainDataSer;
-import static programtester.config.Configuration.getDefaultMainLogSer;
+import net.mainSer.IntMainSer;
+import net.mainSer.userStatus.IntUserStatus;
 import static programtester.config.Configuration.getDefaultMainSer;
-import static programtester.config.Configuration.getDefaultRMIPort;
 
 /**
  *
@@ -26,16 +23,18 @@ import static programtester.config.Configuration.getDefaultRMIPort;
  */
 public class ClientFlow implements IntNetClient{
      private Thread t=null;
+     private Consumer<String> errRun=x->{},messageRun=x->{};
      private Scanner sc=new Scanner(System.in);
      private boolean flag=false;
-     private String mainSer,mainDataSer,mainLogSer,dataSer;
-     private MainSer remoteObj;
+     private String mainSer;
+     private IntMainSer mainObj;
+     private IntRemoteLog logOb;
      private Registry r;
      private int port;
      private String uName="",passwd="";
      public ClientFlow(){}
      
-     private void run(){
+     /*private void run(){
           flag=true;
           System.out.println("enter 0 to exit");
           for(;flag;){
@@ -47,7 +46,6 @@ public class ClientFlow implements IntNetClient{
           }
      }
      
-     
      public void start(){
           if(t!=null&&t.isAlive())
                return;
@@ -57,27 +55,38 @@ public class ClientFlow implements IntNetClient{
      
      public void stop(){
           flag=false;
-     }
+     }*/
 
      @Override
      public boolean init(String uName,String passwd){
           this.mainSer=getDefaultMainSer();
           try{
-               r=LocateRegistry.createRegistry(port);
+               mainObj=(IntMainSer)Naming.lookup(mainSer);
+               IntUserStatus u=mainObj.getStatus(uName, passwd);
+               if(u!=null){
+                    errRun.accept("wrong username or Password");
+                    return false;
+               }
           }catch(Exception ex){
-               System.err.println("Registry fail");
+               System.err.println("Error in getting reference of Remote.");
+               return false;
           }
           try {
-               remoteObj=new MainSer();
-               if(SerDetails.registerMainDataSer(mainDataSer))
-                    throw new RemoteException();
-               if(SerDetails.setLogSer(mainLogSer))
-                    throw new RemoteException();
+               logOb=(IntRemoteLog)Naming.lookup(mainObj.getLogSer());
+               if(logOb==null)
+                    return false;
+               if(!logOb.aya()){
+                    assert true:"logger says not alive";
+                    return false;
+               }
+               DataSerFlow d=new DataSerFlow(mainSer);
+               d.start();
+               d.ss
                //code for register User State as a backup logger.
-               IntRemoteLog rg=(IntRemoteLog)Naming.lookup(mainLogSer);
-               rg.setBackupLogger(UserFactory.init(mainLogSer));
+               //IntRemoteLog rg=(IntRemoteLog)Naming.lookup(mainLogSer);
+               //rg.setBackupLogger(UserFactory.init(mainLogSer));
           } catch (Exception ex) {
-               System.err.println("Object creation error");
+               System.err.println("Server error error");
                return false;
           }
           try{
@@ -91,13 +100,15 @@ public class ClientFlow implements IntNetClient{
      }
      
      @Override
-     public boolean regErrRunner(Runnable r) {
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     public boolean regErrRunner(Consumer r) {
+          errRun=r::accept;
+          return true;
      }
 
      @Override
-     public boolean regMessageRunner(Runnable r) {
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     public boolean regMessageRunner(Consumer r) {
+          messageRun=r::accept;
+          return true;
      }
 
      @Override
