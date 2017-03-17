@@ -14,7 +14,8 @@ import programtester.config.Configurator;
  *
  * @author Neel Patel
  */
-public class ProgramTester {
+public class
+ProgramTester {
 
      /**
       * @param args the command line arguments
