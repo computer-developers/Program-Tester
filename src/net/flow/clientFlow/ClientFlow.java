@@ -10,6 +10,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.Registry;
 import java.util.Scanner;
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.UrlTools;
 import net.flow.dataSerFlow.DataSerFlow;
 import net.logSer.IntRemoteLog;
@@ -87,7 +89,7 @@ public class ClientFlow implements IntNetClient{
                System.err.println("Server error error");
                return false;
           }
-          t=new Thread(()->start());
+          start();
           return true;
      }
      
@@ -105,16 +107,42 @@ public class ClientFlow implements IntNetClient{
 
      @Override
      public boolean log(String s) {
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          try{
+               if(logOb==null)
+                    return false;
+               if(!logOb.aya())
+                    assert true:"log server says not alive";
+               return logOb.log(s);
+          }catch(Exception ex){
+               return false;
+          }
      }
 
      @Override
-     public int credit(long pid) {
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     public int credit(long pid){
+          try {
+               if(mainObj==null)
+                    return -1;
+               if(!mainObj.aya())
+                    assert true:"log server says not alive";
+               IntUserStatus u=mainObj.getStatus(uName, passwd);
+               return u.getAllProStatus().get(pid);
+          } catch (Exception ex) {
+               return -1;
+          }
      }
 
      @Override
      public int userCredit() {
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          try {
+               if(mainObj==null)
+                    return -1;
+               if(!mainObj.aya())
+                    assert true:"log server says not alive";
+               IntUserStatus u=mainObj.getStatus(uName, passwd);
+               return u.getUserCredit();
+          } catch (Exception ex) {
+               return -1;
+          }
      }
 }
