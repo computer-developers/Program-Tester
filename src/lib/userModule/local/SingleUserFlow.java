@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lib.userModule;
+package lib.userModule.local;
 
 import lib.userModule.result.IntLiveResultSet;
 import java.io.IOException;
@@ -16,6 +16,7 @@ import lib.dT.problemManipulate.IntProgramDetail;
 import lib.dT.problemManipulate.ProgramDetails;
 import lib.logger.MyLogger;
 import lib.ui.IntUI;
+import lib.userModule.IntUserFlow;
 import lib.userModule.result.IntProgramState;
 import lib.userModule.result.IntResultSet;
 import lib.userModule.result.ProgramStateAdapter;

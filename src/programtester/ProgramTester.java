@@ -7,7 +7,7 @@ import lib.logger.MyLogger;
 import lib.ui.IntUI;
 import lib.ui.cli.CliUser;
 import lib.userModule.IntUserFlow;
-import lib.userModule.SingleUserFlow;
+import lib.userModule.local.SingleUserFlow;
 import programtester.config.Configurator;
 
 /**
