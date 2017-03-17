@@ -17,15 +17,15 @@ public class UserGUI implements IntUI{
      
      public UserGUI(IntUserFlow uf){
           this.uf=uf;
-          this.uf.register(this);
+//          this.uf.register(this);
           ps=uf.getAllProgramDetail();
           
-    QuestionPage qqp=new QuestionPage();
+//    QuestionPage qqp=new QuestionPage();
     FileChooser ffc=new FileChooser();
     ResultPage rrp=new ResultPage();
-    int ppid=qqp.start();
-    String ccmd=ffc.start();
-    uf.execute(ppid,ccmd);
+//    int ppid=qqp.start();
+//    String ccmd=ffc.start();
+//    uf.execute(ppid,ccmd);
     
     }
      
@@ -41,6 +41,11 @@ public class UserGUI implements IntUI{
 
      @Override
      public void close() {
+          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     }
+
+     @Override
+     public String Prompt(String message) {
           throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
      }
      

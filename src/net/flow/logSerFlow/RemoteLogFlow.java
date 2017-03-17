@@ -47,14 +47,14 @@ public class RemoteLogFlow {
      }
      
      private boolean init(){
-          this.logSer=getDefaultMainLogSer();
-          this.port=getDefaultRMIPort();
           try {
+               this.logSer=getDefaultMainLogSer();
+               this.port=getDefaultRMIPort();
                remoteObj=new RemoteLog();
                System.out.println("Enter Backup Logger..");
                String s;
                for(s=sc.nextLine();s.trim().isEmpty();s=sc.nextLine());
-               if(remoteObj.setBackupLogger(s))
+               if(!remoteObj.setBackupLogger(s))
                     System.err.println("Backup Logger Registration fail");
           } catch (Exception ex) {
                System.err.println("Object creation error");
@@ -66,10 +66,11 @@ public class RemoteLogFlow {
                System.err.println("Registry fail");
           }
           try{
+               System.out.println("check1");
                if(!UrlTools.registerObj(remoteObj,logSer))
                     throw new RemoteException();
           }catch(Exception ex){
-               System.out.println("Object Binding fail");
+               System.err.println("Object Binding fail");
                return false;
           }
           return true;
@@ -82,6 +83,12 @@ public class RemoteLogFlow {
           t.start();
      }
      
+     public void join(){
+          try{
+               t.join();
+          }catch(Exception ex){
+          }
+     }
      public void stop(){
           flag=false;
      }

@@ -24,24 +24,37 @@ import static programtester.config.Configuration.getDefaultMainSer;
  * @author Neel Patel
  */
 public class ClientFlow implements IntNetClient{
+     //local
      private Thread t=null;
      private Consumer<String> errRun=x->{},messageRun=x->{};
      private Scanner sc=new Scanner(System.in);
      private boolean flag=false;
      private String mainSer;
-     private IntMainSer mainObj;
-     private IntRemoteLog logOb;
+     private String uName="",passwd="";
      private Registry r;
      private int port;
-     private String uName="",passwd="";
+     //remote reference
+     private IntMainSer mainObj;
+     private IntRemoteLog logOb;
      public ClientFlow(){}
      
      private void run(){
           flag=true;
           for(;flag;){
                try{
-                    Thread.sleep(1000);
-               }catch(Exception ex){ 
+                    try {
+                         Thread.sleep(1000);
+                    } catch (InterruptedException ex) {}
+                    if(!mainObj.aya()){
+                         assert true:"main server says not alive";
+                         return;
+                    }
+                    if(!logOb.aya()){
+                         assert true:"log server says not alive";
+                         return;
+                    }
+               }catch(RemoteException ex){
+                    return;
                }
           }
      }
@@ -86,7 +99,7 @@ public class ClientFlow implements IntNetClient{
                //IntRemoteLog rg=(IntRemoteLog)Naming.lookup(mainLogSer);
                //rg.setBackupLogger(UserFactory.init(mainLogSer));
           } catch (Exception ex) {
-               System.err.println("Server error error");
+               System.err.println("Server error");
                return false;
           }
           start();

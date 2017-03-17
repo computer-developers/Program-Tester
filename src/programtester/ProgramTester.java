@@ -8,6 +8,10 @@ import lib.ui.IntUI;
 import lib.ui.cli.CliUser;
 import lib.userModule.IntUserFlow;
 import lib.userModule.local.SingleUserFlow;
+import lib.userModule.net.NetUserFlow;
+import net.flow.dataSerFlow.MainDataSerFlow;
+import net.flow.logSerFlow.RemoteLogFlow;
+import net.flow.mainSerFlows.MainSerFlow;
 import programtester.config.Configurator;
 
 /**
@@ -22,7 +26,15 @@ ProgramTester {
       */
      public static void main(String[] args) {
           //mainUserCli();
-          mainAdminCli();
+          if(args.length>0)
+          switch(args[0]){
+               case "netUser":mainAdminCli();break;
+               case "mainSer":mainSerCli();break;
+               case "mainDataSer":mainDataSerCli();break;
+               case "mainLogSer":mainLogSerCli();break;
+               default:mainNetUserCli();break;
+          }
+          else mainNetUserCli();
      }
      
      public static void mainUserCli(){
@@ -33,7 +45,6 @@ ProgramTester {
           //System.out.println("Data Directory = " +Test.getDefaultDir());
           //System.out.println("Program Directory = " +ProgramDetails.getDefaultDir());
           IntUserFlow uf=new SingleUserFlow();
-          IntUI cli=new CliUser(uf);
           try {
                MyLogger l=new LocalLogger("log.txt");
                l.setSep(",");
@@ -41,6 +52,27 @@ ProgramTester {
           } catch (FileNotFoundException ex) {
                System.out.println("error in log file.");
           }
+          IntUI cli=new CliUser(uf);
+          cli.start();
+          //System.exit(0);
+     }
+     
+     public static void mainNetUserCli(){
+          Configurator.init();
+          
+          //Test.setDefaultDir(Paths.get("Data").toAbsolutePath());
+          //System.out.println("Working Directory = " +System.getProperty("user.dir"));
+          //System.out.println("Data Directory = " +Test.getDefaultDir());
+          //System.out.println("Program Directory = " +ProgramDetails.getDefaultDir());
+          IntUserFlow uf=new NetUserFlow();
+          try {
+               MyLogger l=new LocalLogger("log.txt");
+               l.setSep(",");
+               uf.setLogger(l);
+          } catch (FileNotFoundException ex) {
+               System.out.println("error in log file.");
+          }
+          IntUI cli=new CliUser(uf);
           cli.start();
           //System.exit(0);
      }
@@ -48,5 +80,20 @@ ProgramTester {
      public static void mainAdminCli(){
           Configurator.init();
           new AdminFlow().start();
+     }
+     
+     public static void mainSerCli(){
+          Configurator.init();
+          new MainSerFlow().start();
+     }
+     
+     public static void mainDataSerCli(){
+          Configurator.init();
+          new MainDataSerFlow().start();
+     }
+     
+     public static void mainLogSerCli(){
+          Configurator.init();
+          new RemoteLogFlow().start();
      }
 }

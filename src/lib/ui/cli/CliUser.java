@@ -114,5 +114,13 @@ public class CliUser implements IntUI{
      public void close() {
           isAlive=false;
      }
+
+     @Override
+     public String Prompt(String message) {
+          System.out.println("prompt :- "+message);
+          String s="";
+          for(s=sc.nextLine();s.trim().isEmpty();s=sc.nextLine());
+          return s;
+     }
      
 }

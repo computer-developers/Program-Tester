@@ -5,13 +5,17 @@
  */
 package net.flow.dataSerFlow;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.Comparator;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,6 +47,7 @@ public class DataSerFlow {
           try {
                Path pd=getDefaultProDir();
                Path td=getDefaultDir();
+               cleanDir(pd);
                ds.getAllProblems().forEach((n,d)->{
                     Path p=pd.resolve(n);
                     try {
@@ -53,6 +58,7 @@ public class DataSerFlow {
                if(ds.getAllProblems().size()!=Files.list(pd)
                        .filter(i->!Files.isDirectory(i)).count())
                     return false;
+               cleanDir(td);
                ds.getAllTestCases().forEach((n,d)->{
                     Path p=td.resolve(n);
                     try {
@@ -67,6 +73,19 @@ public class DataSerFlow {
           } catch (Exception ex) {
                return false;
           }
+     }
+     
+     public static boolean cleanDir(Path dir){
+          try {
+               Files.walk(dir)
+                       .sorted(Comparator.reverseOrder())
+                       .map(Path::toFile)
+                       //.peek(System.out::println)
+                       .forEach(File::delete);
+          } catch (Exception ex) {
+               return false;
+          }
+          return true;
      }
      
      public DataSerFlow(String mainUrl){
@@ -148,4 +167,5 @@ public class DataSerFlow {
      public void stop(){
           flag=false;
      }
+     
 }

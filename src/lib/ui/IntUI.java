@@ -20,6 +20,14 @@ public interface IntUI extends Closeable{
      public void showMessage(String message);
      
      /**
+      * implementation of this method should prompt for input to the user.
+      * {@code message} should be shown to the user when getting input.
+      * @param message String message
+      * @return input given by user.
+      */
+     public String Prompt(String message);
+     
+     /**
       * implementation of this method should initiate the process of execution.
       */
      public void start();

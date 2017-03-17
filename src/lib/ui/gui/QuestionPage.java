@@ -38,6 +38,6 @@ public class QuestionPage extends JFrame{
      
      
      public static void main(String[] args){
-        QuestionPage qp=new QuestionPage();
+//        QuestionPage qp=new QuestionPage();
     }
 }

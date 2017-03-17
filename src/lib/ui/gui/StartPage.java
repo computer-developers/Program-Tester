@@ -19,13 +19,13 @@ public class StartPage extends javax.swing.JPanel {
      
      private List<? extends IntProgramState> ps;
      public StartPage(List<? extends IntProgramState> ps) {
-          initComponents();
+//          initComponents();
           this.ps=ps;
      }
-     public int start(){
+     /*public int start(){
           JButton[] jb=new JButton[10];
           JLabel[] jl=new JLabel[50];
           
           return pid;
-     }
+     }*/
 }

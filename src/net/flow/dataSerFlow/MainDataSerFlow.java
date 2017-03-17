@@ -33,11 +33,11 @@ public class MainDataSerFlow {
           if(!init())
                return;
           flag=true;
-          System.out.println("enter 0 to exit");
           for(;flag;){
                try{
+                    System.out.println("enter 0 to exit");
                     if(sc.nextInt()==0)
-                    break;
+                         stop();
                }catch(Exception ex){ 
                }
           }

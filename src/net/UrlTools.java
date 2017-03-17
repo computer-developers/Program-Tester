@@ -86,16 +86,26 @@ public class UrlTools {
           try {
                new Thread(()->{
                     try {
-                         //System.out.println("bind");
-                         Naming.rebind(uri, obj);
+                         String s;
+                         if(uri.startsWith("rmi:")){
+                              s=uri.replaceFirst("rmi:","");
+                         }else
+                              s=uri;
+                         System.out.println("bind");
+                         Naming.rebind(s, obj);
                     } catch (Exception ex) {
-                         //System.out.println("bind exception");
+                         
                     }
                }).start();
-               //System.out.println("bind suc :- "+obj);
-               return true;
+               System.out.println("bind suc :- "+obj);
+               Remote r=Naming.lookup(uri);
+               System.out.println("obj "+r);
+               if(r!=null)
+                    return true;
+               else
+                    return false;
           } catch (Exception ex) {
-               //System.out.println("reg exception");
+               System.out.println("reg exception");
                return false;
           }
      }

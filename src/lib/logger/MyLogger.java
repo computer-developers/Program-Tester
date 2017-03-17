@@ -31,6 +31,12 @@ public class MyLogger implements Closeable{
           this.log(l);
      }
      
+     public synchronized String getlogString(String... ar){
+          String l=Arrays.stream(ar)
+                  .reduce((s1,s2)->s1+sep+s2).orElse("");
+          return l;
+     }
+     
      @Override
      public void finalize(){
           close();

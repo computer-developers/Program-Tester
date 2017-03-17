@@ -22,6 +22,8 @@ import lib.userModule.result.IntProgramState;
 import lib.userModule.result.IntResultSet;
 import lib.userModule.result.ProgramStateAdapter;
 import lib.userModule.test.Test;
+import net.flow.clientFlow.ClientFlow;
+import net.flow.clientFlow.IntNetClient;
 
 /**
  *
@@ -31,6 +33,8 @@ public class NetUserFlow implements IntUserFlow{
      private IntUI ui; //Refrence to the UI
      private MyLogger logger; //Refrence to the Logger
      private List<ProblemState> ps; //Reference to the live Problem definations.
+     private final IntNetClient net;
+     private String uName,password;
      //private Thread t;
      //this is executer service used to execute the parallel task.
      private ExecutorService es=Executors.newCachedThreadPool();
@@ -83,10 +87,16 @@ public class NetUserFlow implements IntUserFlow{
           if(code>x.getState()){
                x.setState(code);
           }
-          if(logger!=null)
-               logger.log("DateTime = "+LocalDateTime.now()
-               ,"PID = "+x.getProgramID()
-               ,"State = "+x.getState());
+          if(logger!=null){
+               String l=logger.getlogString("DateTime = "+LocalDateTime.now()
+                         ,"UserName = "+uName
+                         //,"Password = "+password
+                         ,"PID = "+x.getProgramID()
+                         ,"State = "+code);
+               logger.log(l);
+               if(net.log(l))
+                    ui.showMessage("Remote log error");
+          }
           System.gc();
      }
      
@@ -113,7 +123,9 @@ public class NetUserFlow implements IntUserFlow{
         program directory.
       */
      public NetUserFlow(){
-          ps=(List<ProblemState>)getPrograms();
+          net=new ClientFlow();
+          net.regErrRunner(System.out::println);
+          net.regMessageRunner(System.out::println);
      }
      
      /**
@@ -124,7 +136,16 @@ public class NetUserFlow implements IntUserFlow{
       */
      @Override
      public synchronized void register(IntUI ui) {
+          if(this.ui!=null)
+               return;
           this.ui=ui;
+          uName=ui.Prompt("enter User Name");
+          password=ui.Prompt("enter password");
+          for(;!net.init(uName, password);){
+               ui.showMessage("username or password wrong.");
+               uName=ui.Prompt("enter User Name");
+               password=ui.Prompt("enter password");
+          }
      }
 
      /**
@@ -142,6 +163,8 @@ public class NetUserFlow implements IntUserFlow{
      @Override
      public IntLiveResultSet execute(long pid,String cmd) {
           try {
+               if(ps==null)
+               ps=(List<ProblemState>)getPrograms();
                Test t=new Test(pid,cmd);
                IntLiveResultSet rt=t.start();
                es.submit(()->update(t));
@@ -162,14 +185,16 @@ public class NetUserFlow implements IntUserFlow{
      }
 
      /**
-      * this method return list of {@code IntProgramState} corresponds to the
-        all Program Details.
+      * this method return list of {@code IntProgramState}
+        corresponds to the all Program Details.
       * the list return by this method is unmodifiable list.
       * @return unmodifiable list of Program states
       */
      @Override
      public synchronized List<? extends IntProgramState> getAllProgramDetail() {
-          return ps;
+          if(ps==null)
+               ps=(List<ProblemState>)getPrograms();
+          return Collections.unmodifiableList(ps);
      }
      
      /**
