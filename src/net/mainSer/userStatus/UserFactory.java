@@ -18,6 +18,11 @@ import lib.logger.LogTools;
 import net.UrlTools;
 import net.logSer.IntLogProc;
 import net.logSer.IntRemoteLog;
+import static programtester.config.Configuration.TEST_FAIL;
+import static programtester.config.Configuration.TEST_FILE_ERROR;
+import static programtester.config.Configuration.TEST_PASS;
+import static programtester.config.Configuration.TEST_PRESENT_ERROR;
+import static programtester.config.Configuration.TEST_TIME_ERROR;
 import static programtester.config.Configuration.getDefaultRMIPort;
 
 /**
@@ -138,7 +143,17 @@ public class UserFactory {
                long pid=Long.parseLong(LogTools.getLogProperty(log, "pid"));
                int status=Integer.parseInt(LogTools.getLogProperty(log, "status"));
                UserStatus u=(UserStatus)getUser(uName,passwd);
-               return u.update(pid, status);
+               if(status==TEST_PASS)
+                    return u.update(pid, getCredit(pid));
+               else if(status==TEST_PRESENT_ERROR)
+                    return u.update(pid, getCredit(pid)-1);
+               else if(status==TEST_TIME_ERROR)
+                    return u.update(pid, 0);
+               else if(status==TEST_FAIL)
+                    return u.update(pid, 0);
+               else if(status==TEST_FILE_ERROR)
+                    return u.update(pid, 0);
+               else return false;
           }catch(Exception ex){
                return false;
           }

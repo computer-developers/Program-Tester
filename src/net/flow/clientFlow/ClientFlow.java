@@ -24,7 +24,7 @@ import static programtester.config.Configuration.getDefaultRMIPort;
  *
  * @author Neel Patel
  */
-public class ClientFlow {
+public class ClientFlow implements IntNetClient{
      private Thread t=null;
      private Scanner sc=new Scanner(System.in);
      private boolean flag=false;
@@ -32,11 +32,10 @@ public class ClientFlow {
      private MainSer remoteObj;
      private Registry r;
      private int port;
+     private String uName="",passwd="";
      public ClientFlow(){}
      
      private void run(){
-          if(!init())
-               return;
           flag=true;
           System.out.println("enter 0 to exit");
           for(;flag;){
@@ -47,7 +46,21 @@ public class ClientFlow {
                }
           }
      }
-     private boolean init(){
+     
+     
+     public void start(){
+          if(t!=null&&t.isAlive())
+               return;
+          t=new Thread(this::run);
+          t.start();
+     }
+     
+     public void stop(){
+          flag=false;
+     }
+
+     @Override
+     public boolean init(String uName,String passwd){
           this.mainSer=getDefaultMainSer();
           try{
                r=LocateRegistry.createRegistry(port);
@@ -77,14 +90,28 @@ public class ClientFlow {
           return true;
      }
      
-     public void start(){
-          if(t!=null&&t.isAlive())
-               return;
-          t=new Thread(this::run);
-          t.start();
+     @Override
+     public boolean regErrRunner(Runnable r) {
+          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
      }
-     
-     public void stop(){
-          flag=false;
+
+     @Override
+     public boolean regMessageRunner(Runnable r) {
+          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     }
+
+     @Override
+     public boolean log(String s) {
+          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     }
+
+     @Override
+     public int credit(long pid) {
+          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     }
+
+     @Override
+     public int userCredit() {
+          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
      }
 }
