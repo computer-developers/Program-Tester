@@ -131,6 +131,13 @@ public class DataSerFlow {
           return false;
      }
      
+     public void join(){
+          try{
+               t.join();
+          }catch(Exception ex){
+          }
+     }
+     
      public void start(){
           if(t!=null&&t.isAlive())
                return;

@@ -34,13 +34,11 @@ public class ClientFlow implements IntNetClient{
      private String uName="",passwd="";
      public ClientFlow(){}
      
-     /*private void run(){
+     private void run(){
           flag=true;
-          System.out.println("enter 0 to exit");
           for(;flag;){
                try{
-                    if(sc.nextInt()==0)
-                    break;
+                    Thread.sleep(1000);
                }catch(Exception ex){ 
                }
           }
@@ -55,7 +53,7 @@ public class ClientFlow implements IntNetClient{
      
      public void stop(){
           flag=false;
-     }*/
+     }
 
      @Override
      public boolean init(String uName,String passwd){
@@ -81,7 +79,7 @@ public class ClientFlow implements IntNetClient{
                }
                DataSerFlow d=new DataSerFlow(mainSer);
                d.start();
-               d.ss
+               d.join();
                //code for register User State as a backup logger.
                //IntRemoteLog rg=(IntRemoteLog)Naming.lookup(mainLogSer);
                //rg.setBackupLogger(UserFactory.init(mainLogSer));
@@ -89,13 +87,7 @@ public class ClientFlow implements IntNetClient{
                System.err.println("Server error error");
                return false;
           }
-          try{
-               if(!UrlTools.registerObj(remoteObj,mainSer))
-                    throw new RemoteException();
-          }catch(Exception ex){
-               System.out.println("Object Binding fail");
-               return false;
-          }
+          t=new Thread(()->start());
           return true;
      }
      
