@@ -112,7 +112,7 @@ public class NetUserFlow implements IntUserFlow{
       * initialize the object with all problem definition read from the default
         program directory.
       */
-     public SingleUserFlow(){
+     public NetUserFlow(){
           ps=(List<ProblemState>)getPrograms();
      }
      
