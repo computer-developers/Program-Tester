@@ -34,25 +34,25 @@ public interface IntDataSer extends Remote{
         object of which maps the name of the file to byte array of file data.
       * @return map object containing data of Problems.
       */
-     Map<String,byte[]> getAllProblems();
+     Map<String,byte[]> getAllProblems()throws RemoteException;
      
      /**
       * this method should return all the Test files as map object of which
         maps the name of the file to byte array of file data.
       * @return map object containing data of Test files.
       */
-     Map<String,byte[]> getAllTestCases();
+     Map<String,byte[]> getAllTestCases()throws RemoteException;
      
      /**
       * when this method called remotely, this object should be
         transfer from the server to client through the network.
       * @return this object.
       */
-     IntDataSer getObject();
+     IntDataSer getObject()throws RemoteException;
      
      /**
       * should return creation time of the object
       * @return object of LocalDateTime
       */
-     LocalDateTime getTime();
+     LocalDateTime getTime()throws RemoteException;
 }

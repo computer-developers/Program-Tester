@@ -30,6 +30,8 @@ public class Configuration {
      static final private ReentrantReadWriteLock ldefLogDir=new ReentrantReadWriteLock();
      static private Path defProDir=Paths.get(".").toAbsolutePath();
      static final private ReentrantReadWriteLock ldefProDir=new ReentrantReadWriteLock();
+     static private Path defUserDetPath=Paths.get(".").toAbsolutePath();
+     static final private ReentrantReadWriteLock ldefUserDetPath=new ReentrantReadWriteLock();
 //network
      static private String defMainSer="";
      static final private ReentrantReadWriteLock ldefMainSer=new ReentrantReadWriteLock();
@@ -198,6 +200,48 @@ public class Configuration {
                ldefProDir.writeLock().unlock();
           }
      }
+     
+     /**
+      * getter method of default path.
+      * it is used by constructor if the path is not provided explicitly.
+      * this method is thread safe.
+      * @return default path.
+      */
+     static public Path getDefaultUserDetailPath(){
+          try{
+               ldefUserDetPath.readLock().lock();
+               return defUserDetPath;
+          }
+          finally{
+               ldefUserDetPath.readLock().unlock();     
+          }
+     }
+     
+     /**
+      * setter method of default path.
+      * this method is thread safe.<br>
+      * Note:- changes made in default path is not reflected in existing objects
+        of the class as they use their local variable to store path variable
+        to locate the data files.
+      * @param p new default path.
+      * @return true if the default path is updated with {@code p}, false if p
+        is not absolute or not a directory.
+      */
+     static public boolean setDefaultUserDetailPath(Path p){
+          if(!p.isAbsolute()||Files.isDirectory(p))
+               return false;
+          try{
+               if(getDefaultUserDetailPath().equals(p))
+                    return true;
+               ldefUserDetPath.writeLock().lock();
+               defUserDetPath=p;
+               return true;
+          }finally{
+               ldefUserDetPath.writeLock().unlock();
+          }
+     }
+     
+//network
      
      /**
       * getter default Main Server URI.

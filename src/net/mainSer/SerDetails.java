@@ -115,6 +115,7 @@ public class SerDetails {
                     return false;
                }
           } catch (Exception ex) {
+               System.out.println("Set Loger Ser :- "+ex);
                return false;
           } 
      }
@@ -144,6 +145,7 @@ public class SerDetails {
                     return false;
                }
           } catch (Exception ex) {
+               System.out.println("Set Data Ser :- "+ex);
                return false;
           }
      }
@@ -173,6 +175,7 @@ public class SerDetails {
                     return false;
                }
           } catch (Exception ex) {
+               System.out.println("Set Main Data Ser :- "+ex);
                return false;
           }
      }

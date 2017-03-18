@@ -66,6 +66,11 @@ public class Configurator {
                     if(Files.exists(p4)&&Files.isDirectory(p4))
                          Configuration.setDefaultLogDir(p4);
                     break;
+               case "user_details":
+                    Path p5=Paths.get(ar[1]).toAbsolutePath();
+                    if(Files.exists(p5)&&!Files.isDirectory(p5))
+                         Configuration.setDefaultUserDetailPath(p5);
+                    break;
                case "network_logger_ip":
                     break;
                case "parallel_execution":
@@ -80,7 +85,23 @@ public class Configurator {
                          
                     }catch(NumberFormatException e){}
                     break;
-               case "network_logger_port":
+               case "rmi_port":
+                    try{
+                         int p=Integer.parseInt(ar[1]);
+                         Configuration.setDefaultRMIPort(p);
+                    }catch(NumberFormatException e){}
+                    break;
+               case "main_server":
+                    Configuration.setDefaultMainSer(ar[1]);
+                    break;
+               case "main_data_server":
+                    Configuration.setDefaultMainDataSer(ar[1]);
+                    break;
+               case "main_remote_logger":
+                    Configuration.setDefaultMainLogSer(ar[1]);
+                    break;
+               case "data_server":
+                    Configuration.setDefaultDataSer(ar[1]);
                     break;
                     
           }

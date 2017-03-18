@@ -36,7 +36,7 @@ public class RemoteLogFlow {
           if(!init())
                return;
           flag=true;
-          System.out.println("enter 0 to exit");
+          System.out.println("enter 0 to stop server");
           for(;flag;){
                try{
                     if(sc.nextInt()==0)
@@ -66,8 +66,10 @@ public class RemoteLogFlow {
                System.err.println("Registry fail");
           }
           try{
-               System.out.println("check1");
+               System.out.println("URI :- "+logSer);
                if(!UrlTools.registerObj(remoteObj,logSer))
+                    throw new RemoteException();
+               if(!remoteObj.setUrl(logSer))
                     throw new RemoteException();
           }catch(Exception ex){
                System.err.println("Object Binding fail");

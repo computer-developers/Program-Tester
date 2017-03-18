@@ -9,6 +9,7 @@ import net.mainSer.userStatus.IntUserStatus;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Map;
+import net.mainSer.userStatus.UserFactory;
 
 /**
  *
@@ -55,7 +56,7 @@ public class MainSer extends UnicastRemoteObject implements IntMainSer{
       */
      @Override
      public IntUserStatus getStatus(String user, String passwd) {
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          return UserFactory.getUser(user, passwd);
      }
      
 }

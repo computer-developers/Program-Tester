@@ -15,6 +15,7 @@ import programtester.config.Configurator;
 public class MainDataFlowTest {
      public static void main(String... arg){
           Configurator.init();
+          System.out.println("Main Data Ser");
           MainDataSerFlow r=new MainDataSerFlow();
           r.start();
           r.join();

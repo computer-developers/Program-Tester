@@ -5,8 +5,11 @@
  */
 package net.mainSer.userStatus;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.rmi.Naming;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,6 +17,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
+import lib.dT.problemManipulate.IntProgramDetail;
+import lib.dT.problemManipulate.ProgramDetails;
 import lib.logger.LogTools;
 import net.UrlTools;
 import net.logSer.IntLogProc;
@@ -24,6 +30,7 @@ import static programtester.config.Configuration.TEST_PASS;
 import static programtester.config.Configuration.TEST_PRESENT_ERROR;
 import static programtester.config.Configuration.TEST_TIME_ERROR;
 import static programtester.config.Configuration.getDefaultRMIPort;
+import static programtester.config.Configuration.getDefaultUserDetailPath;
 
 /**
  *
@@ -46,6 +53,8 @@ public class UserFactory {
                IntRemoteLog ir=new UserStatusLog();
                int port=getDefaultRMIPort();
                String uri=UrlTools.registerObj(ir, port,"userState");
+               readUserDetail(getDefaultUserDetailPath());
+               readProgramDetails();
                new Thread(()->proBack(lp)).start();
                return uri;
           } catch (Exception ex) {
@@ -89,6 +98,21 @@ public class UserFactory {
      }
      
      /**
+      * add problem if already not exist in system.
+      * this method add new problem with specified credit in the system.
+      * it will return true if the problem already not in the system and
+        added successfully.
+      * it will return false if the problem is not exist in the system.<br>
+      * Note:-if the problem is already in the system then it will not make any
+        change and simply return false;
+      * @param pd object of type IntProgramDetail
+      * @return true if successfully added, false otherwise
+      */
+     public static synchronized boolean addProblem(IntProgramDetail pd){
+          return addProblem(pd.getProgramID(),pd.getCredit());
+     }
+     
+     /**
       * this method return object of {@code IntUserStatus}.
       * this method return return object of {@code IntUserStatus} from the
         system containing same username and password.
@@ -102,12 +126,18 @@ public class UserFactory {
           UserStatus u=user.parallelStream()
                          .filter(i->i.getUName().equals(uName))
                          .findAny().orElse(null);
+          System.out.println("user name :- "+u.getUName()+";"+u.getPasswd());
           if(u==null)
                return null;
-          if(u.getPasswd().equals(passwd))
+          System.out.println("check1");
+          if(u.getPasswd().equals(passwd)){
+               System.out.println("check2");
                return u;
-          else
+          }
+          else{
+               System.out.println("err check");
                return null;
+          }
      }
      
      /**
@@ -195,4 +225,32 @@ public class UserFactory {
           }
      }
 
+     public static List<String> getAllUser(){
+          return user.stream().map(i->i.getUName())
+                    .sorted().collect(Collectors.toList());
+     }
+     
+     public static Map<Long,Integer> getAllProblems(){
+          return Collections.unmodifiableMap(problems);
+     }
+     
+     static boolean readUserDetail(Path file){
+          System.out.println("start readUserDetail. "+file);
+          try {
+               Files.lines(file).peek(System.out::println).peek(l->{
+                    String s[]=Arrays.stream(l.split("=",2)).map(i->i.trim())
+                                   .toArray(String[]::new);
+                    addUser(s[0],s[1]);
+               }).count();
+               return true;
+          } catch (Exception ex) {
+               System.err.println("readUserdetail :- "+ex);
+               ex.printStackTrace();
+               return false;
+          }
+     }
+     
+     static void readProgramDetails(){
+          ProgramDetails.readProgramDetail().forEach(i->addProblem(i));
+     }
 }

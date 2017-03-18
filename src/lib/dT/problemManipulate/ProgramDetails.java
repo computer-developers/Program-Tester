@@ -118,6 +118,10 @@ public class ProgramDetails {
           return readProgramDetail(f);
      }
      
+     /**
+      * 
+      * @return 
+      */
      public static List<IntProgramDetail> readProgramDetail(){
           Path dir=getDefaultProDir();
           try {

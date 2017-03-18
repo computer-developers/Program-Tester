@@ -82,6 +82,7 @@ public class DataSerFlow {
                        .map(Path::toFile)
                        //.peek(System.out::println)
                        .forEach(File::delete);
+               Files.createDirectories(dir);
           } catch (Exception ex) {
                return false;
           }

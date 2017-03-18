@@ -1,0 +1,4 @@
+max = 12345
+foo = 5623
+abcd = abcd
+min = 12345

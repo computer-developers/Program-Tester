@@ -11,14 +11,15 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Scanner;
 import net.UrlTools;
-import static programtester.config.Configuration.getDefaultMainLogSer;
+import net.dataSer.IntDataSer;
+import static programtester.config.Configuration.getDefaultMainDataSer;
 import programtester.config.Configurator;
 
 /**
  *
  * @author Neel Patel
  */
-public class LogSerClient {
+public class DataSerClient {
      static Scanner sc=new Scanner(System.in);
      public static void main(String arg[]) throws RemoteException, NotBoundException, MalformedURLException{
           Configurator.init();
@@ -30,17 +31,16 @@ public class LogSerClient {
           for(name=sc.next();name.trim().isEmpty();name=sc.next());
           String ur=UrlTools.makeRMI(ip,port,name);
           System.out.println("url :- "+ur);
-          ur=getDefaultMainLogSer();
-          IntRemoteLog rl=(IntRemoteLog)Naming.lookup(ur);
+          ur=getDefaultMainDataSer();
+          IntDataSer rl=(IntDataSer)Naming.lookup(ur);
           String s=sc.next();
-          for(int i=0;!s.equals("0");s=sc.next(),i++){
-               if(i%5==0){
-                    System.out.println("aya = "+rl.aya());
-                    System.out.println("url = "+rl.toUrl());
-               }
-               System.out.println(rl.log(s));
-                    
-          }
+          System.out.println("aya = "+rl.aya());
+          System.out.println("url = "+rl.toUrl());
+          System.out.println("All Problem = "+rl.getAllProblems());
+          System.out.println("All Test Cases = "+rl.getAllTestCases());
+          System.out.println("Object = "+rl.getObject());
+          System.out.println("Time = "+rl.getTime());
+          
           //p.destroyForcibly();
           System.exit(0);
      }

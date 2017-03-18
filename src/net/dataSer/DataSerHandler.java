@@ -43,6 +43,8 @@ public class DataSerHandler {
                IntDataSer a=new DataSer(pm,tm);
                return a;
           } catch (Exception ex) {
+               System.out.println("Object handler :- "+ex.getMessage());
+               ex.printStackTrace();
                return null;
           }
      }

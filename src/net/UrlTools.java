@@ -87,16 +87,17 @@ public class UrlTools {
                new Thread(()->{
                     try {
                          String s;
-                         if(uri.startsWith("rmi:")){
+                         /*if(uri.startsWith("rmi:")){
                               s=uri.replaceFirst("rmi:","");
-                         }else
+                         }else*/
                               s=uri;
                          System.out.println("bind");
                          Naming.rebind(s, obj);
                     } catch (Exception ex) {
-                         
+                         System.out.println("Register Thread Exception.."+ex);
                     }
                }).start();
+               Thread.sleep(1000);
                System.out.println("bind suc :- "+obj);
                Remote r=Naming.lookup(uri);
                System.out.println("obj "+r);

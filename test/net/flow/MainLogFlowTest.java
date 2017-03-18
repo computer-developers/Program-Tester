@@ -15,6 +15,7 @@ import programtester.config.Configurator;
 public class MainLogFlowTest {
      public static void main(String... arg){
           Configurator.init();
+          System.out.println("Log Ser");
           RemoteLogFlow r=new RemoteLogFlow();
           r.start();
           r.join();

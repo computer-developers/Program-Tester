@@ -74,14 +74,17 @@ public class ClientFlow implements IntNetClient{
      public boolean init(String uName,String passwd){
           this.mainSer=getDefaultMainSer();
           try{
+               System.out.println("Main ser..."+mainSer);
                mainObj=(IntMainSer)Naming.lookup(mainSer);
+               
                IntUserStatus u=mainObj.getStatus(uName, passwd);
-               if(u!=null){
+               if(u==null){
                     errRun.accept("wrong username or Password");
                     return false;
                }
           }catch(Exception ex){
-               System.err.println("Error in getting reference of Remote.");
+               System.err.println("Error in getting reference of Remote."+ex);
+               ex.printStackTrace();
                return false;
           }
           try {

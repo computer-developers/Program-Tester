@@ -35,7 +35,7 @@ public class MainDataSerFlow {
           flag=true;
           for(;flag;){
                try{
-                    System.out.println("enter 0 to exit");
+                    System.out.println("enter 0 to stop server");
                     if(sc.nextInt()==0)
                          stop();
                }catch(Exception ex){ 
@@ -47,7 +47,9 @@ public class MainDataSerFlow {
           this.dataSer=getDefaultMainDataSer();
           this.port=getDefaultRMIPort();
           try {
+               System.out.println("start object creation");
                remoteObj=(DataSer)DataSerHandler.makeObject();
+               System.out.println("end object creation");
           } catch (Exception ex) {
                System.err.println("Object creation error");
                return false;
@@ -58,7 +60,10 @@ public class MainDataSerFlow {
                System.err.println("Registry fail");
           }
           try{
+               System.out.println("URI :- "+dataSer);
                if(!UrlTools.registerObj(remoteObj,dataSer))
+                    throw new RemoteException();
+               if(!remoteObj.setUrl(dataSer))
                     throw new RemoteException();
           }catch(Exception ex){
                System.out.println("Object Binding fail");
@@ -80,6 +85,7 @@ public class MainDataSerFlow {
           }catch(Exception ex){
           }
      }
+     
      public void stop(){
           flag=false;
      }
