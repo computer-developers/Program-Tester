@@ -6,6 +6,9 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import lib.adminModule.AdminDataManipulator;
+import static lib.adminModule.AdminFlow.disPath;
+import lib.adminModule.AdminProgramManipulator;
 import net.UrlTools;
 import net.logSer.IntRemoteLog;
 import net.mainSer.MainSer;
@@ -31,15 +34,25 @@ public class MainSerFlow {
           if(!init())
                return;
           flag=true;
-          System.out.println(UserFactory.getAllProblems().keySet()
-                  .stream().collect(Collectors.toList()));
-          System.out.println(UserFactory.getAllUser());
-          System.out.println("enter 0 to stop server");
           for(;flag;){
-               try{
-                    if(sc.nextInt()==0)
-                    break;
-               }catch(Exception ex){ 
+               System.out.println("\nMenu..\n"
+                         + "1.get Main Data Server\n"
+                         + "2.get all Data Servers\n"
+                         + "3.get log Server\n"
+                         + "4.get all Programs\n"
+                         + "5.get all Users\n"
+                         + "6.get all Users\n"
+                         + "0.Stop Server\n");
+               switch(sc.nextInt()){
+                    case 1:System.out.println("Main Server URI :- "
+                            +SerDetails.getMainDataSer());
+                              break;
+                    case 2:
+                              break;
+                    case 3:AdminDataManipulator.start();
+                              break;
+                    case 0:stop();return;
+                    default: System.out.println("Invalid input");
                }
           }
      }
@@ -55,25 +68,30 @@ public class MainSerFlow {
           }
           try {
                remoteObj=new MainSer();
-               System.out.println("Main Data Ser :- "+mainDataSer);
+               System.out.println("Main Data Ser URI :- "+mainDataSer);
                if(!SerDetails.registerMainDataSer(mainDataSer)){
-                    System.out.println("DataSer fail");
+                    System.out.println("DataSer Registration fail");
                     throw new RemoteException();
                }
                if(!SerDetails.setLogSer(mainLogSer)){
-                    System.out.println("LogSer fail");
+                    System.out.println("LogSer Registration fail");
                     throw new RemoteException();
                }
                //code for register User State as a backup logger.
                IntRemoteLog rg=(IntRemoteLog)Naming.lookup(mainLogSer);
-               if(!rg.setBackupLogger(UserFactory.init(mainLogSer)))
+               if(!rg.setBackupLogger(UserFactory.init(mainLogSer))){
                     System.out.println("UserStatus Log registration fail.");
+                    return false;
+               }
           } catch (Exception ex) {
                System.err.println("Object creation error.."+ex);
-               //return false;
+               return false;
           }
           try{
                System.out.println("URI :- "+mainSer);
+               System.out.println("Enter 1 to bind the Server...");
+               if(sc.nextInt()!=1)
+                    return false;
                if(!UrlTools.registerObj(remoteObj,mainSer))
                     throw new RemoteException();
           }catch(Exception ex){
@@ -100,4 +118,5 @@ public class MainSerFlow {
      public void stop(){
           flag=false;
      }
+     
 }

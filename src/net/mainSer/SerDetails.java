@@ -5,14 +5,11 @@
  */
 package net.mainSer;
 
-import java.net.MalformedURLException;
 import java.rmi.Naming;
-import java.rmi.NotBoundException;
-import java.rmi.RemoteException;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.dataSer.IntDataSer;
 import net.logSer.IntRemoteLog;
 
@@ -37,6 +34,18 @@ public class SerDetails {
                     return s;
           }
           return null;
+     }
+     
+     /**
+      * 
+      * @return return the data Server, null if no data server connected.
+      */
+     public static synchronized String getMainDataSer(){
+          try{
+               return mainDataSer.toUrl();
+          }catch(Exception ex){
+               return "not available";
+          }
      }
      
      /**
@@ -180,4 +189,8 @@ public class SerDetails {
           }
      }
      
+     public synchronized static Set<String> getAllDataSer(){
+          Set<String> s=new HashSet<String>();
+          return dataSer.forEach(action);
+     }
 }
