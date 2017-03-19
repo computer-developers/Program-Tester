@@ -5,14 +5,11 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Scanner;
-import java.util.stream.Collectors;
-import lib.adminModule.AdminDataManipulator;
-import static lib.adminModule.AdminFlow.disPath;
-import lib.adminModule.AdminProgramManipulator;
 import net.UrlTools;
 import net.logSer.IntRemoteLog;
 import net.mainSer.MainSer;
 import net.mainSer.SerDetails;
+import net.mainSer.userStatus.IntUserStatus;
 import net.mainSer.userStatus.UserFactory;
 import static programtester.config.Configuration.*;
 
@@ -41,7 +38,7 @@ public class MainSerFlow {
                          + "3.get log Server\n"
                          + "4.get all Programs\n"
                          + "5.get all Users\n"
-                         + "6.get all Users\n"
+                         + "6.get Users Details\n"
                          + "0.Stop Server\n");
                switch(sc.nextInt()){
                     case 1:System.out.println("Main Server URI :- "
@@ -55,8 +52,22 @@ public class MainSerFlow {
                             +SerDetails.getLogSer());
                               break;
                     case 4:System.out.println("Program list...");
-                              SerDetails.getAllDataSer()
-                                   .forEach(i->System.out.println(i));
+                              UserFactory.getAllProblems()
+                                   .forEach((x,y)->System.out.println(x+"\t"+y));
+                              break;
+                    case 5:System.out.println("Users list...");
+                              UserFactory.getAllUser()
+                                   .forEach((i)->System.out.println(i));
+                              break;
+                    case 6:System.out.println("Enter User name...");
+                              String s;
+                              for(s=sc.next();s.trim().isEmpty();s=sc.next());
+                              IntUserStatus u=UserFactory.getUser(s);
+                              System.out.println("Password :- "+u.getPasswd());
+                              System.out.println("Total Credit :- "+u.getUserCredit());
+                              System.out.println("problem details...");
+                              u.getAllProStatus()
+                                      .forEach((x,y)->System.out.println(x+"\t"+y));
                               break;
                     case 0:stop();return;
                     default: System.out.println("Invalid input");

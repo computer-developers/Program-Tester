@@ -5,10 +5,11 @@
         <group>
             <file>file:/C:/My%20Folder/Fun/Data/Program%20Tester/src/lib/adminModule/AdminStartServer.java</file>
             <file>file:/C:/My%20Folder/Fun/Data/Program%20Tester/src/net/mainSer/MainSer.java</file>
+            <file>file:/C:/My%20Folder/Fun/Data/Program%20Tester/src/lib/adminModule/AdminLogAnalyser.java</file>
             <file>file:/C:/My%20Folder/Fun/Data/Program%20Tester/src/net/mainSer/userStatus/UserFactory.java</file>
             <file>file:/C:/My%20Folder/Fun/Data/Program%20Tester/src/net/mainSer/SerDetails.java</file>
-            <file>file:/C:/My%20Folder/Fun/Data/Program%20Tester/test/net/flow/MainSerFlowTest.java</file>
             <file>file:/C:/My%20Folder/Fun/Data/Program%20Tester/src/net/mainSer/IntMainSer.java</file>
+            <file>file:/C:/My%20Folder/Fun/Data/Program%20Tester/src/lib/adminModule/AdminFlow.java</file>
             <file>file:/C:/My%20Folder/Fun/Data/Program%20Tester/src/net/flow/mainSerFlows/MainSerFlow.java</file>
         </group>
     </open-files>
