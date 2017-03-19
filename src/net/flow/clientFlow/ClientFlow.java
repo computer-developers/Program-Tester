@@ -78,6 +78,7 @@ public class ClientFlow implements IntNetClient{
                mainObj=(IntMainSer)Naming.lookup(mainSer);
                System.out.println("main object obtained");
                IntUserStatus u=mainObj.getStatus(uName, passwd);
+               System.out.println("user status :- "+u);
                if(u==null){
                     errRun.accept("wrong username or Password");
                     return false;
@@ -97,8 +98,9 @@ public class ClientFlow implements IntNetClient{
                }
                DataSerFlow d=new DataSerFlow(mainSer);
                d.start();
+               System.out.println("data ser flow running");
                d.join();
-               System.out.println("befor server error");
+               System.out.println("before server error");
                //code for register User State as a backup logger.
                //IntRemoteLog rg=(IntRemoteLog)Naming.lookup(mainLogSer);
                //rg.setBackupLogger(UserFactory.init(mainLogSer));
