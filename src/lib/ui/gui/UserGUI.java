@@ -3,6 +3,8 @@ package lib.ui.gui;
 import java.util.List;
 import lib.ui.IntUI;
 import lib.userModule.IntUserFlow;
+import lib.userModule.result.IntLiveResult;
+import lib.userModule.result.IntLiveResultSet;
 import lib.userModule.result.IntProgramState;
 import static programtester.config.Configuration.TEST_PASS;
 
@@ -15,19 +17,35 @@ public class UserGUI implements IntUI{
      private IntUserFlow uf;
      private List<? extends IntProgramState> ps;
      
+          
+          
+          
      public UserGUI(IntUserFlow uf){
           this.uf=uf;
           this.uf.register(this);
           ps=uf.getAllProgramDetail();
+     }
+  public void display(long pid)
+  {
+       IntProgramState ips = null;
+       for (IntProgramState k : ps)
+            if(k.getProgramID() == pid)
+            {
+                 ips = k;
+                 break;
+            }
+    QuestionPage qqp=new QuestionPage(ips,this);
           
-//    QuestionPage qqp=new QuestionPage();
-    FileChooser ffc=new FileChooser();
-    ResultPage rrp=new ResultPage();
-//    int ppid=qqp.start();
-//    String ccmd=ffc.start();
-//    uf.execute(ppid,ccmd);
     
     }
+     public void run(long pid){
+        FileChooser ffc=new FileChooser();
+        String retCmd = ffc.returnCmd();
+          IntLiveResultSet ilr = uf.execute(pid, retCmd);
+          ResultPage rrp=new ResultPage(ilr);
+          
+     }
+     
      
      @Override
      public void showMessage(String message) {

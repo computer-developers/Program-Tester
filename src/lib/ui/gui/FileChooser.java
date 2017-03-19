@@ -13,6 +13,8 @@ import javax.swing.*;
 
 public class FileChooser extends JFrame {
 
+     String cmd = null;
+     
    public FileChooser() {
     super("Select your file from here");
     setSize(500,500);
@@ -29,7 +31,7 @@ public class FileChooser extends JFrame {
       public void actionPerformed(ActionEvent ae) {
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("choosertitle");
-        String fullPath = null, cmd;
+        String fullPath = null;
         int option = chooser.showOpenDialog(FileChooser.this);
         if (option == JFileChooser.APPROVE_OPTION) {
             String sf = chooser.getSelectedFile().getName();
@@ -40,11 +42,13 @@ public class FileChooser extends JFrame {
             String dcmd = "java " + fullPath + "\\" + sf;
             StringTokenizer st = new StringTokenizer(dcmd,".");
             cmd = st.nextToken();
-            System.out.println("The final command is "+cmd);
+            
+          //  System.out.println("The final command is "+cmd);
         }
+        
       }
     });
-    result.addActionListener(new ActionListener() {
+    /*result.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
             String cmd = e.getActionCommand();
             
@@ -54,12 +58,14 @@ public class FileChooser extends JFrame {
             new ResultPage();
         }
         }
-    });
+    });*/
 
     c.add(openButton);
     c.add(result);
   }
-
+         String returnCmd(){
+              return this.cmd;
+         }
   public static void main(String args[]) {
     FileChooser fc = new FileChooser();
     fc.setVisible(true);

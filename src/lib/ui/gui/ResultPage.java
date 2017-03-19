@@ -2,29 +2,43 @@ package lib.ui.gui;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.util.*;
+//import java.util.*;
 import javax.swing.*;
+import lib.userModule.result.IntLiveResult;
+import lib.userModule.result.IntLiveResultSet;
 
 /**
  *
  * @author Parth Doshi
  */
 public class ResultPage extends JFrame{
-    JLabel tcno;
-    JTextField ans;
-    public ResultPage() {    
+    JLabel[] tcno,ans = new JLabel[10];
+    
+    IntLiveResultSet irs = null;
+    public ResultPage(IntLiveResultSet irs) {    
         
     super("Result Page");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(500,500);
-        tcno=new JLabel("Test Case");
-        ans=new JTextField(10);
-        tcno.setText("Test Case 1 : ");
-        setVisible(true);
-        this.add(tcno);
-        this.add(ans);
+        this.irs=irs;
+             setSize(500,500);
+             setVisible(true);
+        java.util.List<IntLiveResult> ilr = this.irs.getAllLiveResult();
+        int i = 0;
+        for(IntLiveResult ir: ilr) //for-each loop
+        {
+        
+             
+             //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+             
+        tcno[i]=new JLabel("Test Case - "+ir.getMessageCode());
+        ans[i]=new JLabel(ir.getMessage());
+        //tcno.setText("Test Case 1 : ");
+        
+        this.add(tcno[i]);
+        this.add(ans[i]);
+        i++;
+        }
     }
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         ResultPage rp=new ResultPage();
-    }
+    }*/
 }
