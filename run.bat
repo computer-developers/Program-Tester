@@ -1,1 +1,1 @@
-java -jar ProgramTesterUser.jar
+java -jar ProgramTester.jar

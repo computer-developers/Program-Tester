@@ -67,6 +67,9 @@ public class RemoteLogFlow {
           }
           try{
                System.out.println("URI :- "+logSer);
+               System.out.println("Enter 1 to bind the Server...");
+               if(sc.nextInt()!=1)
+                    return false;
                if(!UrlTools.registerObj(remoteObj,logSer))
                     throw new RemoteException();
                if(!remoteObj.setUrl(logSer))

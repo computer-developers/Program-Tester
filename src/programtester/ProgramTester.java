@@ -26,14 +26,10 @@ ProgramTester {
       */
      public static void main(String[] args) {
           //mainUserCli();
-          if(args.length>0)
-          switch(args[0]){
-               case "netUser":mainAdminCli();break;
-               case "mainSer":mainSerCli();break;
-               case "mainDataSer":mainDataSerCli();break;
-               case "mainLogSer":mainLogSerCli();break;
-               default:mainNetUserCli();break;
-          }
+          if(args.length>0&&args[0].equalsIgnoreCase("admin"))
+               mainAdminCli();
+          else if(args.length>0&&args[0].equalsIgnoreCase("localuser"))
+               mainUserCli();
           else mainNetUserCli();
      }
      

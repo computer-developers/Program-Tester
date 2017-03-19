@@ -1,1 +1,1 @@
-java -jar ProgramTesterAdmin.jar
+java -jar ProgramTester.jar admin

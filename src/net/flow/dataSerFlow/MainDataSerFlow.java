@@ -12,6 +12,9 @@ import java.util.Scanner;
 import net.UrlTools;
 import net.dataSer.DataSer;
 import net.dataSer.DataSerHandler;
+import net.mainSer.SerDetails;
+import net.mainSer.userStatus.IntUserStatus;
+import net.mainSer.userStatus.UserFactory;
 import static programtester.config.Configuration.getDefaultMainDataSer;
 import static programtester.config.Configuration.getDefaultRMIPort;
 
@@ -34,11 +37,27 @@ public class MainDataSerFlow {
                return;
           flag=true;
           for(;flag;){
-               try{
-                    System.out.println("enter 0 to stop server");
-                    if(sc.nextInt()==0)
-                         stop();
-               }catch(Exception ex){ 
+               System.out.println("\nMenu..\n"
+                         + "1.get all Program Files\n"
+                         + "2.get all Test Data\n"
+                         + "0.Stop Server\n");
+               switch(sc.nextInt()){
+                    case 1:System.out.println("Program File list...");
+                              remoteObj.getAllProblems().forEach((x,y)->{
+                                   System.out.println(x);
+                              });
+                              System.out.println("Total :- "+remoteObj
+                                      .getAllProblems().size());
+                              break;
+                    case 2:System.out.println("Test Data File list...");
+                              remoteObj.getAllTestCases().forEach((x,y)->{
+                                   System.out.println(x);
+                              });
+                              System.out.println("Total :- "+remoteObj
+                                      .getAllTestCases().size());
+                              break;
+                    case 0:stop();return;
+                    default: System.out.println("Invalid input");
                }
           }
      }
@@ -61,6 +80,9 @@ public class MainDataSerFlow {
           }
           try{
                System.out.println("URI :- "+dataSer);
+               System.out.println("Enter 1 to bind the Server...");
+               if(sc.nextInt()!=1)
+                    return false;
                if(!UrlTools.registerObj(remoteObj,dataSer))
                     throw new RemoteException();
                if(!remoteObj.setUrl(dataSer))

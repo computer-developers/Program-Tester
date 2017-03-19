@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package lib.adminModule;
+package lib.adminModule.start;
 
 import java.util.Scanner;
 import static lib.adminModule.AdminProgramManipulator.addProgramDefination;
@@ -15,7 +15,7 @@ import net.flow.mainSerFlows.MainSerFlow;
  *
  * @author Neel Patel
  */
-public class AdminStartServer {
+public class AdminStartMainServer {
      private static Scanner sc=new Scanner(System.in);
      public static synchronized void start(){
           System.out.println("\nMenu > Main Server > Start Server ..\n");
