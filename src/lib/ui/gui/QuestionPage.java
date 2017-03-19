@@ -9,7 +9,8 @@ import lib.userModule.result.IntProgramState;
 public class QuestionPage extends JFrame{
      JLabel pid;
      JLabel title;
-     JLabel description;
+     JLabel credit;
+     JTextArea  description;
      JLabel input;
      JLabel output;
      JPanel saminput;
@@ -22,7 +23,7 @@ public class QuestionPage extends JFrame{
         setSize(500,500);
         pid=new JLabel("Program ID : "+det.getProgramID());    //Converted to String from Long
         title=new JLabel("Program Title : "+det.getTitle());
-        description=new JLabel("Description : "+det.getDescription());
+//        description=new JTextArea("Description : "+det.getDescription());
         input=new JLabel("Input : "+det.getInput());
         output=new JLabel("Output : "+det.getOutput());
         saminput=new JPanel();

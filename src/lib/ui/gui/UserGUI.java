@@ -17,7 +17,7 @@ public class UserGUI implements IntUI{
      
      public UserGUI(IntUserFlow uf){
           this.uf=uf;
-//          this.uf.register(this);
+          this.uf.register(this);
           ps=uf.getAllProgramDetail();
           
 //    QuestionPage qqp=new QuestionPage();

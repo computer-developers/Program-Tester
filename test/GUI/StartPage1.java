@@ -27,7 +27,8 @@ public class StartPage1 extends javax.swing.JPanel {
                IntProgramState x=ps.get(i);
                
            }
-          return pid;
+          //return pid;
+          return 0;
           
      }
      /**
