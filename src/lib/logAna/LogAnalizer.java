@@ -21,12 +21,12 @@ public class LogAnalizer {
     private List<String> file_list;
     private Path p;
 
-    protected LogAnalizer(Path p) {
+    public LogAnalizer(Path p) {
         this.p = p;
         file_list = getAllFiles(p);
     }
 
-    protected LogAnalizer() {
+    public LogAnalizer() {
         this.p = Configuration.getDefaultLogDir();
         file_list = getAllFiles(Configuration.getDefaultLogDir());
     }
@@ -74,7 +74,7 @@ public class LogAnalizer {
 
     }
 
-    public Map<Long, Integer> stateToCredit(Map<Long, Integer> lm) {
+    private Map<Long, Integer> stateToCredit(Map<Long, Integer> lm) {
         Map<Long, Integer> cre = new HashMap<Long, Integer>();
         for (Long pid_list : lm.keySet()) {
 

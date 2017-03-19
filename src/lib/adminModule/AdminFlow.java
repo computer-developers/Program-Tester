@@ -18,6 +18,7 @@ public class AdminFlow {
                          + "1.Display Paths\n"
                          + "2.Program Defination manipulation\n"
                          + "3.Source Data manipulation\n"
+                         + "4.Log Analysis\n"
                          + "0.Exit\n");
                switch(sc.nextInt()){
                     case 1:disPath();
@@ -25,6 +26,8 @@ public class AdminFlow {
                     case 2:AdminProgramManipulator.start();
                               break;
                     case 3:AdminDataManipulator.start();
+                              break;
+                    case 4:AdminLogAnalyser.start();
                               break;
                     case 0:return;
                     default: System.out.println("Invalid input");
