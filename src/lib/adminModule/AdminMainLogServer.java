@@ -5,9 +5,9 @@
  */
 package lib.adminModule;
 
-import lib.adminModule.start.AdminStartMainServer;
 import java.nio.file.Paths;
 import java.util.Scanner;
+import lib.adminModule.start.AdminStartLogServer;
 import static programtester.config.Configuration.getDefaultLogDir;
 import static programtester.config.Configuration.getDefaultMainLogSer;
 import static programtester.config.Configuration.setDefaultLogDir;
@@ -31,7 +31,7 @@ public class AdminMainLogServer {
                               break;
                     case 2:setPathsURI();
                               break;
-                    case 3:AdminStartMainServer.start();
+                    case 3:AdminStartLogServer.start();
                               break;
                     case 0:return;
                     default: System.out.println("Invalid input");

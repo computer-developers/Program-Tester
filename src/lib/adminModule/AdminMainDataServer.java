@@ -5,9 +5,9 @@
  */
 package lib.adminModule;
 
-import lib.adminModule.start.AdminStartMainServer;
 import java.nio.file.Paths;
 import java.util.Scanner;
+import lib.adminModule.start.AdminStartDataServer;
 import static programtester.config.Configuration.getDefaultDir;
 import static programtester.config.Configuration.getDefaultMainDataSer;
 import static programtester.config.Configuration.getDefaultProDir;
@@ -27,13 +27,13 @@ public class AdminMainDataServer {
                          + "1.show default Paths & URI\n"
                          + "2.set defaults\n"
                          + "3.start Server\n"
-                         + "0.exit from Exit from Main Server\n");
+                         + "0.exit from Exit from Main Data Server\n");
                switch(sc.nextInt()){
                     case 1:defPathsURI();
                               break;
                     case 2:setPathsURI();
                               break;
-                    case 3:AdminStartMainServer.start();
+                    case 3:AdminStartDataServer.start();
                               break;
                     case 0:return;
                     default: System.out.println("Invalid input");
@@ -49,7 +49,7 @@ public class AdminMainDataServer {
      }
      
      private static void setPathsURI(){
-          System.out.println("\nMenu > Main Server..\n"
+          System.out.println("\nMenu > Main Data Server..\n"
                          + "1.set Data Directory\n"
                          + "2.set Program Directory\n"
                          + "3.set Main Data Server Url\n"

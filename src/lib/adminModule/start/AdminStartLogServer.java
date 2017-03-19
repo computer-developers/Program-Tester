@@ -16,7 +16,7 @@ public class AdminStartLogServer {
      private static Scanner sc=new Scanner(System.in);
      public static synchronized void start(){
           System.out.println("\nMenu > Main Server > Start Server ..\n");
-          System.out.println("Main Ser");
+          System.out.println("Main Log Ser");
           RemoteLogFlow r=new RemoteLogFlow();
           r.start();
           r.join();
