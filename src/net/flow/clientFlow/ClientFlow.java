@@ -76,7 +76,7 @@ public class ClientFlow implements IntNetClient{
           try{
                System.out.println("Main ser..."+mainSer);
                mainObj=(IntMainSer)Naming.lookup(mainSer);
-               
+               System.out.println("main object obtained");
                IntUserStatus u=mainObj.getStatus(uName, passwd);
                if(u==null){
                     errRun.accept("wrong username or Password");
