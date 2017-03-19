@@ -1,4 +1,4 @@
-package lib.logAna;
+    package lib.logAna;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.*;
 
 import lib.dT.problemManipulate.IntProgramDetail;
+import org.jetbrains.annotations.Nullable;
 import programtester.config.Configuration;
 import static lib.logger.LogTools.getLogProperty;
 import static lib.dT.problemManipulate.ProgramDetails.readProgramDetail;
@@ -57,15 +58,25 @@ public class LogAnalizer {
     public Map<Long, Integer> getUserStatus(String user_name) {
         HashMap<Long, Integer> m = new HashMap<Long, Integer>();
         for (String update : file_list) {
-            if (update.contains(user_name)) {
-                Long pid = new Long(getLogProperty(update, "Pid"));
-                Integer state = new Integer(getLogProperty(update, "State"));
-                if (!(m.containsKey(pid)))
-                    m.put(new Long(pid), new Integer(state));
-                else {
-                    if (m.get(pid) < state) {
-                        m.put(pid, state);
+            if (update!= null && update.contains(user_name)) {
+
+                Long pid =null;
+                Integer state = null;
+                try {
+                    pid = new Long(getLogProperty(update, "Pid"));
+                    state = new Integer(getLogProperty(update, "State"));
+                    if(pid!=null && state!=null) {
+                        if (!(m.containsKey(pid)))
+                            m.put(new Long(pid), new Integer(state));
+                        else {
+                            if (m.get(pid) < state) {
+                                m.put(pid, state);
+                            }
+                        }
                     }
+                }catch(Exception e)
+                {
+                    System.err.println("Invalid format");
                 }
             }
 
@@ -74,33 +85,40 @@ public class LogAnalizer {
 
     }
 
+
     private Map<Long, Integer> stateToCredit(Map<Long, Integer> lm) {
         Map<Long, Integer> cre = new HashMap<Long, Integer>();
-        for (Long pid_list : lm.keySet()) {
+        if(lm.size() > 0) {
+            for (Long pid_list : lm.keySet()) {
 
-            IntProgramDetail ipd = null;
-            try {
-                ipd = readProgramDetail(pid_list);
-            } catch (IOException e) {
-                System.err.println("Reading error - File Not Found !");
-                return null;
+                IntProgramDetail ipd = null;
+                try {
+                    ipd = readProgramDetail(pid_list);
+                } catch (Exception e) {
+                    System.err.println("Reading error - File Not Found !");
+                    return null;
+                }
+                Integer val = ipd.getCredit();
+
+
+                switch (lm.get(pid_list)) {
+                    case TEST_PRESENT_ERROR:
+                        cre.put(pid_list, val - 1);
+                        break;
+                    case TEST_PASS:
+                        cre.put(pid_list, val);
+                        break;
+                    default:
+                        cre.put(pid_list, 0);
+                        break;
+                }
+
+
             }
-            Integer val = ipd.getCredit();
-            switch (lm.get(pid_list)) {
-                case TEST_PRESENT_ERROR:
-                    cre.put(pid_list, val - 1);
-                    break;
-                case TEST_PASS:
-                    cre.put(pid_list, val);
-                    break;
-                default:
-                    cre.put(pid_list, 0);
-                    break;
-
-            }
-
+            return cre;
         }
-        return cre;
+        else
+            return null;
     }
 
     public Map<String, Integer> getAllUserStatus() throws IOException {
@@ -108,9 +126,11 @@ public class LogAnalizer {
         Map<String, Integer> hm = new HashMap<String, Integer>();
         for (String update : file_list) {
             String st = getLogProperty(update, "User");
-            if (!(s.contains(st)))
+            if (st!=null && !(s.contains(st)))
                 s.add(st);
         }
+        if(s.size() > 0)
+        {
         for (String set_it : s) {
             Map<Long, Integer> lm = getUserStatus(set_it);
             lm = stateToCredit(lm);
@@ -119,7 +139,11 @@ public class LogAnalizer {
                 credit += cre;
             hm.put(set_it, credit);
         }
-        return hm;
+            return hm;
+        }
+        else
+            return null;
+
     }
 }
 
