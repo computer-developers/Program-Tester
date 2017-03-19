@@ -114,10 +114,12 @@ public class DataSerFlow {
      
      private boolean init(){
           try {
+               System.out.println("start data ser");
                mainObj=(IntMainSer)Naming.lookup(mainSer);
                dataSer=mainObj.getDataSer();
                dataObj=(IntDataSer)Naming.lookup(dataSer);
                dataObj=dataObj.getObject();
+               System.out.println("object reference done");
           } catch (Exception ex) {
                System.err.println("Remote Object access error");
                return false;
@@ -126,6 +128,7 @@ public class DataSerFlow {
                System.err.println("error in getting data");
                return false;
           }
+          System.out.println("writing successfully");
           this.dataSer=getDefaultDataSer();
           this.port=getDefaultRMIPort();
           try{
@@ -144,11 +147,12 @@ public class DataSerFlow {
           try {
                if(mainObj.registerDataSer(dataSer))
                     return true;
+               System.out.println("registration done");
           } catch (Exception ex) {
                System.out.println("Object registration fail");
                return false;
           }
-          return false;
+          return true;
      }
      
      public void join(){

@@ -98,11 +98,12 @@ public class ClientFlow implements IntNetClient{
                DataSerFlow d=new DataSerFlow(mainSer);
                d.start();
                d.join();
+               System.out.println("befor server error");
                //code for register User State as a backup logger.
                //IntRemoteLog rg=(IntRemoteLog)Naming.lookup(mainLogSer);
                //rg.setBackupLogger(UserFactory.init(mainLogSer));
           } catch (Exception ex) {
-               System.err.println("Server error");
+               System.err.println("Server error..."+ex);
                return false;
           }
           start();
