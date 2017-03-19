@@ -402,7 +402,7 @@ public class Configuration {
       * this method is thread safe.<br>
       * Note:- changes made in default Data Server URI is not reflected in
         existing objects of the class.
-      * @param uri new default Data Server's URI.
+      * @param port new default port.
       * @return true if the default Data Server URI is updated with {@code uri},
         false otherwise.
       */

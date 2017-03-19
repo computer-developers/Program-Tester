@@ -5,6 +5,7 @@ lib.dT.manipulate.comparators
 lib.dT.problemManipulate
 lib.dt.inputGenerator.regEx
 lib.dt.inputGenerator.regEx.util
+lib.logAna
 lib.logger
 lib.runDetails
 lib.runTest
@@ -12,10 +13,16 @@ lib.ui
 lib.ui.cli
 lib.ui.gui
 lib.userModule
+lib.userModule.local
+lib.userModule.net
 lib.userModule.result
 lib.userModule.test
 net
 net.dataSer
+net.flow.clientFlow
+net.flow.dataSerFlow
+net.flow.logSerFlow
+net.flow.mainSerFlows
 net.logSer
 net.mainSer
 net.mainSer.userStatus

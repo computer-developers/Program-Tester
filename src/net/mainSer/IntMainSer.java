@@ -48,10 +48,10 @@ public interface IntMainSer extends Remote{
      
      /**
       * return the object of IntUserStatus if parameters are valid.
-      * if the Username & Password is not valid then null will be return.
+      * if the Username and Password is not valid then null will be return.
       * @param user username
       * @param passwd password
-      * @return the Object of IntUserStatus if the username & password is valid.
+      * @return the Object of IntUserStatus if the username and password is valid.
       * @throws RemoteException if occur in RMI framework.
       */
      IntUserStatus getStatus(String user,String passwd)throws RemoteException;
