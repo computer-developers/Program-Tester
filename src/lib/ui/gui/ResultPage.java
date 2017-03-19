@@ -2,7 +2,6 @@ package lib.ui.gui;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-//import java.util.*;
 import javax.swing.*;
 import lib.userModule.result.IntLiveResult;
 import lib.userModule.result.IntLiveResultSet;
