@@ -91,13 +91,16 @@ public class DataSerFlow {
      
      public DataSerFlow(String mainUrl){
           mainSer=mainUrl;
+          System.out.println("Data ser const");
      }
      
      public DataSerFlow(){
           mainSer=getDefaultMainSer();
+          System.out.println("Data ser const 2");
      }
      
      private void run(){
+          System.out.println("data ser run");
           if(!init())
                return;
           flag=true;
@@ -163,6 +166,7 @@ public class DataSerFlow {
      }
      
      public void start(){
+          System.out.println("data ser run");
           if(t!=null&&t.isAlive())
                return;
           t=new Thread(this::run);
