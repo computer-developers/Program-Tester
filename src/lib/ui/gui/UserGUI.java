@@ -3,7 +3,9 @@ package lib.ui.gui;
 import java.io.File;
 import java.util.List;
 import java.util.StringTokenizer;
+import javax.swing.ButtonGroup;
 import javax.swing.JFileChooser;
+import javax.swing.JRadioButton;
 import lib.ui.IntUI;
 import lib.userModule.IntUserFlow;
 import lib.userModule.result.IntLiveResult;
@@ -46,16 +48,34 @@ public class UserGUI implements IntUI{
           JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("choosertitle");
         String fullPath = null;
-        int option = chooser.showOpenDialog(FileChooser.this);
+        int option = chooser.showOpenDialog(null);
         if (option == JFileChooser.APPROVE_OPTION) {
             String sf = chooser.getSelectedFile().getName();
             File file = chooser.getCurrentDirectory();
             fullPath = file.getPath();
-            System.out.println("The selected file's path is " + fullPath);
-            System.out.println("The selected file is " + sf);
-            String dcmd = "java " + fullPath + "\\" + sf;
-            StringTokenizer st = new StringTokenizer(dcmd,".");
-            cmd = st.nextToken();
+             JRadioButton jr1=new JRadioButton("C or C++");
+             JRadioButton jr2=new JRadioButton("Java");
+             JRadioButton jr3=new JRadioButton("PYthon");
+             ButtonGroup bg=new ButtonGroup();
+             bg.add(jr1);
+             bg.add(jr2);
+             bg.add(jr3);
+             if(jr1.isSelected()){
+                  cmd=fullPath;
+             }
+             else if(jr2.isSelected()){
+                String dcmd = "java " + fullPath + "\\" + sf;
+                StringTokenizer st = new StringTokenizer(dcmd,".");
+                cmd = st.nextToken();     
+             }
+             else if(jr3.isSelected()){
+                String dcmd = "python " + fullPath + "\\" + sf;
+                StringTokenizer st = new StringTokenizer(dcmd,".");
+                cmd = st.nextToken();
+             }
+            //System.out.println("The selected file's path is " + fullPath);
+            //System.out.println("The selected file is " + sf);
+            
         }
           IntLiveResultSet ilr = uf.execute(pid, cmd);
           ResultPage rrp=new ResultPage(ilr);
