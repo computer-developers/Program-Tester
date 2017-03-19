@@ -6,6 +6,7 @@ import lib.logger.LocalLogger;
 import lib.logger.MyLogger;
 import lib.ui.IntUI;
 import lib.ui.cli.CliUser;
+import lib.ui.gui.UserGUI;
 import lib.userModule.IntUserFlow;
 import lib.userModule.local.SingleUserFlow;
 import lib.userModule.net.NetUserFlow;
@@ -25,6 +26,7 @@ ProgramTester {
       * @param args the command line arguments
       */
      public static void main(String[] args) {
+          //mainUserGui();
           //mainUserCli();
           if(args.length>0&&args[0].equalsIgnoreCase("admin"))
                mainAdminCli();
@@ -52,7 +54,25 @@ ProgramTester {
           cli.start();
           //System.exit(0);
      }
-     
+     public static void mainUserGui(){
+          Configurator.init();
+          
+          //Test.setDefaultDir(Paths.get("Data").toAbsolutePath());
+          //System.out.println("Working Directory = " +System.getProperty("user.dir"));
+          //System.out.println("Data Directory = " +Test.getDefaultDir());
+          //System.out.println("Program Directory = " +ProgramDetails.getDefaultDir());
+          IntUserFlow uf=new SingleUserFlow();
+          try {
+               MyLogger l=new LocalLogger("log.txt");
+               l.setSep(",");
+               uf.setLogger(l);
+          } catch (FileNotFoundException ex) {
+               System.out.println("error in log file.");
+          }
+          IntUI cli=new UserGUI(uf);
+          cli.start();
+          //System.exit(0);
+     }
      public static void mainNetUserCli(){
           Configurator.init();
           
