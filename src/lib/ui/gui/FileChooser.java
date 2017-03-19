@@ -16,7 +16,7 @@ public class FileChooser extends JFrame {
      String cmd = null;
      
    public FileChooser() {
-    super("Select your file from here");
+    //super("Select your file from here");
     setSize(500,500);
     setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -24,12 +24,11 @@ public class FileChooser extends JFrame {
     c.setLayout(new FlowLayout());
     
     JButton openButton = new JButton("Select your file from here");
-    JButton result=new JButton("Submit your file");
-    result.setActionCommand("Open");
+    
     // Create a file chooser that opens up as an Open dialog
     openButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
-        JFileChooser chooser = new JFileChooser();
+           JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("choosertitle");
         String fullPath = null;
         int option = chooser.showOpenDialog(FileChooser.this);
@@ -42,31 +41,14 @@ public class FileChooser extends JFrame {
             String dcmd = "java " + fullPath + "\\" + sf;
             StringTokenizer st = new StringTokenizer(dcmd,".");
             cmd = st.nextToken();
-            
-          //  System.out.println("The final command is "+cmd);
         }
-        
-      }
+        }
+         
     });
-    /*result.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            String cmd = e.getActionCommand();
-            
-
-        if(cmd.equals("Open"))
-        {
-            new ResultPage();
-        }
-        }
-    });*/
-
+    
     c.add(openButton);
-    c.add(result);
   }
-         String returnCmd(){
-              return this.cmd;
-         }
-  public static void main(String args[]) {
+ public static void main(String args[]) {
     FileChooser fc = new FileChooser();
     fc.setVisible(true);
   }

@@ -20,22 +20,21 @@ public class ResultPage extends JFrame{
         this.irs=irs;
              setSize(500,500);
              setVisible(true);
+             Container c = getContentPane();
+             c.setLayout(new FlowLayout());
+    
         java.util.List<IntLiveResult> ilr = this.irs.getAllLiveResult();
         int i = 0;
         for(IntLiveResult ir: ilr) //for-each loop
         {
-        
-             
-             //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-             
-        tcno[i]=new JLabel("Test Case - "+ir.getMessageCode());
-        ans[i]=new JLabel(ir.getMessage());
-        //tcno.setText("Test Case 1 : ");
-        
-        this.add(tcno[i]);
-        this.add(ans[i]);
-        i++;
+            tcno[i]=new JLabel("Test Case - "+ir.index());
+            ans[i]=new JLabel(ir.getMessage());
+            this.add(tcno[i]);
+            this.add(ans[i]);
+            i++;
         }
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+             
     }
     /*public static void main(String[] args){
         ResultPage rp=new ResultPage();

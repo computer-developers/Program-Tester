@@ -1,6 +1,9 @@
 package lib.ui.gui;
 
+import java.io.File;
 import java.util.List;
+import java.util.StringTokenizer;
+import javax.swing.JFileChooser;
 import lib.ui.IntUI;
 import lib.userModule.IntUserFlow;
 import lib.userModule.result.IntLiveResult;
@@ -39,9 +42,22 @@ public class UserGUI implements IntUI{
     
     }
      public void run(long pid){
-        FileChooser ffc=new FileChooser();
-        String retCmd = ffc.returnCmd();
-          IntLiveResultSet ilr = uf.execute(pid, retCmd);
+          String cmd=null;
+          JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("choosertitle");
+        String fullPath = null;
+        int option = chooser.showOpenDialog(FileChooser.this);
+        if (option == JFileChooser.APPROVE_OPTION) {
+            String sf = chooser.getSelectedFile().getName();
+            File file = chooser.getCurrentDirectory();
+            fullPath = file.getPath();
+            System.out.println("The selected file's path is " + fullPath);
+            System.out.println("The selected file is " + sf);
+            String dcmd = "java " + fullPath + "\\" + sf;
+            StringTokenizer st = new StringTokenizer(dcmd,".");
+            cmd = st.nextToken();
+        }
+          IntLiveResultSet ilr = uf.execute(pid, cmd);
           ResultPage rrp=new ResultPage(ilr);
           
      }

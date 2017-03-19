@@ -1,4 +1,6 @@
 package lib.ui.gui;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import lib.userModule.result.IntProgramState;
 
@@ -6,7 +8,7 @@ import lib.userModule.result.IntProgramState;
  *
  * @author Parth Doshi
  */
-public class QuestionPage extends JFrame{
+public class QuestionPage extends JFrame implements ActionListener{
      JLabel pid;
      JLabel title;
      JLabel credit;
@@ -15,9 +17,12 @@ public class QuestionPage extends JFrame{
      JLabel output;
      JPanel saminput;
      JPanel samoutput;
+     JButton fchoose;
      IntProgramState det;
-     public QuestionPage(IntProgramState dett) {
+     UserGUI ug=null;
+     public QuestionPage(IntProgramState dett, UserGUI ug) {
         super("Question Page");
+        this.ug=ug;
         this.det=dett;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(500,500);
@@ -28,17 +33,23 @@ public class QuestionPage extends JFrame{
         output=new JLabel("Output : "+det.getOutput());
         saminput=new JPanel();
         samoutput=new JPanel();
+        fchoose.addActionListener(this);
         setVisible(true);
         this.add(pid);
         this.add(title);
         this.add(description);
         this.add(input);
         this.add(output);
-        
+        this.add(fchoose);
      }
      
      
      public static void main(String[] args){
 //        QuestionPage qp=new QuestionPage();
     }
+
+     @Override
+     public void actionPerformed(ActionEvent e) {
+          ug.run(det.getProgramID());
+     }
 }
