@@ -48,7 +48,7 @@ public class UserFactory {
       * @param lp URI of remote object of IntLogProc.
       * @return URI of user status logger, null otherwise.
       */
-     public static String init(String lp){
+     public static synchronized String init(String lp){
           try {
                IntRemoteLog ir=new UserStatusLog();
                int port=getDefaultRMIPort();

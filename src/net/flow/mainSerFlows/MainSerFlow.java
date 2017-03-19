@@ -47,9 +47,16 @@ public class MainSerFlow {
                     case 1:System.out.println("Main Server URI :- "
                             +SerDetails.getMainDataSer());
                               break;
-                    case 2:
+                    case 2:System.out.println("Data Servers...");
+                              SerDetails.getAllDataSer()
+                                   .forEach(i->System.out.println(i));
                               break;
-                    case 3:AdminDataManipulator.start();
+                    case 3:System.out.println("Log Server URI :- "
+                            +SerDetails.getLogSer());
+                              break;
+                    case 4:System.out.println("Program list...");
+                              SerDetails.getAllDataSer()
+                                   .forEach(i->System.out.println(i));
                               break;
                     case 0:stop();return;
                     default: System.out.println("Invalid input");

@@ -6,10 +6,13 @@
 package net.mainSer;
 
 import java.rmi.Naming;
+import java.rmi.RemoteException;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.dataSer.IntDataSer;
 import net.logSer.IntRemoteLog;
 
@@ -191,6 +194,13 @@ public class SerDetails {
      
      public synchronized static Set<String> getAllDataSer(){
           Set<String> s=new HashSet<String>();
-          return dataSer.forEach(action);
+          dataSer.keySet().forEach(i->{
+               try {
+                    s.add(i.toUrl());
+               } catch (RemoteException ex) {
+                    dataSer.remove(i);
+               }
+          });
+          return s;
      }
 }
