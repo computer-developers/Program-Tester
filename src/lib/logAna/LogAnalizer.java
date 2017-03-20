@@ -33,7 +33,7 @@ public class LogAnalizer {
     }
 
 
-    private static List<String> getAllFiles(Path dir) {
+    private synchronized  static List<String> getAllFiles(Path dir) {
         try {
             if (!Files.isDirectory(dir))
                 return null;
@@ -51,11 +51,11 @@ public class LogAnalizer {
         }
     }
 
-    public void refresh() {
+    public synchronized void refresh() {
         file_list = getAllFiles(p);
     }
 
-    public Map<Long, Integer> getUserStatus(String user_name) {
+    public synchronized Map<Long, Integer> getUserStatus(String user_name) {
         HashMap<Long, Integer> m = new HashMap<Long, Integer>();
         for (String update : file_list) {
             if (update!= null && update.contains(user_name)) {
@@ -86,7 +86,7 @@ public class LogAnalizer {
     }
 
 
-    private Map<Long, Integer> stateToCredit(Map<Long, Integer> lm) {
+    private synchronized Map<Long, Integer> stateToCredit(Map<Long, Integer> lm) {
         Map<Long, Integer> cre = new HashMap<Long, Integer>();
         if(lm.size() > 0) {
             for (Long pid_list : lm.keySet()) {
@@ -119,6 +119,17 @@ public class LogAnalizer {
         }
         else
             return null;
+    }
+
+    public void log(String...s)
+    {
+
+        if(s.length > 0) {
+            for (String h : s)
+                if(h!=null) {
+                    file_list.add(h);
+                }
+        }
     }
 
     public Map<String, Integer> getAllUserStatus() throws IOException {
