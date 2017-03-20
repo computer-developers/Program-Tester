@@ -29,6 +29,7 @@ public class UserGUI implements IntUI{
           this.uf=uf;
           this.uf.register(this);
           ps=uf.getAllProgramDetail();
+          StartPage sp=new StartPage(ps,this);
      }
   public void display(long pid)
   {
