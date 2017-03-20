@@ -24,6 +24,8 @@ import lib.userModule.result.ProgramStateAdapter;
 import lib.userModule.test.Test;
 import net.flow.clientFlow.ClientFlow;
 import net.flow.clientFlow.IntNetClient;
+import static programtester.config.Configuration.getDefaultDir;
+import static programtester.config.Configuration.getDefaultProDir;
 
 /**
  *
@@ -123,6 +125,8 @@ public class NetUserFlow implements IntUserFlow{
         program directory.
       */
      public NetUserFlow(){
+          System.out.println("Pro :- "+getDefaultProDir());
+          System.out.println("test :- "+getDefaultDir());
           net=new ClientFlow();
           net.regErrRunner(System.out::println);
           net.regMessageRunner(System.out::println);

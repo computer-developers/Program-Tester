@@ -30,7 +30,9 @@ public class UserStatusLog extends UnicastRemoteObject implements IntRemoteLog{
 
      @Override
      public boolean log(String s) throws RemoteException {
-          return UserFactory.logHandle(s);
+          System.out.println("log arrived");
+          //return UserFactory.logHandle(s);
+          return UserFactory.processLog(s);
      }
 
      @Override

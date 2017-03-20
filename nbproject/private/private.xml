@@ -3,14 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/My%20Folder/Fun/Data/Program%20Tester/src/lib/adminModule/AdminStartServer.java</file>
-            <file>file:/C:/My%20Folder/Fun/Data/Program%20Tester/src/net/mainSer/MainSer.java</file>
-            <file>file:/C:/My%20Folder/Fun/Data/Program%20Tester/src/lib/adminModule/AdminLogAnalyser.java</file>
-            <file>file:/C:/My%20Folder/Fun/Data/Program%20Tester/src/net/mainSer/userStatus/UserFactory.java</file>
-            <file>file:/C:/My%20Folder/Fun/Data/Program%20Tester/src/net/mainSer/SerDetails.java</file>
-            <file>file:/C:/My%20Folder/Fun/Data/Program%20Tester/src/net/mainSer/IntMainSer.java</file>
-            <file>file:/C:/My%20Folder/Fun/Data/Program%20Tester/src/lib/adminModule/AdminFlow.java</file>
-            <file>file:/C:/My%20Folder/Fun/Data/Program%20Tester/src/net/flow/mainSerFlows/MainSerFlow.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/userModule/net/NetUserFlow.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/net/logSer/LogHandler.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/dT/problemManipulate/ProgramDetails.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/net/flow/clientFlow/ClientFlow.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/net/mainSer/userStatus/UserStatusLog.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/net/flow/mainSerFlows/MainSerFlow.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/test/net/flow/MainDataFlowTest.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/test/net/flow/MainLogFlowTest.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/net/logSer/RemoteLog.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/test/net/flow/MainSerFlowTest.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/net/mainSer/userStatus/UserStatus.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/net/mainSer/userStatus/UserFactory.java</file>
         </group>
     </open-files>
 </project-private>

@@ -5,7 +5,9 @@
  */
 package net.flow;
 
+import java.nio.file.Paths;
 import net.flow.mainSerFlows.MainSerFlow;
+import static programtester.config.Configuration.setDefaultProDir;
 import programtester.config.Configurator;
 
 /**
@@ -15,6 +17,7 @@ import programtester.config.Configurator;
 public class MainSerFlowTest {
      public static void main(String... arg){
           Configurator.init();
+          setDefaultProDir(Paths.get("resources/datapro").toAbsolutePath());
           System.out.println("Main Ser");
           MainSerFlow r=new MainSerFlow();
           r.start();

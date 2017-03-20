@@ -2,7 +2,6 @@ package net.logSer;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.PrintStream;
 import static java.lang.Thread.sleep;
 import java.nio.file.Files;
@@ -13,8 +12,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.concurrent.*;
 import static programtester.config.Configuration.getDefaultLogDir;
 
 /**
@@ -28,6 +26,8 @@ public class LogHandler {
      private static final String dtf="yyMMddhhmmss";
      private static boolean flag=false;
      private static Thread t;
+     private static Executor es=new ThreadPoolExecutor(0,5, 10, TimeUnit.MINUTES
+             ,new ArrayBlockingQueue<Runnable>(100));
      private static final int timeInter=600000;
      
      /**
@@ -43,16 +43,22 @@ public class LogHandler {
                if(ps==null)
                     return false;
                ps.println(log);
+               System.out.println("log :-"+log);
                ps.flush();
                if(back!=null){
-                    try{
-                         back.log(log);
-                    }catch(RemoteException ex){
-                         back=null;
-                    }
+                    es.execute(()->{
+                         try{
+                              back.log(log);
+                         }catch(RemoteException ex){
+                              System.out.println("backup logger fail .."+ex);
+                              back=null;
+                         }
+                    });
                }
+               System.out.println("log return");
                return true;
           }catch(Exception ex){
+               System.err.println("logging fail");
                return false;
           }
      }
@@ -127,6 +133,7 @@ public class LogHandler {
                IntRemoteLog ls=(IntRemoteLog)Naming.lookup(url);
                if(ls.aya()){
                     back=ls;
+                    System.out.println("backup logger :- "+back.toUrl());
                     return true;
                }
                else{

@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.*;
 
 import lib.dT.problemManipulate.IntProgramDetail;
-import org.jetbrains.annotations.Nullable;
 import programtester.config.Configuration;
 import static lib.logger.LogTools.getLogProperty;
 import static lib.dT.problemManipulate.ProgramDetails.readProgramDetail;

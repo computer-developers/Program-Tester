@@ -77,6 +77,7 @@ public class DataSerFlow {
      
      public static boolean cleanDir(Path dir){
           try {
+               Files.createDirectories(dir);
                Files.walk(dir)
                        .sorted(Comparator.reverseOrder())
                        .map(Path::toFile)

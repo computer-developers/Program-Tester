@@ -5,7 +5,10 @@
  */
 package net.flow;
 
+import java.nio.file.Paths;
 import net.flow.logSerFlow.RemoteLogFlow;
+import static programtester.config.Configuration.getDefaultLogDir;
+import static programtester.config.Configuration.setDefaultLogDir;
 import programtester.config.Configurator;
 
 /**
@@ -15,7 +18,8 @@ import programtester.config.Configurator;
 public class MainLogFlowTest {
      public static void main(String... arg){
           Configurator.init();
-          System.out.println("Log Ser");
+          setDefaultLogDir(Paths.get("resources/logser").toAbsolutePath());
+          System.out.println("path :- "+getDefaultLogDir());
           RemoteLogFlow r=new RemoteLogFlow();
           r.start();
           r.join();
