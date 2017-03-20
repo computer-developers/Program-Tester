@@ -21,15 +21,12 @@ public class UserGUI implements IntUI{
 
      private IntUserFlow uf;
      private List<? extends IntProgramState> ps;
-     
-          
-          
           
      public UserGUI(IntUserFlow uf){
           this.uf=uf;
           this.uf.register(this);
           ps=uf.getAllProgramDetail();
-          StartPage sp=new StartPage(ps,this);
+          
      }
   public void display(long pid)
   {
@@ -56,7 +53,7 @@ public class UserGUI implements IntUI{
             fullPath = file.getPath();
              JRadioButton jr1=new JRadioButton("C or C++");
              JRadioButton jr2=new JRadioButton("Java");
-             JRadioButton jr3=new JRadioButton("PYthon");
+             JRadioButton jr3=new JRadioButton("Python");
              ButtonGroup bg=new ButtonGroup();
              bg.add(jr1);
              bg.add(jr2);
@@ -86,16 +83,19 @@ public class UserGUI implements IntUI{
      
      @Override
      public void showMessage(String message) {
+          
           throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
      }
 
      @Override
      public void start() {
+          StartPage sp=new StartPage(ps,this);
           throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
      }
 
      @Override
      public void close() {
+          
           throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
      }
 
