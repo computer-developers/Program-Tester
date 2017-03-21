@@ -12,7 +12,7 @@ import lib.userModule.result.IntProgramState;
  *
  * @author Parth Doshi
  */
-public class StartPage extends javax.swing.JPanel implements ActionListener {
+public class StartPage extends javax.swing.JFrame implements ActionListener {
 
      /**
       * Creates new form StartPage
@@ -37,11 +37,14 @@ public class StartPage extends javax.swing.JPanel implements ActionListener {
              add(jl[i]);
              i++;
         }  
+        
         JButton close=new JButton("Close Program");
         add(close);
         close.addActionListener(new ActionListener() {
+             @Override
              public void actionPerformed(ActionEvent e) {
              ugi.close();
+             StartPage.this.dispose();
            }
         });
      }
