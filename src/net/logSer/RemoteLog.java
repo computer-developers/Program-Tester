@@ -54,7 +54,7 @@ public class RemoteLog extends UnicastRemoteObject implements IntRemoteLog,
       */
      @Override
      public boolean setBackupLogger(String bl) throws RemoteException {
-          return LogHandler.setBackupLog(url);
+          return LogHandler.setBackupLog(bl);
      }
 
      /**

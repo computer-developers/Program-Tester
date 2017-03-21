@@ -55,6 +55,7 @@ public class UserFactory {
                String uri=UrlTools.registerObj(ir, port,"userState");
                readUserDetail(getDefaultUserDetailPath());
                readProgramDetails();
+               System.out.println("user factory uri :- "+uri);
                //new Thread(()->proBack(lp)).start();
                return uri;
           } catch (Exception ex) {

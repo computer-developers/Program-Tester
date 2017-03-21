@@ -48,6 +48,7 @@ public class LogHandler {
                if(back!=null){
                     es.execute(()->{
                          try{
+                              System.out.println("back "+back);
                               back.log(log);
                          }catch(RemoteException ex){
                               System.out.println("backup logger fail .."+ex);
