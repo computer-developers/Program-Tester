@@ -30,6 +30,7 @@ public class UserGUI implements IntUI{
      }
   public void display(long pid)
   {
+       System.out.println("Inside display of UserGUI");
        IntProgramState ips = null;
        for (IntProgramState k : ps)
             if(k.getProgramID() == pid)
@@ -42,8 +43,8 @@ public class UserGUI implements IntUI{
     
     }
      public void run(long pid){
-          String cmd=null;
-          JFileChooser chooser = new JFileChooser();
+        String cmd=null;
+        JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("choosertitle");
         String fullPath = null;
         int option = chooser.showOpenDialog(null);
@@ -89,13 +90,13 @@ public class UserGUI implements IntUI{
 
      @Override
      public void start() {
+          System.out.println("ABC");
           StartPage sp=new StartPage(ps,this);
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
      }
 
      @Override
      public void close() {
-          
+          uf.close();
           throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
      }
 

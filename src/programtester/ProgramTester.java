@@ -26,13 +26,13 @@ ProgramTester {
       * @param args the command line arguments
       */
      public static void main(String[] args) {
-          //mainUserGui();
+          mainUserGui();
           //mainUserCli();
-          if(args.length>0&&args[0].equalsIgnoreCase("admin"))
+          /*if(args.length>0&&args[0].equalsIgnoreCase("admin"))
                mainAdminCli();
           else if(args.length>0&&args[0].equalsIgnoreCase("localuser"))
                mainUserCli();
-          else mainNetUserCli();
+          else mainNetUserCli();*/
      }
      
      public static void mainUserCli(){

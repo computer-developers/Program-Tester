@@ -17,9 +17,10 @@ public class StartPage extends javax.swing.JFrame implements ActionListener {
      /**
       * Creates new form StartPage
       */
-     JPanel StartPage;
+     //JPanel StartPage;
      JButton[] jb=new JButton[10];
      JLabel[] jl=new JLabel[10];
+     //JLabel[] jl2=new JLabel[10];
      Long[] spid=new Long[10];
      UserGUI ugi = null;
      JButton close;
@@ -29,15 +30,22 @@ public class StartPage extends javax.swing.JFrame implements ActionListener {
         this.ugi = ugi;
         int i=0;
         for(IntProgramState ips:ps){
-             jl[i]=new JLabel("Program no :"+i+1);
+             jl[i]=new JLabel("Program no :"+(i+1),SwingConstants.CENTER);
+             //jl2[i]=new JLabel("<html><br/></html>");
              jb[i]=new JButton("Attempt This");
              spid[i] = ips.getProgramID();
              jb[i].addActionListener(this);
-             add(jb[i]);
              add(jl[i]);
+             jb[i].setActionCommand(""+i);
+             add(jb[i]);
+             //add(jl2[i]);
+             
              i++;
         }  
-        
+        setLayout(new GridLayout(12,2));
+        setSize(700, 700);
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         JButton close=new JButton("Close Program");
         add(close);
         close.addActionListener(new ActionListener() {
@@ -51,6 +59,8 @@ public class StartPage extends javax.swing.JFrame implements ActionListener {
      
      @Override
      public void actionPerformed(ActionEvent e) {
-          ugi.display(spid[e.getID()]);
+          System.out.println();
+          ugi.display(spid[Integer.parseInt(e.getActionCommand())]);
+          
      }
 }
