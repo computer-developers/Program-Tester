@@ -52,6 +52,8 @@ public class UserGUI implements IntUI{
             String sf = chooser.getSelectedFile().getName();
             File file = chooser.getCurrentDirectory();
             fullPath = file.getPath();
+            System.out.println(fullPath);
+        
              JRadioButton jr1=new JRadioButton("C or C++");
              JRadioButton jr2=new JRadioButton("Java");
              JRadioButton jr3=new JRadioButton("Python");
@@ -60,7 +62,7 @@ public class UserGUI implements IntUI{
              bg.add(jr2);
              bg.add(jr3);
              if(jr1.isSelected()){
-                  cmd=fullPath;
+                  cmd="\""+fullPath+"\"";
              }
              else if(jr2.isSelected()){
                 String dcmd = "java " + fullPath + "\\" + sf;
@@ -76,8 +78,10 @@ public class UserGUI implements IntUI{
             //System.out.println("The selected file is " + sf);
             
         }
+        System.out.println(cmd);
           IntLiveResultSet ilr = uf.execute(pid, cmd);
           ResultPage rrp=new ResultPage(ilr);
+          //System.out.println(ilr);
           
      }
      

@@ -11,19 +11,23 @@ import lib.userModule.result.IntLiveResultSet;
  * @author Parth Doshi
  */
 public class ResultPage extends JFrame{
-    JLabel[] tcno,ans = new JLabel[10];
+    JLabel[] tcno= new JLabel[10];
+    JLabel[] ans= new JLabel[10];
     
     IntLiveResultSet irs = null;
     public ResultPage(IntLiveResultSet irs) {    
         
     super("Result Page");
         this.irs=irs;
-             setSize(500,500);
-             setVisible(true);
-             Container c = getContentPane();
-             c.setLayout(new FlowLayout());
-    
+        setLayout(new GridLayout(20,1));
+        setSize(700, 700);
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        Container c = getContentPane();
+        c.setLayout(new FlowLayout());
         java.util.List<IntLiveResult> ilr = this.irs.getAllLiveResult();
+        System.out.println(ilr);
+        
         int i = 0;
         for(IntLiveResult ir: ilr) //for-each loop
         {
