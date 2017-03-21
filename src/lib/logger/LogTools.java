@@ -28,10 +28,10 @@ public class LogTools {
       */
      public static String getLogProperty(String log,String p){
           try{
-               String[] ar=Arrays.stream(log.split(";")).map(i->i.trim())
+               String[] ar=Arrays.stream(log.split(",")).map(i->i.trim())
                               .toArray(String[]::new);
                for(String s:ar){
-                    String[] a=Arrays.stream(log.split("=",2)).map(i->i.trim())
+                    String[] a=Arrays.stream(s.split("=",2)).map(i->i.trim())
                                    .toArray(String[]::new);
                     if(a[0].equalsIgnoreCase(p))
                          return a[1];

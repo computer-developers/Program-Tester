@@ -38,7 +38,6 @@ import static programtester.config.Configuration.getDefaultUserDetailPath;
  */
 public class UserFactory {
      private UserFactory(){}
-     private static AtomicBoolean bl=new AtomicBoolean(false);
      private static List<String> log=Collections.synchronizedList(new ArrayList<>());
      private static final Map<Long,Integer> problems=new HashMap<>();
      private static final Set<UserStatus> user=new HashSet<UserStatus>();
@@ -53,10 +52,10 @@ public class UserFactory {
                IntRemoteLog ir=new UserStatusLog();
                int port=getDefaultRMIPort();
                String uri=UrlTools.registerObj(ir, port,"userState");
-               readUserDetail(getDefaultUserDetailPath());
                readProgramDetails();
+               readUserDetail(getDefaultUserDetailPath());
                System.out.println("user factory uri :- "+uri);
-               //new Thread(()->proBack(lp)).start();
+               new Thread(()->proBack(lp)).start();
                return uri;
           } catch (Exception ex) {
                return null;
@@ -170,10 +169,10 @@ public class UserFactory {
      public synchronized static boolean processLog(String log){
           try{
                String uName=LogTools.getLogProperty(log, "username");
-               String passwd=LogTools.getLogProperty(log, "password");
+               //String passwd=LogTools.getLogProperty(log, "password");
                long pid=Long.parseLong(LogTools.getLogProperty(log, "pid"));
-               int status=Integer.parseInt(LogTools.getLogProperty(log, "status"));
-               UserStatus u=(UserStatus)getUser(uName,passwd);
+               int status=Integer.parseInt(LogTools.getLogProperty(log, "state"));
+               UserStatus u=(UserStatus)getUser(uName);
                if(status==TEST_PASS)
                     return u.update(pid, getCredit(pid));
                else if(status==TEST_PRESENT_ERROR)
@@ -203,26 +202,17 @@ public class UserFactory {
      }
      
      public static synchronized boolean logHandle(String s){
-          if(bl.get())
-               log.add(s);
-          else
-               processLog(s);
+          log.add(s);
           return true;
      }
      
      public static void proBack(String uri){
           try {
-               bl.set(true);
                IntLogProc lp=(IntLogProc)Naming.lookup(uri);
                List<String> l=lp.getLogs(null,null);
                l.stream().forEach(i->processLog(i));
-               synchronized(UserFactory.class){
                     log.stream().forEach(i->processLog(i));
-                    bl.set(false);
-               }
           } catch (Exception ex) {
-               bl.set(false);
-               return;
           }
      }
 
