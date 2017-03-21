@@ -98,4 +98,22 @@ public class ProgramDetail implements IntProgramDetail, Serializable {
      public int getCredit() {
           return credit;
      }
+     
+     @Override
+     public boolean equals(Object o){
+          if(o instanceof ProgramDetail){
+               ProgramDetail p=(ProgramDetail)o;
+               if(p.getProgramID()==this.getProgramID())
+                    return true;
+          }
+          return false;
+     }
+
+     @Override
+     public int hashCode() {
+          int hash = 7;
+          hash = 71 * hash + this.credit;
+          hash = 71 * hash + (int) (this.programId ^ (this.programId >>> 32));
+          return hash;
+     }
 }

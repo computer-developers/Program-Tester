@@ -16,7 +16,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 import lib.dT.problemManipulate.IntProgramDetail;
 import lib.dT.problemManipulate.ProgramDetails;
@@ -39,8 +38,10 @@ import static programtester.config.Configuration.getDefaultUserDetailPath;
 public class UserFactory {
      private UserFactory(){}
      private static List<String> log=Collections.synchronizedList(new ArrayList<>());
-     private static final Map<Long,Integer> problems=new HashMap<>();
-     private static final Set<UserStatus> user=new HashSet<UserStatus>();
+     private static final List<IntProgramDetail> problems=
+             Collections.synchronizedList(new ArrayList<>());
+     private static final Set<UserStatus> user=
+             Collections.synchronizedSet(new HashSet<UserStatus>());
 
      /**
       * this method initialize the user status logger.
@@ -73,28 +74,8 @@ public class UserFactory {
       */
      public static synchronized boolean addUser(String uName,String passwd){
           UserStatus u=new UserStatus(uName,passwd,new HashMap<>());
-          u.addProgramId(problems.keySet().toArray(new Long[0]));
+//          u.addProgramId(problems.keySet().toArray(new Long[0]));
           return user.add(u);
-     }
-     
-     /**
-      * add problem if already not exist in system.
-      * this method add new problem with specified credit in the system.
-      * it will return true if the problem already not in the system and
-        added successfully.
-      * it will return false if the problem is not exist in the system.<br>
-      * Note:-if the problem is already in the system then it will not make any
-        change and simply return false;
-      * @param pid ProgramId
-      * @param credit credit of the program.
-      * @return true if successfully added, false otherwise
-      */
-     public static synchronized boolean addProblem(Long pid,Integer credit){
-          if(problems.putIfAbsent(pid, credit)==null){
-               user.parallelStream().forEach(i->i.addProgramId(pid));
-               return true;
-          }
-          return false;
      }
      
      /**
@@ -109,7 +90,12 @@ public class UserFactory {
       * @return true if successfully added, false otherwise
       */
      public static synchronized boolean addProblem(IntProgramDetail pd){
-          return addProblem(pd.getProgramID(),pd.getCredit());
+          if(!problems.contains(pd)){
+               problems.add(pd);
+  //             user.parallelStream().forEach(i->i.addProgramId(pd));
+               return true;
+          }
+          return false;
      }
      
      /**
@@ -196,8 +182,8 @@ public class UserFactory {
       * @return credit of the program.
       */
      public static synchronized int getCredit(long pid){
-          if(problems.containsKey(pid))
-               return problems.get(pid);
+    //      if(problems.containsKey(pid))
+    //           return problems.get(pid);
           return -1;
      }
      
@@ -222,7 +208,8 @@ public class UserFactory {
      }
      
      public static Map<Long,Integer> getAllProblems(){
-          return Collections.unmodifiableMap(problems);
+     //     return Collections.unmodifiableMap(problems);
+          return null;
      }
      
      static boolean readUserDetail(Path file){
