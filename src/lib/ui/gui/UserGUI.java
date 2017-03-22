@@ -11,6 +11,8 @@ import lib.ui.IntUI;
 import lib.userModule.IntUserFlow;
 import lib.userModule.result.IntLiveResultSet;
 import lib.userModule.result.IntProgramState;
+import javax.swing.JOptionPane; 
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -76,8 +78,7 @@ public class UserGUI implements IntUI{
      
      @Override
      public void showMessage(String message) {
-          
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          JOptionPane.showMessageDialog(null, message, "Input Your Message", JOptionPane.INFORMATION_MESSAGE);
      }
 
      @Override
@@ -93,7 +94,10 @@ public class UserGUI implements IntUI{
 
      @Override
      public String Prompt(String message) {
-          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+          System.out.println("ABCD");
+          String mes =(JOptionPane.showInputDialog(this, message));
+        
+        return mes;
      }
      
 }
