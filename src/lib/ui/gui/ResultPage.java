@@ -1,8 +1,7 @@
 package lib.ui.gui;
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import javax.swing.*;
+import java.awt.GridLayout;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import lib.userModule.result.IntLiveResult;
 import lib.userModule.result.IntLiveResultSet;
 
@@ -11,6 +10,12 @@ import lib.userModule.result.IntLiveResultSet;
  * @author Parth Doshi
  */
 public class ResultPage extends JFrame{
+     /**
+      * This Page is called from the run method of the UserGUI
+      * This method displays the test cases and their states
+      * This is the final page that is displayed in the GUI
+      * 
+      */
     JLabel[] tcno= new JLabel[10];
     JLabel[] ans= new JLabel[10];
     java.util.List<IntLiveResult> ilr = null;
@@ -23,8 +28,6 @@ public class ResultPage extends JFrame{
         setSize(700, 700);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        //Container c = getContentPane();
-        //c.setLayout(new FlowLayout());
         ilr = this.irs.getAllLiveResult();
         //System.out.println(ilr);
         

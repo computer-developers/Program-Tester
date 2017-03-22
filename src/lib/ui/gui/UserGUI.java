@@ -7,12 +7,12 @@ import javax.swing.ButtonGroup;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
+import javax.swing.JOptionPane; 
+import javax.swing.SwingConstants;
 import lib.ui.IntUI;
 import lib.userModule.IntUserFlow;
 import lib.userModule.result.IntLiveResultSet;
 import lib.userModule.result.IntProgramState;
-import javax.swing.JOptionPane; 
-import javax.swing.SwingConstants;
 
 /**
  *
@@ -128,10 +128,3 @@ public class UserGUI implements IntUI{
      }
      
 }
-/*
-          int i=obj.getState();
-          switch (i){
-               case TEST_PASS://code
-                    break;
-          }
-*/

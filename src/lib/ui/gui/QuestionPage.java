@@ -3,15 +3,28 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
+import javax.swing.JLabel;
+import javax.swing.JRadioButton;
 import lib.userModule.result.IntProgramState;
 
 /**
  *
  * @author Parth Doshi
  */
+
 public class QuestionPage extends JFrame implements ActionListener{
+     /**
+      * This page is called from the display method of UserGUI
+      * This page displays the details of the question selected by the user from the StartPage
+      * The selection of the language used is made here
+      * All the data is displayed in a predefined but editable format using JFrame
+      * The button to choose the selected file i.e.fchoose is provided here
+      * This button calls the run method of the UserGUI which in turns opens the JFileChooser
+      */
      JLabel pid;
      JLabel title;
      JLabel credit;
@@ -31,6 +44,7 @@ public class QuestionPage extends JFrame implements ActionListener{
      int button_select=0;
      IntProgramState det;
      UserGUI ug=null;
+
      public QuestionPage(IntProgramState dett, UserGUI ug) {
         super("Question Page");
         this.ug=ug;
@@ -88,12 +102,6 @@ public class QuestionPage extends JFrame implements ActionListener{
         //System.out.println(bg.getSelection());
         this.add(fchoose);     
      }
-     
-     
-/*     public static void main(String[] args){
-        QuestionPage qp=new QuestionPage();
-    }
-*/
      @Override
      public void actionPerformed(ActionEvent e) {
           if(jr1.isSelected()){                   //bg.getSelection().getActionCommand().equals("Cc")
@@ -112,4 +120,9 @@ public class QuestionPage extends JFrame implements ActionListener{
           ug.run(det.getProgramID(),button_select);
           
      }
+     
+/*    public static void main(String[] args){
+        QuestionPage qp=new QuestionPage();
+    }
+*/
 }
