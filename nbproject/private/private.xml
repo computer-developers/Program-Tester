@@ -6,11 +6,11 @@
             <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/userModule/net/NetUserFlow.java</file>
             <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/lib/ui/cli/CliUser.java</file>
             <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/net/flow/clientFlow/ClientFlow.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/net/flow/mainSerFlows/MainSerFlow.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/programtester/ProgramTester.java</file>
             <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/test/net/flow/MainLogFlowTest.java</file>
             <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/test/net/flow/MainDataFlowTest.java</file>
-            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/test/net/flow/MainSerFlowTest.java</file>
             <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/net/mainSer/userStatus/UserStatus.java</file>
+            <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/test/net/flow/MainSerFlowTest.java</file>
             <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/net/flow/clientFlow/IntNetClient.java</file>
             <file>file:/C:/My%20folder/Fun/Data/Program%20Tester/src/net/mainSer/userStatus/UserFactory.java</file>
         </group>

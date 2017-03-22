@@ -34,8 +34,8 @@ ProgramTester {
                mainUserGui();
           else if(args.length>0&&args[0].equalsIgnoreCase("localusercli"))
                mainUserCli();
-          else if(args.length>0&&args[0].equalsIgnoreCase("localusercli"))
-               mainUserCli();
+          else if(args.length>0&&args[0].equalsIgnoreCase("netusercli"))
+               mainNetUserCli();
           else mainNetUserGui();
      }
      
