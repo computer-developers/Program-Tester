@@ -18,17 +18,23 @@ public class QuestionPage extends JFrame implements ActionListener{
      JLabel[] description;
      JLabel input;
      JLabel output;
-     JLabel saminput;
-     JLabel samoutput;
-     String samin="",samout="";
+     JLabel samin;
+     JLabel samout;
+     JLabel[] saminput;
+     JLabel[] samoutput;
+     JRadioButton jr1;
+     JRadioButton jr2;
+     JRadioButton jr3;
      JButton fchoose;
+     ButtonGroup bg;
+     int button_select=0;
      IntProgramState det;
      UserGUI ug=null;
      public QuestionPage(IntProgramState dett, UserGUI ug) {
         super("Question Page");
         this.ug=ug;
         this.det=dett;
-        setLayout(new GridLayout(20,1));
+        setLayout(new GridLayout(30,1));
         setSize(700, 700);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -46,25 +52,40 @@ public class QuestionPage extends JFrame implements ActionListener{
         }
         input=new JLabel("Input : "+det.getInput());
         output=new JLabel("Output : "+det.getOutput());
+        samin=new JLabel("The sample input for this program is : ");
+        this.add(samin);
+        saminput = new JLabel[(det.getSampleInput().size())];
         for(String s:det.getSampleInput()){
-             samin+=s;
-             samin+="<html><br></html>";
+             saminput[i]=new JLabel(s);
+             add(saminput[i]);
         }
-        saminput=new JLabel("Sample Input: "+samin);
-        add(saminput);
-        samoutput=new JLabel();
+        samout=new JLabel("The sample output for this program is : ");
+        this.add(samout);
+        samoutput = new JLabel[(det.getSampleOutput().size())];
         for(String s:det.getSampleOutput()){
-             samout+=s+"<html><br></html>";
+             samoutput[i]=new JLabel(s);
+             add(samoutput[i]);
         }
-        samoutput=new JLabel("Sample output: "+samout);
-        add(samoutput);
         fchoose=new JButton("Choose Your File");
         fchoose.addActionListener(this);
+        jr1=new JRadioButton("C or C++");
+        jr2=new JRadioButton("Java");
+        jr3=new JRadioButton("Python");
+        bg=new ButtonGroup();
         setVisible(true);
         this.add(input);
         this.add(output);
-        this.add(fchoose);
-        
+        this.add(jr1);
+        this.add(jr2);
+        this.add(jr3);
+        bg.add(jr1);
+        jr1.setActionCommand("Cc");
+        bg.add(jr2);
+        jr1.setActionCommand("Ja");
+        bg.add(jr3);
+        jr1.setActionCommand("Py");
+        System.out.println(bg.getSelection());
+        this.add(fchoose);     
      }
      
      
@@ -74,6 +95,20 @@ public class QuestionPage extends JFrame implements ActionListener{
 
      @Override
      public void actionPerformed(ActionEvent e) {
-          ug.run(det.getProgramID());
+          if(jr1.isSelected()){                   //bg.getSelection().getActionCommand().equals("Cc")
+                button_select=1;
+                System.out.println("JR1");
+             }
+             else if(jr2.isSelected()){
+                button_select=2;
+                System.out.println("JR2");
+             }
+             else if(jr3.isSelected()){
+                button_select=3;
+                System.out.println("JR3");
+             }
+          //System.out.println(button_select);
+          ug.run(det.getProgramID(),button_select);
+          
      }
 }
