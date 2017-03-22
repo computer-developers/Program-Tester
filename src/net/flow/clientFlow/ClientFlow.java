@@ -8,6 +8,7 @@ package net.flow.clientFlow;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.Registry;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.function.Consumer;
 import java.util.logging.Level;
@@ -54,6 +55,7 @@ public class ClientFlow implements IntNetClient{
                          return;
                     }
                }catch(RemoteException ex){
+                    errRun.accept("Servers not Connected !!");
                     return;
                }
           }
@@ -73,6 +75,8 @@ public class ClientFlow implements IntNetClient{
      @Override
      public boolean init(String uName,String passwd){
           this.mainSer=getDefaultMainSer();
+          this.uName=uName;
+          this.passwd=passwd;
           try{
                System.out.println("Main ser..."+mainSer);
                mainObj=(IntMainSer)Naming.lookup(mainSer);
@@ -97,9 +101,9 @@ public class ClientFlow implements IntNetClient{
                     return false;
                }
                DataSerFlow d=new DataSerFlow(mainSer);
-               d.start();
                System.out.println("data ser flow running");
-               d.join();
+               d.start();
+               //d.join();
                System.out.println("before server error");
                //code for register User State as a backup logger.
                //IntRemoteLog rg=(IntRemoteLog)Naming.lookup(mainLogSer);
@@ -147,6 +151,7 @@ public class ClientFlow implements IntNetClient{
                IntUserStatus u=mainObj.getStatus(uName, passwd);
                return u.getAllProStatus().get(pid);
           } catch (Exception ex) {
+               System.err.println("credit error");
                return -1;
           }
      }
@@ -154,14 +159,36 @@ public class ClientFlow implements IntNetClient{
      @Override
      public int userCredit() {
           try {
-               if(mainObj==null)
+               if(mainObj==null){
+                    System.err.println("mainObj null");
                     return -1;
+               }
                if(!mainObj.aya())
                     assert true:"log server says not alive";
                IntUserStatus u=mainObj.getStatus(uName, passwd);
+               System.err.println("u = "+u);
                return u.getUserCredit();
           } catch (Exception ex) {
+               System.err.println("user credit error");
                return -1;
+          }
+     }
+
+     @Override
+     public Map<Long, Integer> getAllStatus() {
+          try {
+               if(mainObj==null)
+                    return null;
+               if(!mainObj.aya())
+                    assert true:"log server says not alive";
+               System.out.println("name pass "+uName+";"+passwd);
+               IntUserStatus u=mainObj.getStatus(uName, passwd);
+               System.out.println("user status :- "+u);
+               return u.getAllProStatus();
+          } catch (Exception ex) {
+               System.err.println("status error :- "+ex);
+               ex.printStackTrace();
+               return null;
           }
      }
 }

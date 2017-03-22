@@ -2,6 +2,7 @@ package lib.userModule;
 
 import java.io.Closeable;
 import java.util.List;
+import java.util.Map;
 import lib.logger.MyLogger;
 import lib.userModule.result.IntLiveResultSet;
 import lib.ui.*;
@@ -41,6 +42,21 @@ public interface IntUserFlow extends Closeable{
       * @return {@code IntLiveResultSet}, containing the result of command.
       */
      IntLiveResultSet execute(long pid,String cmd);
+     
+     /**
+      * implementation of this method should return the total credit of the user.
+      * credit returned by this method should be reflected everywhere i.e. remote
+        server etc. 
+      * @return credit of the user.
+      */
+     int getCredit();
+     
+     /**
+      * implementation of this method should update the data.
+      * call to this method should fetch the data from the remote servers &
+        update it.
+      */
+     void refresh();
      
      /**
       * implementation of this method should return all the

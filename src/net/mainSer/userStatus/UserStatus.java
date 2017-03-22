@@ -1,9 +1,12 @@
 package net.mainSer.userStatus;
 
-import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import lib.dT.problemManipulate.IntProgramDetail;
+import static programtester.config.Configuration.TEST_PASS;
+import static programtester.config.Configuration.TEST_PRESENT_ERROR;
 
 
 /**
@@ -12,10 +15,16 @@ import java.util.Collections;
  */
 public class UserStatus implements IntUserStatus{
      private final Map<Long,Integer> ps;
+     private final List<IntProgramDetail> pc;
      private int credit;
      private final String uName,passwd;
-     UserStatus(String uName,String passwd,Map<Long,Integer> ps){
-          this.ps=ps;
+     UserStatus(String uName,String passwd,List<IntProgramDetail> lpc,Map<Long,Integer> mps){
+          this.pc=lpc;
+          ps=new HashMap<>();
+          ps.putAll(mps);
+          pc.forEach(i->{
+               ps.putIfAbsent(i.getProgramID(),0);
+          });
           this.uName=uName;
           this.passwd=passwd;
           creditCal();
@@ -62,15 +71,15 @@ public class UserStatus implements IntUserStatus{
       * if old credit greater then the new credit then this method simply
         return true without changing anything.
       * @param problemId programId
-      * @param credit new credit
+      * @param status new credit
       * @return true if updated successfully, false otherwise.
       */
-     public synchronized boolean update(long problemId,int credit){
+     public synchronized boolean update(long problemId,int status){
           if(!ps.containsKey(problemId))
                return false;
-          if(ps.get(problemId)>credit)
+          if(ps.get(problemId)>status)
                return true;
-          ps.replace(problemId,credit);
+          ps.replace(problemId,status);
           creditCal();
           return true;
      }
@@ -82,13 +91,11 @@ public class UserStatus implements IntUserStatus{
         with credit 0
       * @param ar array of programIds
       */
-     synchronized void addProgramId(Long... ar){
-          Arrays.stream(ar)
-                  .distinct()
-                  .filter(i->(!ps.containsKey(i)))
-                  .forEach(i->{
-                       ps.put(i,0);
-                  });
+     synchronized void addProgramId(IntProgramDetail pd){
+          if(pc.contains(pd))
+               return;
+          pc.add(pd);
+          ps.put(pd.getProgramID(),0);
      }
      
      /**
@@ -98,9 +105,12 @@ public class UserStatus implements IntUserStatus{
       */
      private synchronized void creditCal(){
           credit=0;
-          ps.forEach((x,y)->{
-               if(y>0)
-                    credit+=y;
+          pc.forEach(p->{
+               int s=ps.getOrDefault(p.getProgramID(),0);
+               if(s==TEST_PRESENT_ERROR)
+                    credit+=(p.getCredit()-1);
+               else if(s==TEST_PASS)
+                    credit+=p.getCredit();
           });
      }
      

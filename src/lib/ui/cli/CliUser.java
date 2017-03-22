@@ -40,7 +40,9 @@ public class CliUser implements IntUI{
           while(isAlive){
                System.out.println("\nMenu..\n"
                          + "1.Test\n"
-                         + "2.Display\n"
+                         + "2.Display Problems\n"
+                         + "3.Display User's Total Credit\n"
+                         + "4.Refresh\n"
                          + "0.Exit\n");
                switch(sc.nextInt()){
                     case 1:System.out.println("Enter Program ID..");
@@ -51,6 +53,10 @@ public class CliUser implements IntUI{
                               test(p,s);
                               break;
                     case 2:dispDetail();
+                              break;
+                    case 3:System.out.println("Users Credit:-"+uf.getCredit());
+                              break;
+                    case 4:uf.refresh();
                               break;
                     case 0:uf.close();
                          return;

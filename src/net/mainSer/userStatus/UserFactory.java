@@ -37,7 +37,6 @@ import static programtester.config.Configuration.getDefaultUserDetailPath;
  */
 public class UserFactory {
      private UserFactory(){}
-     private static List<String> log=Collections.synchronizedList(new ArrayList<>());
      private static final List<IntProgramDetail> problems=
              Collections.synchronizedList(new ArrayList<>());
      private static final Set<UserStatus> user=
@@ -73,8 +72,7 @@ public class UserFactory {
       * @return true if user added successfully, false otherwise.
       */
      public static synchronized boolean addUser(String uName,String passwd){
-          UserStatus u=new UserStatus(uName,passwd,new HashMap<>());
-//          u.addProgramId(problems.keySet().toArray(new Long[0]));
+          UserStatus u=new UserStatus(uName,passwd,problems,new HashMap<>());
           return user.add(u);
      }
      
@@ -92,7 +90,7 @@ public class UserFactory {
      public static synchronized boolean addProblem(IntProgramDetail pd){
           if(!problems.contains(pd)){
                problems.add(pd);
-  //             user.parallelStream().forEach(i->i.addProgramId(pd));
+               user.parallelStream().forEach(i->i.addProgramId(pd));
                return true;
           }
           return false;
@@ -112,7 +110,9 @@ public class UserFactory {
           UserStatus u=user.parallelStream()
                          .filter(i->i.getUName().equals(uName))
                          .findAny().orElse(null);
-          System.out.println("user name :- "+u.getUName()+";"+u.getPasswd());
+          if(u==null)
+               System.out.println("null user state");
+          System.out.println("user quary :- "+u.getUName()+";"+u.getPasswd());
           if(u==null)
                return null;
           System.out.println("check1");
@@ -160,9 +160,9 @@ public class UserFactory {
                int status=Integer.parseInt(LogTools.getLogProperty(log, "state"));
                UserStatus u=(UserStatus)getUser(uName);
                if(status==TEST_PASS)
-                    return u.update(pid, getCredit(pid));
+                    return u.update(pid, TEST_PASS);
                else if(status==TEST_PRESENT_ERROR)
-                    return u.update(pid, getCredit(pid)-1);
+                    return u.update(pid, TEST_PRESENT_ERROR);
                else if(status==TEST_TIME_ERROR)
                     return u.update(pid, 0);
                else if(status==TEST_FAIL)
@@ -182,14 +182,12 @@ public class UserFactory {
       * @return credit of the program.
       */
      public static synchronized int getCredit(long pid){
-    //      if(problems.containsKey(pid))
-    //           return problems.get(pid);
-          return -1;
+          return problems.stream().filter(i->i.getProgramID()==pid)
+                  .mapToInt(i->i.getCredit()).findAny().orElse(-1);
      }
      
      public static synchronized boolean logHandle(String s){
-          log.add(s);
-          return true;
+          return processLog(s);
      }
      
      public static void proBack(String uri){
@@ -197,8 +195,9 @@ public class UserFactory {
                IntLogProc lp=(IntLogProc)Naming.lookup(uri);
                List<String> l=lp.getLogs(null,null);
                l.stream().forEach(i->processLog(i));
-                    log.stream().forEach(i->processLog(i));
+               System.out.println("Log recovered");
           } catch (Exception ex) {
+               System.err.println("Error in log recovery!!");
           }
      }
 
@@ -207,9 +206,8 @@ public class UserFactory {
                     .sorted().collect(Collectors.toList());
      }
      
-     public static Map<Long,Integer> getAllProblems(){
-     //     return Collections.unmodifiableMap(problems);
-          return null;
+     public static List<IntProgramDetail> getAllProblems(){
+          return Collections.unmodifiableList(problems);
      }
      
      static boolean readUserDetail(Path file){
@@ -223,7 +221,7 @@ public class UserFactory {
                return true;
           } catch (Exception ex) {
                System.err.println("readUserdetail :- "+ex);
-               ex.printStackTrace();
+               //ex.printStackTrace();
                return false;
           }
      }

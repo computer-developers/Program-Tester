@@ -49,12 +49,18 @@ public class Configurator {
                
                case "source_data_dir":
                     Path p2=Paths.get(ar[1]).toAbsolutePath();
+                    try {
+                         Files.createDirectories(p2);
+                    } catch (IOException ex) {}
                     //System.out.println("sdd :- "+p2);
                     if(Files.exists(p2)&&Files.isDirectory(p2))
                          Configuration.setDefaultDir(p2);
                     break;
                case "problem_dir":
                     Path p3=Paths.get(ar[1]).toAbsolutePath();
+                    try {
+                         Files.createDirectories(p3);
+                    } catch (IOException ex) {}
                     if(Files.exists(p3)&&Files.isDirectory(p3))
                          Configuration.setDefaultProDir(p3);
                     break;

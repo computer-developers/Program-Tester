@@ -53,7 +53,10 @@ public class MainSerFlow {
                               break;
                     case 4:System.out.println("Program list...");
                               UserFactory.getAllProblems()
-                                   .forEach((x,y)->System.out.println(x+"\t"+y));
+                                   .forEach(i->{
+                                           System.out.println(i.getProgramID()
+                                                   +"\t"+i.getCredit());
+                                   });
                               break;
                     case 5:System.out.println("Users list...");
                               UserFactory.getAllUser()

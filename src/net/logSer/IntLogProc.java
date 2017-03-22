@@ -5,6 +5,8 @@
  */
 package net.logSer;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,6 +14,6 @@ import java.util.List;
  *
  * @author Neel Patel
  */
-public interface IntLogProc {
-     List<String> getLogs(LocalDateTime start,LocalDateTime end);
+public interface IntLogProc extends Remote{
+     List<String> getLogs(LocalDateTime start,LocalDateTime end) throws RemoteException;
 }

@@ -56,7 +56,12 @@ public class MainSer extends UnicastRemoteObject implements IntMainSer{
       */
      @Override
      public IntUserStatus getStatus(String user, String passwd) {
-          return UserFactory.getUser(user, passwd);
+          IntUserStatus u=UserFactory.getUser(user, passwd);
+          System.out.println("us name - "+u.getUName());
+          System.out.println("us pass - "+u.getPasswd());
+          System.out.println("us credit - "+u.getUserCredit());
+          System.out.println("us status - "+u.getAllProStatus());
+          return u;
      }
      
 }

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -40,6 +41,34 @@ public class NetUserFlow implements IntUserFlow{
      //private Thread t;
      //this is executer service used to execute the parallel task.
      private ExecutorService es=Executors.newCachedThreadPool();
+
+     @Override
+     public int getCredit() {
+          System.out.println("getcredit meth");
+          if(net==null)
+               return -1;
+          System.out.println("credit get");
+          return net.userCredit();
+     }
+
+     @Override
+     public synchronized void refresh(){
+          System.out.println("refresh meth");
+          try{
+               if(net==null)
+                    return;
+               Map<Long,Integer> u=net.getAllStatus();
+               if(u==null)
+                    return;
+               ps.stream().forEach(i->{
+                    i.setState(u.getOrDefault(i.getProgramID(),0));
+               });
+               System.out.println("refresh meth com");
+          }catch(Exception ex){
+               System.err.println("refresh meth com err");
+               ui.showMessage("error while refreshing");
+          }
+     }
 
      /**
       * this is simple extension of class {@code ProgramStateAdapter},
@@ -96,14 +125,15 @@ public class NetUserFlow implements IntUserFlow{
                          ,"PID = "+x.getProgramID()
                          ,"State = "+code);
                logger.log(l);
-               if(net.log(l))
+               if(!net.log(l))
                     ui.showMessage("Remote log error");
           }
           System.gc();
      }
      
      /**
-      * this method read and return all the program from default program directory.
+      * this method read and return all the program from default
+        program directory.
       * this method internally call {@code ProgramDetails.readProgramDetail()}
         to get problem definition.
       * this process create the new objects of type ProblemState using the
@@ -128,8 +158,8 @@ public class NetUserFlow implements IntUserFlow{
           System.out.println("Pro :- "+getDefaultProDir());
           System.out.println("test :- "+getDefaultDir());
           net=new ClientFlow();
-          net.regErrRunner(System.out::println);
-          net.regMessageRunner(System.out::println);
+          //net.regErrRunner(System.out::println);
+          //net.regMessageRunner(System.out::println);
      }
      
      /**
@@ -143,6 +173,8 @@ public class NetUserFlow implements IntUserFlow{
           if(this.ui!=null)
                return;
           this.ui=ui;
+          net.regMessageRunner(ui::showMessage);
+          net.regErrRunner(ui::showMessage);
           uName=ui.Prompt("enter User Name");
           password=ui.Prompt("enter password");
           for(;!net.init(uName, password);){
@@ -175,6 +207,8 @@ public class NetUserFlow implements IntUserFlow{
                return rt;
           } catch (IOException ex) {
                ui.showMessage("file not found !!!");
+          }catch(Exception ex){
+               ui.showMessage("something wrong !!");
           }
           return null;
      }
@@ -197,7 +231,7 @@ public class NetUserFlow implements IntUserFlow{
      @Override
      public synchronized List<? extends IntProgramState> getAllProgramDetail() {
           if(ps==null)
-               ps=(List<ProblemState>)getPrograms();
+               ps=Collections.synchronizedList((List<ProblemState>)getPrograms());
           return Collections.unmodifiableList(ps);
      }
      
@@ -207,6 +241,7 @@ public class NetUserFlow implements IntUserFlow{
      @Override
      public void finalize(){
           es.shutdownNow();
+          System.exit(0);
      }
      
      /**
@@ -217,5 +252,6 @@ public class NetUserFlow implements IntUserFlow{
           es.shutdownNow();
           logger.close();
           ui.close();
+          System.exit(0);
      }
 }

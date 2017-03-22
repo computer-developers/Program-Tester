@@ -128,8 +128,6 @@ public class LogHandler {
       * @return true if the logger set successfully, false otherwise
       */
      public static boolean setBackupLog(String url){
-          if(back!=null)
-               return false;
           try {
                IntRemoteLog ls=(IntRemoteLog)Naming.lookup(url);
                if(ls.aya()){

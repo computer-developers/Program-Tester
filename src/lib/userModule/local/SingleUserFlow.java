@@ -34,6 +34,15 @@ public class SingleUserFlow implements IntUserFlow{
      //this is executer service used to execute the parallel task.
      private ExecutorService es=Executors.newCachedThreadPool();
 
+     @Override
+     public int getCredit() {
+          throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     }
+
+     @Override
+     public void refresh() {
+     }
+
      /**
       * this is simple extension of class {@code ProgramStateAdapter},
         which implements the {@code IntProblemState}.

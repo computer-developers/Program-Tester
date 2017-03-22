@@ -6,19 +6,15 @@
 package net.flow.dataSerFlow;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.FileVisitOption;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.Comparator;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.UrlTools;
 import net.dataSer.DataSer;
 import net.dataSer.IntDataSer;
@@ -51,7 +47,8 @@ public class DataSerFlow {
                ds.getAllProblems().forEach((n,d)->{
                     Path p=pd.resolve(n);
                     try {
-                         Files.write(p, d);
+                         Files.write(p, d, StandardOpenOption.TRUNCATE_EXISTING,
+                                 StandardOpenOption.CREATE);
                     } catch (Exception ex) {
                     }
                });
@@ -62,11 +59,12 @@ public class DataSerFlow {
                ds.getAllTestCases().forEach((n,d)->{
                     Path p=td.resolve(n);
                     try {
-                         Files.write(p, d);
+                         Files.write(p, d, StandardOpenOption.TRUNCATE_EXISTING,
+                                 StandardOpenOption.CREATE);
                     } catch (Exception ex) {
                     }
                });
-               if(ds.getAllTestCases().size()!=Files.list(pd)
+               if(ds.getAllTestCases().size()!=Files.list(td)
                        .filter(i->!Files.isDirectory(i)).count())
                     return false;
                return true;
@@ -78,7 +76,7 @@ public class DataSerFlow {
      public static boolean cleanDir(Path dir){
           try {
                Files.createDirectories(dir);
-               Files.walk(dir)
+               Files.walk(dir,0)
                        .sorted(Comparator.reverseOrder())
                        .map(Path::toFile)
                        //.peek(System.out::println)
@@ -101,9 +99,6 @@ public class DataSerFlow {
      }
      
      private void run(){
-          System.out.println("data ser run");
-          if(!init())
-               return;
           flag=true;
           for(;flag;){
                try{
@@ -150,8 +145,7 @@ public class DataSerFlow {
           }
           try {
                if(mainObj.registerDataSer(dataSer))
-                    return true;
-               System.out.println("registration done");
+                    System.out.println("registration done");
           } catch (Exception ex) {
                System.out.println("Object registration fail");
                return false;
@@ -169,6 +163,8 @@ public class DataSerFlow {
      public void start(){
           System.out.println("data ser run");
           if(t!=null&&t.isAlive())
+               return;
+          if(!init())
                return;
           t=new Thread(this::run);
           t.start();

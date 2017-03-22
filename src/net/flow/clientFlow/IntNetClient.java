@@ -5,6 +5,7 @@
  */
 package net.flow.clientFlow;
 
+import java.util.Map;
 import java.util.function.Consumer;
 
 /**
@@ -18,4 +19,12 @@ public interface IntNetClient {
      boolean log(String s);
      int credit(long pid);
      int userCredit();
+     /**
+      * implementation of this method should return the total credit of the user.
+      * credit returned by this method should be reflected everywhere i.e. remote
+        server etc. 
+      * @return return Map of ProblemId to Status.
+      */
+     Map<Long,Integer> getAllStatus();
+     
 }
