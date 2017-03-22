@@ -9,12 +9,12 @@ import lib.userModule.result.IntLiveResultSet;
  *
  * @author Parth Doshi
  */
+
 public class ResultPage extends JFrame{
      /**
       * This Page is called from the run method of the UserGUI
       * This method displays the test cases and their states
       * This is the final page that is displayed in the GUI
-      * 
       */
     JLabel[] tcno= new JLabel[10];
     JLabel[] ans= new JLabel[10];
@@ -41,7 +41,6 @@ public class ResultPage extends JFrame{
             i++;
         }
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-             
     }
     public void refresh(){
          ilr = irs.getAllLiveResult();
@@ -50,8 +49,6 @@ public class ResultPage extends JFrame{
         {
             tcno[i].setText("Test Case - "+ir.index());
             ans[i].setText(ir.getMessage());
-           
-    
             i++;
         }
     }

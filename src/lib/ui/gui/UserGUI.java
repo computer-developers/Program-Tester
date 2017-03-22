@@ -3,12 +3,9 @@ package lib.ui.gui;
 import java.io.File;
 import java.util.List;
 import java.util.StringTokenizer;
-import javax.swing.ButtonGroup;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JRadioButton;
 import javax.swing.JOptionPane; 
-import javax.swing.SwingConstants;
 import lib.ui.IntUI;
 import lib.userModule.IntUserFlow;
 import lib.userModule.result.IntLiveResultSet;
@@ -51,6 +48,7 @@ public class UserGUI implements IntUI{
         }
         QuestionPage qqp=new QuestionPage(ips,this);
      }
+     
      public void run(long pid,int select){
           /**
            * This method contains the code for choosing the file
@@ -91,12 +89,13 @@ public class UserGUI implements IntUI{
      }
      
      
+     
      @Override
      public void showMessage(String message) {
           /**
            * This method opens a dialog box showing a message
            */
-          JOptionPane.showMessageDialog(null, message, "Input Your Message", JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(null, message, "Message Input Box", JOptionPane.INFORMATION_MESSAGE);
      }
 
      @Override

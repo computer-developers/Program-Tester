@@ -52,7 +52,7 @@ public class StartPage extends JFrame implements ActionListener {
              i++;
         }  
 
-        JButton close=new JButton("Close Program");
+        close=new JButton("Close Program");
         add(close);
         close.addActionListener(new ActionListener() {           //anonymous class
              @Override
