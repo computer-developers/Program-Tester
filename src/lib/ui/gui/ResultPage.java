@@ -23,8 +23,8 @@ public class ResultPage extends JFrame{
         setSize(700, 700);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        Container c = getContentPane();
-        c.setLayout(new FlowLayout());
+        //Container c = getContentPane();
+        //c.setLayout(new FlowLayout());
         ilr = this.irs.getAllLiveResult();
         //System.out.println(ilr);
         
@@ -53,6 +53,6 @@ public class ResultPage extends JFrame{
         }
     }
     /*public static void main(String[] args){
-        ResultPage rp=new ResultPage();
+        ResultPage rp=new ResultPage(null);
     }*/
 }

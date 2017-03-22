@@ -18,6 +18,14 @@ import javax.swing.SwingConstants;
  *
  * @author Parth Doshi
  */
+
+/**
+ * This is the main controller of GUI for the software
+ * Every GUI call would be made from this class
+ * And every call will return to this class only
+ * Nothing in the GUI happens without this class
+ */
+
 public class UserGUI implements IntUI{
      private IntUserFlow uf;
      private List<? extends IntProgramState> ps;
@@ -30,6 +38,9 @@ public class UserGUI implements IntUI{
 
      public void display(long pid)
      {
+          /**
+           * This method calls the main QuestionPage with the help of pid from StartPage 
+           */
         //System.out.println("Inside display of UserGUI");
         IntProgramState ips = null;
         for (IntProgramState k : ps)
@@ -41,6 +52,10 @@ public class UserGUI implements IntUI{
         QuestionPage qqp=new QuestionPage(ips,this);
      }
      public void run(long pid,int select){
+          /**
+           * This method contains the code for choosing the file
+           * and it makes the call to the ResultPage
+           */
         String cmd=null,dcmd=null;
         StringTokenizer st;
         JFileChooser chooser = new JFileChooser();
@@ -78,25 +93,37 @@ public class UserGUI implements IntUI{
      
      @Override
      public void showMessage(String message) {
+          /**
+           * This method opens a dialog box showing a message
+           */
           JOptionPane.showMessageDialog(null, message, "Input Your Message", JOptionPane.INFORMATION_MESSAGE);
      }
 
      @Override
      public void start() {
+          /**
+           * This method initiates the software by calling the main StartPage
+           */
           //System.out.println("ABC");
           StartPage sp=new StartPage(ps,this);
      }
 
      @Override
      public void close() {
+          /**
+           * This method closes all working threads of the userFlow
+           * This method is invoke to shut down the GUI
+           */
           uf.close();
      }
 
      @Override
      public String Prompt(String message) {
-          System.out.println("ABCD");
+          /**
+           * This method is called when a user input is required
+           */
+          //System.out.println("ABCD");
           String mes =(JOptionPane.showInputDialog(this, message));
-        
         return mes;
      }
      

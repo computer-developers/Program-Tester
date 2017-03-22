@@ -28,6 +28,15 @@ public class StartPage extends javax.swing.JFrame implements ActionListener {
      public StartPage(List<? extends IntProgramState> ps,UserGUI ugi) {
         this.ps=ps;
         this.ugi = ugi;
+        //setLayout(new BorderLayout());
+        //JLabel background=new JLabel(new ImageIcon("C:\\Users\\Parth Doshi\\Documents\\NetBeansProjects\\Program-Tester\\X-pro coder.png"));
+        //background.setLayout(new FlowLayout());
+        //background.setSize(500, 500);
+        //add(background);
+        setLayout(new GridLayout(12,2));
+        setSize(700, 700);
+        setVisible(true);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         int i=0;
         for(IntProgramState ips:ps){
              jl[i]=new JLabel("Program no :"+(i+1),SwingConstants.CENTER);
@@ -42,10 +51,6 @@ public class StartPage extends javax.swing.JFrame implements ActionListener {
              
              i++;
         }  
-        setLayout(new GridLayout(12,2));
-        setSize(700, 700);
-        setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         JButton close=new JButton("Close Program");
         add(close);
         close.addActionListener(new ActionListener() {
@@ -62,4 +67,7 @@ public class StartPage extends javax.swing.JFrame implements ActionListener {
           ugi.display(spid[Integer.parseInt(e.getActionCommand())]);
           
      }
+     /*public static void main(String args[]){
+          StartPage spp=new StartPage(null,null);
+     }*/
 }
