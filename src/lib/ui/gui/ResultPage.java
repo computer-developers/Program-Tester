@@ -16,17 +16,17 @@ public class ResultPage extends JFrame{
     java.util.List<IntLiveResult> ilr = null;
     IntLiveResultSet irs = null;
     public ResultPage(IntLiveResultSet irs) {    
-         super("Result Page");
+        super("Result Page");
         this.irs=irs;
         irs.getAllLiveResult().forEach(i->i.addRunnable(this::refresh));
-        setLayout(new GridLayout(10,1));
+        setLayout(new GridLayout(50,3));
         setSize(700, 700);
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         Container c = getContentPane();
         c.setLayout(new FlowLayout());
         ilr = this.irs.getAllLiveResult();
-        System.out.println(ilr);
+        //System.out.println(ilr);
         
         int i = 0;
         for(IntLiveResult ir: ilr) //for-each loop
@@ -37,7 +37,7 @@ public class ResultPage extends JFrame{
             this.add(ans[i]);
             i++;
         }
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
              
     }
     public void refresh(){

@@ -17,7 +17,6 @@ import lib.userModule.result.IntProgramState;
  * @author Parth Doshi
  */
 public class UserGUI implements IntUI{
-
      private IntUserFlow uf;
      private List<? extends IntProgramState> ps;
           
@@ -25,25 +24,23 @@ public class UserGUI implements IntUI{
           this.uf=uf;
           this.uf.register(this);
           ps=uf.getAllProgramDetail();
-          
      }
-  public void display(long pid)
-  {
-       System.out.println("Inside display of UserGUI");
-       IntProgramState ips = null;
-       for (IntProgramState k : ps)
-            if(k.getProgramID() == pid)
-            {
-                 ips = k;
-                 break;
-            }
-    QuestionPage qqp=new QuestionPage(ips,this);
-          
-    
-    }
+
+     public void display(long pid)
+     {
+        //System.out.println("Inside display of UserGUI");
+        IntProgramState ips = null;
+        for (IntProgramState k : ps)
+        if(k.getProgramID() == pid)
+        {
+            ips = k;
+            break;
+        }
+        QuestionPage qqp=new QuestionPage(ips,this);
+     }
      public void run(long pid,int select){
         String cmd=null,dcmd=null;
-         StringTokenizer st;
+        StringTokenizer st;
         JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("choosertitle");
         String fullPath = null;
@@ -53,8 +50,8 @@ public class UserGUI implements IntUI{
             String sf = chooser.getSelectedFile().getName();
             File file = chooser.getCurrentDirectory();
             fullPath = file.getPath();
-            System.out.println("Path "+fullPath);
-            System.out.println(select);
+            //System.out.println("Path "+fullPath);
+            //System.out.println(select);
             switch(select){
                  case 1:cmd="\""+fullPath+"\\"+sf+"\"";
                         break;
@@ -69,13 +66,11 @@ public class UserGUI implements IntUI{
              }
             //System.out.println("The selected file's path is " + fullPath);
             //System.out.println("The selected file is " + sf);
-            
         }
-        System.out.println(cmd);
+        //System.out.println(cmd);
           IntLiveResultSet ilr = uf.execute(pid, cmd);
           ResultPage rrp=new ResultPage(ilr);
           //System.out.println(ilr);
-          
      }
      
      
@@ -87,7 +82,7 @@ public class UserGUI implements IntUI{
 
      @Override
      public void start() {
-          System.out.println("ABC");
+          //System.out.println("ABC");
           StartPage sp=new StartPage(ps,this);
      }
 

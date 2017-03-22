@@ -59,7 +59,6 @@ public class StartPage extends javax.swing.JFrame implements ActionListener {
      
      @Override
      public void actionPerformed(ActionEvent e) {
-          System.out.println();
           ugi.display(spid[Integer.parseInt(e.getActionCommand())]);
           
      }
