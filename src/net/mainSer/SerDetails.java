@@ -33,6 +33,7 @@ public class SerDetails {
      public static String getDataSer(){
           for(;!(dataSer.isEmpty()&&mainDataSer==null);){
                String s=findDataSer();
+               System.out.println("data server query :- "+s);
                if(s!=null)
                     return s;
           }
@@ -150,6 +151,7 @@ public class SerDetails {
           try {
                IntDataSer ds=(IntDataSer)Naming.lookup(url);
                if(ds.aya()){
+                    System.out.println("data check1");
                     dataSer.put(ds,System.currentTimeMillis());
                     return true;
                }else{

@@ -5,16 +5,19 @@
  */
 package net.dataSer;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Neel Patel
  */
-public class DataSer extends UnicastRemoteObject implements IntDataSer{
+public class DataSer extends UnicastRemoteObject implements IntDataSer,Serializable{
      private String url="";
      private final Map<String,byte[]> problems;
      private final Map<String,byte[]> testCases;
@@ -27,12 +30,20 @@ public class DataSer extends UnicastRemoteObject implements IntDataSer{
           this.dt=LocalDateTime.now();
      }
      
+     private DataSer(DataSer d) throws RemoteException{
+          this.dt=d.dt;
+          this.problems=d.problems;
+          this.testCases=d.testCases;
+          this.url=d.url;
+     }
+     
      /**
       * set the URI of the object which will return by toUrl method.
       * @param u URI String
       * @return true if the URI updated successfully.
       */
-     public boolean setUrl(String u){
+     @Override
+     public boolean setUrl(String u)throws RemoteException{
           url=u;
           return true;
      }
@@ -74,7 +85,11 @@ public class DataSer extends UnicastRemoteObject implements IntDataSer{
       */
      @Override
      public IntDataSer getObject() {
-          return this;
+          try {
+               return new DataSer(this);
+          } catch (RemoteException ex) {
+          }
+          return null;
      }
 
      /**

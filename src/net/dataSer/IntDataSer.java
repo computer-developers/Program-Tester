@@ -5,6 +5,7 @@
  */
 package net.dataSer;
 
+import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ import java.util.Map;
  *
  * @author Neel Patel
  */
-public interface IntDataSer extends Remote{
+public interface IntDataSer extends Remote,Serializable{
      /**
       * are you alive.
       * @return this method should always return true;
@@ -55,4 +56,9 @@ public interface IntDataSer extends Remote{
       * @return object of LocalDateTime
       */
      LocalDateTime getTime()throws RemoteException;
+     
+     /**
+      * 
+      */
+     boolean setUrl(String s)throws RemoteException;
 }

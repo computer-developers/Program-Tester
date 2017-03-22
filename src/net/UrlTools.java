@@ -64,7 +64,7 @@ public class UrlTools {
                //System.out.println("bind suc :- "+obj);
                return url;
           } catch (Exception ex) {
-               //System.out.println("reg exception");
+               System.out.println("reg exception "+ex);
                return null;
           }
      }

@@ -88,7 +88,7 @@ public class MainDataSerFlow {
                if(!remoteObj.setUrl(dataSer))
                     throw new RemoteException();
           }catch(Exception ex){
-               System.out.println("Object Binding fail");
+               System.out.println("Object Binding fail..."+ex);
                return false;
           }
           return true;

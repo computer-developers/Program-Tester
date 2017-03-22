@@ -119,6 +119,7 @@ ProgramTester {
      public static void mainAdminCli(){
           Configurator.init();
           new AdminFlow().start();
+          System.exit(0);
      }
      
      public static void mainSerCli(){

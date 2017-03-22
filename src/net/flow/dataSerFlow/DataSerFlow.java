@@ -61,12 +61,16 @@ public class DataSerFlow {
                     try {
                          Files.write(p, d, StandardOpenOption.TRUNCATE_EXISTING,
                                  StandardOpenOption.CREATE);
+                         System.out.println("write fail");
                     } catch (Exception ex) {
                     }
                });
                if(ds.getAllTestCases().size()!=Files.list(td)
-                       .filter(i->!Files.isDirectory(i)).count())
+                       .peek(System.out::println)
+                       .filter(i->!Files.isDirectory(i)).count()){
                     return false;
+               }
+               System.out.println("write done");
                return true;
           } catch (Exception ex) {
                return false;
@@ -76,8 +80,9 @@ public class DataSerFlow {
      public static boolean cleanDir(Path dir){
           try {
                Files.createDirectories(dir);
-               Files.walk(dir,0)
-                       .sorted(Comparator.reverseOrder())
+               Files.walk(dir,1)
+                       //.sorted(Comparator.reverseOrder())
+                       .filter(i->!Files.isDirectory(i))
                        .map(Path::toFile)
                        //.peek(System.out::println)
                        .forEach(File::delete);
@@ -120,7 +125,8 @@ public class DataSerFlow {
                dataObj=dataObj.getObject();
                System.out.println("object reference done");
           } catch (Exception ex) {
-               System.err.println("Remote Object access error");
+               System.err.println("Remote Object access error.."+ex);
+               ex.printStackTrace();
                return false;
           }
           if(!writeData(dataObj)){
@@ -136,11 +142,13 @@ public class DataSerFlow {
                System.err.println("Registry fail");
           }
           try{
+               System.out.println("data server bind :- "+dataSer);
                if(!UrlTools.registerObj(dataObj,dataSer))
                     throw new RemoteException();
-               ((DataSer)dataObj).setUrl(dataSer);
+               dataObj.setUrl(dataSer);
           }catch(Exception ex){
-               System.out.println("Object Binding fail");
+               System.out.println("Object Binding fail.."+ex);
+               ex.printStackTrace();
                return false;
           }
           try {
