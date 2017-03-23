@@ -45,9 +45,9 @@ public class CliUser implements IntUI{
                          + "4.Refresh\n"
                          + "0.Exit\n");
                switch(sc.nextInt()){
-                    case 1:System.out.println("Enter Program ID..");
+                    case 1:System.out.println("Enter Program ID (Enter the unique 12 length number):-");
                               long p=sc.nextLong();
-                              System.out.println("Enter command");
+                              System.out.println("Enter command (Enter the path of the .exe file of the program) :-");
                               String s;
                               for(s=sc.nextLine();s.isEmpty();s=sc.nextLine());
                               test(p,s);
