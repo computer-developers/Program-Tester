@@ -69,8 +69,6 @@ public class QuestionPage extends JFrame implements ActionListener{
              add(description[i]);
         }                                                        //setFont(field.getFont().deriveFont(Font.BOLD));
         input=new JLabel("Input : "+det.getInput());
-        input.setBackground(Color.red);
-        input.setFont("Lucida Console", Font.PLAIN, 12);
         output=new JLabel("Output : "+det.getOutput());
         samin=new JLabel("The sample input for this program is : ");
         this.add(samin);
