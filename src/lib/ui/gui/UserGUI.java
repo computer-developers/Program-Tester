@@ -122,7 +122,7 @@ public class UserGUI implements IntUI{
            * This method is called when a user input is required
            */
           //System.out.println("ABCD");
-          String mes =(JOptionPane.showInputDialog(this, message));
+          String mes =(JOptionPane.showInputDialog(message));
         return mes;
      }
      

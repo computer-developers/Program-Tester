@@ -7,7 +7,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import lib.userModule.result.IntProgramState;
 import static programtester.config.Configuration.TEST_PASS;
@@ -37,14 +36,13 @@ public class QuestionPage extends JFrame implements ActionListener{
      JLabel output;
      JLabel samin;
      JLabel samout;
-     //JLabel get_status;
+     JLabel get_status;
      JLabel[] saminput;
      JLabel[] samoutput;
      JRadioButton jr1;
      JRadioButton jr2;
      JRadioButton jr3;
      JButton fchoose;
-     JButton get_status;
      ButtonGroup bg;
      int button_select=0,int_status;
      String str_status;
@@ -55,6 +53,7 @@ public class QuestionPage extends JFrame implements ActionListener{
         super("Question Page");
         this.ug=ug;
         this.det=dett;
+        det.addRunnable(this::refresh);
         setLayout(new GridLayout(30,1));
         setSize(700, 700);
         setVisible(true);
@@ -108,6 +107,11 @@ public class QuestionPage extends JFrame implements ActionListener{
         jr1.setActionCommand("Py");
         //System.out.println(bg.getSelection());
         this.add(fchoose);
+        get_status=new JLabel();
+        refresh();
+        this.add(get_status);
+     }
+     public void refresh(){
         int_status=det.getState();
         switch(int_status){
              case TEST_PRESENT_ERROR:
@@ -119,15 +123,8 @@ public class QuestionPage extends JFrame implements ActionListener{
              default : 
                   str_status="Program Still Unsolved";
         }
-        get_status=new JButton("Click here to see the current of this question");
-        get_status.addActionListener(new ActionListener() {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-                  JOptionPane.showMessageDialog(null, "Status = "+str_status, "Status of current program" , JOptionPane.INFORMATION_MESSAGE);
-             }
-        });
-        add(get_status);
-     }
+        get_status.setText("Status of this question is - "+str_status);
+    }
      @Override
      public void actionPerformed(ActionEvent e) {
           if(jr1.isSelected()){                   //bg.getSelection().getActionCommand().equals("Cc")
