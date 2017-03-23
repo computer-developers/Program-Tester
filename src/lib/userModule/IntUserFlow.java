@@ -53,7 +53,7 @@ public interface IntUserFlow extends Closeable{
      
      /**
       * implementation of this method should update the data.
-      * call to this method should fetch the data from the remote servers &
+      * call to this method should fetch the data from the remote servers and
         update it.
       */
      void refresh();

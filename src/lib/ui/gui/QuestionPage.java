@@ -1,4 +1,5 @@
 package lib.ui.gui;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -13,20 +14,17 @@ import static programtester.config.Configuration.TEST_PASS;
 import static programtester.config.Configuration.TEST_PRESENT_ERROR;
 
 
-/**
- *
- * @author Parth Doshi
- */
-
-public class QuestionPage extends JFrame implements ActionListener{
      /**
-      * This page is called from the display method of UserGUI
-      * This page displays the details of the question selected by the user from the StartPage
-      * The selection of the language used is made here
-      * All the data is displayed in a predefined but editable format using JFrame
-      * The button to choose the selected file i.e.fchoose is provided here
-      * This button calls the run method of the UserGUI which in turns opens the JFileChooser
+      * This page is called from the display method of UserGUI.
+      * This page displays the details of the question selected by the user from the StartPage.
+      * The selection of the language used is made here.
+      * All the data is displayed in a predefined but editable format using JFrame.
+      * The button to choose the selected file i.e.fchoose is provided here.
+      * This button calls the run method of the UserGUI which in turns opens the JFileChooser.
+      * @author Parth Doshi
       */
+     
+public class QuestionPage extends JFrame implements ActionListener{
      JLabel pid;
      JLabel title;
      JLabel credit;
@@ -71,6 +69,8 @@ public class QuestionPage extends JFrame implements ActionListener{
              add(description[i]);
         }                                                        //setFont(field.getFont().deriveFont(Font.BOLD));
         input=new JLabel("Input : "+det.getInput());
+        input.setBackground(Color.red);
+        input.setFont("Lucida Console", Font.PLAIN, 12);
         output=new JLabel("Output : "+det.getOutput());
         samin=new JLabel("The sample input for this program is : ");
         this.add(samin);
