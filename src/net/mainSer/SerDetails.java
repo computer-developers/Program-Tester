@@ -7,12 +7,11 @@ package net.mainSer;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.dataSer.IntDataSer;
 import net.logSer.IntRemoteLog;
 
@@ -24,7 +23,8 @@ public class SerDetails {
      private SerDetails(){}
      private static IntRemoteLog log;
      private static IntDataSer mainDataSer;
-     private final static Map<IntDataSer,Long> dataSer=new ConcurrentHashMap<>();
+     private final static Map<IntDataSer,Long> dataSer=
+             Collections.synchronizedMap(new HashMap<>());
      
      /**
       * 
@@ -72,13 +72,17 @@ public class SerDetails {
                               }).orElse(mainDataSer);
           try {
                if(d.aya()){
+                    IntDataSer d1=(IntDataSer)Naming.lookup(d.toUrl());
                     dataSer.replace(d,System.currentTimeMillis());
+                    System.out.println("c2");
                     return d.toUrl();
                }else{
+                    System.out.println("c3");
                     assert true:"remote data Server say 'not alive'";
                     return null;
                }
           } catch (Exception ex) {
+               System.out.println("c4");
                dataSer.remove(d);
                return null;
           }
