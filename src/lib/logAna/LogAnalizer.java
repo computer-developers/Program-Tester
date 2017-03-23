@@ -89,10 +89,11 @@ public class LogAnalizer {
         Map<Long, Integer> cre = new HashMap<Long, Integer>();
         if(lm.size() > 0) {
             for (Long pid_list : lm.keySet()) {
-
+             //    System.out.println("pid_list: "+pid_list);
                 IntProgramDetail ipd = null;
                 try {
                     ipd = readProgramDetail(pid_list);
+                 //    System.out.println("ipd: "+ipd);
                 } catch (Exception e) {
                     System.err.println("Reading error - File Not Found !");
                     return null;
@@ -135,20 +136,24 @@ public class LogAnalizer {
         Set<String> s = new HashSet<String>();
         Map<String, Integer> hm = new HashMap<String, Integer>();
         for (String update : file_list) {
-            String st = getLogProperty(update, "User");
+            String st = getLogProperty(update, "UserName");
+             //System.out.println(st);
             if (st!=null && !(s.contains(st)))
                 s.add(st);
         }
+         //System.out.println("set: "+s);
         if(s.size() > 0)
         {
         for (String set_it : s) {
             Map<Long, Integer> lm = getUserStatus(set_it);
+           //  System.out.println(lm);
             lm = stateToCredit(lm);
             Integer credit = 0;
             for (Integer cre : lm.values())
                 credit += cre;
             hm.put(set_it, credit);
         }
+        
             return hm;
         }
         else

@@ -21,15 +21,16 @@ public class AdminLogAnalyser {
 
         while (true) {
 
-            System.out.println("\nMenu > Main Server..\n"
+            System.out.println("\nMenu > LogAnalyser Menu..\n"
                     + "1.get user status\n"
                     + "2.refresh data\n"
                     + "3.get all user with credit\n"
                     + "0.exit from Exit from Main Server\n");
             switch (s1.nextInt()) {
                 case 1:
-                    String user_name = s1.nextLine();
-                    Map<Long, Integer> mp = la.getUserStatus(user_name);
+                    String s = "";
+                    for(s=s1.nextLine();s.trim().isEmpty();s=s1.nextLine());
+                    Map<Long, Integer> mp = la.getUserStatus(s);
                     for (Long l1 : mp.keySet())
                         System.out.println("Program-id:  " + l1 + "       status:   " + mp.get(l1));
                     break;
@@ -39,8 +40,8 @@ public class AdminLogAnalyser {
                 case 3:
                     try {
                         Map<String, Integer> mp1 = la.getAllUserStatus();
-                        for (String s : mp1.keySet()) {
-                            System.out.println("User-Name:   " + s + "     " + mp1.get(s));
+                        for (String s2 : mp1.keySet()) {
+                            System.out.println("User-Name:   " + s2 + "     " + mp1.get(s2));
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
