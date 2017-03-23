@@ -104,7 +104,7 @@ public class UserGUI implements IntUI{
            * This method initiates the software by calling the main StartPage
            */
           //System.out.println("ABC");
-          StartPage sp=new StartPage(ps,this);
+          StartPage sp=new StartPage(ps,this,uf);
      }
 
      @Override

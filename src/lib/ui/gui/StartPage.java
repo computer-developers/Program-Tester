@@ -4,10 +4,13 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
+import lib.userModule.IntUserFlow;
 import lib.userModule.result.IntProgramState;
 
 /**
@@ -21,16 +24,19 @@ public class StartPage extends JFrame implements ActionListener {
       * This class is displays the first page of the GUI
       * User can select the Program he wants to attempt from the list of programs using JButtons
       */
-
+     IntUserFlow uf;
      JButton[] jb=new JButton[10];
      JLabel[] jl=new JLabel[10];
      Long[] spid=new Long[10];
+     JButton refresh;
+     JButton credit_popup;
      UserGUI ugi = null;
-     JButton close;
+     //JButton close;
      private List<? extends IntProgramState> ps;
-     public StartPage(List<? extends IntProgramState> ps,UserGUI ugi) {
+     public StartPage(List<? extends IntProgramState> ps,UserGUI ugi,IntUserFlow uf) {
         this.ps=ps;
         this.ugi = ugi;
+        this.uf=uf;
         //setLayout(new BorderLayout());
         //JLabel background=new JLabel(new ImageIcon("C:\\Users\\Parth Doshi\\Documents\\NetBeansProjects\\Program-Tester\\X-pro coder.png"));
         //background.setLayout(new FlowLayout());
@@ -51,8 +57,23 @@ public class StartPage extends JFrame implements ActionListener {
              add(jb[i]);
              i++;
         }  
-
-        close=new JButton("Close Program");
+        refresh=new JButton("Refresh");
+        add(refresh);
+        refresh.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                  uf.refresh();
+             }
+        });
+        credit_popup=new JButton("Credit Messege");
+        add(credit_popup);
+        credit_popup.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                  JOptionPane.showMessageDialog(null, "Your Current Credit is "+uf.getCredit(), "Credit", JOptionPane.INFORMATION_MESSAGE);
+             }
+        });
+        /*close=new JButton("Close Program");
         add(close);
         close.addActionListener(new ActionListener() {           //anonymous class
              @Override
@@ -60,7 +81,7 @@ public class StartPage extends JFrame implements ActionListener {
              ugi.close();
              StartPage.this.dispose();
            }
-        });
+        });*/
      }
      
      @Override

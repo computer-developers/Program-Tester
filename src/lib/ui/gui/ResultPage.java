@@ -24,10 +24,10 @@ public class ResultPage extends JFrame{
         super("Result Page");
         this.irs=irs;
         irs.getAllLiveResult().forEach(i->i.addRunnable(this::refresh));
-        setLayout(new GridLayout(50,3));
+        setLayout(new GridLayout(10,2));
         setSize(700, 700);
         setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        //setDefaultCloseOperation(EXIT_ON_CLOSE);
         ilr = this.irs.getAllLiveResult();
         //System.out.println(ilr);
         

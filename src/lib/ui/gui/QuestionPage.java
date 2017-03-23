@@ -7,8 +7,12 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import lib.userModule.result.IntProgramState;
+import static programtester.config.Configuration.TEST_PASS;
+import static programtester.config.Configuration.TEST_PRESENT_ERROR;
+
 
 /**
  *
@@ -33,14 +37,17 @@ public class QuestionPage extends JFrame implements ActionListener{
      JLabel output;
      JLabel samin;
      JLabel samout;
+     //JLabel get_status;
      JLabel[] saminput;
      JLabel[] samoutput;
      JRadioButton jr1;
      JRadioButton jr2;
      JRadioButton jr3;
      JButton fchoose;
+     JButton get_status;
      ButtonGroup bg;
-     int button_select=0;
+     int button_select=0,int_status;
+     String str_status;
      IntProgramState det;
      UserGUI ug=null;
 
@@ -92,6 +99,7 @@ public class QuestionPage extends JFrame implements ActionListener{
         this.add(jr1);
         this.add(jr2);
         this.add(jr3);
+        jr1.setSelected(true);
         bg.add(jr1);
         jr1.setActionCommand("Cc");
         bg.add(jr2);
@@ -99,7 +107,26 @@ public class QuestionPage extends JFrame implements ActionListener{
         bg.add(jr3);
         jr1.setActionCommand("Py");
         //System.out.println(bg.getSelection());
-        this.add(fchoose);     
+        this.add(fchoose);
+        int_status=det.getState();
+        switch(int_status){
+             case TEST_PRESENT_ERROR:
+                  str_status="Presentation Error Found";
+                  break;
+             case TEST_PASS:
+                  str_status="Program Successfully Executed";
+                  break;
+             default : 
+                  str_status="Program Still Unsolved";
+        }
+        get_status=new JButton("Click here to see the current of this question");
+        get_status.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                  JOptionPane.showMessageDialog(null, "Status = "+str_status, "Status of current program" , JOptionPane.INFORMATION_MESSAGE);
+             }
+        });
+        add(get_status);
      }
      @Override
      public void actionPerformed(ActionEvent e) {
