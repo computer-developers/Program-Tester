@@ -14,6 +14,10 @@ import static programtester.config.Configuration.TEST_PRESENT_ERROR;
  * @author Neel Patel
  */
 public class UserStatus implements IntUserStatus{
+     private static final long serialVersionUID = 1L;
+     static long getVersion(){
+          return serialVersionUID;
+     }
      private final Map<Long,Integer> ps;
      private final List<IntProgramDetail> pc;
      private int credit;

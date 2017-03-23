@@ -1,5 +1,6 @@
 dk.brics.automaton
 lib.adminModule
+lib.adminModule.start
 lib.dT.inputGenerator
 lib.dT.manipulate.comparators
 lib.dT.problemManipulate
