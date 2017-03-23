@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.dataSer.IntDataSer;
 import net.logSer.IntRemoteLog;
 
@@ -71,20 +73,25 @@ public class SerDetails {
                                    return x;
                               }).orElse(mainDataSer);
           try {
-               if(d.aya()){
-                    IntDataSer d1=(IntDataSer)Naming.lookup(d.toUrl());
+               if(isAlive(d)){
                     dataSer.replace(d,System.currentTimeMillis());
-                    System.out.println("c2");
                     return d.toUrl();
                }else{
-                    System.out.println("c3");
-                    assert true:"remote data Server say 'not alive'";
+                    dataSer.remove(d);
                     return null;
                }
           } catch (Exception ex) {
-               System.out.println("c4");
                dataSer.remove(d);
                return null;
+          }
+     }
+     
+     private static boolean isAlive(IntDataSer d){
+          try{
+               IntDataSer d1=(IntDataSer)Naming.lookup(d.toUrl());
+               return d1.aya();
+          }catch(Exception ex){
+               return false;
           }
      }
      
@@ -155,7 +162,7 @@ public class SerDetails {
           try {
                IntDataSer ds=(IntDataSer)Naming.lookup(url);
                if(ds.aya()){
-                    System.out.println("data check1");
+                    System.out.println("data check :- "+ds.toUrl());
                     dataSer.put(ds,System.currentTimeMillis());
                     return true;
                }else{
@@ -200,9 +207,13 @@ public class SerDetails {
      
      public synchronized static Set<String> getAllDataSer(){
           Set<String> s=new HashSet<String>();
-          dataSer.keySet().forEach(i->{
+          new HashSet<IntDataSer>(dataSer.keySet()).stream().forEach(i->{
                try {
-                    s.add(i.toUrl());
+                    if(isAlive(i)){
+                         s.add(i.toUrl());
+                    }else{
+                         dataSer.remove(i);
+                    }
                } catch (RemoteException ex) {
                     dataSer.remove(i);
                }
