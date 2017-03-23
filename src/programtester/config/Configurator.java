@@ -21,6 +21,7 @@ import lib.userModule.test.Test;
 public class Configurator {
      private Configurator(){}
      public static void init(){
+          System.setProperty("sun.rmi.transport.proxy.connectTimeout","1800000");
           Path p=Paths.get("config.txt").toAbsolutePath();
           try {
                Files.lines(p).map(i->i.trim())
