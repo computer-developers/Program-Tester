@@ -52,6 +52,8 @@ public class UserFactory {
                IntRemoteLog ir=new UserStatusLog();
                int port=getDefaultRMIPort();
                String uri=UrlTools.registerObj(ir, port,"userState");
+               ((UserStatusLog)ir).setUrl(uri);
+               
                readProgramDetails();
                readUserDetail(getDefaultUserDetailPath());
                System.out.println("user factory uri :- "+uri);
@@ -152,7 +154,7 @@ public class UserFactory {
       * @param log String of log
       * @return true if processed successfully, false otherwise.
       */
-     public synchronized static boolean processLog(String log){
+     public static synchronized boolean processLog(String log){
           try{
                String uName=LogTools.getLogProperty(log, "username");
                //String passwd=LogTools.getLogProperty(log, "password");
@@ -171,6 +173,7 @@ public class UserFactory {
                     return u.update(pid, 0);
                else return false;
           }catch(Exception ex){
+               System.out.println("Log Processing fail :- "+log);
                return false;
           }
      }
@@ -181,7 +184,7 @@ public class UserFactory {
       * @param pid programId.
       * @return credit of the program.
       */
-     public static synchronized int getCredit(long pid){
+     public static int getCredit(long pid){
           return problems.stream().filter(i->i.getProgramID()==pid)
                   .mapToInt(i->i.getCredit()).findAny().orElse(-1);
      }
@@ -194,8 +197,8 @@ public class UserFactory {
           try {
                IntLogProc lp=(IntLogProc)Naming.lookup(uri);
                List<String> l=lp.getLogs(null,null);
-               l.stream().forEach(i->processLog(i));
-               System.out.println("Log recovered");
+               long c=l.stream().peek(i->processLog(i)).count();
+               System.out.println("Log recovered "+c);
           } catch (Exception ex) {
                System.err.println("Error in log recovery!!");
           }

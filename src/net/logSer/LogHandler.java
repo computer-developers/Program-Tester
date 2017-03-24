@@ -140,6 +140,7 @@ public class LogHandler {
                     return false;
                }
           } catch (Exception ex) {
+               System.out.println("Setting backup server fail..");
                return false;
           }
      }

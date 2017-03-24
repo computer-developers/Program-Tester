@@ -22,6 +22,7 @@ import net.logSer.IntRemoteLog;
  * @author Neel Patel
  */
 public class SerDetails {
+     private static long QUE_LEN = 6;
      private SerDetails(){}
      private static IntRemoteLog log;
      private static IntDataSer mainDataSer;
@@ -67,6 +68,7 @@ public class SerDetails {
       */
      private synchronized static String findDataSer(){
           IntDataSer d=dataSer.keySet().parallelStream()
+                              //.filter(i->isAlive(i))
                               .reduce((x,y)->{
                                    if(dataSer.get(x)>dataSer.get(y))
                                         return y;
@@ -100,7 +102,7 @@ public class SerDetails {
       * @return URI of log server, null if log sever is not reachable
         exception occur
       */
-     public static synchronized String getLogSer(){
+     public static String getLogSer(){
           try {
                if(log.aya())
                     return log.toUrl();
@@ -159,6 +161,14 @@ public class SerDetails {
         reason.
       */
      public static boolean registerDataSer(String url){
+          System.out.println("data ser reg :- "+url);
+          long c = new HashSet<IntDataSer>(dataSer.keySet()).parallelStream().peek(i->{
+               if(!isAlive(i)){
+                    dataSer.remove(i);
+               }
+          }).count();
+          if(c>QUE_LEN)
+               return false;
           try {
                IntDataSer ds=(IntDataSer)Naming.lookup(url);
                if(ds.aya()){
@@ -207,7 +217,7 @@ public class SerDetails {
      
      public synchronized static Set<String> getAllDataSer(){
           Set<String> s=new HashSet<String>();
-          new HashSet<IntDataSer>(dataSer.keySet()).stream().forEach(i->{
+          new HashSet<IntDataSer>(dataSer.keySet()).parallelStream().forEach(i->{
                try {
                     if(isAlive(i)){
                          s.add(i.toUrl());
