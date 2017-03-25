@@ -22,7 +22,7 @@ import net.logSer.IntRemoteLog;
  * @author Neel Patel
  */
 public class SerDetails {
-     private static long QUE_LEN = 6;
+     private final static long QUE_LEN = 6;
      private SerDetails(){}
      private static IntRemoteLog log;
      private static IntDataSer mainDataSer;
@@ -167,8 +167,11 @@ public class SerDetails {
                     dataSer.remove(i);
                }
           }).count();
+          c=dataSer.size();
+          System.out.println("count :- "+c);
           if(c>QUE_LEN)
                return false;
+          
           try {
                IntDataSer ds=(IntDataSer)Naming.lookup(url);
                if(ds.aya()){
