@@ -16,8 +16,8 @@ Program tester is software built in java which can execute any program created i
   * user-id, password based authentication.
   * config file support.
 ### Parth Doshi (doshiparth)
-* design & implement graphical user interface.
-* helped in project design.
+* Designed & implemented the graphical user interface (GUI) of the software.
+* Helped in project design.
 ### Yash Gandhi (YashGandhi97)
 * desing & implement log analysis.
 * helped in GUI design & implementation.
