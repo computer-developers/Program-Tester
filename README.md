@@ -5,7 +5,7 @@ Program tester is software built in java which can execute any program created i
 ## Contribution
 ### Neel Patel (neelpatel21)
 * design & manage the project.
-* design & implement core modules for following functionality.
+* design & implement modules for following functionality.
   * creating test-cases & problem defination
   * run executable code using test-case.
   * comparison of the outputs on different criteria.
