@@ -1,3 +1,0 @@
-DateTime = 2017-03-23T11:03:03.932,UserName = max,PID = 170215054616,State = 2
-DateTime = 2017-03-23T11:03:43.048,UserName = min,PID = 170215054616,State = 2
-DateTime = 2017-03-23T11:05:11.980,UserName = min,PID = 170215054616,State = 2

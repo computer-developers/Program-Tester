@@ -14,13 +14,7 @@
 * limitations under the License.
 * package lib.adminModule;
 */
-package programtester.config;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
+package programTester.config;
 
 /**
  *
@@ -30,7 +24,7 @@ public class Configurator {
      private Configurator(){}
      public static void init(){
           //System.setProperty("sun.rmi.transport.proxy.connectTimeout","1800000");
-          Path p=Paths.get("config.txt").toAbsolutePath();
+          /*Path p=Paths.get("config.txt").toAbsolutePath();
           try {
                Files.lines(p).map(i->i.trim())
                        .filter(i->!i.startsWith("#"))
@@ -39,22 +33,14 @@ public class Configurator {
           } catch (IOException ex) {
                ex.printStackTrace();
           }
-                  
+            */      
      }
-     
+     /*
      private static void proc(String s){
           String ar[]=Arrays.stream(s.split(":-",2)).map(i->i.trim())
                   .toArray(String[]::new);
           switch(ar[0]){
-               /*case "working_dir":
-                    Path p=Paths.get(ar[1]).toAbsolutePath();
-                    System.out.println("wd :- "+p);
-                    if(Files.exists(p)&&Files.isDirectory(p)){
-                         System.out.println("test");
-                         System.setProperty("user.dir",p.toString());
-                    }
-                    break;
-               */
+               
                
                case "source_data_dir":
                     Path p2=Paths.get(ar[1]).toAbsolutePath();
@@ -121,8 +107,8 @@ public class Configurator {
                     
           }
      }
+*/
 }
-
 /*
 working_dir :- .\resources\
 problem_dir :- .\resources\data

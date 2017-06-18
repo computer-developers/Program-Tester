@@ -1,1 +1,0 @@
-java -jar ProgramTester.jar admin

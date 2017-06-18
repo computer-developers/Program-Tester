@@ -14,7 +14,7 @@
 * limitations under the License.
 * package lib.adminModule;
 */
-package programtester.config;
+package programTester.config;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -32,7 +32,8 @@ public class Configuration {
      public static final int TEST_PASS=2,TEST_PRESENT_ERROR=1,TEST_FAIL=-2,
              TEST_TIME_ERROR=-1,TEST_FILE_ERROR=-3;
      public static long minMem=1000000;
-     static private Path defDir=Paths.get(".").toAbsolutePath();
+}
+     /*static private Path defDir=Paths.get(".").toAbsolutePath();
      static final private ReentrantReadWriteLock ldefDir=new ReentrantReadWriteLock();
      static private boolean isParallel=true;
      static final private ReentrantReadWriteLock lIsParallel=new ReentrantReadWriteLock();
@@ -59,7 +60,7 @@ public class Configuration {
       * it is used by constructor if the path is not provided explicitly.
       * this method is thread safe.
       * @return default path.
-      */
+      
      static public Path getDefaultDir(){
           try{
                ldefDir.readLock().lock();
@@ -79,7 +80,7 @@ public class Configuration {
       * @param p new default path.
       * @return true if the default path is updated with {@code p}, false if p
         is not absolute or not a directory.
-      */
+      
      static public boolean setDefaultDir(Path p){
           if(!p.isAbsolute()||!Files.isDirectory(p))
                return false;
@@ -100,7 +101,7 @@ public class Configuration {
       * it is used by default.
       * this method is thread safe.
       * @return default execution method.
-      */
+      
      static public boolean getIsParallel(){
           try{
                lIsParallel.readLock().lock();
@@ -115,7 +116,7 @@ public class Configuration {
       * setter method of default execution method.
       * this method is thread safe.<br>
       * @param isParallel if the execution method is parallel or not.
-      */
+      
      static public void setIsParallel(boolean isParallel){
           try{
                if(getIsParallel()==isParallel)
@@ -135,7 +136,7 @@ public class Configuration {
       * it is used by constructor if the path is not provided explicitly.
       * this method is thread safe.
       * @return default path.
-      */
+      
      static public Path getDefaultLogDir(){
           try{
                ldefLogDir.readLock().lock();
@@ -155,7 +156,7 @@ public class Configuration {
       * @param p new default path.
       * @return true if the default path is updated with {@code p}, false if p
         is not absolute or not a directory.
-      */
+      
      static public boolean setDefaultLogDir(Path p){
           if(!p.isAbsolute()||!Files.isDirectory(p))
                return false;
@@ -176,7 +177,7 @@ public class Configuration {
       * it is used by constructor if the path is not provided explicitly.
       * this method is thread safe.
       * @return default path.
-      */
+      
      static public Path getDefaultProDir(){
           try{
                ldefProDir.readLock().lock();
@@ -196,7 +197,7 @@ public class Configuration {
       * @param p new default path.
       * @return true if the default path is updated with {@code p}, false if p
         is not absolute or not a directory.
-      */
+      
      static public boolean setDefaultProDir(Path p){
           if(!p.isAbsolute()||!Files.isDirectory(p))
                return false;
@@ -216,7 +217,7 @@ public class Configuration {
       * it is used by constructor if the path is not provided explicitly.
       * this method is thread safe.
       * @return default path.
-      */
+      
      static public Path getDefaultUserDetailPath(){
           try{
                ldefUserDetPath.readLock().lock();
@@ -236,7 +237,7 @@ public class Configuration {
       * @param p new default path.
       * @return true if the default path is updated with {@code p}, false if p
         is not absolute or not a directory.
-      */
+      
      static public boolean setDefaultUserDetailPath(Path p){
           if(!p.isAbsolute()||Files.isDirectory(p))
                return false;
@@ -256,7 +257,7 @@ public class Configuration {
      /**
       * getter default Main Server URI.
       * @return default Main Server URI.
-      */
+      
      static public String getDefaultMainSer(){
           try{
                ldefMainSer.readLock().lock();
@@ -275,7 +276,7 @@ public class Configuration {
       * @param uri new default Main Server's URI.
       * @return true if the default Main Server URI is updated with {@code uri},
         false otherwise.
-      */
+      
      static public boolean setDefaultMainSer(String uri){
           try{
                if(getDefaultMainSer().equals(uri))
@@ -291,7 +292,7 @@ public class Configuration {
      /**
       * getter default Main Data Server URI.
       * @return default Main Data Server URI.
-      */
+      
      static public String getDefaultMainDataSer(){
           try{
                ldefMainDataSer.readLock().lock();
@@ -310,7 +311,7 @@ public class Configuration {
       * @param uri new default Main Data Server's URI.
       * @return true if the default Main Data Server URI is updated with {@code uri},
         false otherwise.
-      */
+      
      static public boolean setDefaultMainDataSer(String uri){
           try{
                if(getDefaultMainDataSer().equals(uri))
@@ -326,7 +327,7 @@ public class Configuration {
      /**
       * getter default Main Log Server URI.
       * @return default Main Log Server URI.
-      */
+      
      static public String getDefaultMainLogSer(){
           try{
                ldefMainLogSer.readLock().lock();
@@ -345,7 +346,7 @@ public class Configuration {
       * @param uri new default Main Log Server's URI.
       * @return true if the default Main Log Server URI is updated with {@code uri},
         false otherwise.
-      */
+      
      static public boolean setDefaultMainLogSer(String uri){
           try{
                if(getDefaultMainLogSer().equals(uri))
@@ -361,7 +362,7 @@ public class Configuration {
      /**
       * getter default Data Server URI.
       * @return default Data Server URI.
-      */
+      
      static public String getDefaultDataSer(){
           try{
                ldefDataSer.readLock().lock();
@@ -380,7 +381,7 @@ public class Configuration {
       * @param uri new default Data Server's URI.
       * @return true if the default Data Server URI is updated with {@code uri},
         false otherwise.
-      */
+      
      static public boolean setDefaultDataSer(String uri){
           try{
                if(getDefaultDataSer().equals(uri))
@@ -396,7 +397,7 @@ public class Configuration {
      /**
       * getter default RMI Port.
       * @return default RMI Port.
-      */
+      
      static public int getDefaultRMIPort(){
           try{
                ldefRMIPort.readLock().lock();
@@ -415,7 +416,7 @@ public class Configuration {
       * @param port new default port.
       * @return true if the default Data Server URI is updated with {@code uri},
         false otherwise.
-      */
+      
      static public boolean setDefaultRMIPort(int port){
           try{
                if(getDefaultRMIPort()==port)
@@ -428,8 +429,8 @@ public class Configuration {
           }
      }
      
-}
 
+*/
      /* 
      * defProDir is default path veriable which is used by methods if no path
        provided explicitly.
