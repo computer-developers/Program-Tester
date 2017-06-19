@@ -21,22 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package modul.admin;
+package ui.gui.util.table;
 
-import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import ui.IntUI;
+import javax.swing.table.AbstractTableModel;
+import lib.problemDefination.IntProgramDetail;
 
 /**
  *
  * @author Neel Patel
  */
-public interface IntUserDBFlow {
-    void registerUI(IntUI ui);
-    void selectDataBase(Path db);
-    void addUser(String uName,String passwd);
-    List<String> getAllUserName();
-    Map<String,String> getAllUser();
-    void removeUser(String UserName);
+public class ProgramDetailTableModel extends AbstractTableModel{
+
+    private List<? extends IntProgramDetail> li;
+    public ProgramDetailTableModel(List<? extends IntProgramDetail> li){
+        if(li!=null)
+            this.li=li;
+        else
+            this.li=new ArrayList<>();
+    }
+    
+    @Override
+    public int getRowCount() {
+        return li.size();
+    }
+
+    @Override
+    public int getColumnCount() {
+        return 1;
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        return li.get(rowIndex);
+    }
+    
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return true; 
+    }
 }

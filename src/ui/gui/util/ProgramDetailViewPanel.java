@@ -23,52 +23,40 @@
  */
 package ui.gui.util;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.util.function.Consumer;
 import lib.problemDefination.IntProgramDetail;
-import lib.run.test.util.IntProgramState;
-import static programTester.config.Configuration.TEST_FAIL;
-import static programTester.config.Configuration.TEST_FILE_ERROR;
-import static programTester.config.Configuration.TEST_PASS;
-import static programTester.config.Configuration.TEST_PRESENT_ERROR;
-import static programTester.config.Configuration.TEST_TIME_ERROR;
 
 /**
  *
  * @author Neel Patel
  */
-public class ProgramStateViewPanel extends javax.swing.JPanel {
+public class ProgramDetailViewPanel extends javax.swing.JPanel {
 
     private Consumer<IntProgramDetail> cons=x->{};
-    private IntProgramState ps;
-    private Image background= Toolkit.getDefaultToolkit()
-            .createImage("src\\ui\\gui\\util\\source\\Gradient-Background-Best-Wallpaper-16349.jpg");
+    private IntProgramDetail ps;
     
     /**
      * Creates new form ProgramDetailCreater
      */
-    public ProgramStateViewPanel() {
+    public ProgramDetailViewPanel() {
         //creditErrLabel.setText("");
         initComponents();    
         
     }
 
-    public IntProgramState getProgramState() {
+    public IntProgramDetail getProgramState() {
         return ps;
     }
 
-    public void setPs(IntProgramState ps) {
+    public void setPs(IntProgramDetail ps) {
         this.ps = ps;
         update();
     }
     
     private void update(){
         titleText.setText(ps.getTitle());
+        pidText.setText(ps.getProgramID()+"");
         creditText.setText(ps.getCredit()+"");
-        ps.addRunnable(this::statusUpdate);
-        statusUpdate();
         descriptionText.setText("");
         ps.getDescription().forEach(i->descriptionText.append(i+"\n"));
         inputText.setText("");
@@ -81,28 +69,11 @@ public class ProgramStateViewPanel extends javax.swing.JPanel {
         ps.getSampleOutput().forEach(i->sampleOutputText.append(i+"\n"));
     }
     
-    private void statusUpdate(){
-        switch(ps.getState()){
-            case TEST_PASS:statusText.setText("Solved");break;
-            case TEST_PRESENT_ERROR:statusText.setText("Presentation Error");break;
-            case TEST_FAIL:statusText.setText("Unsolved");break;
-            case TEST_TIME_ERROR:statusText.setText("Time Limit Exceed");break;
-            case TEST_FILE_ERROR:statusText.setText("Unsolved");break;
-        }
-    }
-    
     public synchronized void setCon(Consumer<IntProgramDetail> cons){
         if(cons!=null)
             this.cons=cons;
-        
     }
     
-    @Override
-    public void printComponent(Graphics g){
-        super.printComponent(g);
-        System.out.println("test");
-        g.drawImage(background,0, 0, null);
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -136,13 +107,13 @@ public class ProgramStateViewPanel extends javax.swing.JPanel {
         sampleOutputLabel = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         sampleOutputText = new javax.swing.JTextArea();
-        statusText = new javax.swing.JLabel();
-        statusLabel = new javax.swing.JLabel();
+        pidLabel = new javax.swing.JLabel();
+        pidText = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(new java.awt.Color(9, 238, 249));
         setToolTipText(""); // NOI18N
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         setMinimumSize(new java.awt.Dimension(100, 17));
         setName(""); // NOI18N
@@ -252,7 +223,6 @@ public class ProgramStateViewPanel extends javax.swing.JPanel {
         sampleInputPanel.setBackground(new java.awt.Color(0, 0, 0));
         sampleInputPanel.setMinimumSize(new java.awt.Dimension(382, 100));
         sampleInputPanel.setName(""); // NOI18N
-        sampleInputPanel.setOpaque(false);
         sampleInputPanel.setPreferredSize(new java.awt.Dimension(75, 75));
 
         sampleInputLabel.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
@@ -293,7 +263,6 @@ public class ProgramStateViewPanel extends javax.swing.JPanel {
         sampleOutputPanel.setToolTipText("");
         sampleOutputPanel.setMinimumSize(new java.awt.Dimension(382, 100));
         sampleOutputPanel.setName(""); // NOI18N
-        sampleOutputPanel.setOpaque(false);
         sampleOutputPanel.setPreferredSize(new java.awt.Dimension(394, 112));
 
         sampleOutputLabel.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
@@ -329,15 +298,27 @@ public class ProgramStateViewPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane5))
         );
 
-        statusText.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
-        statusText.setForeground(new java.awt.Color(255, 255, 0));
-        statusText.setText("Not Solved");
-        statusText.setName("creditLable"); // NOI18N
+        pidLabel.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
+        pidLabel.setForeground(new java.awt.Color(9, 238, 249));
+        pidLabel.setText("PID :-");
+        pidLabel.setName("creditLable"); // NOI18N
 
-        statusLabel.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
-        statusLabel.setForeground(new java.awt.Color(9, 238, 249));
-        statusLabel.setText("Status :-");
-        statusLabel.setName("creditLable"); // NOI18N
+        pidText.setEditable(false);
+        pidText.setBackground(new java.awt.Color(0, 0, 0));
+        pidText.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        pidText.setForeground(new java.awt.Color(134, 176, 179));
+        pidText.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        pidText.setName("titleText"); // NOI18N
+        pidText.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                pidTextFocusLost(evt);
+            }
+        });
+        pidText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pidTextActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -370,9 +351,9 @@ public class ProgramStateViewPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(statusLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(statusText)
+                                .addComponent(pidLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(pidText, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(createButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(sampleOutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE))))
@@ -385,29 +366,29 @@ public class ProgramStateViewPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(titleLabel)
                     .addComponent(titleText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 21, Short.MAX_VALUE)
+                .addGap(18, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(DescriptionLabel)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 24, Short.MAX_VALUE)
+                .addGap(18, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(inputLabel))
-                .addGap(18, 21, Short.MAX_VALUE)
+                .addGap(18, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(outputLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(sampleInputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                     .addComponent(sampleOutputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
-                .addGap(18, 19, Short.MAX_VALUE)
+                .addGap(18, 20, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(creditText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(creditLabel)
-                        .addComponent(statusLabel)
-                        .addComponent(statusText))
+                        .addComponent(pidLabel)
+                        .addComponent(pidText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(createButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29))
         );
@@ -431,6 +412,14 @@ public class ProgramStateViewPanel extends javax.swing.JPanel {
         cons.accept(ps);
     }//GEN-LAST:event_createButtonActionPerformed
 
+    private void pidTextFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_pidTextFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pidTextFocusLost
+
+    private void pidTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pidTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pidTextActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel DescriptionLabel;
@@ -448,14 +437,14 @@ public class ProgramStateViewPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel outputLabel;
     private javax.swing.JTextArea outputText;
+    private javax.swing.JLabel pidLabel;
+    private javax.swing.JTextField pidText;
     private javax.swing.JLabel sampleInputLabel;
     private javax.swing.JPanel sampleInputPanel;
     private javax.swing.JTextArea sampleInputText;
     private javax.swing.JLabel sampleOutputLabel;
     private javax.swing.JPanel sampleOutputPanel;
     private javax.swing.JTextArea sampleOutputText;
-    private javax.swing.JLabel statusLabel;
-    private javax.swing.JLabel statusText;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JTextField titleText;
     // End of variables declaration//GEN-END:variables

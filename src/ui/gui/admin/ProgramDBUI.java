@@ -21,22 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package modul.admin;
+package ui.gui.admin;
 
-import java.nio.file.Path;
-import java.util.List;
-import java.util.Map;
+import javax.swing.JOptionPane;
 import ui.IntUI;
 
 /**
  *
  * @author Neel Patel
  */
-public interface IntUserDBFlow {
-    void registerUI(IntUI ui);
-    void selectDataBase(Path db);
-    void addUser(String uName,String passwd);
-    List<String> getAllUserName();
-    Map<String,String> getAllUser();
-    void removeUser(String UserName);
+public class ProgramDBUI implements IntUI{
+
+    @Override
+    public void showMessage(String message) {
+        JOptionPane.showMessageDialog(null, message, "Message", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Override
+    public String Prompt(String message) {
+        String mes =(JOptionPane.showInputDialog(message));
+        return mes;
+    }
+
+    @Override
+    public void start() {
+    }
+
+    @Override
+    public void close() {
+    }
+    
 }

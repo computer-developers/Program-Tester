@@ -59,7 +59,7 @@ public class LocalUserUI implements IntUI{
     
     @Override
     public void showMessage(String message) {
-        JOptionPane.showMessageDialog(null, message, "Message Input Box", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, message, "Message", JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
