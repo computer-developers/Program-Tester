@@ -76,15 +76,16 @@ public class TestCaseTablePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jScrollPane1.getViewport().setBackground(new java.awt.Color(0, 0, 0));
+        jScrollPane1.getViewport().setOpaque(false);
         jTable = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(new java.awt.Color(0, 0, 0));
+        setOpaque(false);
 
         jScrollPane1.setBackground(new java.awt.Color(0, 0, 0));
-        jScrollPane1.setBorder(null);
         jScrollPane1.setForeground(new java.awt.Color(0, 0, 0));
+        jScrollPane1.setOpaque(false);
 
         jTable.setBackground(new java.awt.Color(0, 0, 0));
         jTable.setForeground(new java.awt.Color(0, 0, 0));
@@ -98,6 +99,7 @@ public class TestCaseTablePanel extends javax.swing.JPanel {
         ));
         jTable.setIntercellSpacing(new java.awt.Dimension(0, 0));
         jTable.setName(""); // NOI18N
+        jTable.setOpaque(false);
         jTable.setRowHeight(60);
         jTable.setSelectionBackground(new java.awt.Color(0, 0, 0));
         jTable.setSelectionForeground(new java.awt.Color(0, 0, 0));

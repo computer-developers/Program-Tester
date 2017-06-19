@@ -27,6 +27,7 @@ import ui.gui.util.table.ProgramStateCell;
 import ui.gui.util.table.ProgramStateTableModel;
 import java.util.List;
 import java.util.function.Consumer;
+import javax.swing.DefaultListCellRenderer;
 import lib.run.test.util.IntProgramState;
 
 /**
@@ -46,6 +47,7 @@ public class ProgramStateTablePanel extends javax.swing.JPanel {
         this.pdc = new ProgramStateCell(cons);
         jTable.setDefaultRenderer(Object.class, pdc);
         jTable.setDefaultEditor(Object.class, pdc);
+        //((DefaultListCellRenderer)jTable.getDefaultRenderer(Object.class)).setOpaque(false);
         jTable.setColumnSelectionAllowed(true);
         jTable.setCellSelectionEnabled(true);
         jTable.setEnabled(true);
@@ -88,14 +90,16 @@ public class ProgramStateTablePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jScrollPane1.getViewport().setBackground(new java.awt.Color(0, 0, 0));
+        jScrollPane1.getViewport().setOpaque(false);
         jTable = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(new java.awt.Color(0, 0, 0));
+        setOpaque(false);
 
         jScrollPane1.setBackground(new java.awt.Color(0, 0, 0));
         jScrollPane1.setForeground(new java.awt.Color(0, 0, 0));
+        jScrollPane1.setOpaque(false);
 
         jTable.setBackground(new java.awt.Color(0, 0, 0));
         jTable.setForeground(new java.awt.Color(0, 0, 0));
@@ -107,8 +111,10 @@ public class ProgramStateTablePanel extends javax.swing.JPanel {
                 "Title 1"
             }
         ));
+        jTable.setGridColor(new java.awt.Color(0, 0, 0));
         jTable.setIntercellSpacing(new java.awt.Dimension(0, 0));
         jTable.setName(""); // NOI18N
+        jTable.setOpaque(false);
         jTable.setRowHeight(60);
         jTable.setSelectionBackground(new java.awt.Color(0, 0, 0));
         jTable.setSelectionForeground(new java.awt.Color(0, 0, 0));

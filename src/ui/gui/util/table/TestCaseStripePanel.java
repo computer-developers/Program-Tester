@@ -78,6 +78,7 @@ public class TestCaseStripePanel extends javax.swing.JPanel{
         timeLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 0, 0));
+        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(600, 60));
 
         indexLabel.setBackground(new java.awt.Color(0, 0, 0));
@@ -94,7 +95,6 @@ public class TestCaseStripePanel extends javax.swing.JPanel{
         timeLabel.setBackground(new java.awt.Color(0, 0, 0));
         timeLabel.setFont(new java.awt.Font("Cambria", 0, 24)); // NOI18N
         timeLabel.setForeground(new java.awt.Color(0, 239, 195));
-        timeLabel.setText("12");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

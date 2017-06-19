@@ -23,69 +23,38 @@
  */
 package ui.gui.util;
 
-import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.Toolkit;
-import javax.swing.JPanel;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Neel Patel
  */
-public class ContainerPanel extends javax.swing.JPanel {
+public class backgroundTest extends javax.swing.JPanel {
 
-    private JPanel jp;
-    private CardLayout cl=new CardLayout(0, 0);
-    private Image background= new javax.swing.ImageIcon(getClass()
-            .getResource("/ui/gui/util/source/Gradient-Background-Best-Wallpaper-16349.jpg")).getImage();
-    
     /**
-     * Creates new form ContainerPanel
+     * Creates new form backgroundTest
      */
-    public ContainerPanel() {
+    public backgroundTest() {
         initComponents();
-        this.setBorder(null);
-        setLayout(cl); 
-        setPanel(new JPanel());
     }
 
-    public void setPanel(JPanel jp){
-        this.jp=jp;
-        jp.setBorder(null);
-        add(jp,"jp");
-        //this.setLayout(cl);
-        ((CardLayout)getLayout()).show(this,"jp");
-        setBackground(new Color(0, 0, 0));
-        setEnabled(true);
-        setVisible(true);
-        this.revalidate();
-        this.repaint();
-        jp.setEnabled(true);
-        jp.setVisible(true);
-        jp.revalidate();
-        jp.repaint();
-        /*bl.setHgap(0);
-        bl.setVgap(0);
-        //scrollPanel.setBorder(null);
-        /*jp.setBorder(null);
-        */
-    }
-    
-    public JPanel getPanel(){
-        return jp;
-    }
-    
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        //Image background= Toolkit.getDefaultToolkit()
-        //    .createImage("/ui/gui/util/source/Gradient-Background-Best-Wallpaper-16349.jpg");
-        System.out.println("test 3"+background);
+        Image background= new ImageIcon("light-minimalistic-soft-shading-gradient-background-800x600-wallpaper.jpg").getImage();
+        System.out.println("test "+background);
         g.drawImage(background,0 , 0, this);
-        //g.fillOval(0, 0, 800, 600);
-        System.out.println("test 4 "+background);
+        System.out.println("test 2 "+background);
+    }
+    
+    public static void main(String arg[]){
+        JFrame jf= new JFrame();
+        jf.add(new backgroundTest());
+        jf.pack();
+        jf.setVisible(true);
     }
     
     /**
@@ -97,11 +66,16 @@ public class ContainerPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(0, 0, 0));
-        setMaximumSize(new java.awt.Dimension(800, 600));
-        setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
-        setLayout(null);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
     }// </editor-fold>//GEN-END:initComponents
 
 

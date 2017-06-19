@@ -60,7 +60,10 @@ public class UserHomePanel extends javax.swing.JPanel {
         creditLabel = new javax.swing.JLabel();
         programDetailPanel = new ui.gui.util.ProgramStateTablePanel();
 
+        setOpaque(false);
+
         titlePanel.setBackground(new java.awt.Color(0, 0, 0));
+        titlePanel.setOpaque(false);
 
         creditTitleLabel.setFont(new java.awt.Font("Bell MT", 0, 24)); // NOI18N
         creditTitleLabel.setForeground(new java.awt.Color(0, 255, 255));
@@ -95,9 +98,7 @@ public class UserHomePanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(titlePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(programDetailPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(programDetailPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

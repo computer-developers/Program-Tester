@@ -162,8 +162,9 @@ public class SingleUserFlow implements IntUserFlow{
                IntLiveResultSet rt=t.start();
                es.submit(()->update(t));
                return rt;
-          } catch (IOException ex) {
-               ui.showMessage("file not found !!!");
+          } catch (Exception ex) {
+               ui.showMessage("Error !!!");
+               ex.printStackTrace();
           }
           return null;
      }

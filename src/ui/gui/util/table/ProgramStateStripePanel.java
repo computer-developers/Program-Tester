@@ -88,6 +88,7 @@ public class ProgramStateStripePanel extends javax.swing.JPanel{
         );
 
         setBackground(new java.awt.Color(0, 0, 0));
+        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(600, 60));
 
         indexLabel.setFont(new java.awt.Font("Cambria", 0, 24)); // NOI18N
@@ -107,6 +108,7 @@ public class ProgramStateStripePanel extends javax.swing.JPanel{
         expButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ui/gui/util/source/More Than_48px.png"))); // NOI18N
         expButton.setBorder(null);
         expButton.setFocusPainted(false);
+        expButton.setOpaque(false);
         expButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 expButtonActionPerformed(evt);

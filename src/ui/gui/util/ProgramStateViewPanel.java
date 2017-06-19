@@ -43,8 +43,7 @@ public class ProgramStateViewPanel extends javax.swing.JPanel {
 
     private Consumer<IntProgramDetail> cons=x->{};
     private IntProgramState ps;
-    private Image background= Toolkit.getDefaultToolkit()
-            .createImage("src\\ui\\gui\\util\\source\\Gradient-Background-Best-Wallpaper-16349.jpg");
+    //private Image background= new javax.swing.ImageIcon(getClass().getResource("/ui/gui/util/source/light-minimalistic-soft-shading-gradient-background-800x600-wallpaper.jpg")).getImage();
     
     /**
      * Creates new form ProgramDetailCreater
@@ -97,12 +96,15 @@ public class ProgramStateViewPanel extends javax.swing.JPanel {
         
     }
     
-    @Override
-    public void printComponent(Graphics g){
-        super.printComponent(g);
-        System.out.println("test");
-        g.drawImage(background,0, 0, null);
-    }
+    /*@Override
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        //Image background= Toolkit.getDefaultToolkit()
+        //    .createImage("light-minimalistic-soft-shading-gradient-background-800x600-wallpaper.jpg");
+        System.out.println("test "+background);
+        g.drawImage(background,0 , 0, this);
+        System.out.println("test 2 "+background);
+    }*/
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -146,7 +148,7 @@ public class ProgramStateViewPanel extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         setMinimumSize(new java.awt.Dimension(100, 17));
         setName(""); // NOI18N
-        setNextFocusableComponent(titleText);
+        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(800, 600));
 
         titleLabel.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
@@ -181,11 +183,14 @@ public class ProgramStateViewPanel extends javax.swing.JPanel {
         titleText.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         titleText.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         titleText.setName("titleText"); // NOI18N
+        titleText.setOpaque(false);
         titleText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 titleTextActionPerformed(evt);
             }
         });
+
+        jScrollPane1.setOpaque(false);
 
         inputText.setEditable(false);
         inputText.setBackground(new java.awt.Color(0, 0, 0));
@@ -198,6 +203,8 @@ public class ProgramStateViewPanel extends javax.swing.JPanel {
         inputText.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jScrollPane1.setViewportView(inputText);
 
+        jScrollPane2.setOpaque(false);
+
         descriptionText.setEditable(false);
         descriptionText.setBackground(new java.awt.Color(0, 0, 0));
         descriptionText.setColumns(20);
@@ -208,6 +215,8 @@ public class ProgramStateViewPanel extends javax.swing.JPanel {
         descriptionText.setToolTipText("");
         descriptionText.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jScrollPane2.setViewportView(descriptionText);
+
+        jScrollPane3.setOpaque(false);
 
         outputText.setEditable(false);
         outputText.setBackground(new java.awt.Color(0, 0, 0));
@@ -226,6 +235,7 @@ public class ProgramStateViewPanel extends javax.swing.JPanel {
         creditText.setForeground(new java.awt.Color(134, 176, 179));
         creditText.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         creditText.setName("titleText"); // NOI18N
+        creditText.setOpaque(false);
         creditText.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 creditTextFocusLost(evt);
@@ -259,6 +269,8 @@ public class ProgramStateViewPanel extends javax.swing.JPanel {
         sampleInputLabel.setForeground(new java.awt.Color(9, 238, 249));
         sampleInputLabel.setText("Sample Input");
         sampleInputLabel.setName("sampleInputLable"); // NOI18N
+
+        jScrollPane4.setOpaque(false);
 
         sampleInputText.setEditable(false);
         sampleInputText.setBackground(new java.awt.Color(0, 0, 0));
@@ -300,6 +312,8 @@ public class ProgramStateViewPanel extends javax.swing.JPanel {
         sampleOutputLabel.setForeground(new java.awt.Color(9, 238, 249));
         sampleOutputLabel.setText("Sample Output");
         sampleOutputLabel.setName("sampleOutputLabel"); // NOI18N
+
+        jScrollPane5.setOpaque(false);
 
         sampleOutputText.setEditable(false);
         sampleOutputText.setBackground(new java.awt.Color(0, 0, 0));
