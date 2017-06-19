@@ -36,6 +36,7 @@ import ui.IntUI;
 public interface IntProgramDBFlow {
     void registerUI(IntUI ui);
     void selectDataBase(Path db);
+    String getDataBase();
     void addProgramDefination(IntProgramDetail pd);
     void removeProgramDefination(long pid);
     void addTestCase(IntTestCase tc);

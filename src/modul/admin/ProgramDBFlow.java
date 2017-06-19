@@ -42,18 +42,21 @@ public class ProgramDBFlow implements IntProgramDBFlow{
     private String cs="";
     private IntObjectBase ob;
     private IntUI ui;
-    
+    private String file="";
     @Override
     public void selectDataBase(Path db) {
         try{
             if(db!=null&&!Files.isDirectory(db)&&db.toString().endsWith(".db")){
                 this.cs="jdbc:sqlite:"+db;
                 ob=new ObjectDataBase(db);
+                file=db.toString();
             }
             else{
+                file="";
                 showMessage("invalid DataBase Path!!!");
             }
         }catch(Exception ex){
+            file="";
             ex.printStackTrace();
         }
     }
@@ -203,5 +206,10 @@ public class ProgramDBFlow implements IntProgramDBFlow{
         }catch(Exception ex){
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public String getDataBase() {
+        return file;
     }
 }
