@@ -43,7 +43,7 @@ public class Test {
      private List<TestState> ts;  //contain test-case results details
      private IntLiveResultSet lrs;  //refer to the object return by execute method
      private boolean flag=false;  //shows the state of thread t
-     private IntObjectBase ob;
+     private IntObjectSource ob;
      
      /**
       * this method compare the output of {@code us} with
@@ -95,8 +95,7 @@ public class Test {
       * @throws IOException if occurred while reading object or no object found 
       */
      private synchronized void reader()throws IOException{
-          List<TestState> ts=IntStream.rangeClosed(1,30)
-                              .mapToObj(i->ob.getTestCase(pid, i))
+          List<TestState> ts=ob.getTestCases(pid).stream()
                               .filter(i->i!=null)
                               .filter(i->i.programID()==pid)
                               .distinct()

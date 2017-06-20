@@ -95,7 +95,7 @@ public class ProgramDBHomePanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(new java.awt.Color(9, 238, 249));
         setToolTipText(""); // NOI18N
-        setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
         setMinimumSize(new java.awt.Dimension(100, 17));
         setName(""); // NOI18N

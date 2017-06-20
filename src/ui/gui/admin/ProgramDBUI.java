@@ -23,14 +23,34 @@
  */
 package ui.gui.admin;
 
+import java.nio.file.Paths;
 import javax.swing.JOptionPane;
+import modul.admin.IntProgramDBFlow;
 import ui.IntUI;
+import ui.gui.util.AbstractPanel;
+import ui.gui.util.ProgramDBHomePanel;
+import ui.gui.util.ProgramDetailCreaterPanel;
+import ui.gui.util.SimpleTab;
+import ui.gui.util.SimpleTabPage;
 
 /**
  *
  * @author Neel Patel
  */
 public class ProgramDBUI implements IntUI{
+
+    private IntProgramDBFlow pdf;
+    private AdminPanel ap;
+    private SimpleTab st;
+    private AbstractPanel abp;
+    private ProgramDBHomePanel pdbhp;
+    private ProgramDetailCreaterPanel pdcp;
+            
+    public ProgramDBUI(IntProgramDBFlow pdf, AdminPanel ap) {
+        this.pdf=pdf;
+        this.ap=ap;
+        pdf.registerUI(this);
+    }
 
     @Override
     public void showMessage(String message) {
@@ -45,6 +65,67 @@ public class ProgramDBUI implements IntUI{
 
     @Override
     public void start() {
+        abp=new AbstractPanel();
+        ap.addTab(abp, "Program DataBase");
+        st=new SimpleTab(abp);
+        pdbhp=new ProgramDBHomePanel();
+        config();
+        st.setCurrent(new SimpleTabPage(pdbhp));
+    }
+    
+    private void config(){
+        programDetailCreaterPanel();
+        pdbhp.getSelectDBButton().addActionListener(x->dataBaseSelect());
+        pdbhp.getRemoveProgramButton().addActionListener(x->programRemove());
+        pdbhp.getRemoveTestCaseButton().addActionListener(x->testCaseRemove());
+        
+    }
+    
+    private void dataBaseSelect(){
+        try{
+            String p=Prompt("enter absolute path of database");
+            pdf.selectDataBase(Paths.get(p));
+            if(!pdf.getDataBase().trim().equals(""))
+                pdbhp.getDatabaseLabel().setText(pdf.getDataBase());
+            else
+                pdbhp.getDatabaseLabel().setText("none");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    private void programRemove(){
+        try{
+            String p=Prompt("enter pid of program you want to delete");
+            long l=Long.parseLong(p);
+            pdf.removeProgramDefination(l);
+        }catch(NumberFormatException e){
+            showMessage("invalid PID!!!");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    private void testCaseRemove(){
+        try{
+            String p=Prompt("enter pid of testcase you want to delete");
+            long pid=Long.parseLong(p);
+            String i=Prompt("enter index of testcase you want to delete");
+            long index=Long.parseLong(i);
+            pdf.removeTestCase(pid, index);
+        }catch(NumberFormatException e){
+            showMessage("invalid PID or Index!!!");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    private void programDetailCreaterPanel(){
+        pdcp=new ProgramDetailCreaterPanel();
+        pdcp.setCon(x->pdf.addProgramDefination(x));
+        pdbhp.getAddProgramButton().addActionListener(x->{
+            ProgramDBUI.this.st.setCurrent(new SimpleTabPage(pdcp, this.st.getCurrent()));
+        });
     }
 
     @Override

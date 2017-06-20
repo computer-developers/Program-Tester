@@ -137,7 +137,7 @@ public class ObjectDataBase implements IntObjectBase{
         try(Connection con=DriverManager.getConnection(cs);
                 Statement st=con.createStatement();){
             con.setAutoCommit(true);
-            String createQuery = "DELETE FROM program_defination " +
+            String createQuery = "DELETE FROM problem_defination " +
                     "WHERE pid="+pid+";";
             st.execute(createQuery);
             return true;
@@ -154,7 +154,8 @@ public class ObjectDataBase implements IntObjectBase{
                 Statement st=con.createStatement();){
             con.setAutoCommit(true);
             String createQuery = "DELETE FROM testcase " +
-                    "WHERE pid="+pid+"AND index="+index+";";
+                    "WHERE ( pid="+pid+" AND `index`="+index+") ;";
+            System.out.println(createQuery);
             st.execute(createQuery);
             return true;
         }catch(Exception e){
