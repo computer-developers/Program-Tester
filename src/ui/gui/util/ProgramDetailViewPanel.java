@@ -32,7 +32,7 @@ import lib.problemDefination.IntProgramDetail;
  */
 public class ProgramDetailViewPanel extends javax.swing.JPanel {
 
-    private Consumer<IntProgramDetail> cons=x->{};
+    private Consumer<IntProgramDetail> cons=null;
     private IntProgramDetail ps;
     
     /**
@@ -41,7 +41,7 @@ public class ProgramDetailViewPanel extends javax.swing.JPanel {
     public ProgramDetailViewPanel() {
         //creditErrLabel.setText("");
         initComponents();    
-        
+        createButton.setVisible(false);
     }
 
     public IntProgramDetail getProgramState() {
@@ -70,8 +70,12 @@ public class ProgramDetailViewPanel extends javax.swing.JPanel {
     }
     
     public synchronized void setCon(Consumer<IntProgramDetail> cons){
-        if(cons!=null)
+        if(cons!=null){
             this.cons=cons;
+            createButton.setVisible(true);
+        }else
+            createButton.setVisible(false);
+            
     }
     
     

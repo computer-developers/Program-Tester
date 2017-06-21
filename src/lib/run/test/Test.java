@@ -19,7 +19,6 @@ package lib.run.test;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import lib.problemDefination.util.*;
 import lib.problemDefination.*;
 import lib.run.execution.RunTest;
@@ -44,7 +43,7 @@ public class Test {
      private IntLiveResultSet lrs;  //refer to the object return by execute method
      private boolean flag=false;  //shows the state of thread t
      private IntObjectSource ob;
-     
+     boolean isParallel=true;
      /**
       * this method compare the output of {@code us} with
         corresponding output in list {@code orig}.
@@ -128,16 +127,13 @@ public class Test {
                }
                RunTest rt=new RunTest(i,cmd);
                i.setState("Executing", 0);
-               if(rt==null){
+               try{
                    i.update(rt.getIODetail());
-                   try{
-                       comp(i);
-                   }catch(IllegalArgumentException ex){
-                       i.setState("Error", TEST_FAIL);
-                   }
-               }
-               else
+                   comp(i);
+               //    i.setState("Error", TEST_FAIL);
+               }catch(Exception e){
                    i.setState("Error", TEST_FAIL);
+               }
                i.makeFinal();
                
           }
@@ -175,16 +171,13 @@ public class Test {
                }
                RunTest rt=new RunTest(i,cmd);
                i.setState("Executing", 0);
-               if(rt==null){
+               try{
                    i.update(rt.getIODetail());
-                   try{
-                       comp(i);
-                   }catch(IllegalArgumentException ex){
-                       i.setState("Error", TEST_FAIL);
-                   }
-               }
-               else
+                   comp(i);
+               //    i.setState("Error", TEST_FAIL);
+               }catch(Exception e){
                    i.setState("Error", TEST_FAIL);
+               }
                i.makeFinal();
                System.gc();
           }).count();
@@ -216,7 +209,10 @@ public class Test {
           if(t!=null)
                return lrs;
           reader();
-          t=new Thread(()->run(true),"Tester Thread");
+          try{
+              isParallel=Boolean.parseBoolean(System.getProperty("parallel_execution", "true"));
+          }catch(Exception e){}
+          t=new Thread(()->run(isParallel),"Tester Thread");
           t.start();
           lrs=new LiveResultSetAdapter(ts);
           return lrs;

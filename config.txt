@@ -1,0 +1,22 @@
+program_db :- data.db
+user_db :- user.db
+test_db :- test.db
+#local_logger_dir :- resources\temp\log\
+#parallel_execution :- false
+parallel_thread :- 4
+# RMI Regisrty
+rmi_port :- 8686
+# Main Server
+main_server :- rmi://127.0.0.1:8686/main
+main_data_server :- rmi://127.0.0.1:8686/mainDataSer
+main_remote_logger :- rmi://127.0.0.1:8686/logger
+#user_details :- resources\userdetails.txt
+# Main Data Server
+# Remote logger
+#main_remote_logger :- rmi://localhost:8686/logger
+#main_server :- rmi://localhost:8686/main
+# Remote client
+#main_server :- rmi://localhost:8686/main
+# Data server
+#main_server :- rmi://localhost:8686/main
+data_server :- rmi://127.0.0.1:8686/dataSer

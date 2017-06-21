@@ -25,6 +25,7 @@ package modul.admin;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +43,17 @@ public class UserDBFlow implements IntUserDBFlow{
     private String cs="";
     private IntUserData ob;
     private IntUI ui;
+    private String file="";
+    
+    public UserDBFlow() {
+        try{
+            file=System.getProperty("user_db", "");
+            selectDataBase(Paths.get(file));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    
+    }
     
     @Override
     public void selectDataBase(Path db) {
@@ -136,5 +148,10 @@ public class UserDBFlow implements IntUserDBFlow{
         }catch(Exception ex){
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public String getDataBase() {
+        return file;
     }
 }

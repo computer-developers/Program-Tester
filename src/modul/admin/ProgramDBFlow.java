@@ -25,6 +25,7 @@ package modul.admin;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import lib.db.ObjectDataBase;
@@ -43,15 +44,26 @@ public class ProgramDBFlow implements IntProgramDBFlow{
     private IntObjectBase ob;
     private IntUI ui;
     private String file="";
+    
+    public ProgramDBFlow(){
+        try{
+            file=System.getProperty("program_db", "");
+            selectDataBase(Paths.get(file));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     @Override
     public void selectDataBase(Path db) {
         try{
             if(db!=null&&!Files.isDirectory(db)&&db.toString().endsWith(".db")){
                 this.cs="jdbc:sqlite:"+db;
                 ob=new ObjectDataBase(db);
-                file=db.toString();
+                file=db.toAbsolutePath().toString();
             }
             else{
+                System.out.println("caca"+db);
                 file="";
                 showMessage("invalid DataBase Path!!!");
             }

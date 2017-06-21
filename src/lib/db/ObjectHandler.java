@@ -107,4 +107,18 @@ public class ObjectHandler {
         return null;
     }
     
+    public boolean removeObject(String id){
+        try(Connection con=DriverManager.getConnection(cs)){
+            con.setAutoCommit(true);
+            Statement st=con.createStatement();
+            //byte[] data = objectToBytes(o);
+            String sql="DELETE FROM objects " +
+                    "WHERE id=\""+id+"\";";
+            st.execute(sql);
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

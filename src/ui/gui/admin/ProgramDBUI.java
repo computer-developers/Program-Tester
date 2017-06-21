@@ -25,13 +25,19 @@ package ui.gui.admin;
 
 import java.nio.file.Paths;
 import javax.swing.JOptionPane;
+import lib.problemDefination.IntProgramDetail;
+import lib.problemDefination.IntTestCase;
 import modul.admin.IntProgramDBFlow;
 import ui.IntUI;
 import ui.gui.util.AbstractPanel;
 import ui.gui.util.ProgramDBHomePanel;
 import ui.gui.util.ProgramDetailCreaterPanel;
+import ui.gui.util.ProgramDetailTablePanel;
+import ui.gui.util.ProgramDetailViewPanel;
 import ui.gui.util.SimpleTab;
 import ui.gui.util.SimpleTabPage;
+import ui.gui.util.TestCaseCreaterPanel;
+import ui.gui.util.TestCaseViewPanel;
 
 /**
  *
@@ -45,7 +51,8 @@ public class ProgramDBUI implements IntUI{
     private AbstractPanel abp;
     private ProgramDBHomePanel pdbhp;
     private ProgramDetailCreaterPanel pdcp;
-            
+    private TestCaseCreaterPanel tccp;
+    
     public ProgramDBUI(IntProgramDBFlow pdf, AdminPanel ap) {
         this.pdf=pdf;
         this.ap=ap;
@@ -75,15 +82,23 @@ public class ProgramDBUI implements IntUI{
     
     private void config(){
         programDetailCreaterPanel();
+        testcaseCreaterPanel();
         pdbhp.getSelectDBButton().addActionListener(x->dataBaseSelect());
+        if(!pdf.getDataBase().trim().equals(""))
+            pdbhp.getDatabaseLabel().setText(pdf.getDataBase());
+        else
+            pdbhp.getDatabaseLabel().setText("none");
         pdbhp.getRemoveProgramButton().addActionListener(x->programRemove());
         pdbhp.getRemoveTestCaseButton().addActionListener(x->testCaseRemove());
+        pdbhp.getShowProgramButton().addActionListener(x->showAllProgram());
+        pdbhp.getShowTestCaseButton().addActionListener(x->testCaseShow());
         
     }
     
     private void dataBaseSelect(){
         try{
-            String p=Prompt("enter absolute path of database");
+            String p="";
+            p=Prompt("enter absolute path of database");
             pdf.selectDataBase(Paths.get(p));
             if(!pdf.getDataBase().trim().equals(""))
                 pdbhp.getDatabaseLabel().setText(pdf.getDataBase());
@@ -120,6 +135,23 @@ public class ProgramDBUI implements IntUI{
         }
     }
     
+    private void testCaseShow(){
+        try{
+            String p=Prompt("enter pid of testcase");
+            long pid=Long.parseLong(p);
+            String i=Prompt("enter index of testcase");
+            long index=Long.parseLong(i);
+            IntTestCase tc=pdf.getTestCase(pid, index);
+            TestCaseViewPanel tcvp=new TestCaseViewPanel();
+            tcvp.setTc(tc);
+            ProgramDBUI.this.st.setCurrent(new SimpleTabPage(tcvp, this.st.getCurrent()));
+        }catch(NumberFormatException e){
+            showMessage("invalid PID or Index!!!");
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     private void programDetailCreaterPanel(){
         pdcp=new ProgramDetailCreaterPanel();
         pdcp.setCon(x->pdf.addProgramDefination(x));
@@ -128,6 +160,26 @@ public class ProgramDBUI implements IntUI{
         });
     }
 
+    private void testcaseCreaterPanel(){
+        tccp= new TestCaseCreaterPanel();
+        tccp.setCon(x->pdf.addTestCase(x));
+        pdbhp.getAddTestCaseButton().addActionListener(x->{
+            ProgramDBUI.this.st.setCurrent(new SimpleTabPage(tccp, this.st.getCurrent()));
+        });
+    }
+    
+    private void showAllProgram(){
+        ProgramDetailTablePanel pdvp=new ProgramDetailTablePanel(pdf.getAllProgramDetail(),
+                ProgramDBUI.this::showProgram);
+        ProgramDBUI.this.st.setCurrent(new SimpleTabPage(pdvp, this.st.getCurrent()));
+    }
+    
+    private void showProgram(IntProgramDetail pd){
+        ProgramDetailViewPanel pdvp=new ProgramDetailViewPanel();
+        pdvp.setPs(pd);
+        ProgramDBUI.this.st.setCurrent(new SimpleTabPage(pdvp, this.st.getCurrent()));
+    }
+    
     @Override
     public void close() {
     }

@@ -138,9 +138,9 @@ public class ObjectDataBase implements IntObjectBase{
                 Statement st=con.createStatement();){
             con.setAutoCommit(true);
             String createQuery = "DELETE FROM problem_defination " +
-                    "WHERE pid="+pid+";";
+                    "WHERE (pid="+pid+");";
             st.execute(createQuery);
-            return true;
+            return oh.removeObject("p"+pid);
         }catch(Exception e){
             e.printStackTrace();
             return false;
@@ -157,7 +157,7 @@ public class ObjectDataBase implements IntObjectBase{
                     "WHERE ( pid="+pid+" AND `index`="+index+") ;";
             System.out.println(createQuery);
             st.execute(createQuery);
-            return true;
+            return oh.removeObject("p"+pid+"i"+index);
         }catch(Exception e){
             e.printStackTrace();
             return false;

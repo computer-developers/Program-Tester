@@ -35,6 +35,7 @@ import ui.IntUI;
 public interface IntUserDBFlow {
     void registerUI(IntUI ui);
     void selectDataBase(Path db);
+    String getDataBase();
     void addUser(String uName,String passwd);
     List<String> getAllUserName();
     Map<String,String> getAllUser();

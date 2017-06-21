@@ -16,7 +16,6 @@
 */
 package modul.user;
 
-import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;

@@ -26,6 +26,7 @@ package modul;
 import javax.swing.JFrame;
 import modul.admin.IntProgramDBFlow;
 import modul.admin.ProgramDBFlow;
+import programTester.config.Configurator;
 import ui.IntUI;
 import ui.gui.admin.AdminPanel;
 import ui.gui.admin.ProgramDBUI;
@@ -40,7 +41,9 @@ public class ProgramDBAdminTest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Configurator.init();
         IntProgramDBFlow uf=new ProgramDBFlow();
+        //uf.selectDataBase(Paths.get("C:\\My folder\\Fun\\Data\\Program Tester\\data.db"));
         AdminPanel ap=new AdminPanel();
         JFrame jf=new JFrame();
         jf.add(ap);
