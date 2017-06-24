@@ -25,11 +25,14 @@ package modul;
 
 import javax.swing.JFrame;
 import modul.admin.IntProgramDBFlow;
+import modul.admin.IntUserDBFlow;
 import modul.admin.ProgramDBFlow;
+import modul.admin.UserDBFlow;
 import programTester.config.Configurator;
 import ui.IntUI;
 import ui.gui.admin.AdminPanel;
 import ui.gui.admin.ProgramDBUI;
+import ui.gui.admin.UserDBUI;
 
 /**
  *
@@ -42,15 +45,16 @@ public class ProgramDBAdminTest {
      */
     public static void main(String[] args) {
         Configurator.init();
-        IntProgramDBFlow uf=new ProgramDBFlow();
-        //uf.selectDataBase(Paths.get("C:\\My folder\\Fun\\Data\\Program Tester\\data.db"));
-        AdminPanel ap=new AdminPanel();
         JFrame jf=new JFrame();
+        AdminPanel ap=new AdminPanel();
+        IntProgramDBFlow pdf=new ProgramDBFlow();
+        IntUI ui=new ProgramDBUI(pdf, ap);
+        IntUserDBFlow uf=new UserDBFlow();
+        IntUI ui2=new UserDBUI(uf, ap);
         jf.add(ap);
         jf.pack();
         jf.setVisible(true);
         jf.setDefaultCloseOperation(2);
-        IntUI ui=new ProgramDBUI(uf, ap);
     }
     
 }

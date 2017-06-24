@@ -26,6 +26,7 @@ package modul.admin;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+import ui.IntUI;
 
 /**
  *
@@ -35,8 +36,10 @@ public interface IntTestDBFlow {
     void makeDataBase(Path testDB,Path programDB,Path userDB);
     void selectDataBase(Path db);
     void reset();
+    void registerUI(IntUI ui);
     List<Long> getAllProgramID();
     List<String> getAllUserName();
     Map<Long,Integer> getUserStatus(String uName);
     Map<String,Integer> getProgramStatus(long pid);
+    String getDataBase();
 }

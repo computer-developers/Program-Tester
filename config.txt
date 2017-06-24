@@ -1,5 +1,5 @@
 program_db :- data.db
-user_db :- user.db
+user_db :- data.db
 test_db :- test.db
 #local_logger_dir :- resources\temp\log\
 #parallel_execution :- false

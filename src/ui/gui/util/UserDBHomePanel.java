@@ -40,37 +40,46 @@ public class UserDBHomePanel extends javax.swing.JPanel {
         initComponents();    
     }
 
-    public JButton getAddProgramButton() {
-        return addProgramButton;
+    public JButton getAddUserButton() {
+        return addUserButton;
     }
 
-    public JButton getAddTestCaseButton() {
-        return addTestCaseButton;
+    public void setAddUserButton(JButton addUserButton) {
+        this.addUserButton = addUserButton;
     }
 
     public JLabel getDatabaseLabel() {
         return databaseLabel;
     }
 
-    public JButton getRemoveProgramButton() {
-        return removeProgramButton;
+    public void setDatabaseLabel(JLabel databaseLabel) {
+        this.databaseLabel = databaseLabel;
     }
 
-    public JButton getRemoveTestCaseButton() {
-        return removeTestCaseButton;
+    public JButton getRemoveUserButton() {
+        return removeUserButton;
+    }
+
+    public void setRemoveUserButton(JButton removeUserButton) {
+        this.removeUserButton = removeUserButton;
     }
 
     public JButton getSelectDBButton() {
         return selectDBButton;
     }
 
-    public JButton getShowProgramButton() {
-        return showProgramButton;
+    public void setSelectDBButton(JButton selectDBButton) {
+        this.selectDBButton = selectDBButton;
     }
 
-    public JButton getShowTestCaseButton() {
-        return showTestCaseButton;
+    public JButton getShowUserButton() {
+        return showUserButton;
     }
+
+    public void setShowUserButton(JButton showUserButton) {
+        this.showUserButton = showUserButton;
+    }
+
     
     
     
@@ -85,12 +94,9 @@ public class UserDBHomePanel extends javax.swing.JPanel {
 
         databaseLabel = new javax.swing.JLabel();
         selectDBButton = new javax.swing.JButton();
-        showProgramButton = new javax.swing.JButton();
-        addProgramButton = new javax.swing.JButton();
-        addTestCaseButton = new javax.swing.JButton();
-        showTestCaseButton = new javax.swing.JButton();
-        removeProgramButton = new javax.swing.JButton();
-        removeTestCaseButton = new javax.swing.JButton();
+        showUserButton = new javax.swing.JButton();
+        addUserButton = new javax.swing.JButton();
+        removeUserButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 0, 0));
         setForeground(new java.awt.Color(9, 238, 249));
@@ -113,57 +119,31 @@ public class UserDBHomePanel extends javax.swing.JPanel {
         selectDBButton.setText("Select DataBase");
         selectDBButton.setBorder(null);
 
-        showProgramButton.setBackground(new java.awt.Color(0, 0, 0));
-        showProgramButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        showProgramButton.setForeground(new java.awt.Color(9, 238, 249));
-        showProgramButton.setBorder(null);
-        showProgramButton.setLabel("Show all Programs");
-        showProgramButton.setOpaque(false);
+        showUserButton.setBackground(new java.awt.Color(0, 0, 0));
+        showUserButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        showUserButton.setForeground(new java.awt.Color(9, 238, 249));
+        showUserButton.setText("Show all Users");
+        showUserButton.setBorder(null);
+        showUserButton.setOpaque(false);
 
-        addProgramButton.setBackground(new java.awt.Color(0, 0, 0));
-        addProgramButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        addProgramButton.setForeground(new java.awt.Color(9, 238, 249));
-        addProgramButton.setBorder(null);
-        addProgramButton.setLabel("Add new Program");
-        addProgramButton.setOpaque(false);
-
-        addTestCaseButton.setBackground(new java.awt.Color(0, 0, 0));
-        addTestCaseButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        addTestCaseButton.setForeground(new java.awt.Color(9, 238, 249));
-        addTestCaseButton.setText("Add new Test Case");
-        addTestCaseButton.setBorder(null);
-        addTestCaseButton.setOpaque(false);
-        addTestCaseButton.addActionListener(new java.awt.event.ActionListener() {
+        addUserButton.setBackground(new java.awt.Color(0, 0, 0));
+        addUserButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        addUserButton.setForeground(new java.awt.Color(9, 238, 249));
+        addUserButton.setText("Add new User");
+        addUserButton.setBorder(null);
+        addUserButton.setOpaque(false);
+        addUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addTestCaseButtonActionPerformed(evt);
+                addUserButtonActionPerformed(evt);
             }
         });
 
-        showTestCaseButton.setBackground(new java.awt.Color(0, 0, 0));
-        showTestCaseButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        showTestCaseButton.setForeground(new java.awt.Color(9, 238, 249));
-        showTestCaseButton.setText("Show Test Case");
-        showTestCaseButton.setBorder(null);
-        showTestCaseButton.setOpaque(false);
-        showTestCaseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showTestCaseButtonActionPerformed(evt);
-            }
-        });
-
-        removeProgramButton.setBackground(new java.awt.Color(0, 0, 0));
-        removeProgramButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        removeProgramButton.setForeground(new java.awt.Color(255, 102, 0));
-        removeProgramButton.setText("Remove Program");
-        removeProgramButton.setBorder(null);
-        removeProgramButton.setOpaque(false);
-
-        removeTestCaseButton.setBackground(new java.awt.Color(0, 0, 0));
-        removeTestCaseButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        removeTestCaseButton.setForeground(new java.awt.Color(255, 102, 0));
-        removeTestCaseButton.setText("Remove Test Case");
-        removeTestCaseButton.setBorder(null);
-        removeTestCaseButton.setOpaque(false);
+        removeUserButton.setBackground(new java.awt.Color(0, 0, 0));
+        removeUserButton.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        removeUserButton.setForeground(new java.awt.Color(255, 102, 0));
+        removeUserButton.setText("Remove User");
+        removeUserButton.setBorder(null);
+        removeUserButton.setOpaque(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -178,13 +158,10 @@ public class UserDBHomePanel extends javax.swing.JPanel {
                         .addComponent(databaseLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(showProgramButton)
-                            .addComponent(addTestCaseButton)
-                            .addComponent(showTestCaseButton)
-                            .addComponent(addProgramButton)
-                            .addComponent(removeProgramButton)
-                            .addComponent(removeTestCaseButton))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(showUserButton)
+                            .addComponent(addUserButton)
+                            .addComponent(removeUserButton))
+                        .addGap(0, 682, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -195,38 +172,25 @@ public class UserDBHomePanel extends javax.swing.JPanel {
                     .addComponent(selectDBButton)
                     .addComponent(databaseLabel))
                 .addGap(51, 51, 51)
-                .addComponent(showProgramButton)
-                .addGap(18, 18, 18)
-                .addComponent(showTestCaseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(addProgramButton)
-                .addGap(18, 18, 18)
-                .addComponent(addTestCaseButton)
-                .addGap(18, 18, 18)
-                .addComponent(removeProgramButton)
-                .addGap(18, 18, 18)
-                .addComponent(removeTestCaseButton)
-                .addContainerGap(279, Short.MAX_VALUE))
+                .addComponent(showUserButton)
+                .addGap(59, 59, 59)
+                .addComponent(addUserButton)
+                .addGap(59, 59, 59)
+                .addComponent(removeUserButton)
+                .addContainerGap(320, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addTestCaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTestCaseButtonActionPerformed
+    private void addUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_addTestCaseButtonActionPerformed
-
-    private void showTestCaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showTestCaseButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_showTestCaseButtonActionPerformed
+    }//GEN-LAST:event_addUserButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addProgramButton;
-    private javax.swing.JButton addTestCaseButton;
+    private javax.swing.JButton addUserButton;
     private javax.swing.JLabel databaseLabel;
-    private javax.swing.JButton removeProgramButton;
-    private javax.swing.JButton removeTestCaseButton;
+    private javax.swing.JButton removeUserButton;
     private javax.swing.JButton selectDBButton;
-    private javax.swing.JButton showProgramButton;
-    private javax.swing.JButton showTestCaseButton;
+    private javax.swing.JButton showUserButton;
     // End of variables declaration//GEN-END:variables
 }

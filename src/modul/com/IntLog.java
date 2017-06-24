@@ -23,17 +23,15 @@
  */
 package modul.com;
 
-import java.util.List;
-import java.util.Map;
-import modul.com.userstatus.IntUserStatus;
+import java.time.LocalDateTime;
 
 /**
  *
  * @author Neel Patel
  */
-public interface IntTestData extends IntLog{
-    List<Long> getAllProgramIds();
-    List<String> getAllUserNames();
-    IntUserStatus getUserStatus(String name);
-    Map<String,Integer> getProgramStatus(long pid);
+public interface IntLog {
+    default boolean log(String uName, long pid,int status){
+        return log(uName,pid,status,LocalDateTime.now());
+    }
+    boolean log(String uName, long pid,int status,LocalDateTime dt);
 }

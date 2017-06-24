@@ -48,6 +48,7 @@ public class UserDataBase implements IntUserData{
     
     @Override
     public List<String> getAllUserName() {
+        createTables();
         try(Connection con=DriverManager.getConnection(cs);
                 Statement st=con.createStatement();){
             con.setAutoCommit(true);
@@ -67,6 +68,7 @@ public class UserDataBase implements IntUserData{
 
     @Override
     public Map<String, String> getAllUser() {
+        createTables();
         try(Connection con=DriverManager.getConnection(cs);
                 Statement st=con.createStatement();){
             con.setAutoCommit(true);
@@ -87,6 +89,7 @@ public class UserDataBase implements IntUserData{
 
     @Override
     public String getPasswd(String uName) {
+        createTables();
         try(Connection con=DriverManager.getConnection(cs);
                 Statement st=con.createStatement();){
             con.setAutoCommit(true);
@@ -106,13 +109,14 @@ public class UserDataBase implements IntUserData{
 
     @Override
     public boolean removeUser(String uName) {
+        createTables();
         try(Connection con=DriverManager.getConnection(cs);
                 Statement st=con.createStatement();){
             con.setAutoCommit(true);
             if(uName.trim().equals(""))
                 return false;
             String createQuery = "DELETE FROM user_details " +
-                    "WHERE user_name=`"+uName+"`;";
+                    "WHERE user_name=\""+uName+"\";";
             st.execute(createQuery);
             return true;
         }catch(Exception e){
@@ -127,8 +131,8 @@ public class UserDataBase implements IntUserData{
         try(Connection con=DriverManager.getConnection(cs);
                 Statement st=con.createStatement();){
             con.setAutoCommit(true);
-            String createQuery = "INSERT INTO user_details (`user_name`,`passwd`) " +
-                    "VALUES (`"+uName+"`,`"+passwd+"`);";
+            String createQuery = "INSERT INTO user_details(`user_name`,`passwd`) " +
+                    "VALUES (\""+uName+"\",\""+passwd+"\");";
             st.execute(createQuery);
             return true;
         }catch(Exception e){

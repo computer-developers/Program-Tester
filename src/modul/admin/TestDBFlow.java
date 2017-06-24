@@ -30,41 +30,57 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lib.db.UserDataBase;
-import modul.com.IntUserData;
+import lib.db.TestDataBaseFactory;
+import modul.com.IntTestData;
 import ui.IntUI;
 
 /**
  *
  * @author Neel Patel
  */
-public class UserDBFlow implements IntUserDBFlow{
+public class TestDBFlow implements IntTestDBFlow{
 
     private String cs="";
-    private IntUserData ob;
+    private IntTestData ob;
     private IntUI ui;
     private String file="";
     
-    public UserDBFlow() {
+    public TestDBFlow(){
         try{
-            file=System.getProperty("user_db", "");
-            selectDataBase(Paths.get(file).toAbsolutePath());
+            file=System.getProperty("test_db", "");
+            selectDataBase(Paths.get(file));
         }catch(Exception e){
             e.printStackTrace();
         }
     }
     
     @Override
-    public void selectDataBase(Path db) {
+    public void makeDataBase(Path testDB, Path programDB, Path userDB) {
         try{
-            if(db!=null&&(!Files.isDirectory(db))&&db.toString().endsWith(".db")){
-                this.cs="jdbc:sqlite:"+db;
-                ob=new UserDataBase(db);
-                file=db.toAbsolutePath().toString();
+            if(programDB!=null&&!Files.isDirectory(programDB)&&programDB.toString().endsWith(".db")&&
+                    userDB!=null&&!Files.isDirectory(userDB)&&userDB.toString().endsWith(".db")&&
+                    testDB!=null&&testDB.toString().endsWith(".db")){
+                TestDataBaseFactory.makeTestDataBase(testDB, programDB, userDB);
             }
             else{
                 showMessage("invalid DataBase Path!!!");
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void selectDataBase(Path db) {
+        try{
+            if(db!=null&&!Files.isDirectory(db)&&db.toString().endsWith(".db")){
+                this.cs="jdbc:sqlite:"+db;
+                ob=TestDataBaseFactory.getTestDataBase(db);
+                file=db.toAbsolutePath().toString();
+            }
+            else{
                 file="";
+                showMessage("invalid DataBase Path!!!");
             }
         }catch(Exception ex){
             file="";
@@ -73,18 +89,10 @@ public class UserDBFlow implements IntUserDBFlow{
     }
 
     @Override
-    public void addUser(String uName, String passwd) {
+    public void reset() {
         try{
-            if(ob!=null){
-                if(uName==null||uName.trim().equals("")||passwd==null||passwd.trim().equals("")){
-                    showMessage("invalid username or password");
-                    return;
-                }
-                if(ob.insertUser(uName, passwd))
-                    showMessage("Inserted successfully");
-                else
-                    showMessage("Error in insertion!!!");
-            }
+            if(ob!=null)
+                TestDataBaseFactory.resetTestDataBase(Paths.get(file));
             else
                 showMessage("please select database");
         }catch(Exception ex){
@@ -93,10 +101,10 @@ public class UserDBFlow implements IntUserDBFlow{
     }
 
     @Override
-    public List<String> getAllUserName() {
+    public List<Long> getAllProgramID() {
         try{
             if(ob!=null)
-                return ob.getAllUserName();
+                return ob.getAllProgramIds();
             else{
                 showMessage("please select database");
                 return new ArrayList<>();
@@ -108,10 +116,25 @@ public class UserDBFlow implements IntUserDBFlow{
     }
 
     @Override
-    public Map<String, String> getAllUser() {
+    public List<String> getAllUserName() {
         try{
             if(ob!=null)
-                return ob.getAllUser();
+                return ob.getAllUserNames();
+            else{
+                showMessage("please select database");
+                return new ArrayList<>();
+            }
+        }catch(Exception ex){
+            ex.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public Map<Long, Integer> getUserStatus(String uName) {
+        try{
+            if(ob!=null)
+                return ob.getUserStatus(uName).getAllProStatus();
             else{
                 showMessage("please select database");
                 return new HashMap<>();
@@ -123,26 +146,17 @@ public class UserDBFlow implements IntUserDBFlow{
     }
 
     @Override
-    public void removeUser(String UserName) {
+    public Map<String, Integer> getProgramStatus(long pid) {
         try{
-            if(ob!=null){
-                if(ob.removeUser(UserName))
-                    showMessage("Removed successfully");
-                else
-                    showMessage("Error in removing!!!");
-            }
-            else
+            if(ob!=null)
+                return ob.getProgramStatus(pid);
+            else{
                 showMessage("please select database");
+                return new HashMap<>();
+            }
         }catch(Exception ex){
             ex.printStackTrace();
-        }
-    }
-    
-    @Override
-    public void registerUI(IntUI ui) {
-        if(ui!=null){
-            this.ui=ui;
-            ui.start();
+            return new HashMap<>();
         }
     }
     
@@ -160,4 +174,13 @@ public class UserDBFlow implements IntUserDBFlow{
     public String getDataBase() {
         return file;
     }
+    
+    @Override
+    public void registerUI(IntUI ui) {
+        if(ui!=null){
+            this.ui=ui;
+            ui.start();
+        }
+    }
+    
 }

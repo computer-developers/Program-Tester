@@ -21,19 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package modul.com;
+package ui.gui.util.table;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import modul.com.userstatus.IntUserStatus;
+import java.util.Map.Entry;
+import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author Neel Patel
  */
-public interface IntTestData extends IntLog{
-    List<Long> getAllProgramIds();
-    List<String> getAllUserNames();
-    IntUserStatus getUserStatus(String name);
-    Map<String,Integer> getProgramStatus(long pid);
+public class UserTableModel extends AbstractTableModel{
+
+    private List<Entry<String,String>> users;
+    public UserTableModel(List<Entry<String,String>> users){
+        if(users!=null)
+            this.users=users;
+        else
+            this.users=new ArrayList<>();
+    }
+    
+    @Override
+    public int getRowCount() {
+        return users.size();
+    }
+
+    @Override
+    public int getColumnCount() {
+        return 1;
+    }
+
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex) {
+        System.out.println("row "+rowIndex+" "+users.get(rowIndex));
+        return users.get(rowIndex);
+    }
+    
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return true; 
+    }
 }

@@ -28,6 +28,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import lib.problemDefination.IntObjectSource;
+import modul.com.IntTestData;
 import modul.com.IntUserData;
 
 /**
@@ -37,17 +38,22 @@ import modul.com.IntUserData;
 public class TestDataBaseFactory {
     private TestDataBaseFactory(){}
     
-    public static void makeDataBase(Path testDB,IntObjectSource os,IntUserData ud){
+    public static void makeTestDataBase(Path testDB,IntObjectSource os,IntUserData ud){
         createTables(testDB);
         popProgramTable(testDB, os);
         popUserState(testDB, ud);
     }
     
-    public static void makeDataBase(Path testDB,Path programDB,Path userDB){
-        makeDataBase(testDB,new ObjectDataBase(programDB),new UserDataBase(userDB));
+    public static void makeTestDataBase(Path testDB,Path programDB,Path userDB){
+        makeTestDataBase(testDB,new ObjectDataBase(programDB),new UserDataBase(userDB));
     }
     
-    public static void resetDataBase(Path testDB){
+    public static IntTestData getTestDataBase(Path db){
+        createTables(db);
+        return new TestDataBase(db);
+    }
+    
+    public static void resetTestDataBase(Path testDB){
         createTables(testDB);
         String cs="jdbc:sqlite:"+testDB;
         try(Connection con=DriverManager.getConnection(cs);
@@ -96,7 +102,7 @@ public class TestDataBaseFactory {
             ud.getAllUser().forEach((u,p)->{
                 try{
                     String createQuery2 = "INSERT INTO user_state (`user_name`,`passwd`,`credit`) " +
-                    "VALUES (`"+u+"`,`"+p+"`,0);";
+                    "VALUES (\""+u+"\",\""+p+"\",0);";
                     st.execute(createQuery2);
                 }catch(Exception e){
                     e.printStackTrace();
@@ -107,7 +113,7 @@ public class TestDataBaseFactory {
         }
     }
     
-    private static void createTables(Path tdb){
+    static void createTables(Path tdb){
         String cs="jdbc:sqlite:"+tdb;
         try(Connection con=DriverManager.getConnection(cs);
                 Statement st=con.createStatement();){
