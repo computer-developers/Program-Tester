@@ -25,15 +25,14 @@ package modul.com;
 
 import java.util.List;
 import java.util.Map;
+import lib.problemDefination.IntObjectBase;
 import modul.com.userstatus.IntUserStatus;
 
 /**
  *
  * @author Neel Patel
  */
-public interface IntTestData extends IntLog{
-    List<Long> getAllProgramIds();
-    List<String> getAllUserNames();
+public interface IntTestData extends IntLog,IntObjectBase,IntUserData{
     IntUserStatus getUserStatus(String name);
     Map<String,Integer> getProgramStatus(long pid);
 }

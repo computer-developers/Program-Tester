@@ -100,5 +100,16 @@ public class ObjectBase implements IntObjectBase{
             return false;
         }
     }
+
+    @Override
+    public void pop(IntObjectBase ob) {
+        ob.getAllProgramDetails().forEach(x->insertProgramDetail(x));
+        ob.getAllTestCases().forEach(x->insertTestCase(x));
+    }
+
+    @Override
+    public void reset() {
+        data.clear();
+    }
     
 }

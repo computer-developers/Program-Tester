@@ -36,4 +36,6 @@ public interface IntUserData {
     String getPasswd(String uName);
     boolean removeUser(String uName);
     boolean insertUser(String uName,String passwd);
+    void pop(IntUserData ud);
+    void reset();
 }

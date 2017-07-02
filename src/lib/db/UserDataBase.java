@@ -155,4 +155,23 @@ public class UserDataBase implements IntUserData{
             e.printStackTrace();
         }
     }
+    
+    @Override
+    public void pop(IntUserData ud){
+        createTables();
+        ud.getAllUser().forEach((u,p)->insertUser(u, p));
+    }
+    
+    @Override
+    public void reset(){
+        try(Connection con=DriverManager.getConnection(cs);
+                Statement st=con.createStatement();){
+            con.setAutoCommit(true);
+            //st.execute("PRAGMA foreign_keys = ON;");
+            String createQuery1 = "DROP TABLE user_details;";
+            st.execute(createQuery1);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }

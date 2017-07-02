@@ -30,8 +30,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lib.db.TestDataBaseFactory;
+import java.util.stream.Collectors;
+import lib.db.ObjectDataBase;
+import lib.db.TestDataBase;
+import lib.db.UserDataBase;
 import modul.com.IntTestData;
+import modul.com.userstatus.IntUserStatus;
 import ui.IntUI;
 
 /**
@@ -55,16 +59,20 @@ public class TestDBFlow implements IntTestDBFlow{
     }
     
     @Override
-    public void makeDataBase(Path testDB, Path programDB, Path userDB) {
+    public void popDataBase(Path programDB, Path userDB) {
         try{
-            if(programDB!=null&&!Files.isDirectory(programDB)&&programDB.toString().endsWith(".db")&&
-                    userDB!=null&&!Files.isDirectory(userDB)&&userDB.toString().endsWith(".db")&&
-                    testDB!=null&&testDB.toString().endsWith(".db")){
-                TestDataBaseFactory.makeTestDataBase(testDB, programDB, userDB);
+            if(ob!=null){
+                if(programDB!=null&&!Files.isDirectory(programDB)&&programDB.toString().endsWith(".db")&&
+                        userDB!=null&&!Files.isDirectory(userDB)&&userDB.toString().endsWith(".db")){
+                    ob.pop(new ObjectDataBase(programDB));
+                    ob.pop(new UserDataBase(userDB));
+                }
+                else{
+                    showMessage("invalid DataBase Path!!!");
+                }
             }
-            else{
-                showMessage("invalid DataBase Path!!!");
-            }
+            else
+                showMessage("please select database");
         }catch(Exception ex){
             ex.printStackTrace();
         }
@@ -75,7 +83,7 @@ public class TestDBFlow implements IntTestDBFlow{
         try{
             if(db!=null&&!Files.isDirectory(db)&&db.toString().endsWith(".db")){
                 this.cs="jdbc:sqlite:"+db;
-                ob=TestDataBaseFactory.getTestDataBase(db);
+                ob=new TestDataBase(db);
                 file=db.toAbsolutePath().toString();
             }
             else{
@@ -92,7 +100,7 @@ public class TestDBFlow implements IntTestDBFlow{
     public void reset() {
         try{
             if(ob!=null)
-                TestDataBaseFactory.resetTestDataBase(Paths.get(file));
+                ob.reset();
             else
                 showMessage("please select database");
         }catch(Exception ex){
@@ -101,10 +109,12 @@ public class TestDBFlow implements IntTestDBFlow{
     }
 
     @Override
-    public List<Long> getAllProgramID() {
+    public List<IntUserStatus> getAllUserStatus() {
         try{
-            if(ob!=null)
-                return ob.getAllProgramIds();
+            if(ob!=null){
+                return ob.getAllUserName().stream().map(x->ob.getUserStatus(x))
+                        .collect(Collectors.toList());
+            }
             else{
                 showMessage("please select database");
                 return new ArrayList<>();
@@ -116,32 +126,17 @@ public class TestDBFlow implements IntTestDBFlow{
     }
 
     @Override
-    public List<String> getAllUserName() {
+    public IntUserStatus getUserStatus(String uName) {
         try{
             if(ob!=null)
-                return ob.getAllUserNames();
+                return ob.getUserStatus(uName);
             else{
                 showMessage("please select database");
-                return new ArrayList<>();
+                return null;
             }
         }catch(Exception ex){
             ex.printStackTrace();
-            return new ArrayList<>();
-        }
-    }
-
-    @Override
-    public Map<Long, Integer> getUserStatus(String uName) {
-        try{
-            if(ob!=null)
-                return ob.getUserStatus(uName).getAllProStatus();
-            else{
-                showMessage("please select database");
-                return new HashMap<>();
-            }
-        }catch(Exception ex){
-            ex.printStackTrace();
-            return new HashMap<>();
+            return null;
         }
     }
 

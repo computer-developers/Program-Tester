@@ -24,15 +24,11 @@
 package ui.gui.util.table;
 
 import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.AbstractCellEditor;
-import javax.swing.ImageIcon;
 import javax.swing.JTable;
 import java.util.Map.Entry;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-import lib.problemDefination.IntProgramDetail;
 
 /**
  *

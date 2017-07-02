@@ -121,4 +121,16 @@ public class ObjectHandler {
             return false;
         }
     }
+    
+    public void reset(){
+        try(Connection con=DriverManager.getConnection(cs);
+                Statement st=con.createStatement();){
+            con.setAutoCommit(true);
+            //st.execute("PRAGMA foreign_keys = ON;");
+            String createQuery1 = "DROP TABLE objects;";
+            st.execute(createQuery1);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }

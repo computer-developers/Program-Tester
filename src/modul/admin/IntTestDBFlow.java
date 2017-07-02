@@ -26,6 +26,7 @@ package modul.admin;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+import modul.com.userstatus.IntUserStatus;
 import ui.IntUI;
 
 /**
@@ -33,13 +34,12 @@ import ui.IntUI;
  * @author Neel Patel
  */
 public interface IntTestDBFlow {
-    void makeDataBase(Path testDB,Path programDB,Path userDB);
     void selectDataBase(Path db);
+    void popDataBase(Path programDB,Path userDB);
     void reset();
     void registerUI(IntUI ui);
-    List<Long> getAllProgramID();
-    List<String> getAllUserName();
-    Map<Long,Integer> getUserStatus(String uName);
+    List<IntUserStatus> getAllUserStatus();
+    IntUserStatus getUserStatus(String uName);
     Map<String,Integer> getProgramStatus(long pid);
     String getDataBase();
 }

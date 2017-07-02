@@ -32,4 +32,6 @@ public interface IntObjectBase extends IntObjectSource{
     boolean insertTestCase(IntTestCase tc);
     boolean removeProgramDetail(long pid);
     boolean removeTestCase(long pid,long index);
+    void pop(IntObjectBase ob);
+    void reset();
 }
